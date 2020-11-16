@@ -4,4 +4,5 @@ Ceci est le début du projet new Cratie
 
 Faire une doc ici
 
-Cc test de doray
+Commit de Louis le charismatique/humble
+Commit de doray le chef
