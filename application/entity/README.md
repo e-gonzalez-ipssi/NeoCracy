@@ -1,0 +1,3 @@
+Ici seront stocker tout les fichiers lié au entité de l'application.
+
+Exemple d'entité : Utilisateur, Organisation, Message, ...
