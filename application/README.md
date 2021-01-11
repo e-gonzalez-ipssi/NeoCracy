@@ -1,0 +1,3 @@
+Ici sera mis tout le code lié au Back-end
+
+on y retrouvera tout (ou presque) les scripts php, aka entité, service, manager, ...
