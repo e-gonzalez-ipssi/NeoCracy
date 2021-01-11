@@ -43,5 +43,3 @@ abstract class  Manager
 
         return $result
     }
-
-}
