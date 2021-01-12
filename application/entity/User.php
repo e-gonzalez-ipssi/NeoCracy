@@ -8,6 +8,7 @@ class  User {
     private string $mail;
     private string $telephone;
     private string $photo;
+    private bool $isAdmin;
 
     public function __construct (  
         int $id,
@@ -16,56 +17,62 @@ class  User {
         string $mail,
         string $telephone,
         string $photo,
+        bool $isAdmin = false,
     ) {
-        $this->$id = $id;
-        $this->$nom = $nom;
-        $this->$prenom = $prenom;
-        $this->$mail = $mail;
-        $this->$telephone = $telephone;
-        $this->$photo = $photo;
+        $this->id = $id;
+        $this->nom = $nom;
+        $this->prenom = $prenom;
+        $this->mail = $mail;
+        $this->telephone = $telephone;
+        $this->photo = $photo;
+        $this->isAdmin = $isAdmin;
     }
 
-    private function getId(): int {
+    public function getId(): int {
         return $this->id;
     }
 
-    private function getNom(): string {
+    public function getNom(): string {
         return $this->nom;
     }
 
-    private function setNom(string $nom) {
+    public function setNom(string $nom) {
         $this->nom = $nom;
     }
 
-    private function getPrenom(): string {
+    public function getPrenom(): string {
         return $this->prenom;
     }
 
-    private function setPrenom(string $prenom) {
+    public function setPrenom(string $prenom) {
         $this->prenom = $prenom;
     }
 
-    private function getMail(): string {
+    public function getMail(): string {
         return $this->mail;
     }
 
-    private function setMail(string $mail) {
+    public function setMail(string $mail) {
         $this->mail = $mail;
     }
 
-    private function getTelephone(): string {
+    public function getTelephone(): string {
         return $this->telephone;
     }
 
-    private function setTelephone(string $telephone) {
+    public function setTelephone(string $telephone) {
         $this->telephone = $telephone;
     }
 
-    private function getPhoto(): string {
+    public function getPhoto(): string {
         return $this->photo;
     }
 
-    private function setPhoto(string $photo) {
+    public function setPhoto(string $photo) {
         $this->photo = $photo;
+    }
+
+    public function isAdmin(): bool {
+        return $this->isAdmin;
     }
 }
