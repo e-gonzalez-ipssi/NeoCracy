@@ -1,11 +1,11 @@
 <?php
 
-include 'bd.php';
+include '../entity/bd.php';
 
 abstract class  Manager
 {
-    bd $bd;
-    string $query;
+    private bd $bd;
+    private string $query;
     
     public function __construct (bd $bd)  {
         $this->$bd = $bd;
@@ -30,7 +30,7 @@ abstract class  Manager
     private function find () {
         $result = $bd->query($this->$query);
 
-        return $result
+        return $result;
     }
 
     /**
@@ -61,3 +61,4 @@ abstract class  Manager
             "message" => $message,
         ];
     }
+}
