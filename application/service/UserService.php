@@ -1,5 +1,6 @@
 <?php
 
+include '../entity/User.php';
 include '../manager/UserManager.php';
 
 class  UserService {
@@ -22,6 +23,16 @@ class  UserService {
 
     public function getUserByName (string $nom, string $prenom): array {
         return $this->userManager->getUserByName($nom, $prenom);
+    }
+
+    public function deleteUserById (User $currentUser, int $id){
+        if (
+            $currentUser->getId() != $id
+            || ! $currentUser->isAdmin()
+        ){
+            throw new Exception('error-no-permission');
+        }
+        return $this->userManager->deleteUserById($id);
     }
 
 }
