@@ -17,7 +17,7 @@ class Organisation
         $this->lienSite = $lienSite;
     }
 
-    public function getId():Int{
+    public function getId():int{
         return $this->id;
     }
 
