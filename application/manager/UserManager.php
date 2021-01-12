@@ -89,6 +89,7 @@ class UserManager extends Manager {
             $result["mail"],
             $result["tel"],
             $result["photo"],
+            $result["isAdmin"],
         );
     }
     private function fromQueryToUsers($result): array {
@@ -101,6 +102,7 @@ class UserManager extends Manager {
                 $user["mail"],
                 $user["tel"],
                 $user["photo"],
+                $user["isAdmin"],
             );
             array_push($users, $newUser);
         }
