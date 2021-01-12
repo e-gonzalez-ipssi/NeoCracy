@@ -22,6 +22,22 @@ class OrganisationManager extends Manager {
     }
 
     /**
+     * Cette fonction permet de supprimer une Organisation
+     * 
+     * @return string Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
+     * 
+     */
+    public function deleteOrganisation(int $id): Organisation {
+        /** @var string $newQuery */
+        $newQuery = "DELETE FROM `Organisation`  WHERE id = $id ;";
+        $this->setQuery($newQuery);
+
+        $this->find();
+
+        return $this->ack("L'Organisation a bien été supprimé a la base de donnée");
+    }
+
+    /**
      * Cette fonction permet de récupéré un Organisation
      * 
      * @param int $id L'id de l'Organisation que l'on recherche

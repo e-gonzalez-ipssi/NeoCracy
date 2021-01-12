@@ -10,12 +10,14 @@ class  OrganisationService {
         $this->$organisationManager = $organisationManager;
     }
 
-    public function addOrganisation (string $nom, string $description, string $lienSite): array {
-
+    public function createOrganisation (string $nom, string $description, string $lienSite): array {
         return $this->organisationManager->createOrganisation($nom, $description, $lienSite);
     }
 
-    public function getOrganisationById (int $id): User {
+    public function deleteOrganisation(int $id){
+        return $this->organisationManager->deleteOrganisation($id);
+    }
+    public function getOrganisationById (int $id): Organisation {
         return $this->organisationManager->getUserById($id);
     }
 
