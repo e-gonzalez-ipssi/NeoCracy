@@ -26,46 +26,46 @@ class  User {
     }
 
     private function getId(): int {
-        return $this->$id;
+        return $this->id;
     }
 
     private function getNom(): string {
-        return $this->$nom;
+        return $this->nom;
     }
 
     private function setNom(string $nom) {
-        $this->$nom = $nom;
+        $this->nom = $nom;
     }
 
     private function getPrenom(): string {
-        return $this->$prenom;
+        return $this->prenom;
     }
 
-    private function setPrenom(string $nom) {
-        $this->$prenom = $prenom;
+    private function setPrenom(string $prenom) {
+        $this->prenom = $prenom;
     }
 
     private function getMail(): string {
-        return $this->$mail;
+        return $this->mail;
     }
 
     private function setMail(string $mail) {
-        $this->$mail = $mail;
+        $this->mail = $mail;
     }
 
     private function getTelephone(): string {
-        return $this->$telephone;
+        return $this->telephone;
     }
 
     private function setTelephone(string $telephone) {
-        $this->$telephone = $telephone;
+        $this->telephone = $telephone;
     }
 
     private function getPhoto(): string {
-        return $this->$photo;
+        return $this->photo;
     }
 
     private function setPhoto(string $photo) {
-        $this->$photo = $photo;
+        $this->photo = $photo;
     }
 }
