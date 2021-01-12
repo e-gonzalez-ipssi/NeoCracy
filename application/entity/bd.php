@@ -1,7 +1,6 @@
 <?php
 
 /*
-
 Fetch a record from a database:
 $account = $db->query('SELECT * FROM accounts WHERE username = ? AND password = ?', 'test', 'test')->fetchArray();
 echo $account['name'];
@@ -60,9 +59,18 @@ class bd
         $this->connection->set_charset($charset);
     }
 
+    /**
+     * Cette fonction permet de préparer une requete 
+     * Des exemples :
+     * $insert = $db->query('INSERT INTO utilisateur (nom,prenom,mail,tel) VALUES (?,?,?,?)', 'test', 'test', 'test@gmail.com', '0130506070');
+     * $accounts = $db->query('SELECT * FROM accounts');
+     * @param string  la requete que l'on souhaite mettre en recherche
+     * 
+     * @return query
+     */
+
     public function query($query)
     {
-
         if (!$this->query_closed) {
             $this->query->close();
         }
@@ -98,6 +106,14 @@ class bd
         return $this;
     }
 
+    /**
+     * Cette fonction permet de faire une récupération de plusieurs enregistrements à partir d’une base de données sur une REQUETE
+     * $accounts = $db->query('SELECT * FROM accounts')->fetchAll();
+     * foreach ($accounts as $account) {
+     * echo $account['id'] . '<br>';
+     * }
+     * 
+     */
     public function fetchAll($callback = null)
     {
         $params = array();
@@ -129,6 +145,11 @@ class bd
         return $result;
     }
 
+    /**
+     * Cette fonction permet de faire une récupération d'un'enregistrement à partir d’une base de données sur une REQUETE
+     * $account = $db->query('SELECT * FROM accounts WHERE username = ? AND password = ?', 'test', 'test')->fetchArray();
+     * echo $account['name'];
+     */
     public function fetchArray()
     {
         $params = array();
