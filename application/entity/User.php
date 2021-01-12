@@ -2,12 +2,12 @@
 
 class  User {
 
-    int $id;
-    string $nom;
-    string $prenom;
-    string $mail;
-    string $telephone;
-    string $photo;
+    private int $id;
+    private string $nom;
+    private string $prenom;
+    private string $mail;
+    private string $telephone;
+    private string $photo;
 
     public function __construct (  
         int $id,
