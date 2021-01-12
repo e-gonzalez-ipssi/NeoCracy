@@ -2,7 +2,7 @@
 
 include 'Manager.php';
 
-class AddUserManager extends Manager {
+class UserManager extends Manager {
 
     /**
      * Cette fonction permet de setup la query pour créer un utilisateur

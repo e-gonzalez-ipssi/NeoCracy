@@ -18,8 +18,8 @@ abstract class  Manager
      * 
      * @return void
      */
-    private function setQuery (string $requete): void {
-        $this->$query = $requete;
+    protected function setQuery (string $requete): void {
+        $this->query = $requete;
     }
 
     /**
@@ -27,8 +27,8 @@ abstract class  Manager
      * 
      * @return array
      */
-    private function find () {
-        $result = $bd->query($this->$query);
+    protected function find () {
+        $result = $this->bd->query($this->query);
 
         return $result;
     }
@@ -40,7 +40,7 @@ abstract class  Manager
      * 
      * @return array
      */
-    private function ack(string $message): array {
+    protected function ack(string $message): array {
         return [
             "code" => 200,
             "message" => $message,
@@ -55,7 +55,7 @@ abstract class  Manager
      * 
      * @return array
      */
-    private function error(int $code, string $message): array {
+    protected function error(int $code, string $message): array {
         return [
             "code" => $code,
             "message" => $message,
