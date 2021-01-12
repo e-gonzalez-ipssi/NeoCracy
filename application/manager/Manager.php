@@ -1,12 +1,14 @@
 <?php
 
+include 'bd.php';
+
 abstract class  Manager
 {
-    DB $db;
+    bd $bd;
     string $query;
     
-    public function __construct (DB $db)  {
-        $this->$db = $db;
+    public function __construct (bd $bd)  {
+        $this->$bd = $bd;
     }
 
     /**
@@ -21,25 +23,41 @@ abstract class  Manager
     }
 
     /**
-     * Cette fonction permet de renvoyer le resultat de la requête faite a la DB sous la forme d'une array exploitable
+     * Cette fonction permet de renvoyer le resultat de la requête faite a la bd sous la forme d'une array exploitable
      * 
      * @return array
      */
-    private function find (): array {
-        $result = $db->query($this->$query);
+    private function find () {
+        $result = $bd->query($this->$query);
 
-        return $this->arrayify($result);
+        return $result
     }
 
     /**
-     * Cette fonction permet de créer une array exploitable avec le resultat de la query
+     * Permet de créer un retour indiquant que la fonction c'est bien dérouler comme prévu
      * 
-     * @param typederetour $queryResult le resultat de la query
+     * @param string $message Message a renvoyer a l'utilisateur
      * 
      * @return array
      */
-    private function arrayify (typederetour $queryResult): array {
-        $result = $queryResult;
+    private function ack(string $message): array {
+        return [
+            "code" => 200,
+            "message" => $message,
+        ];
+    }
 
-        return $result
+    /**
+     * Permet de créer un retour indiquant que la fonction c'est bien dérouler comme prévu
+     * 
+     * @param int $code le code d'erreur a renvoyer a l'utilisateur
+     * @param string $message Message a renvoyer a l'utilisateur
+     * 
+     * @return array
+     */
+    private function error(int $code, string $message): array {
+        return [
+            "code" => $code,
+            "message" => $message,
+        ];
     }
