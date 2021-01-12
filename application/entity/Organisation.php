@@ -37,13 +37,13 @@ class Organisation
         $this->description = $description;
     }
     public function getDescription():string{
-        return $description->description;
+        return $this->description;
     }
 
     public function setLienSite(string $lienSite){
         $this->lienSite = $lienSite;
     }
     public function getLienSite():string{
-        return $lienSite->lienSite;
+        return $this->lienSite;
     }
 }
