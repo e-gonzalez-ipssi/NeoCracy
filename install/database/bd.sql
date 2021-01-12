@@ -14,7 +14,8 @@ CREATE TABLE Utilisateur(
         mail   Varchar (50) NOT NULL ,
         tel    Varchar (50) NOT NULL ,
         mdp    Varchar (50) NOT NULL ,
-        photo  Varchar (50) NOT NULL
+        photo  Varchar (50) NOT NULL ,
+        isAdmin Boolean NOT NUll ,
 	,CONSTRAINT Utilisateur_PK PRIMARY KEY (id)
 )ENGINE=InnoDB;
 

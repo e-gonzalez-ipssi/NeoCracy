@@ -8,7 +8,7 @@ class UserManager extends Manager {
     /**
      * Cette fonction permet de setup la query pour créer un utilisateur
      * 
-     * @return string Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
+     * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
     public function createUser(string $nom, string $prenom, string $mdp, string $mail, ?string $telephone = null, ?string $photo = null): array {
@@ -31,7 +31,7 @@ class UserManager extends Manager {
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
     public function getUserById(int $id): User {
-        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo` FROM `Utilisateur` WHERE id = $id";
+        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE id = $id";
         $this->setQuery($newQuery);
 
         $result = $this->find();
@@ -44,7 +44,7 @@ class UserManager extends Manager {
     }
 
     /**
-     * Cette fonction permet de récupéré un utilisateur
+     * Cette fonction permet de récupéré une liste d'utilisateur avec le nom rechercher
      * 
      * @param int $id L'id de l'utilisateur que l'on recherche
      * 
@@ -53,7 +53,7 @@ class UserManager extends Manager {
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
     public function getUserByName(string $nom): array {
-        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo` FROM `Utilisateur` WHERE nom = $nom";
+        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE nom = $nom";
         $this->setQuery($newQuery);
 
         $result = $this->find();
@@ -65,6 +65,22 @@ class UserManager extends Manager {
         return $this->fromQueryToUsers($result);
     }
 
+    /**
+     * Cette fonction permet de supprimé un utilisateur de la database
+     * 
+     * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
+     * 
+     */
+    public function deleteUserById(int $id): array {
+        /** @var string $newQuery */
+        $newQuery = "DELETE FROM `Utilisateur` WHERE id = $id";
+        $this->setQuery($newQuery);
+
+        $this->find();
+
+        return $this->ack("L'utilisateur a bien été supprimé a la base de donnée");
+    }
+
     private function fromQueryToUser($result): User {
         return new User(
             $result["id"],
@@ -73,7 +89,7 @@ class UserManager extends Manager {
             $result["mail"],
             $result["tel"],
             $result["photo"],
-        );;
+        );
     }
     private function fromQueryToUsers($result): array {
         $users = [];
