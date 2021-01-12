@@ -1,6 +1,7 @@
 <?php 
 
 include 'Manager.php';
+include '../entity/User.php';
 
 class UserManager extends Manager {
 
@@ -15,12 +16,78 @@ class UserManager extends Manager {
         $newQuery = "INSERT INTO `Utilisateur` (`nom`, `prenom`, `mdp`, `mail`, `tel`, `photo`) VALUES ($nom, $prenom, $mdp, $mail, $telephone, $photo);";
         $this->setQuery($newQuery);
 
-        try {
-            $result = $this->find();
-        } catch (Exception $e) {
-            return $this->error($e->getCode(), $e->getMessage());
-        }
-        
+        $this->find();
+
         return $this->ack("L'utilisateur a bien été ajouté a la base de donnée");
+    }
+
+    /**
+     * Cette fonction permet de récupéré un utilisateur
+     * 
+     * @param int $id L'id de l'utilisateur que l'on recherche
+     * 
+     * @return User Cette fonction retourne l'utilisateur rechercher
+     * 
+     * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
+     */
+    public function getUserById(int $id): User {
+        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo` FROM `Utilisateur` WHERE id = $id";
+        $this->setQuery($newQuery);
+
+        $result = $this->find();
+
+        if(count($result) < 1) {
+            throw new Exception("error-user-not-found");
+        }
+
+        return $this->fromQueryToUser($result);
+    }
+
+    /**
+     * Cette fonction permet de récupéré un utilisateur
+     * 
+     * @param int $id L'id de l'utilisateur que l'on recherche
+     * 
+     * @return array Cette fonction retourne la liste d'utilisateur possédant le nom rechercher
+     * 
+     * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
+     */
+    public function getUserByName(string $nom): array {
+        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo` FROM `Utilisateur` WHERE nom = $nom";
+        $this->setQuery($newQuery);
+
+        $result = $this->find();
+
+        if(count($result) < 1) {
+            throw new Exception("error-user-not-found");
+        }
+
+        return $this->fromQueryToUsers($result);
+    }
+
+    private function fromQueryToUser($result): User {
+        return new User(
+            $result["id"],
+            $result["nom"],
+            $result["prenom"],
+            $result["mail"],
+            $result["tel"],
+            $result["photo"],
+        );;
+    }
+    private function fromQueryToUsers($result): array {
+        $users = [];
+        foreach($result as $user) {
+            $newUser = new User(
+                $user["id"],
+                $user["nom"],
+                $user["prenom"],
+                $user["mail"],
+                $user["tel"],
+                $user["photo"],
+            );
+            array_push($users, $newUser);
+        }
+        return $users;
     }
 }

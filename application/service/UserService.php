@@ -16,16 +16,12 @@ class  UserService {
         return $this->userManager->createUser($nom, $prenom, $mdp, $mail, $telephone, $photo);
     }
 
-    public function getUserById (int $id) {
+    public function getUserById (int $id): User {
         return $this->userManager->getUserById($id);
     }
 
-    public function getUserByName ($nom, $prenom) {
+    public function getUserByName (string $nom, string $prenom): array {
         return $this->userManager->getUserByName($nom, $prenom);
-    }
-
-    public function deleteUser (int $id) {
-        return $this->userManager->deleteUser($id);
     }
 
 }

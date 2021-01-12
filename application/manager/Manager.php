@@ -27,10 +27,15 @@ abstract class  Manager
      * 
      * @return array
      */
-    protected function find () {
-        $result = $this->bd->query($this->query);
+    protected function find (): array {
+        try {
+            $result = $this->bd->query($this->query);
+        } catch (Exception $e) {
+            return $this->error($e->getCode(), $e->getMessage());
+        }
 
-        return $result;
+        return $result->fetchAll();
+
     }
 
     /**
