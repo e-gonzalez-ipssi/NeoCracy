@@ -17,33 +17,33 @@ class Organisation
         $this->lienSite = $lienSite;
     }
 
-    public function getId(){
+    public function getId():Int{
         return $this->id;
     }
 
-    public function setId($id){
+    public function setId(int $id){
         $this->id = $id;
     }
 
-    public function getNom(){
+    public function getNom():string{
         return $this->nom;
     }
 
-    public function setNom($nom){
+    public function setNom(string $nom){
         $this->nom = $nom;
     }
 
-    public function setDescription($description){
+    public function setDescription(string $description){
         $this->description = $description;
     }
-    public function getDescription(){
+    public function getDescription():string{
         return $description->description;
     }
 
-    public function setLienSite($lienSite){
+    public function setLienSite(string $lienSite){
         $this->lienSite = $lienSite;
     }
-    public function getLienSite(){
+    public function getLienSite():string{
         return $lienSite->lienSite;
     }
 }
