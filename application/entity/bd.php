@@ -101,7 +101,8 @@ class bd
     public function fetchAll($callback = null)
     {
         $params = array();
-        $row = array();
+		$row = array();
+		
         $meta = $this->query->result_metadata();
         while ($field = $meta->fetch_field()) {
             $params[] = &$row[$field->name];
