@@ -10,8 +10,8 @@ class  OrganisationService {
         $this->$organisationManager = $organisationManager;
     }
 
-    public function createOrganisation (string $nom, string $description, string $lienSite): array {
-        return $this->organisationManager->createOrganisation($nom, $description, $lienSite);
+    public function createOrganisation (string $nom, string $description, string $lienSite , User $user): array {
+        return $this->organisationManager->createOrganisation($nom, $description, $lienSite, $user->getNom());
     }
 
     public function getOrganisationById (int $id): Organisation {
@@ -22,10 +22,10 @@ class  OrganisationService {
         return $this->organisationManager->getOrganisationByName($nom);
     }
 
-    public function deleteOrganisation(string $nom){
+    public function deleteOrganisation(string $nom , User $user){
         // Renvoie une erreur si organisation inexistant
         $this->organisationManager->getOrganisationByName($nom);
-        return $this->organisationManager->deleteOrganisation($nom);
+        return $this->organisationManager->deleteOrganisation($nom, $user->getNom());
     }
 
 }

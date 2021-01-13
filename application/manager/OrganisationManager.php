@@ -11,11 +11,11 @@ class OrganisationManager extends Manager {
      * @return string Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
-    public function createOrganisation(string $nom, string $description, string $lienSite): array {
+    public function createOrganisation(string $nom, string $description, string $lienSite , string $userName): array {
         /** @var string $newQuery */
         /** @var string $request */
         /** @var string $request2 */
-        $session_user = "test";
+        $userName = "test";
         
         $request = "SELECT * FROM `Organisation`  WHERE nom = $nom;";
         $this->setQuery($request);
@@ -26,7 +26,7 @@ class OrganisationManager extends Manager {
         }
 
         $request2 = "INSERT INTO `estAdmin` (`idUtilisateur`, `idOrganisation`) VALUES (
-            (SELECT idUtilisateur FROM Utilisateur WHERE nom = $session_user), 
+            (SELECT idUtilisateur FROM Utilisateur WHERE nom = $userName), 
             (SELECT idOrganisation FROM Organisation WHERE nom = $nom));";
         $this->setQuery($request2);
         $this->find();
@@ -89,12 +89,12 @@ class OrganisationManager extends Manager {
      * @return string Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
-    public function deleteOrganisation(string $nom): Organisation {
+    public function deleteOrganisation(string $nom, string $userName): Organisation {
         /** @var string $newQuery */
-        $session_user = "test";
+        $userName = "test";
 
         $newQuery = "DELETE FROM `estAdmin`  WHERE idOrganisation = (SELECT idOrganisation FROM Organisation WHERE nom = $nom) AND 
-        idUtilisateur = (SELECT IdUtilisateur FROM Utilisateur WHERE nom = $session_user) ;";
+        idUtilisateur = (SELECT IdUtilisateur FROM Utilisateur WHERE nom = $userName) ;";
         $this->setQuery($newQuery);
         $this->find();
 
