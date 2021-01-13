@@ -13,28 +13,29 @@ class OrganisationManager extends Manager {
      */
     public function createOrganisation(string $nom, string $description, string $lienSite): array {
         /** @var string $newQuery */
+        /** @var string $rqt */
+        /** @var string $rqt2 */
+
+        $session_user = "test";
+        $rqt = "SELECT * FROM `Organisation`  WHERE nom = $nom;";
+        $this->setQuery($rqt);
+        $result = $this->find();
+
+        if(count($result) != 1){
+            throw new Exception("error-creation-organisation-failed");
+        }
+
+        $rqt2 = "INSERT INTO `estAdmin` (`idUtilisateur`, `idOrganisation`) VALUES (
+            (SELECT idUtilisateur FROM Utilisateur WHERE nom = $session_user), 
+            (SELECT idOrganisation FROM Organisation WHERE nom = $nom));";
+        $this->setQuery($rqt2);
+        $this->find();
+
         $newQuery = "INSERT INTO `Organisation` (`nom`, `description`, `lienSite`) VALUES ($nom, $description, $lienSite);";
         $this->setQuery($newQuery);
-
         $this->find();
 
         return $this->ack("L'Organisation a bien été ajouté a la base de donnée");
-    }
-
-    /**
-     * Cette fonction permet de supprimer une Organisation
-     * 
-     * @return string Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
-     * 
-     */
-    public function deleteOrganisation(int $id): Organisation {
-        /** @var string $newQuery */
-        $newQuery = "DELETE FROM `Organisation`  WHERE id = $id ;";
-        $this->setQuery($newQuery);
-
-        $this->find();
-
-        return $this->ack("L'Organisation a bien été supprimé a la base de donnée");
     }
 
     /**
@@ -75,10 +76,40 @@ class OrganisationManager extends Manager {
         $result = $this->find();
 
         if(count($result) < 1) {
-            throw new Exception("error-Organisation-not-found");
+            throw new Exception("error-organisation-not-found");
         }
 
         return $this->fromQueryToOrganisations($result);
+    }
+
+    
+    /**
+     * Cette fonction permet de supprimer une Organisation
+     * 
+     * @return string Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
+     * 
+     */
+    public function deleteOrganisation(string $nom): Organisation {
+        /** @var string $newQuery */
+        $session_user = "test";
+        $rqt = "SELECT * FROM `Organisation`  WHERE nom = $nom;";
+        $this->setQuery($rqt);
+        $result = $this->find();
+
+        if(count($result) < 1){
+            throw new Exception("error-delete-organisation-failed");
+        }
+
+        $newQuery = "DELETE FROM `estAdmin`  WHERE idOrganisation = (SELECT idOrganisation FROM Organisation WHERE nom = $nom) AND 
+        idUtilisateur = (SELECT IdUtilisateur FROM Utilisateur WHERE nom = $session_user) ;";
+        $this->setQuery($newQuery);
+        $this->find();
+
+        $newQuery = "DELETE FROM `Organisation`  WHERE nom = $nom ;";
+        $this->setQuery($newQuery);
+        $this->find();
+
+        return $this->ack("L'Organisation a bien été supprimé a la base de donnée");
     }
 
     private function fromQueryToOrganisation($result): Organisation {

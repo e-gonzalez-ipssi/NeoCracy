@@ -75,9 +75,7 @@ class UserManager extends Manager {
         /** @var string $newQuery */
         $newQuery = "DELETE FROM `Utilisateur` WHERE id = $id";
         $this->setQuery($newQuery);
-
         $this->find();
-
         return $this->ack("L'utilisateur a bien été supprimé a la base de donnée");
     }
 

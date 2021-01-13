@@ -14,15 +14,16 @@ class  OrganisationService {
         return $this->organisationManager->createOrganisation($nom, $description, $lienSite);
     }
 
-    public function deleteOrganisation(int $id){
-        return $this->organisationManager->deleteOrganisation($id);
-    }
     public function getOrganisationById (int $id): Organisation {
         return $this->organisationManager->getUserById($id);
     }
 
     public function getOrganisationByName (string $nom): array {
         return $this->organisationManager->getOrganisationByName($nom);
+    }
+
+    public function deleteOrganisation(string $nom){
+        return $this->organisationManager->deleteOrganisation($nom);
     }
 
 }
