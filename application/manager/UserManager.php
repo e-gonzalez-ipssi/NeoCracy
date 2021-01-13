@@ -16,7 +16,7 @@ class UserManager extends Manager {
         $newQuery = "INSERT INTO `Utilisateur` (`nom`, `prenom`, `mdp`, `mail`, `tel`, `photo`) VALUES ($nom, $prenom, $mdp, $mail, $telephone, $photo);";
         $this->setQuery($newQuery);
 
-        $this->find();
+        $this->query();
 
         return $this->ack("L'utilisateur a bien été ajouté a la base de donnée");
     }
@@ -34,7 +34,7 @@ class UserManager extends Manager {
         $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE id = $id";
         $this->setQuery($newQuery);
 
-        $result = $this->find();
+        $result = $this->query();
 
         if(count($result) < 1) {
             throw new Exception("error-user-not-found");
@@ -56,7 +56,7 @@ class UserManager extends Manager {
         $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE nom = $nom";
         $this->setQuery($newQuery);
 
-        $result = $this->find();
+        $result = $this->query();
 
         if(count($result) < 1) {
             throw new Exception("error-user-not-found");
@@ -75,7 +75,7 @@ class UserManager extends Manager {
         /** @var string $newQuery */
         $newQuery = "DELETE FROM `Utilisateur` WHERE id = $id";
         $this->setQuery($newQuery);
-        $this->find();
+        $this->query();
         return $this->ack("L'utilisateur a bien été supprimé a la base de donnée");
     }
 

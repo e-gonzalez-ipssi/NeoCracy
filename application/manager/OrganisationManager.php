@@ -13,12 +13,14 @@ class OrganisationManager extends Manager {
      */
     public function createOrganisation(string $nom, string $description, string $lienSite , string $userName): array {
         /** @var string $newQuery */
-        $userName = "test";
+        $newQuery = "INSERT INTO `Organisation` (`nom`, `description`, `lienSite`) VALUES ($nom, $description, $lienSite);";
+        $this->setQuery($newQuery);
+        $this->query();
 
         /** @var string $request */
         $request = "SELECT * FROM `Organisation`  WHERE nom = $nom;";
         $this->setQuery($request);
-        $result = $this->find();
+        $result = $this->query();
 
         if(count($result) >= 1){
             throw new Exception("error-creation-organisation-failed");
@@ -28,11 +30,7 @@ class OrganisationManager extends Manager {
             (SELECT idUtilisateur FROM Utilisateur WHERE nom = $userName), 
             (SELECT idOrganisation FROM Organisation WHERE nom = $nom));";
         $this->setQuery($request2);
-        $this->find();
-
-        $newQuery = "INSERT INTO `Organisation` (`nom`, `description`, `lienSite`) VALUES ($nom, $description, $lienSite);";
-        $this->setQuery($newQuery);
-        $this->find();
+        $this->query();
 
         return $this->ack("L'Organisation a bien été ajouté a la base de donnée");
     }
@@ -50,7 +48,7 @@ class OrganisationManager extends Manager {
         $newQuery = "SELECT `id`, `nom`, `description`, `lienSite` FROM `Organisation` WHERE id = $id";
         $this->setQuery($newQuery);
 
-        $result = $this->find();
+        $result = $this->query();
 
         if(count($result) < 1) {
             throw new Exception("error-organisation-not-found");
@@ -72,7 +70,7 @@ class OrganisationManager extends Manager {
         $newQuery = "SELECT `id`, `nom`, `description`, `lienSite` FROM `Organisation` WHERE nom = $nom";
         $this->setQuery($newQuery);
 
-        $result = $this->find();
+        $result = $this->query();
 
         if(count($result) < 1) {
             throw new Exception("error-organisation-not-found");
@@ -89,17 +87,15 @@ class OrganisationManager extends Manager {
      * 
      */
     public function deleteOrganisation(string $nom, string $userName): array {
-        $userName = "test";
-
         /** @var string $newQuery */
         $newQuery = "DELETE FROM `estAdmin`  WHERE idOrganisation = (SELECT idOrganisation FROM Organisation WHERE nom = $nom) AND 
         idUtilisateur = (SELECT IdUtilisateur FROM Utilisateur WHERE nom = $userName) ;";
         $this->setQuery($newQuery);
-        $this->find();
+        $this->query();
         /** @var string $request */
         $request = "DELETE FROM `Organisation`  WHERE nom = $nom ;";
         $this->setQuery($request);
-        $this->find();
+        $this->query();
 
         return $this->ack("L'Organisation a bien été supprimé a la base de donnée");
     }
