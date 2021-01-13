@@ -8,15 +8,14 @@ class OrganisationManager extends Manager {
     /**
      * Cette fonction permet de setup la query pour créer un Organisation
      * 
-     * @return string Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
+     * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
     public function createOrganisation(string $nom, string $description, string $lienSite , string $userName): array {
         /** @var string $newQuery */
-        /** @var string $request */
-        /** @var string $request2 */
         $userName = "test";
-        
+
+        /** @var string $request */
         $request = "SELECT * FROM `Organisation`  WHERE nom = $nom;";
         $this->setQuery($request);
         $result = $this->find();
@@ -24,7 +23,7 @@ class OrganisationManager extends Manager {
         if(count($result) >= 1){
             throw new Exception("error-creation-organisation-failed");
         }
-
+        /** @var string $request2 */    
         $request2 = "INSERT INTO `estAdmin` (`idUtilisateur`, `idOrganisation`) VALUES (
             (SELECT idUtilisateur FROM Utilisateur WHERE nom = $userName), 
             (SELECT idOrganisation FROM Organisation WHERE nom = $nom));";
@@ -54,7 +53,7 @@ class OrganisationManager extends Manager {
         $result = $this->find();
 
         if(count($result) < 1) {
-            throw new Exception("error-Organisation-not-found");
+            throw new Exception("error-organisation-not-found");
         }
 
         return $this->fromQueryToOrganisation($result);
@@ -63,7 +62,7 @@ class OrganisationManager extends Manager {
     /**
      * Cette fonction permet de récupéré un Organisation
      * 
-     * @param int $id L'id de l'Organisation que l'on recherche
+     * @param string $nom Le nom des Organisations que l'on recherche
      * 
      * @return array Cette fonction retourne la liste d'Organisation possédant le nom rechercher
      * 
@@ -89,15 +88,15 @@ class OrganisationManager extends Manager {
      * @return string Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
-    public function deleteOrganisation(string $nom, string $userName): Organisation {
-        /** @var string $newQuery */
+    public function deleteOrganisation(string $nom, string $userName): array {
         $userName = "test";
 
+        /** @var string $newQuery */
         $newQuery = "DELETE FROM `estAdmin`  WHERE idOrganisation = (SELECT idOrganisation FROM Organisation WHERE nom = $nom) AND 
         idUtilisateur = (SELECT IdUtilisateur FROM Utilisateur WHERE nom = $userName) ;";
         $this->setQuery($newQuery);
         $this->find();
-
+        /** @var string $request */
         $request = "DELETE FROM `Organisation`  WHERE nom = $nom ;";
         $this->setQuery($request);
         $this->find();

@@ -15,7 +15,7 @@ class  OrganisationService {
     }
 
     public function getOrganisationById (int $id): Organisation {
-        return $this->organisationManager->getUserById($id);
+        return $this->organisationManager->getOrganisationById($id);
     }
 
     public function getOrganisationByName (string $nom): array {
@@ -23,6 +23,8 @@ class  OrganisationService {
     }
 
     public function deleteOrganisation(string $nom , User $user){
+        // TODO: ajouter une condition pour empecher un utilisateur qui n'est pas admin d'une org de la delete
+
         // Renvoie une erreur si organisation inexistant
         $this->organisationManager->getOrganisationByName($nom);
         return $this->organisationManager->deleteOrganisation($nom, $user->getNom());
