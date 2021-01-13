@@ -23,6 +23,8 @@ class  OrganisationService {
     }
 
     public function deleteOrganisation(string $nom){
+        // Renvoie une erreur si organisation inexistant
+        $this->organisationManager->getOrganisationByName($nom);
         return $this->organisationManager->deleteOrganisation($nom);
     }
 

@@ -13,22 +13,22 @@ class OrganisationManager extends Manager {
      */
     public function createOrganisation(string $nom, string $description, string $lienSite): array {
         /** @var string $newQuery */
-        /** @var string $rqt */
-        /** @var string $rqt2 */
-
+        /** @var string $request */
+        /** @var string $request2 */
         $session_user = "test";
-        $rqt = "SELECT * FROM `Organisation`  WHERE nom = $nom;";
-        $this->setQuery($rqt);
+        
+        $request = "SELECT * FROM `Organisation`  WHERE nom = $nom;";
+        $this->setQuery($request);
         $result = $this->find();
 
-        if(count($result) != 1){
+        if(count($result) >= 1){
             throw new Exception("error-creation-organisation-failed");
         }
 
-        $rqt2 = "INSERT INTO `estAdmin` (`idUtilisateur`, `idOrganisation`) VALUES (
+        $request2 = "INSERT INTO `estAdmin` (`idUtilisateur`, `idOrganisation`) VALUES (
             (SELECT idUtilisateur FROM Utilisateur WHERE nom = $session_user), 
             (SELECT idOrganisation FROM Organisation WHERE nom = $nom));";
-        $this->setQuery($rqt2);
+        $this->setQuery($request2);
         $this->find();
 
         $newQuery = "INSERT INTO `Organisation` (`nom`, `description`, `lienSite`) VALUES ($nom, $description, $lienSite);";
@@ -92,21 +92,14 @@ class OrganisationManager extends Manager {
     public function deleteOrganisation(string $nom): Organisation {
         /** @var string $newQuery */
         $session_user = "test";
-        $rqt = "SELECT * FROM `Organisation`  WHERE nom = $nom;";
-        $this->setQuery($rqt);
-        $result = $this->find();
-
-        if(count($result) < 1){
-            throw new Exception("error-delete-organisation-failed");
-        }
 
         $newQuery = "DELETE FROM `estAdmin`  WHERE idOrganisation = (SELECT idOrganisation FROM Organisation WHERE nom = $nom) AND 
         idUtilisateur = (SELECT IdUtilisateur FROM Utilisateur WHERE nom = $session_user) ;";
         $this->setQuery($newQuery);
         $this->find();
 
-        $newQuery = "DELETE FROM `Organisation`  WHERE nom = $nom ;";
-        $this->setQuery($newQuery);
+        $request = "DELETE FROM `Organisation`  WHERE nom = $nom ;";
+        $this->setQuery($request);
         $this->find();
 
         return $this->ack("L'Organisation a bien été supprimé a la base de donnée");
