@@ -46,7 +46,7 @@ class UserManager extends Manager {
     /**
      * Cette fonction permet de récupéré une liste d'utilisateur avec le nom rechercher
      * 
-     * @param int $id L'id de l'utilisateur que l'on recherche
+     * @param string $nom Le nom de l'utilisateur que l'on recherche
      * 
      * @return array Cette fonction retourne la liste d'utilisateur possédant le nom rechercher
      * 
@@ -66,6 +66,104 @@ class UserManager extends Manager {
     }
 
     /**
+     * Cette fonction permet de récupéré le mot de passe utilisateur avec son adresse mail
+     * 
+     * @param string $mail Le mail de l'utilisateur que l'on recherche
+     * 
+     * @return User Cette fonction retourne l'utilisateur rechercher
+     * 
+     * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
+     */
+    public function getUserByMail(string $mail): User {
+        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE mail = $mail";
+        $this->setQuery($newQuery);
+
+        $result = $this->query();
+
+        if(count($result) < 1) {
+            throw new Exception("error-user-not-found");
+        }
+
+        return $this->fromQueryToUser($result);
+    }
+
+    /**
+     * Cette fonction permet de récupéré l'utilisateur avec son token rechercher
+     * 
+     * @param string $token Le nom token de l'utilisateur que l'on cherche
+     * 
+     * @return User Cette fonction retourne la liste d'utilisateur possédant le nom rechercher
+     * 
+     * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
+     */
+    public function getUserByToken(string $token): User {
+        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE token = $token";
+        $this->setQuery($newQuery);
+
+        $result = $this->query();
+
+        if(count($result) < 1) {
+            throw new Exception("error-user-not-found");
+        }
+
+        return $this->fromQueryToUser($result);
+    }
+
+    /**
+     * Cette fonction permet de set un token de connexion
+     * 
+     * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
+     */
+    public function setUserToken(string $token, int $id): array {
+        $newQuery = "UPDATE `Utilisateur` SET token = $token WHERE id = $id";
+        $this->setQuery($newQuery);
+
+        $result = $this->query();
+
+        return $this->ack("Le Token a bien été ajouter a l'utilisateur");
+    }
+
+    /**
+     * Cette fonction permet de récupéré le mot de passe utilisateur avec son adresse mail
+     * 
+     * @param int $id L'idée de l'utilisateur rechercher
+     * 
+     * @return string Le mot de passe stoker dans la bd
+     * 
+     * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
+     */
+    public function getPasswordById(int $id): string {
+        $newQuery = "SELECT `Password` FROM `Utilisateur` WHERE id = $id";
+        $this->setQuery($newQuery);
+
+        $result = $this->query();
+
+        if(count($result) < 1) {
+            throw new Exception("error-user-not-found");
+        }
+
+        return $result["password"];
+    }
+
+    /**
+     * Cette fonction permet de récupéré les adresses mail de tout les utilisateurs
+     * 
+     * @return array La liste des adresses mail de tout les utilisateurs
+     */
+    public function getAllUserMail(): array {
+        $newQuery = "SELECT `mail` FROM `Utilisateur`";
+        $this->setQuery($newQuery);
+        $queryResult = $this->query();
+        
+        $result = [];
+        foreach($queryResult as $row) {
+            array_push($result, $row['mail']);
+        }
+
+        return $result;
+    }
+
+    /**
      * Cette fonction permet de supprimé un utilisateur de la database
      * 
      * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
@@ -79,7 +177,7 @@ class UserManager extends Manager {
         return $this->ack("L'utilisateur a bien été supprimé a la base de donnée");
     }
 
-    private function fromQueryToUser($result): User {
+    private function fromQueryToUser(array $result): User {
         return new User(
             $result["id"],
             $result["nom"],
@@ -90,7 +188,7 @@ class UserManager extends Manager {
             $result["isAdmin"],
         );
     }
-    private function fromQueryToUsers($result): array {
+    private function fromQueryToUsers(array $result): array {
         $users = [];
         foreach($result as $user) {
             $newUser = new User(

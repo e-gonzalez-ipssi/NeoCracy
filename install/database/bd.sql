@@ -12,11 +12,12 @@ CREATE TABLE Utilisateur(
         nom    Varchar (50) NOT NULL ,
         prenom Varchar (50) NOT NULL ,
         mail   Varchar (50) NOT NULL ,
-        tel    Varchar (50) NOT NULL ,
+        tel    Varchar (50),
         mdp    Varchar (50) NOT NULL ,
-        photo  Varchar (50) NOT NULL ,
-        isAdmin Boolean NOT NUll 
-        ,CONSTRAINT Utilisateur_PK PRIMARY KEY (id)
+        photo  Varchar (50),
+        isAdmin Boolean NOT NUll ,
+        token Varchar (50) ,
+	,CONSTRAINT Utilisateur_PK PRIMARY KEY (id),
 )ENGINE=InnoDB;
 
 

@@ -1,5 +1,6 @@
 <?php
 
+include '../entity/Constant.php';
 include '../entity/User.php';
 include '../manager/UserManager.php';
 
@@ -24,7 +25,7 @@ class  UserService {
      * @return array output a renvoyer a l'utilisateur lui indiquant l'état de sa requête
      */
     public function addUser (string $nom, string $prenom,  string $mdp, string $mail, ?string $telephone = null, ?string $photo = null):array {
-        $mdp = password_hash($mdp, "NeoCracy");
+        $mdp = password_hash($mdp, HASH_CODE);
 
         return $this->userManager->createUser($nom, $prenom, $mdp, $mail, $telephone, $photo);
     }
@@ -39,6 +40,18 @@ class  UserService {
     public function getUserById (int $id): User {
         return $this->userManager->getUserById($id);
     }
+
+    /**
+     * Cette fonction permet de récupéré un objet Utilisateur a partir de son id
+     * 
+     * @param string $mail L'id de l'utilisateur que l'on cherche
+     * 
+     * @return User L'utilisateur correspondant au mail
+     */
+    public function getUserByMail (string $mail): User {
+        return $this->userManager->getUserByMail($mail);
+    }
+
 
     /**
      * Cette fonction permet de récupéré une liste d'objet Utilisateur a partir de son nom
@@ -72,5 +85,4 @@ class  UserService {
         }
         return $this->userManager->deleteUserById($id);
     }
-
 }
