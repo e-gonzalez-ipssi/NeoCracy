@@ -1,0 +1,57 @@
+{
+  "name": "react-pwa",
+  "version": "2.2.10",
+  "description": "A highly scalable, Progressive Web Application foundation with the best Developer Experience (DX).",
+  "scripts": {
+    "start": "pawjs --no-cache --env=development start",
+    "build": "pawjs --no-cache --env-config-path=./.prod.env --env=production build",
+    "build:demo": "pawjs --no-cache --env-config-path=./.demo.env --env=production build",
+    "lint": "pawjs lint",
+    "test": "pawjs --no-cache test"
+  },
+  "author": {
+    "name": "Atyantik Technologies",
+    "email": "admin@atyantik.com",
+    "url": "https://www.atyantik.com/"
+  },
+  "contributors": [
+    {
+      "name": "Tirth Bodawala",
+      "email": "tirthbodawala@atyantik.com",
+      "url": "https://www.atyantik.com/"
+    },
+    {
+      "name": "Yash Thakur",
+      "email": "thakur.yash514@gmail.com",
+      "url": "http://yashthakur.in/"
+    },
+    {
+      "name": "Ajay Patel",
+      "email": "ajaypatel@atyantik.com",
+      "url": "https://www.atyantik.com/"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@craco/craco": "^6.0.0",
+    "@pawjs/image-optimizer": "^2.2.6",
+    "@pawjs/pawjs": "^3.0.2-beta.6",
+    "@pawjs/sass": "^2.2.5",
+    "@pawjs/srcset": "^2.1.6",
+    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
+    "autoprefixer": "^9",
+    "bulma": "^0.8.2",
+    "cloudinary": "^1.21.0",
+    "eslint-import-resolver-webpack": "^0.12.1",
+    "fork-ts-checker-webpack-plugin": "^4.1.3",
+    "postcss": "^7",
+    "prop-types": "^15.7.2",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "universal-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "webpack-bundle-analyzer": "^3.6.1"
+  }
+}
