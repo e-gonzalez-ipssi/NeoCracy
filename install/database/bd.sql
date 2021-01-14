@@ -14,10 +14,16 @@ CREATE TABLE Utilisateur(
         mail   Varchar (50) NOT NULL ,
         tel    Varchar (50),
         mdp    Varchar (50) NOT NULL ,
+<<<<<<< HEAD
         photo  Varchar (50),
         isAdmin Boolean NOT NUll ,
         token Varchar (50) ,
 	,CONSTRAINT Utilisateur_PK PRIMARY KEY (id),
+=======
+        photo  Varchar (50) NOT NULL ,
+        isAdmin Boolean NOT NUll 
+        ,CONSTRAINT Utilisateur_PK PRIMARY KEY (id)
+>>>>>>> 840d84ec69b66d79ffff375ae85b4ce4ff7906ef
 )ENGINE=InnoDB;
 
 
@@ -53,11 +59,11 @@ CREATE TABLE Proposition(
 #------------------------------------------------------------
 
 CREATE TABLE Appartient(
-        id             Int NOT NULL ,
+        id_Organisation Int NOT NULL ,
         id_Utilisateur Int NOT NULL
-	,CONSTRAINT Appartient_PK PRIMARY KEY (id,id_Utilisateur)
+	,CONSTRAINT Appartient_PK PRIMARY KEY (id_Organisation,id_Utilisateur)
 
-	,CONSTRAINT Appartient_Organisation_FK FOREIGN KEY (id) REFERENCES Organisation(id)
+	,CONSTRAINT Appartient_Organisation_FK FOREIGN KEY (id_Organisation) REFERENCES Organisation(id)
 	,CONSTRAINT Appartient_Utilisateur0_FK FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id)
 )ENGINE=InnoDB;
 
@@ -67,11 +73,11 @@ CREATE TABLE Appartient(
 #------------------------------------------------------------
 
 CREATE TABLE estAdmin(
-        id             Int NOT NULL ,
+        id_Organisation Int NOT NULL ,
         id_Utilisateur Int NOT NULL
-	,CONSTRAINT estAdmin_PK PRIMARY KEY (id,id_Utilisateur)
+	,CONSTRAINT estAdmin_PK PRIMARY KEY (id_Organisation,id_Utilisateur)
 
-	,CONSTRAINT estAdmin_Organisation_FK FOREIGN KEY (id) REFERENCES Organisation(id)
+	,CONSTRAINT estAdmin_Organisation_FK FOREIGN KEY (id_Organisation) REFERENCES Organisation(id)
 	,CONSTRAINT estAdmin_Utilisateur0_FK FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id)
 )ENGINE=InnoDB;
 
@@ -81,11 +87,11 @@ CREATE TABLE estAdmin(
 #------------------------------------------------------------
 
 CREATE TABLE aCree(
-        id             Int NOT NULL ,
+        id_Proposition Int NOT NULL ,
         id_Utilisateur Int NOT NULL
-	,CONSTRAINT aCree_PK PRIMARY KEY (id,id_Utilisateur)
+	,CONSTRAINT aCree_PK PRIMARY KEY (id_Proposition,id_Utilisateur)
 
-	,CONSTRAINT aCree_Proposition_FK FOREIGN KEY (id) REFERENCES Proposition(id)
+	,CONSTRAINT aCree_Proposition_FK FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
 	,CONSTRAINT aCree_Utilisateur0_FK FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id)
 )ENGINE=InnoDB;
 
@@ -95,11 +101,11 @@ CREATE TABLE aCree(
 #------------------------------------------------------------
 
 CREATE TABLE peutAvoir(
-        id              Int NOT NULL ,
+        id_Proposition  Int NOT NULL ,
         id_Organisation Int NOT NULL
-	,CONSTRAINT peutAvoir_PK PRIMARY KEY (id,id_Organisation)
+	,CONSTRAINT peutAvoir_PK PRIMARY KEY (id_Proposition,id_Organisation)
 
-	,CONSTRAINT peutAvoir_Proposition_FK FOREIGN KEY (id) REFERENCES Proposition(id)
+	,CONSTRAINT peutAvoir_Proposition_FK FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
 	,CONSTRAINT peutAvoir_Organisation0_FK FOREIGN KEY (id_Organisation) REFERENCES Organisation(id)
 )ENGINE=InnoDB;
 
@@ -109,12 +115,12 @@ CREATE TABLE peutAvoir(
 #------------------------------------------------------------
 
 CREATE TABLE aLike(
-        id             Int NOT NULL ,
+        id_Proposition Int NOT NULL ,
         id_Utilisateur Int NOT NULL ,
         vote           Bool NOT NULL
-	,CONSTRAINT aLike_PK PRIMARY KEY (id,id_Utilisateur)
+	,CONSTRAINT aLike_PK PRIMARY KEY (id_Proposition,id_Utilisateur)
 
-	,CONSTRAINT aLike_Proposition_FK FOREIGN KEY (id) REFERENCES Proposition(id)
+	,CONSTRAINT aLike_Proposition_FK FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
 	,CONSTRAINT aLike_Utilisateur0_FK FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id)
 )ENGINE=InnoDB;
 
@@ -124,13 +130,13 @@ CREATE TABLE aLike(
 #------------------------------------------------------------
 
 CREATE TABLE aCommente(
-        id             Int NOT NULL ,
+        id_Proposition Int NOT NULL ,
         id_Utilisateur Int NOT NULL ,
         commentaire    Varchar (50) NOT NULL ,
         date           Date NOT NULL
-	,CONSTRAINT aCommente_PK PRIMARY KEY (id,id_Utilisateur)
+	,CONSTRAINT aCommente_PK PRIMARY KEY (id_Proposition,id_Utilisateur)
 
-	,CONSTRAINT aCommente_Proposition_FK FOREIGN KEY (id) REFERENCES Proposition(id)
+	,CONSTRAINT aCommente_Proposition_FK FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
 	,CONSTRAINT aCommente_Utilisateur0_FK FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id)
 )ENGINE=InnoDB;
 

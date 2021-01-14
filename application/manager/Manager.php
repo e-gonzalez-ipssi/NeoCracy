@@ -27,7 +27,7 @@ abstract class  Manager
      * 
      * @return array
      */
-    protected function find (): array {
+    protected function query(): array {
         try {
             $result = $this->bd->query($this->query);
         } catch (Exception $e) {
