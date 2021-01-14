@@ -29,12 +29,12 @@ jobs:
           yarn run build
           ls dist
           
-      - name: Zip 📦
-        run: |
-          cd ./static/frontend_neoracy
-          ls dist
-          zip deployment.zip dist
-          ls
+      - name: Archive release
+        uses: thedoctor0/zip-release@master
+        with:
+          path: ./static/frontend_neoracy
+          directory: ./static/frontend_neoracy/dist
+          filename: 'deployment.zip'
           
       - name: Commit deployment.zip 🗒
         run: |
