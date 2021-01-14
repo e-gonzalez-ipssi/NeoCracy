@@ -28,7 +28,7 @@ jobs:
           yarn
           yarn run build
           mkdir deployment
-          mv ./dist/* ./deployment && rm -rf dist
+          mv dist/* deployment && rm -rf dist
           zip deployment.zip ./deployment
           
       - name: Commit deployment.zip 🗒
