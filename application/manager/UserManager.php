@@ -78,7 +78,7 @@ class UserManager extends Manager {
         $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE mail = $mail";
         $this->setQuery($newQuery);
 
-        $result = $this->find();
+        $result = $this->query();
 
         if(count($result) < 1) {
             throw new Exception("error-user-not-found");
@@ -100,7 +100,7 @@ class UserManager extends Manager {
         $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE token = $token";
         $this->setQuery($newQuery);
 
-        $result = $this->find();
+        $result = $this->query();
 
         if(count($result) < 1) {
             throw new Exception("error-user-not-found");
@@ -118,7 +118,7 @@ class UserManager extends Manager {
         $newQuery = "UPDATE `Utilisateur` SET token = $token WHERE id = $id";
         $this->setQuery($newQuery);
 
-        $result = $this->find();
+        $result = $this->query();
 
         return $this->ack("Le Token a bien été ajouter a l'utilisateur");
     }
@@ -136,7 +136,7 @@ class UserManager extends Manager {
         $newQuery = "SELECT `Password` FROM `Utilisateur` WHERE id = $id";
         $this->setQuery($newQuery);
 
-        $result = $this->find();
+        $result = $this->query();
 
         if(count($result) < 1) {
             throw new Exception("error-user-not-found");
@@ -153,7 +153,7 @@ class UserManager extends Manager {
     public function getAllUserMail(): array {
         $newQuery = "SELECT `mail` FROM `Utilisateur`";
         $this->setQuery($newQuery);
-        $queryResult = $this->find();
+        $queryResult = $this->query();
         
         $result = [];
         foreach($queryResult as $row) {
