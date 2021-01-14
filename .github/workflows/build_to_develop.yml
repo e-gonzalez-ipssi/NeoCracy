@@ -34,13 +34,12 @@ jobs:
         with:
           directory: ./install/frontend_neoracy/dist
           filename: 'deployment.zip'
-        run: |
-        ls
-        mv deployment.zip ../../../static
-        ls ../../../static
           
       - name: Commit deployment.zip 🗒
         run: |
+          ls
+          mv deployment.zip ../../../static
+          ls ../../../static
           cd ./static/frontend_neoracy
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
