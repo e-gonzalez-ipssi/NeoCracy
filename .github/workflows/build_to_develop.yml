@@ -12,7 +12,7 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
         with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token.
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
           FOLDER: ./static/frontend_neoracy
 
