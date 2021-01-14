@@ -14,16 +14,10 @@ CREATE TABLE Utilisateur(
         mail   Varchar (50) NOT NULL ,
         tel    Varchar (50),
         mdp    Varchar (50) NOT NULL ,
-<<<<<<< HEAD
         photo  Varchar (50),
         isAdmin Boolean NOT NUll ,
         token Varchar (50) ,
 	,CONSTRAINT Utilisateur_PK PRIMARY KEY (id),
-=======
-        photo  Varchar (50) NOT NULL ,
-        isAdmin Boolean NOT NUll 
-        ,CONSTRAINT Utilisateur_PK PRIMARY KEY (id)
->>>>>>> 840d84ec69b66d79ffff375ae85b4ce4ff7906ef
 )ENGINE=InnoDB;
 
 
