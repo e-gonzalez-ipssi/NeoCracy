@@ -7,8 +7,6 @@ jobs:
 
   build-and-deploy:
     runs-on: ubuntu-latest
-    with:
-      FOLDER: ./static/frontend_neoracy
     steps:
     
       - name: Checkout 🛎️
@@ -26,6 +24,7 @@ jobs:
           
       - name: Build and zip 📦
         run: |
+          cd ./static/frontend_neoracy
           yarn
           yarn run build
           mkdir deployment
