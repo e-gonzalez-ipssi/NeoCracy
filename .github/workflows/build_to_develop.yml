@@ -12,8 +12,8 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
         with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token.
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo.
 
       - name: Install yarn 🔧
         run: |
@@ -22,16 +22,26 @@ jobs:
           sudo apt update -y
           sudo apt install yarn -y
           
-      - name: Build and zip 📦
+      - name: Build 📦
         run: |
+          cd ./install/frontend_neoracy
           yarn
           yarn run build
-          mkdir deployment
-          mv ./dist/* ./deployment && rm -rf dist
-          zip deployment.zip ./deployment
+          ls dist
+          
+      - name: Archive release
+        uses: thedoctor0/zip-release@master
+        with:
+          directory: ./install/frontend_neoracy/dist
+          filename: 'deployment.zip'
+        run: |
+        ls
+        mv deployment.zip ../../../static
+        ls ../../../static
           
       - name: Commit deployment.zip 🗒
         run: |
+          cd ./static/frontend_neoracy
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add deployment.zip
