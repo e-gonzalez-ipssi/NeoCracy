@@ -146,9 +146,9 @@ class UserManager extends Manager {
     }
 
     /**
-     * Cette fonction permet de récupéré le mot de passe utilisateur avec son adresse mail
+     * Cette fonction permet de récupéré les adresses mail de tout les utilisateurs
      * 
-     * @return array La liste des adresses mail des utilisateur
+     * @return array La liste des adresses mail de tout les utilisateurs
      */
     public function getAllUserMail(): array {
         $newQuery = "SELECT `mail` FROM `Utilisateur`";
