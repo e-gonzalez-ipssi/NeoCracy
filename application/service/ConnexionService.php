@@ -29,6 +29,8 @@ class  ConnexionService {
         ?string $telephone = null,
         ?string $photo = null
     ) {
+        // TODO : vérifier si le mot de passe a bien une sécurité minimum (exemple : 8 characteres, 1 chiffres, 1 majuscules)
+
         // on vérifie si les mots de passe rentré match pour voir si l'utilisateur a bien confirmer sont mot de passe
         if ($password != $confirmpassword) {
             throw new Exception("password-dont-match");
@@ -72,7 +74,7 @@ class  ConnexionService {
             throw new Exception("bad-password");
         }
 
-        $this->settoken($user, "token test", time() + (86400 * 30));
+        $this->setToken($user, $this->generateUserToken($user), time() + (86400 * 30));
 
         if (! $this->isConnected()) {
             throw new Exception("connection-failed");
@@ -88,12 +90,17 @@ class  ConnexionService {
         if($this->isConnected()) {
             throw new Exception("user-already-disconnected");
         }
-
-        $this->settoken($this->getCurrentUser(), "token test", time() - 3600);
+        
+        $user = $this->getCurrentUser();
+        $this->setToken($user, $this->generateUserToken($user), time() - 3600);
 
         if ($this->isConnected()) {
             throw new Exception("disconnection-failed");
         }
+    }
+
+    private function generateUserToken(User $user): string {
+        return password_hash($user->getMail(), HASH_CODE);;
     }
     
 
