@@ -16,7 +16,7 @@ CREATE TABLE Utilisateur(
         mdp    Varchar (50) NOT NULL ,
         photo  Varchar (50),
         isAdmin Boolean NOT NUll ,
-        token Varchar () ,
+        token Varchar (50) ,
 	,CONSTRAINT Utilisateur_PK PRIMARY KEY (id),
 )ENGINE=InnoDB;
 
