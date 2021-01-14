@@ -24,7 +24,7 @@ jobs:
           
       - name: Build 📦
         run: |
-          cd ./static/frontend_neoracy
+          cd ./install/frontend_neoracy
           yarn
           yarn run build
           ls dist
@@ -32,8 +32,12 @@ jobs:
       - name: Archive release
         uses: thedoctor0/zip-release@master
         with:
-          directory: ./static/frontend_neoracy/dist
+          directory: ./install/frontend_neoracy/dist
           filename: 'deployment.zip'
+        run: |
+        ls
+        mv deployment.zip ../../../static
+        ls ../../../static
           
       - name: Commit deployment.zip 🗒
         run: |
