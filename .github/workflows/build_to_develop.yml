@@ -27,11 +27,12 @@ jobs:
           cd ./static/frontend_neoracy
           yarn
           yarn run build
+          ls dist
           
       - name: Zip 📦
         run: |
           cd ./static/frontend_neoracy
-          ls
+          ls dist
           zip deployment.zip dist
           ls
           
