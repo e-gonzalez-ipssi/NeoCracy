@@ -1,6 +1,11 @@
-let defaultConfig = require('tailwindcss/defaultConfig')
+let defaultConfig = require('tailwindcss/defaultConfig');
 
 module.exports = {
+  purge: [
+    './src/**/*.html',
+    './src/**/*.js',
+  ],
+  darkMode: false, // or 'media' or 'class'
   theme: {
     /*
     |-----------------------------------------------------------------------------
