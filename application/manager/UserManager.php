@@ -68,28 +68,6 @@ class UserManager extends Manager {
     /**
      * Cette fonction permet de récupéré le mot de passe utilisateur avec son adresse mail
      * 
-     * @param int $id L'idée de l'utilisateur rechercher
-     * 
-     * @return string Le mot de passe stoker dans la bd
-     * 
-     * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
-     */
-    public function getPasswordById(int $id): string {
-        $newQuery = "SELECT `Password` FROM `Utilisateur` WHERE id = $id";
-        $this->setQuery($newQuery);
-
-        $result = $this->find();
-
-        if(count($result) < 1) {
-            throw new Exception("error-user-not-found");
-        }
-
-        return $result["password"];
-    }
-
-    /**
-     * Cette fonction permet de récupéré le mot de passe utilisateur avec son adresse mail
-     * 
      * @param string $mail Le mail de l'utilisateur que l'on recherche
      * 
      * @return User Cette fonction retourne l'utilisateur rechercher
@@ -109,7 +87,6 @@ class UserManager extends Manager {
         return $this->fromQueryToUser($result);
     }
 
-    
     /**
      * Cette fonction permet de récupéré l'utilisateur avec son token rechercher
      * 
@@ -144,6 +121,46 @@ class UserManager extends Manager {
         $result = $this->find();
 
         return $this->ack("Le Token a bien été ajouter a l'utilisateur");
+    }
+
+    /**
+     * Cette fonction permet de récupéré le mot de passe utilisateur avec son adresse mail
+     * 
+     * @param int $id L'idée de l'utilisateur rechercher
+     * 
+     * @return string Le mot de passe stoker dans la bd
+     * 
+     * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
+     */
+    public function getPasswordById(int $id): string {
+        $newQuery = "SELECT `Password` FROM `Utilisateur` WHERE id = $id";
+        $this->setQuery($newQuery);
+
+        $result = $this->find();
+
+        if(count($result) < 1) {
+            throw new Exception("error-user-not-found");
+        }
+
+        return $result["password"];
+    }
+
+    /**
+     * Cette fonction permet de récupéré le mot de passe utilisateur avec son adresse mail
+     * 
+     * @return array La liste des adresses mail des utilisateur
+     */
+    public function getAllUserMail(): array {
+        $newQuery = "SELECT `mail` FROM `Utilisateur`";
+        $this->setQuery($newQuery);
+        $queryResult = $this->find();
+        
+        $result = [];
+        foreach($queryResult as $row) {
+            array_push($result, $row['mail']);
+        }
+
+        return $result;
     }
 
     /**

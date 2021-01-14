@@ -19,10 +19,29 @@ class  ConnexionService {
 
     /**
      * Permet d'inscrire un utilisateur sur le site
-     *
      */
-    public function inscription() {
-        
+    public function inscription(
+        string $nom,
+        string $prenom,
+        string $password,
+        string $confirmpassword,
+        string $mail,
+        ?string $telephone = null,
+        ?string $photo = null
+    ) {
+        // on vérifie si les mots de passe rentré match pour voir si l'utilisateur a bien confirmer sont mot de passe
+        if ($password != $confirmpassword) {
+            throw new Exception("password-dont-match");
+        }
+
+        // on verifie si l'email utiliser n'éxiste pas déjà
+        if (in_array($mail, $this->userManager->getAllUserMail())){
+            throw new Exception("mail-already-used");
+        }
+
+        $password = password_hash($password, HASH_CODE);
+
+        $this->userService->addUser($nom, $prenom, $password, $mail, $telephone, $photo);
     }
 
     /**
