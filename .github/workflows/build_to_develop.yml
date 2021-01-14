@@ -27,9 +27,8 @@ jobs:
           cd ./static/frontend_neoracy
           yarn
           yarn run build
-          mkdir deployment
-          mv dist/* deployment && rm -rf dist
-          zip deployment.zip ./deployment
+          mv dist deployment
+          zip deployment.zip deployment
           
       - name: Commit deployment.zip 🗒
         run: |
