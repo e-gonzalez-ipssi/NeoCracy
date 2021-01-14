@@ -1,76 +1,41 @@
-// Bulma CSS for light weight CSS. One can any css framework
-import 'bulma/css/bulma.min.css';
-import './resources/css/util.scss';
-import './resources/css/global.css';
-
+import './resources/css/styles.css';
 export default class Client {
-  advertiseTimeout = 0;
-
-  clearAdvertiseTimeout() {
-    if (this.advertiseTimeout) {
-      clearTimeout(this.advertiseTimeout);
-    }
-    this.advertiseTimeout = 0;
-  }
-
-  advertise() {
-    this.clearAdvertiseTimeout();
-    this.advertiseTimeout = setTimeout(() => {
-      let codeFundDiv = document.getElementById('codefund_ad');
-      if (!codeFundDiv) {
-        codeFundDiv = document.createElement('div');
-        codeFundDiv.id = 'codefund';
-        const footerElement = document.querySelector('footer.footer');
-        if (footerElement) {
-          const jsCodefund = document.getElementById('js-codefund');
-          if (jsCodefund) {
-            footerElement.appendChild(codeFundDiv);
-            if (jsCodefund.src) {
-              const newJsCodefund = document.createElement('script');
-              setTimeout(() => {
-                newJsCodefund.src = `${jsCodefund.getAttribute('data-src')}?v=${(new Date()).getTime()}`;
-                newJsCodefund.id = jsCodefund.id;
-                newJsCodefund.setAttribute('data-src', jsCodefund.getAttribute('data-src'));
-                jsCodefund.remove();
-                document.body.append(newJsCodefund);
-              }, 100);
-              //
-            } else {
-              jsCodefund.src = jsCodefund.getAttribute('data-src');
-            }
-          }
-        }
-      } else {
-        const jsCodefund = document.getElementById('js-codefund');
-        if (jsCodefund) {
-          if (jsCodefund.src) {
-            const newJsCodefund = document.createElement('script');
-            setTimeout(() => {
-              newJsCodefund.src = `${jsCodefund.getAttribute('data-src')}`;
-              newJsCodefund.id = jsCodefund.id;
-              newJsCodefund.setAttribute('data-src', jsCodefund.getAttribute('data-src'));
-              jsCodefund.remove();
-              document.body.append(newJsCodefund);
-            }, 100);
-          } else {
-            jsCodefund.src = jsCodefund.getAttribute('data-src');
-          }
-        }
+  loadAds() {
+    setTimeout(() => {
+      // eslint-disable-next-line
+      if (typeof _codefund !== 'undefined' && _codefund.serve) {
+        // eslint-disable-next-line
+        _codefund.serve();
       }
-    }, 100);
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    }, 10);
   }
 
-  static googleTrack() {
-    if (typeof window.gtag === 'function') {
-      window.gtag('config', 'UA-108804791-2', {
-        page_path: window.location.pathname,
+  trackPageView() {
+    const { ga } = window;
+    if (typeof ga !== 'undefined' && ga) {
+      ga('send', {
+        hitType: 'pageview',
+        page: window.location.pathname,
       });
     }
   }
 
   apply(clientHandler) {
-    clientHandler.hooks.locationChange.tapPromise('ReloadAds', async () => this.advertise());
-    clientHandler.hooks.locationChange.tapPromise('ReloadGoogleTrack', async () => Client.googleTrack());
-    clientHandler.hooks.renderComplete.tap('ReloadAds', async () => this.advertise());
+    clientHandler.hooks.beforeRender.tapPromise('InitAds', async () => {
+      this.loadAds();
+    });
+    clientHandler.hooks.renderComplete.tap('InitTracking', () => {
+      window.ga = window.ga || function () {
+        (window.ga.q = window.ga.q || []).push(arguments);
+      };
+      window.ga.l = +new Date;
+      window.ga('create', 'UA-108804791-1', 'auto');
+      window.ga('send', 'pageview', window.location.pathname);
+    });
+    clientHandler.hooks.locationChange.tapPromise('ReInitAds', async () => {
+      this.loadAds();
+      this.trackPageView();
+    });
   }
 }
