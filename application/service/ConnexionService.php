@@ -18,7 +18,7 @@ class  ConnexionService {
     }
 
     // Petite fonction pour  échapper les caractères dangereux potentiellement envoyées et effectuer un premier nettoyage des données du formulaire
-    public function valid_donnees($donnees){
+    private function valid_donnees($donnees){
         $donnees = trim($donnees);
         $donnees = stripslashes($donnees);
         $donnees = htmlspecialchars($donnees);
@@ -45,7 +45,7 @@ class  ConnexionService {
             throw new Exception("valid-all-details");
         }             
         
-        // TODO : vérifier si le mot de passe a bien une sécurité minimum (exemple : 8 characteres (8-20) , 1 chiffres, 1 majuscules)
+        // Vérifier si le mot de passe a bien une sécurité minimum (exemple : 8 characteres (8-20) , 1 chiffres, 1 majuscules)
         $regex = "((?=.*\\d)(?=.*[A-Z]).{8,20})";
         $verif_pass = strlen($password) >= 8;
         $regex_pass = preg_match($regex,$password);
