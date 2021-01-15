@@ -42,14 +42,6 @@ class OrganisationManager extends Manager {
      * 
      */
     public function addUserToOrganisation(string $organisationId , string $userId): array {
-        /** @var string $request */
-        $request = "SELECT * FROM `Appartient`  WHERE id_Organisation = $organisationId AND id_Utilisateur = $userId ;";
-        $this->setQuery($request);
-        $result = $this->query();
-
-        if(count($result) >= 1){
-            throw new Exception("error-addMemberToOrganisation-failed");
-        }
         /** @var string $request2 */    
         $request2 = "INSERT INTO `Appartient` (`id_Organisation`, `id_Utilisateur`) VALUES ($organisationId, $userId);";
         $this->setQuery($request2);
@@ -65,14 +57,6 @@ class OrganisationManager extends Manager {
      * 
      */
     public function deleteUserToOrganisation(string $organisationId , string $userId): array {
-        /** @var string $request */
-        $request = "SELECT * FROM `Appartient`  WHERE id_Organisation = $organisationId AND id_Utilisateur = $userId ;";
-        $this->setQuery($request);
-        $result = $this->query();
-
-        if(count($result) < 1){
-            throw new Exception("error-deleteMemberToOrganisation-failed");
-        }
         /** @var string $request2 */    
         $request2 = "DELETE FROM `Appartient`  WHERE id_Organisation = $organisationId  AND id_Utilisateur = $userId ;";
         $this->setQuery($request2);
@@ -125,7 +109,6 @@ class OrganisationManager extends Manager {
         return $this->fromQueryToOrganisations($result);
     }
 
-    
     /**
      * Cette fonction permet de supprimer une Organisation
      * 
@@ -144,5 +127,21 @@ class OrganisationManager extends Manager {
         $this->query();
 
         return $this->ack("L'Organisation a bien été supprimé a la base de donnée");
+    }
+
+    /**
+     * Permet de récupéré les organisations d'un utilisateur
+     * 
+     * @param int $userId l'id de l'utilisateur dont on veux récupéré les organisations
+     * 
+     * @return array La liste des organisations de l'utlisateur au format Organisation
+     */
+    public function getOrganisationsFromUser(int $userId): array {
+        /** @var string $newQuery */
+        $newQuery = "SELECT `id_Organisation` FROM `Appartient` WHERE id_Utilisateur = $userId;";
+        $this->setQuery($newQuery);
+        $result = $this->query();
+        
+        return $result;
     }
 }
