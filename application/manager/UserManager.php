@@ -176,32 +176,4 @@ class UserManager extends Manager {
         $this->query();
         return $this->ack("L'utilisateur a bien été supprimé a la base de donnée");
     }
-
-    private function fromQueryToUser(array $result): User {
-        return new User(
-            $result["id"],
-            $result["nom"],
-            $result["prenom"],
-            $result["mail"],
-            $result["tel"],
-            $result["photo"],
-            $result["isAdmin"],
-        );
-    }
-    private function fromQueryToUsers(array $result): array {
-        $users = [];
-        foreach($result as $user) {
-            $newUser = new User(
-                $user["id"],
-                $user["nom"],
-                $user["prenom"],
-                $user["mail"],
-                $user["tel"],
-                $user["photo"],
-                $user["isAdmin"],
-            );
-            array_push($users, $newUser);
-        }
-        return $users;
-    }
 }
