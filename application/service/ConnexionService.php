@@ -149,7 +149,7 @@ class  ConnexionService {
      * Permet de set un utilisateur courant pour la fonction getCurrentUser()
      * Utilise le cookie Utilisateur, si il n'y a pas d'utilisateur courant, le set a NULL
      */
-    public function setCurrentUser() {
+    private function setCurrentUser() {
         if(isset($_COOKIE[COOKIE_USER_TOKEN])){
             try {
                 $this->me = $this->userManager->getUserByToken($_COOKIE[COOKIE_USER_TOKEN]);
@@ -179,7 +179,7 @@ class  ConnexionService {
      * 
      * @return User L'utilisateur courant au format User
      */
-    private function getCurrentUser(): User {
+    public function getCurrentUser(): User {
         if (is_null($this->me)) {
             throw new Exception("error-not-connected");
         }

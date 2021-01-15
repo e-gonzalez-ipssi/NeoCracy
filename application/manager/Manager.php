@@ -1,6 +1,8 @@
 <?php
 
 include '../entity/bd.php';
+include '../entity/User.php';
+include '../entity/Organisation.php';
 
 abstract class  Manager
 {
@@ -65,5 +67,57 @@ abstract class  Manager
             "code" => $code,
             "message" => $message,
         ];
+    }
+
+    protected function fromQueryToOrganisation($result): Organisation {
+        return new Organisation(
+            $result["id"],
+            $result["nom"],
+            $result["description"],
+            $result["lienSite"],
+        );;
+    }
+
+    protected function fromQueryToOrganisations($result): array {
+        $organisations = [];
+        foreach($result as $organisation) {
+            $newOrganisation = new Organisation(
+                $organisation["id"],
+                $organisation["nom"],
+                $organisation["description"],
+                $organisation["lienSite"],
+            );
+            array_push($organisations, $newOrganisation);
+        }
+        return $organisations;
+    }
+
+    protected function fromQueryToUser(array $result): User {
+        return new User(
+            $result["id"],
+            $result["nom"],
+            $result["prenom"],
+            $result["mail"],
+            $result["tel"],
+            $result["photo"],
+            $result["isAdmin"],
+        );
+    }
+    
+    protected function fromQueryToUsers(array $result): array {
+        $users = [];
+        foreach($result as $user) {
+            $newUser = new User(
+                $user["id"],
+                $user["nom"],
+                $user["prenom"],
+                $user["mail"],
+                $user["tel"],
+                $user["photo"],
+                $user["isAdmin"],
+            );
+            array_push($users, $newUser);
+        }
+        return $users;
     }
 }
