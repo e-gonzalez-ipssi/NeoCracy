@@ -145,26 +145,4 @@ class OrganisationManager extends Manager {
 
         return $this->ack("L'Organisation a bien été supprimé a la base de donnée");
     }
-
-    private function fromQueryToOrganisation($result): Organisation {
-        return new Organisation(
-            $result["id"],
-            $result["nom"],
-            $result["description"],
-            $result["lienSite"],
-        );;
-    }
-    private function fromQueryToOrganisations($result): array {
-        $organisations = [];
-        foreach($result as $organisation) {
-            $newOrganisation = new Organisation(
-                $organisation["id"],
-                $organisation["nom"],
-                $organisation["description"],
-                $organisation["lienSite"],
-            );
-            array_push($organisations, $newOrganisation);
-        }
-        return $organisations;
-    }
 }
