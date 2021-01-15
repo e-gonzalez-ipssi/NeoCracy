@@ -29,20 +29,41 @@ class  ConnexionService {
         ?string $telephone = null,
         ?string $photo = null
     ) {
-        // TODO : vérifier si le mot de passe a bien une sécurité minimum (exemple : 8 characteres, 1 chiffres, 1 majuscules)
+        // Petite fonction pour  échapper les caractères dangereux potentiellement envoyées et effectuer un premier nettoyage des données du formulaire
+        function valid_donnees($donnees){
+            $donnees = trim($donnees);
+            $donnees = stripslashes($donnees);
+            $donnees = htmlspecialchars($donnees);
+            return $donnees;
+        }
+        $nom = valid_donnees($nom);
+        $prenom = valid_donnees($prenom);
+        
+        // Vérification saisie des champs si vide erreur + filtre sur mail
+        if(empty($nom) && empty($prenom) && empty($password) && empty($confirmpassword) && empty($mail) && filter_var($mail, FILTER_VALIDATE_EMAIL)){
+            throw new Exception("valid-all-details");
+        }             
+        
+        // TODO : vérifier si le mot de passe a bien une sécurité minimum (exemple : 8 characteres (8-20) , 1 chiffres, 1 majuscules)
+        $regex = "((?=.*\\d)(?=.*[A-Z]).{8,20})";
+        $verif_pass = strlen($password) >= 8;
+        $regex_pass = preg_match($regex,$password);
+
+        if($verif_pass && $regex_pass ){
+            throw new Exception("check-password-security");
+        }
 
         // on vérifie si les mots de passe rentré match pour voir si l'utilisateur a bien confirmer sont mot de passe
         if ($password != $confirmpassword) {
             throw new Exception("password-dont-match");
-        }
+        } 
 
-        // on verifie si l'email utiliser n'éxiste pas déjà
+        // on verifie si l'email utiliseur n'éxiste pas déjà
         if (in_array($mail, $this->userManager->getAllUserMail())){
             throw new Exception("mail-already-used");
         }
 
         $password = password_hash($password, HASH_CODE);
-
         $this->userService->addUser($nom, $prenom, $password, $mail, $telephone, $photo);
     }
 
