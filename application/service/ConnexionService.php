@@ -17,6 +17,14 @@ class  ConnexionService {
         $this->userManager = $userManager;
     }
 
+    // Petite fonction pour  échapper les caractères dangereux potentiellement envoyées et effectuer un premier nettoyage des données du formulaire
+    public function valid_donnees($donnees){
+        $donnees = trim($donnees);
+        $donnees = stripslashes($donnees);
+        $donnees = htmlspecialchars($donnees);
+        return $donnees;
+    }
+
     /**
      * Permet d'inscrire un utilisateur sur le site
      */
@@ -29,15 +37,8 @@ class  ConnexionService {
         ?string $telephone = null,
         ?string $photo = null
     ) {
-        // Petite fonction pour  échapper les caractères dangereux potentiellement envoyées et effectuer un premier nettoyage des données du formulaire
-        function valid_donnees($donnees){
-            $donnees = trim($donnees);
-            $donnees = stripslashes($donnees);
-            $donnees = htmlspecialchars($donnees);
-            return $donnees;
-        }
-        $nom = valid_donnees($nom);
-        $prenom = valid_donnees($prenom);
+        $nom = $this->valid_donnees($nom);
+        $prenom = $this->valid_donnees($prenom);
         
         // Vérification saisie des champs si vide erreur + filtre sur mail
         if(empty($nom) && empty($prenom) && empty($password) && empty($confirmpassword) && empty($mail) && filter_var($mail, FILTER_VALIDATE_EMAIL)){
@@ -58,7 +59,7 @@ class  ConnexionService {
             throw new Exception("password-dont-match");
         } 
 
-        // on verifie si l'email utiliseur n'éxiste pas déjà
+        // on verifie si l'email utiliser n'éxiste pas déjà
         if (in_array($mail, $this->userManager->getAllUserMail())){
             throw new Exception("mail-already-used");
         }
