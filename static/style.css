@@ -1,0 +1,36 @@
+Body{
+    margin: 0 auto;
+    padding: 0;
+    background: #eeeeee;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.waveHeader{
+    position: absolute;
+    top: 0;
+}
+
+.waveFooter{
+    position: relative;
+    top: 10px;
+}
+
+.waveHeader2{
+    position: relative;
+    top: 10px;
+}
+
+.secondPart{
+    max-height: 1000px;
+    background: #ffd369;
+    position: absolute;
+    width: 100%;
+}
+
+.textHome{
+    position: absolute;
+}
