@@ -1,6 +1,8 @@
 <?php
 
 include '../entity/bd.php';
+include '../entity/User.php';
+include '../entity/Organisation.php';
 
 abstract class  Manager
 {

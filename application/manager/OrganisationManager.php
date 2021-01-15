@@ -134,11 +134,43 @@ class OrganisationManager extends Manager {
      * 
      * @param int $userId l'id de l'utilisateur dont on veux récupéré les organisations
      * 
-     * @return array La liste des organisations de l'utlisateur au format Organisation
+     * @return array La liste des organisations de l'utlisateur au format Id
      */
     public function getOrganisationsFromUser(int $userId): array {
         /** @var string $newQuery */
         $newQuery = "SELECT `id_Organisation` FROM `Appartient` WHERE id_Utilisateur = $userId;";
+        $this->setQuery($newQuery);
+        $result = $this->query();
+        
+        return $result;
+    }
+
+    /**
+     * Permet de récupéré les organisations d'un utilisateur
+     * 
+     * @param int $orgId l'id de l'organisation dont on veux récupéré les membres abonnées
+     * 
+     * @return array La liste des organisations de l'utlisateur au format Id
+     */
+    public function getUsersFromOrganisation(int $orgId): array {
+        /** @var string $newQuery */
+        $newQuery = "SELECT `id_Utilisateur` FROM `Appartient` WHERE id_Organisation = $orgId;";
+        $this->setQuery($newQuery);
+        $result = $this->query();
+        
+        return $result;
+    }
+
+        /**
+     * Permet de récupéré les organisations d'un utilisateur
+     * 
+     * @param int $orgId l'id de l'organisation dont on veux récupéré les membres admins
+     * 
+     * @return array La liste des organisations de l'utlisateur au format id
+     */
+    public function getAdminsFromOrganisation(int $orgId): array {
+        /** @var string $newQuery */
+        $newQuery = "SELECT `id_Utilisateur` FROM `estAdmin` WHERE id_Organisation = $orgId;";
         $this->setQuery($newQuery);
         $result = $this->query();
         
