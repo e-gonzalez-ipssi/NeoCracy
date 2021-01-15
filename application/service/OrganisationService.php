@@ -5,9 +5,11 @@ include '../manager/OrganisationManager.php';
 class  OrganisationService {
 
     private OrganisationManager $organisationManager;
+    private ConnexionService $connexionService;
 
-    public function __construct (OrganisationManager $organisationManager) {
+    public function __construct (OrganisationManager $organisationManager, ConnexionService $connexionService) {
         $this->$organisationManager = $organisationManager;
+        $this->connexionService = $connexionService
     }
 
     public function createOrganisation (string $nom, string $description, string $lienSite , User $user): array {
@@ -32,8 +34,13 @@ class  OrganisationService {
 
     /**
      * Permet de vérifier si un utilisateur est dans une organisation
+     * 
+     * @param User $user l'utilisateur dont on veux vérifier l'appartenance
+     * @param Organisation $org l'organisation
+     * 
+     * @return bool
      */
-    public function userIsInOrganisation(User $user, Organisation $org){
+    public function userIsInOrganisation(User $user, Organisation $org): bool{
         if (in_array($org->getId(), $this->organisationManager->getOrganisationsFromUser($user->getId()))) {
             return true;
         }
@@ -43,34 +50,40 @@ class  OrganisationService {
     /**
      * Permet d'ajouter un utilisateur à une organisation
      */
-    public function addUserFromOrganisation(Organisation $org, User $user){
-        if (! $this->userIsInOrganisation($this->connexionService->getCurrentUser(), $org)) {
-            throw new Exception("user-not-in-organisation");
+    public function addUserFromOrganisation(Organisation $org, User $user): void{
+        if ($this->userIsInOrganisation($user, $org)) {
+            throw new Exception("user-is-in-organisation");
         }
+
         $this->organisationManager->addUserToOrganisation($org->getId(), $user->getId());
     }
 
     /**
      * Permet de supprimer un utilisateur d'une organisation de la database
      */
-    public function removeUserFromOrganisation(Organisation $org, User $user){
-        if (! $this->userIsInOrganisation($this->connexionService->getCurrentUser(), $org)) {
+    public function removeUserFromOrganisation(Organisation $org, User $user): void{
+        if ($this->userIsInOrganisation($user, $org)) {
             throw new Exception("user-not-in-organisation");
         }
+
         $this->organisationManager->deleteUserToOrganisation($org->getId(), $user->getId());
     }
 
     /**
      * Permet de récupéré les utilisateurs d'une organisation
      */
-    public function getUserFromOrganisation(Organisation $org){
-
+    public function getUsersFromOrganisation(Organisation $org){
+        if ($this->userIsInOrganisation($this->connexionService->getCurrentUser(), $org)) {
+            throw new Exception("error-permission-error");
+        }
     }
 
     /**
      * Permet de récupéré les administrateurs d'une organisation
      */
-    public function getAdminFromOrganisation(Organisation $org){
+    public function getAdminsFromOrganisation(Organisation $org){
+        if ($this->userIsInOrganisation($this->connexionService->getCurrentUser(), $org)) {
+            throw new Exception("error-permission-error");
+        }
     }
-
 }
