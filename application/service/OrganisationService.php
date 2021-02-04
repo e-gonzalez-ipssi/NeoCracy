@@ -9,7 +9,7 @@ class  OrganisationService {
 
     public function __construct (OrganisationManager $organisationManager, ConnexionService $connexionService) {
         $this->$organisationManager = $organisationManager;
-        $this->connexionService = $connexionService
+        $this->connexionService = $connexionService;
     }
 
     public function createOrganisation (string $nom, string $description, string $lienSite , User $user): array {
