@@ -1,5 +1,7 @@
 <?php
 
+use Neocracy\Entity\User;
+
 include '../entity/Constant.php';
 include '../entity/User.php';
 include '../service/UserService.php';
@@ -85,6 +87,7 @@ class  ConnexionService {
             throw new Exception("bad-input-data");
         }
 
+        /** @var User $user */
         $user = $this->userService->getUserByMail($mail);
 
         $password = password_hash($password, HASH_CODE);

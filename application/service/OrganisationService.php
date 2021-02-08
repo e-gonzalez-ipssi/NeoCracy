@@ -1,5 +1,8 @@
 <?php
 
+use Neocracy\Entity\Organisation;
+use Neocracy\Entity\User;
+
 include '../manager/OrganisationManager.php';
 
 class  OrganisationService {

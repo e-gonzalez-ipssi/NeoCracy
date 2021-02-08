@@ -1,5 +1,7 @@
 <?php 
 
+use Neocracy\Entity\Organisation;
+
 include 'Manager.php';
 include '../entity/Organisation.php';
 
