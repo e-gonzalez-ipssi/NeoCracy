@@ -15,6 +15,11 @@ export default class Routes {
       exact: true,
       component: () => import('./app/components/home'),
     },
+    {
+      path: '/connexion',
+      exact: true,
+      component: () => import('./app/components/connexion'),
+    },
   ];
 
   apply(routeHandler) {
