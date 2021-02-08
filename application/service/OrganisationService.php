@@ -27,12 +27,15 @@ class  OrganisationService {
         return $this->organisationManager->getOrganisationByName($nom);
     }
 
-    public function deleteOrganisation(string $nom , User $user){
+    public function deleteOrganisation(Organisation $org , User $user){
         // TODO: ajouter une condition pour empecher un utilisateur qui n'est pas admin d'une org de la delete
+        if(!in_array($user, $this->getAdminsFromOrganisation($org)))
+        {
+            throw new Exception("error-no-permission");
+        }
 
         // Renvoie une erreur si organisation inexistant
-        $this->organisationManager->getOrganisationByName($nom);
-        return $this->organisationManager->deleteOrganisation($nom, $user->getNom());
+        return $this->organisationManager->deleteOrganisation($org, $user->getNom());
     }
 
     /**

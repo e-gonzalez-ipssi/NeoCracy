@@ -123,7 +123,8 @@ class OrganisationManager extends Manager {
      * @return string Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
-    public function deleteOrganisation(string $nom, string $userName): array {
+    public function deleteOrganisation(Organisation $org, string $userName): array {
+        $nom = $org->getNom();
         /** @var string $newQuery */
         $newQuery = "DELETE FROM `estAdmin`  WHERE id_Organisation = (SELECT id FROM Organisation WHERE nom = $nom) AND 
         id_Utilisateur = (SELECT Id FROM Utilisateur WHERE nom = $userName) ;";
