@@ -1,19 +1,19 @@
 {
-  "name": "example-pawjs-tailwind",
+  "name": "frontend_neocracy",
   "version": "1.0.0",
-  "description": "Example on using Tailwind CSS with PawJS",
+  "description": "Louislebg.tk",
   "scripts": {
     "start": "pawjs --env=development start",
     "build": "pawjs --env=production --config=prod.pawconfig.json build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Atyantik/example-pawjs-tailwind.git"
+    "url": "git+https://github.com/e-gonzalez-ipssi/NeoCracy.git"
   },
   "author": {
-    "name": "Atyantik Technologies",
-    "email": "admin@atyantik.com",
-    "url": "https://www.atyantik.com/"
+    "name": "Louis, Doray, Maxime, Esteban",
+    "email": "soon@neocracy.com",
+    "url": "https://www.neocracy.com/"
   },
   "engines": {
     "node": ">=10.11.0"
