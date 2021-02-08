@@ -1,4 +1,4 @@
-Body{
+body{
     margin: 0 auto;
     padding: 0;
     background: #eeeeee;
@@ -21,10 +21,10 @@ Body{
 
 .waveHeader2{
     position: relative;
-    top: 10px;
+    margin: 0;
 }
 
-.secondPart{
+.secondPart {
     max-height: 1000px;
     background: #ffd369;
     position: absolute;
@@ -33,4 +33,10 @@ Body{
 
 .textHome{
     position: absolute;
+}
+
+.logo{
+    position: absolute;
+    width: 10%;
+    left: 5%;
 }
