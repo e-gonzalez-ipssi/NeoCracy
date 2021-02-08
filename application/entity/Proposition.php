@@ -6,7 +6,6 @@ use date;
 
 class Proposition
 {
-
     protected int $id;
     protected string $nom;
     protected string $description;

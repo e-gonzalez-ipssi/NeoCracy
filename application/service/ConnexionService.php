@@ -112,7 +112,7 @@ class  ConnexionService {
      * throw Exception renvoie une exeption si il n'y a pas d'utilisateur connecté, ou si la déconnection échou
      */
     public function deconnexion() {
-        if($this->isConnected()) {
+        if(!$this->isConnected()) {
             throw new Exception("user-already-disconnected");
         }
         
