@@ -31,6 +31,10 @@ class UserManager extends Manager {
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
     public function getUserById(int $id): User {
+        if (!empty($this->inventory[$id])) {
+            return $this->inventory[$id];
+        }
+
         $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE id = $id";
         $this->setQuery($newQuery);
 
@@ -40,7 +44,9 @@ class UserManager extends Manager {
             throw new Exception("error-user-not-found");
         }
 
-        return $this->fromQueryToUser($result);
+        $user = $this->fromQueryToUser($result);
+        $this->inventory[$user->getId()] = $user;
+        return $user;
     }
 
     /**
