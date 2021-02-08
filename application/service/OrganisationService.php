@@ -27,9 +27,20 @@ class  OrganisationService {
         return $this->organisationManager->getOrganisationByName($nom);
     }
 
-    public function deleteOrganisation(Organisation $org , User $user){
+    /**
+     * Permet de supprimer une organisation
+     * 
+     * @param Organisation $org l'organisation
+     * @param User $user l'utilisateur qui effectue l'action
+     * 
+     * @return void
+     */
+    public function deleteOrganisation(Organisation $org , User $user): void{
         // TODO: ajouter une condition pour empecher un utilisateur qui n'est pas admin d'une org de la delete
-        if(!in_array($user, $this->getAdminsFromOrganisation($org)))
+        if(
+            !in_array($user, $this->getAdminsFromOrganisation($org))
+            && !$user->isAdmin() // si l'utilisateur est admin du site il peut supprimer n'importe quel org
+        )
         {
             throw new Exception("error-no-permission");
         }
