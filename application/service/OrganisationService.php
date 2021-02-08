@@ -36,7 +36,6 @@ class  OrganisationService {
      * @return void
      */
     public function deleteOrganisation(Organisation $org , User $user): void{
-        // TODO: ajouter une condition pour empecher un utilisateur qui n'est pas admin d'une org de la delete
         if(
             !in_array($user, $this->getAdminsFromOrganisation($org))
             && !$user->isAdmin() // si l'utilisateur est admin du site il peut supprimer n'importe quel org
