@@ -75,6 +75,10 @@ class OrganisationManager extends Manager {
      * @throw Exception Relève une expetion si l'Organisation n'a pas été trouvé
      */
     public function getOrganisationById(int $id): Organisation {
+        if (!empty($this->inventory[$id])) {
+            return $this->inventory[$id];
+        }
+
         $newQuery = "SELECT `id`, `nom`, `description`, `lienSite` FROM `Organisation` WHERE id = $id";
         $this->setQuery($newQuery);
 
@@ -84,7 +88,9 @@ class OrganisationManager extends Manager {
             throw new Exception("error-organisation-not-found");
         }
 
-        return $this->fromQueryToOrganisation($result);
+        $org = $this->fromQueryToOrganisation($result);
+        $this->inventory[$org->getId()] = $org;
+        return $org;
     }
 
     /**

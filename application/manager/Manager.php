@@ -8,6 +8,7 @@ abstract class  Manager
 {
     private bd $bd;
     private string $query;
+    protected array $inventory = [];
     
     public function __construct (bd $bd)  {
         $this->$bd = $bd;
