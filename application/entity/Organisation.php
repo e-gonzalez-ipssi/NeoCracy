@@ -1,5 +1,7 @@
 <?php
 
+namespace Neocracy\Entity;
+
 class Organisation
 {
 

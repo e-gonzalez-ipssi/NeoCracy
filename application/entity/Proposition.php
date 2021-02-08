@@ -1,5 +1,9 @@
 <?php
 
+namespace Neocracy\Entity;
+
+use date;
+
 class Proposition
 {
 

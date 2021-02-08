@@ -1,5 +1,9 @@
 <?php
 
+namespace Neocracy\Entity;
+
+use mysqli;
+
 /*
 Fetch a record from a database:
 $account = $db->query('SELECT * FROM accounts WHERE username = ? AND password = ?', 'test', 'test')->fetchArray();
