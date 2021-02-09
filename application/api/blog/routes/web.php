@@ -1,6 +1,6 @@
 <?php
 
-include "../../../Constant.php";
+// include "../../../Constant.php";
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
@@ -15,8 +15,10 @@ include "../../../Constant.php";
 |
 */
 
-$router->get(ROUTE_START_URL.'test', function () use ($router) {
-    return "mabite";
-});
+$router->get('api/todo','TodosController@list');
+$router->post('api/todo','TodosController@saveTodo');
+$router->post('api/todo/done/{id}','TodosController@markAsDone');
+$router->delete('api/todo/delete/{id}','TodosController@deleteTodo');
+
 
 

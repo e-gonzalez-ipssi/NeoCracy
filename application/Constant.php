@@ -20,4 +20,11 @@ define("HASH_CODE", "NeoCracyTheBestHashCode");
 
 define("COOKIE_USER_TOKEN", "userToken");
 
+/**
+ * ==========================================================
+ * 
+ * Constant lié au url
+ * 
+ * ==========================================================
+ */
 define("ROUTE_START_URL", "api/");
