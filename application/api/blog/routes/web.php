@@ -12,7 +12,9 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
+$router->get('/', function () {
+    return 'Hello World';
+});
 $router->get('api/todo','TodosApi@list');
 $router->post('api/todo','TodosApi@saveTodo');
 $router->post('api/todo/done/{id}','TodosApi@markAsDone');
