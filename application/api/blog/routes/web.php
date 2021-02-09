@@ -1,7 +1,5 @@
 <?php
 
-// include "../../../Constant.php";
-
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -15,10 +13,10 @@
 |
 */
 
-$router->get('api/todo','TodosController@list');
-$router->post('api/todo','TodosController@saveTodo');
-$router->post('api/todo/done/{id}','TodosController@markAsDone');
-$router->delete('api/todo/delete/{id}','TodosController@deleteTodo');
+$router->get('api/todo','TodosApi@list');
+$router->post('api/todo','TodosApi@saveTodo');
+$router->post('api/todo/done/{id}','TodosApi@markAsDone');
+$router->delete('api/todo/delete/{id}','TodosApi@deleteTodo');
 
 
 
