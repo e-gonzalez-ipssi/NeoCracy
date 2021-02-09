@@ -19,3 +19,5 @@ define("HASH_CODE", "NeoCracyTheBestHashCode");
  */
 
 define("COOKIE_USER_TOKEN", "userToken");
+
+define("ROUTE_START_URL", "api/");
