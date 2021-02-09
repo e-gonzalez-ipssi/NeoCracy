@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Neocracy\Entity\bd;
-use UserManager;
-use UserService;
-
-include "..\..\..\..\..\\entity\bd.php";
-include "..\..\..\..\..\\service\UserService.php";
-include "..\..\..\..\..\\manager\UserManager.php";
+use App\Entity\bd;
+use App\Manager\UserManager;
+use App\Service\UserService;
 
 class UserApi extends Api
 {

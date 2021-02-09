@@ -1,8 +1,10 @@
 <?php
-use Neocracy\Entity\User;
-include '../entity/Constant.php';
-include "../entity/User.php";
-include '../manager/UserManager.php';
+
+namespace App\Service;
+
+use App\Entity\User;
+use App\Manager\UserManager;
+use Exception;
 
 class  UserService {
 

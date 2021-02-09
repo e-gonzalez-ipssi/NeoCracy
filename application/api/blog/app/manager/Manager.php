@@ -1,10 +1,11 @@
 <?php
-use Neocracy\Entity\bd ;
-use Neocracy\Entity\Organisation ;
-use Neocracy\Entity\User;
-include '../entity/bd.php';
-include '../entity/User.php';
-include '../entity/Organisation.php';
+
+namespace App\Manager;
+
+use App\Entity\bd ;
+use App\Entity\Organisation ;
+use App\Entity\User;
+use Exception;
 
 abstract class  Manager
 {

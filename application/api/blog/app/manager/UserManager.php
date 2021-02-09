@@ -1,7 +1,8 @@
 <?php 
-Use Neocracy\Entity\User;
-include 'Manager.php';
-include '../entity/User.php';
+
+namespace App\Manager;
+Use App\Entity\User;
+use Exception;
 
 class UserManager extends Manager {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Neocracy\Entity;
+namespace App\Entity;
 
 use mysqli;
 

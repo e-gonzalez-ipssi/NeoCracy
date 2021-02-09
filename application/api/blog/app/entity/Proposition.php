@@ -1,22 +1,25 @@
 <?php
 
-namespace Neocracy\Entity;
+namespace App\Entity;
 
-class Organisation
+use date;
+
+class Proposition
 {
-
     protected int $id;
     protected string $nom;
     protected string $description;
-    protected string $lienSite ;
+    protected string $tag ;
+    protected string $date ;
 
 
-    public function __construct(int $id, string $nom, string $description, string $lienSite)
+    public function __construct(int $id, string $nom, string $description, int $tag, date $date)
     {
         $this->id = $id;
         $this->nom = $nom;
         $this->description = $description;
-        $this->lienSite = $lienSite;
+        $this->tag = $tag;
+        $this->date = $date;
     }
 
     public function getId():int{
@@ -42,10 +45,17 @@ class Organisation
         return $this->description;
     }
 
-    public function setLienSite(string $lienSite){
-        $this->lienSite = $lienSite;
+    public function setTag(int $tag){
+        $this->tag = $tag;
     }
-    public function getLienSite():string{
-        return $this->lienSite;
+    public function getTag():int{
+        return $this->tag;
+    }
+
+    public function setDate(date $date){
+        $this->date = $date;
+    }
+    public function getDate():date{
+        return $this->date;
     }
 }

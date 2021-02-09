@@ -1,9 +1,9 @@
 <?php
 
-use Neocracy\Entity\Organisation;
-use Neocracy\Entity\User;
-
-include '../manager/OrganisationManager.php';
+use App\Entity\Organisation;
+use App\Entity\User;
+use App\Manager\OrganisationManager;
+use App\Service\ConnexionService;
 
 class  OrganisationService {
 

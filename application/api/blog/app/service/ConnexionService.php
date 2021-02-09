@@ -1,12 +1,11 @@
 <?php
 
-use Neocracy\Entity\User;
+namespace App\Service;
 
-include '../entity/Constant.php';
-include '../entity/User.php';
-include '../service/UserService.php';
-include '../manager/UserManager.php';
-
+use App\Entity\User;
+use App\Manager\UserManager;
+use App\Service\UserService;
+use Exception;
 
 class  ConnexionService {
 
@@ -14,7 +13,7 @@ class  ConnexionService {
     private UserManager $userManager;
     private ?User $me = null;
 
-    public function __construct(UserService $userService, UserService $userManager) {
+    public function __construct(UserService $userService, UserManager $userManager) {
         $this->userService = $userService;
         $this->userManager = $userManager;
     }

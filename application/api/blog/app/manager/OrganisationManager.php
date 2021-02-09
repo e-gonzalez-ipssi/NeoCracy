@@ -1,9 +1,9 @@
 <?php 
 
-use Neocracy\Entity\Organisation;
+namespace App\Manager;
 
-include 'Manager.php';
-include '../entity/Organisation.php';
+use App\Entity\Organisation;
+use Exception;
 
 class OrganisationManager extends Manager {
 
