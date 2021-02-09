@@ -1,7 +1,7 @@
 <?php
-
+use Neocracy\Entity\User;
 include '../entity/Constant.php';
-include '../entity/User.php';
+include "../entity/User.php";
 include '../manager/UserManager.php';
 
 class  UserService {

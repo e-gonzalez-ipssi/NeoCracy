@@ -1,5 +1,5 @@
 <?php 
-
+Use Neocracy\Entity\User;
 include 'Manager.php';
 include '../entity/User.php';
 
