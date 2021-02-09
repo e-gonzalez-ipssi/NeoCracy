@@ -18,7 +18,7 @@ class  User {
         string $prenom,
         string $mail,
         string $telephone,
-        string $photo,
+        ?string $photo = null,
         bool $isAdmin = false
     ) {
         $this->id = $id;
@@ -26,8 +26,32 @@ class  User {
         $this->prenom = $prenom;
         $this->mail = $mail;
         $this->telephone = $telephone;
-        $this->photo = $photo;
+
+        if(!empty($photo)) {
+            $this->photo = $photo;
+        }
+
         $this->isAdmin = $isAdmin;
+    }
+
+    public function arrayify(): array {
+        if(!empty($this->photo)) {
+            return [
+                "id" => $this->id,
+                "nom" => $this->nom,
+                "prenom" => $this->prenom,
+                "mail" => $this->mail,
+                "telephone" => $this->telephone,
+                "photo" => $this->photo,
+            ];
+        }
+        return [
+            "id" => $this->id,
+            "nom" => $this->nom,
+            "prenom" => $this->prenom,
+            "mail" => $this->mail,
+            "telephone" => $this->telephone,
+        ];
     }
 
     public function getId(): int {

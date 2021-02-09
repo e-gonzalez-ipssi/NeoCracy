@@ -98,13 +98,13 @@ abstract class  Manager
 
     protected function fromQueryToUser(array $result): User {
         return new User(
-            $result["id"],
-            $result["nom"],
-            $result["prenom"],
-            $result["mail"],
-            $result["tel"],
-            $result["photo"],
-            $result["isAdmin"],
+            $result[0]["id"],
+            $result[0]["nom"],
+            $result[0]["prenom"],
+            $result[0]["mail"],
+            $result[0]["tel"],
+            $result[0]["photo"],
+            $result[0]["isAdmin"]
         );
     }
     
@@ -118,7 +118,7 @@ abstract class  Manager
                 $user["mail"],
                 $user["tel"],
                 $user["photo"],
-                $user["isAdmin"],
+                $user["isAdmin"]
             );
             array_push($users, $newUser);
         }

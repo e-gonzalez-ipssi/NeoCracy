@@ -24,8 +24,7 @@ class UserApi extends Api
 
     public function getUser($id) {
         $user = $this->userService->getUserById($id);
-
-        return response()->json($user);
+        return response()->json($user->arrayify());
     }
     //
 }
