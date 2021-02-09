@@ -14,7 +14,7 @@ abstract class  Manager
     protected array $inventory = [];
     
     public function __construct (bd $bd)  {
-        $this->$bd = $bd;
+        $this->bd = $bd;
     }
 
     /**

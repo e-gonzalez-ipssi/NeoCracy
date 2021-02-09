@@ -19,7 +19,7 @@ class  User {
         string $mail,
         string $telephone,
         string $photo,
-        bool $isAdmin = false,
+        bool $isAdmin = false
     ) {
         $this->id = $id;
         $this->nom = $nom;

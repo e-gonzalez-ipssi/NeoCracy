@@ -17,12 +17,7 @@ class UserApi extends Api
      */
     public function __construct()
     {
-        $dbhost = 'localhost';
-        $dbuser = 'root';
-        $dbpass = '';
-        $dbname = 'neocracy';
-
-        $bd = new bd($dbhost, $dbuser, $dbpass, $dbname);
+        $bd = new bd();
         $userManager = new UserManager($bd);
         $this->userService = new UserService($userManager);
     }

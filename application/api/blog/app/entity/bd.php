@@ -54,7 +54,7 @@ class bd
     protected $query_closed = true;
     public $query_count = 0;
 
-    public function __construct($dbhost = 'localhost', $dbuser = 'root', $dbpass = '', $dbname = '', $charset = 'utf8')
+    public function __construct($dbhost = 'localhost', $dbuser = 'root', $dbpass = '', $dbname = 'neocracy', $charset = 'utf8')
     {
         $this->connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
         if ($this->connection->connect_error) {
@@ -218,5 +218,4 @@ class bd
 
         return 'b';
     }
-
 }
