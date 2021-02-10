@@ -1,0 +1,65 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.btnConnect{
+    width: 20rem;
+    margin: 1.5rem;
+    color: #222831;
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08);
+    background: #ffd369;
+    padding: 1rem 3rem 1rem 3rem;
+    border-radius: 99px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btnRegister{
+    width: 20rem;
+    margin: 1.5rem;
+    color: #eeeeee;
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08);
+    background: #222831;
+    padding: 1rem 2rem 1rem 2rem;
+    border-radius: 99px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dayNight{
+    position: absolute;
+    top: 0;
+    right: 10%;
+    background: #ffd369;
+    height: 2.5rem;
+    width: 10rem;
+    border-radius: 0 0 99px 99px;
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08);
+}
+
+.dayNight:hover{
+    opacity: 80%;
+    outline: none;
+}
+
+.dayNight2{
+    position: absolute;
+    top: 10vh;
+    right: 10%;
+    background: #ffd369;
+    height: 2.5rem;
+    width: 10rem;
+    border-radius: 0 0 99px 99px;
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08);
+    display: block;
+}
+
+.btnConnect:focus {
+    opacity: 80%;
+    outline: none;
+}
+
+.btnRegister:focus {
+    opacity: 80%;
+    outline: none;
+}
