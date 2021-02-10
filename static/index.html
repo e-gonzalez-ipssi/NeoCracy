@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link href="output.css" rel="stylesheet">
     <title>site a chier</title>
 </head>
+
 <body>
 
     <div class="bg-grey">
@@ -16,32 +18,43 @@
 
         <img class="z-10 absolute w-40 ml-20 mt-4" src="img/logos.svg" alt="logo"></img>
 
-        <button type="button" class="z-30 dayNight" onclick="myFunction()"></button>
+        <button type="button" class="z-30 dayNight" id="dayNight" onclick="myFunction()">
 
-        <button type="button" class="z-30 dayNight2" id="dayNight2">Night</button>
+            <img class="arrowDown h-8" src="img/arrowdown_111022.svg">
+
+        </button>
+
+        <button type="button" class="z-30 dayNight2" id="dayNight2" onclick="myFunction2()">
+
+            <img class="arrowUp h-8" src="img/arrowup_111030.svg">
+
+        </button>
+
+        <div class="z-30 nightDay" id="nightDay"></div>
 
         <div class="z-20 absolute w-full flex items-center h-screen justify-center">
 
-          <div class="flex justify-between">
+            <div class="flex justify-between">
 
-            <button type="button" class="z-20 btnConnect tracking-wide text-lg">Inscription</button>
+                <button type="button" class="z-20 btnConnect tracking-wide text-lg">Inscription</button>
 
-            <button type="button" class="z-20 btnRegister tracking-wide text-lg">Connexion</button>
+                <button type="button" class="z-20 btnRegister tracking-wide text-lg">Connexion</button>
 
-          </div>
+            </div>
 
         </div>
 
         <img class="z-10 relative" src="img/footer.svg" alt="footer"></img>
 
-      </div>
+    </div>
 
-      <div class="z-0 bg-yellow">
+    <div class="z-0 bg-yellow">
 
         <img class="z-30 relative" src="img/header2.svg" alt="header2"></img>
 
-      </div>
+    </div>
 
 </body>
 <script src="js/index.js"></script>
+
 </html>

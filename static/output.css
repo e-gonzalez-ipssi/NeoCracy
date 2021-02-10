@@ -25679,7 +25679,10 @@ video {
 }
 
 .dayNight:hover{
-  opacity: 80%;
+  outline: none;
+}
+
+.dayNight:focus{
   outline: none;
 }
 
@@ -25692,6 +25695,7 @@ video {
   width: 10rem;
   border-radius: 0 0 99px 99px;
   box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08);
+  display: none;
 }
 
 .btnConnect:focus {
@@ -25702,6 +25706,16 @@ video {
 .btnRegister:focus {
   opacity: 80%;
   outline: none;
+}
+
+.nightDay{
+  position: absolute;
+  top: 0;
+  height: 10vh;
+  width: 10rem;
+  right: 10%;
+  background: #ffd369;
+  display: none;
 }
 
 @media (min-width: 400px) {
