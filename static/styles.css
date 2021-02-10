@@ -43,7 +43,6 @@
 }
 
 .dayNight:focus{
-    opacity: 80%;
     outline: none;
 }
 
