@@ -1,0 +1,9 @@
+{
+  "port": "8080",
+  "host": "0.0.0.0",
+  "appRootUrl": "/examples/tailwind",
+  "serviceWorker": true,
+  "asyncCSS": false,
+  "serverSideRender": true,
+  "singlePageApplication": false
+}
