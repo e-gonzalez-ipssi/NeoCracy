@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Entity\User;
+use Exception;
+use Illuminate\Http\Request;
+use Symfony\Component\Process\ExecutableFinder;
+
+include "Constant.php";
 
 class UserApi extends Api
 {
@@ -24,7 +29,9 @@ class UserApi extends Api
 
         $this->checkAccess($right, $this->me);
 
-        // TODO #95 faire une méthode pour récupéré les paramêtres et les initializers en parametre utilisable
+        $params = $this->getParams($param);
+
+        return $params;
     }
 
     private function checkAccess(int $right, ?User $me) {
@@ -43,8 +50,26 @@ class UserApi extends Api
      * @return  mixed les informations de l'utilisateur au format JSON
      */
     public function getUser(int $id) {
-        $this->initialize([], self::NO_RIGHT, false);
+        $params = $this->initialize([], self::NO_RIGHT, false);
+
         $user = $this->userService->getUserById($id);
         return $this->returnOutput($user->arrayify());
+    }
+
+    /**
+     * @route post(api/connect/)
+     * 
+     * @param int $id l'id de l'utilisateur que l'on recherche
+     * 
+     * @return  mixed les informations de l'utilisateur au format JSON
+     */
+    public function connect(Request $request) {
+        if (!$request->isMethod("post")) {
+            throw new Exception("test");
+        }
+        $params = $this->initialize([["test", true, 1]], self::NO_RIGHT, false);
+        
+        $this->connexionService->connexion();
+        return $this->returnOutput($this->ack());
     }
 }

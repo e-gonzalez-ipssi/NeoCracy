@@ -27,4 +27,5 @@ define("COOKIE_USER_TOKEN", "userToken");
  * 
  * ==========================================================
  */
-define("ROUTE_START_URL", "api/");
+define("TYPE_INT", 1);
+
