@@ -2,31 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Entity\bd;
 use App\Entity\User;
-use App\Manager\UserManager;
-use App\Service\ConnexionService;
-use App\Service\UserService;
 
 class UserApi extends Api
 {
     private const NO_RIGHT = 1;
 
-    private ?User $me = null;
-    private UserService $userService;
-    private ConnexionService $connexionService;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $bd = new bd();
-        $userManager = new UserManager($bd);
-        $this->userService = new UserService($userManager);
-        $this->connexionService = new ConnexionService($this->userService, $userManager);
+        parent::__construct();
     }
 
     private function initialize(
