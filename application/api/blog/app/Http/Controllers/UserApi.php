@@ -63,10 +63,7 @@ class UserApi extends Api
      * 
      * @return  mixed les informations de l'utilisateur au format JSON
      */
-    public function connect(Request $request) {
-        if (!$request->isMethod("post")) {
-            throw new Exception("test");
-        }
+    public function connect() {
         $params = $this->initialize([["test", true, 1]], self::NO_RIGHT, false);
         
         $this->connexionService->connexion();
