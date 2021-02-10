@@ -8,8 +8,48 @@
     <link href="output.css" rel="stylesheet">
     <title>site a chier</title>
 </head>
-<body>
+<style>
 
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  </style>
+<body>
     <div class="bg-grey">
 
         <img class="z-10 absolute" src="img/header.svg" alt="header"></img>
@@ -19,15 +59,53 @@
         <button type="button" class="z-30 dayNight" onclick="myFunction()"></button>
 
         <button type="button" class="z-30 dayNight2" id="dayNight2">Night</button>
+    
+
 
         <div class="z-20 absolute w-full flex items-center h-screen justify-center">
 
           <div class="flex justify-between">
 
-            <button type="button" class="z-20 btnConnect tracking-wide text-lg">Inscription</button>
+            <button type="button" id="Inscription"class="z-20 btnConnect tracking-wide text-lg" onclick="inscription()">Inscription</button>
 
-            <button type="button" class="z-20 btnRegister tracking-wide text-lg">Connexion</button>
+            <button type="button" id="Connexion" class="z-20 btnRegister tracking-wide text-lg" onclick="connexion()" >Connexion</button>
 
+            <div id="myModal" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <form>
+                  <h1>Connexion :</h1>
+                  <label for="mail">e-mail: </label>
+                  <input class="border-2 border-red-500" type="text" id="mail" name="mail"><br><br>
+                  <label for="password">password: </label>
+                  <input class="border-2 border-red-500" type="text" id="password" name="password">
+                </form>
+              </div>
+            
+            </div>
+
+            
+            <div id="myModal2" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span id="close" class="close">&times;</span>
+                <form>
+                  <h1>Inscription :</h1>
+                  <label for="nom">nom:</label>
+                  <input class="border-2 border-red-500" type="text" id="nom" name="nom"><br>
+                  <label for="prenom">prenom:</label>
+                  <input class="border-2 border-red-500" type="text" id="prenom" name="prenom"><br>
+                  <label for="mail">e-mail:</label>
+                  <input class="border-2 border-red-500" type="text" id="mail" name="mail"><br>
+                  <label for="password">password:</label>
+                  <input class="border-2 border-red-500" type="text" id="password" name="password"><br>
+                </form>
+              </div>
+            
+            </div>
           </div>
 
         </div>
@@ -43,5 +121,5 @@
       </div>
 
 </body>
-<script src="js/index.js"></script>
+<script src="js/indexDoray.js"></script>
 </html>
