@@ -4,7 +4,8 @@
   "description": "front of neocracy",
   "main": "index.js",
   "scripts": {
-    "style": "npx tailwindcss build styles.css -o output.css"
+    "style": "npx tailwindcss build styles.css -o output.css",
+    "dev": "nodemon -e js  -x npx tailwindcss build styles.css -o output.css"
   },
   "author": "",
   "license": "ISC",

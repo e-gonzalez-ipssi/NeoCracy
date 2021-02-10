@@ -1,5 +1,3 @@
-import "../tailwind.css"
-
 function myFunction() {
     var x =  document.getElementById("connexion");
     if (x.style.display === "none") {
