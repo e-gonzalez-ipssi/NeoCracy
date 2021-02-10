@@ -140,9 +140,7 @@ class  ConnexionService {
                 return true;
             }
         } catch (Exception $e) {
-            if ($e->getMessage() == "error-not-connected") {
-                return false;
-            }
+            return false;
         }
     }
 
