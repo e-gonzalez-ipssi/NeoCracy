@@ -42,6 +42,11 @@
     outline: none;
 }
 
+.dayNight:focus{
+    opacity: 80%;
+    outline: none;
+}
+
 .dayNight2{
     position: absolute;
     top: 10vh;
@@ -51,7 +56,7 @@
     width: 10rem;
     border-radius: 0 0 99px 99px;
     box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08);
-    display: block;
+    display: none;
 }
 
 .btnConnect:focus {
