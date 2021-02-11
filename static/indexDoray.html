@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,118 +9,59 @@
     <link href="output.css" rel="stylesheet">
     <title>site a chier</title>
 </head>
-<style>
 
-  /* The Modal (background) */
-  .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content */
-  .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
-  
-  /* The Close Button */
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  </style>
-<body>
-    <div class="bg-grey">
+<body style="background-color: grey;" class="dark:bg-black">
+  <nav class="border-b dark:border-gray-500 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto flex items-center h-20 w-full justify-between px-4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 102.4 30" width="106" height="30" role="img" aria-hidden="true"><path fill="#494949" d="M65.4 6.9c-4.5 0-8.1 3.6-8.1 8.1s3.6 8.1 8.1 8.1 8.1-3.6 8.1-8.1-3.6-8.1-8.1-8.1zm0 12.9c-2.6 0-4.8-2.1-4.8-4.8s2.1-4.8 4.8-4.8c2.6 0 4.8 2.1 4.8 4.7 0 2.7-2.1 4.9-4.8 4.9zM83.4 10.8c-2.3 0-4.2 1.9-4.2 4.2v7.7h-3.5V7.4h3.5v2.4c1-1.5 2.7-2.4 4.5-2.4h1.1v3.4h-1.4zM48.2 7.4L50.8 18l2.9-10.6h3.4l-4.4 15.3h-3.5L46.5 12l-2.7 10.7h-3.5L35.9 7.4h3.4L42.2 18l2.7-10.6zM95 14.4c2.6-1.4 4.1-4.1 4.1-7.1h-3.4c0 2.6-2.1 4.6-4.6 4.6h-.5V0h-3.5v22.7h3.5v-7.2h.4c.4 0 .8.2 1 .5l4.9 6.7h4.2L95 14.4z" class="logo-work"></path> <path fill="#6fda44" d="M27.6 6.9c-3.8 0-6.7 2.5-7.9 6.5-1.8-2.7-3.1-5.7-4-8.8h-4.1v10.6c0 2.1-1.7 3.8-3.8 3.8S4 17.3 4 15.2V4.7H0v10.6c0 4.3 3.5 7.9 7.9 7.9s7.9-3.5 7.9-7.9v-1.8c.8 1.7 1.8 3.3 2.9 4.8L16.2 30h4.2l1.8-8.5c1.6 1.1 3.5 1.7 5.5 1.7 4.5 0 8.1-3.6 8.1-8.1-.1-4.5-3.7-8.2-8.2-8.2zm0 12.2c-1.7-.1-3.3-.7-4.6-1.8l.3-1.6v-.1c.3-1.7 1.3-4.6 4.2-4.6 2.2-.1 4 1.7 4.1 3.9.1 2.2-1.7 4-3.9 4.1l-.1.1z"></path></svg>
+ 
+        <div class="flex items-center">
+            <button class="hidden lg:block px-4 dark:text-blue">HOW IT WORKS</button>
+            <button class="hidden lg:block px-4 dark:text-blue">SOLUTIONS</button>
+            <button class="hidden lg:block px-4 dark:text-blue">ENTERPRISE</button>
+            <button class="px-4 dark:text-blue">LOG IN</button>
+            <button class="bg-green-500 text-white rounded shadow-md px-4 py-1">Sign Up</button>
+            <button id="switchTheme" class="h-10 w-10 flex justify-center items-center focus:outline-none text-yellow-500">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+    </div>
+</nav>
 
-        <img class="z-10 absolute" src="img/header.svg" alt="header"></img>
-
-        <img class="z-10 absolute w-40 ml-20 mt-4" src="img/logos.svg" alt="logo"></img>
-
-        <button type="button" class="z-30 dayNight" onclick="myFunction()"></button>
-
-        <button type="button" class="z-30 dayNight2" id="dayNight2">Night</button>
+<main class="bg-gray-800 dark:bg-gray-900">
+  <div class="max-w-7xl mx-auto py-24 grid grid-cols-2">
+      <div>
+          <h1 class="py-4 text-green-500  px-4 dark:text-blue">
+              In-demand talent on demand.TM <br/> <span class="text-white">Upwork is how.TM</span>
+          </h1>
+          <p class=" px-4 dark:text-blue">
+              Hire proven pros with confidence using the world’s largest, remote talent platform.
+          </p>
+      </div>
+  </div>
+</main>
     
 
-
-        <div class="z-20 absolute w-full flex items-center h-screen justify-center">
-
-          <div class="flex justify-between">
-
-            <button type="button" id="Inscription"class="z-20 btnConnect tracking-wide text-lg" onclick="inscription()">Inscription</button>
-
-            <button type="button" id="Connexion" class="z-20 btnRegister tracking-wide text-lg" onclick="connexion()" >Connexion</button>
-
-            <div id="myModal" class="modal">
-
-              <!-- Modal content -->
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <form>
-                  <h1>Connexion :</h1>
-                  <label for="mail">e-mail: </label>
-                  <input class="border-2 border-red-500" type="text" id="mail" name="mail"><br><br>
-                  <label for="password">password: </label>
-                  <input class="border-2 border-red-500" type="text" id="password" name="password">
-                </form>
-              </div>
-            
-            </div>
-
-            
-            <div id="myModal2" class="modal">
-
-              <!-- Modal content -->
-              <div class="modal-content">
-                <span id="close" class="close">&times;</span>
-                <form>
-                  <h1>Inscription :</h1>
-                  <label for="nom">nom:</label>
-                  <input class="border-2 border-red-500" type="text" id="nom" name="nom"><br>
-                  <label for="prenom">prenom:</label>
-                  <input class="border-2 border-red-500" type="text" id="prenom" name="prenom"><br>
-                  <label for="mail">e-mail:</label>
-                  <input class="border-2 border-red-500" type="text" id="mail" name="mail"><br>
-                  <label for="password">password:</label>
-                  <input class="border-2 border-red-500" type="text" id="password" name="password"><br>
-                </form>
-              </div>
-            
-            </div>
-          </div>
-
-        </div>
-
-        <img class="z-10 relative" src="img/footer.svg" alt="footer"></img>
-
-      </div>
-
-      <div class="z-0 bg-yellow">
-
-        <img class="z-30 relative" src="img/header2.svg" alt="header2"></img>
-
-      </div>
-
 </body>
-<script src="js/indexDoray.js"></script>
+<script>
+  document.getElementById('switchTheme').addEventListener('click', function() {
+      let htmlClasses = document.querySelector('html').classList;
+      if(localStorage.theme == 'dark') {
+          htmlClasses.remove('dark');
+          localStorage.removeItem('theme')
+      } else {
+          htmlClasses.add('dark');
+          localStorage.theme = 'dark';
+      }
+
+      
+  });
+
+  if (localStorage.theme === 'dark' || (!'theme' in localStorage && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.querySelector('html').classList.add('dark')
+    } else if (localStorage.theme === 'dark') {
+        document.querySelector('html').classList.add('dark')
+    }
+</script>
+
 </html>
