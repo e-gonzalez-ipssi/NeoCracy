@@ -131,10 +131,10 @@
 }
 
 .title {
-    font-family: 'Comfortaa', cursive;
     top: 25vh;
     left: 10%;
     border-bottom: 4px solid #53ffa9;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .paragraphe {
@@ -150,18 +150,25 @@
     height: 800px;
 }
 
-.fine{
+.f1, .f2, .f3, .f4, .f5, .f6, .f7, .f8{
     position: relative;
     height: 100%;
     width: 1px;
     background: linear-gradient(#222831, #c0d3f0);
-    opacity: 10%;
+    opacity: 15%;
 }
 
 .logo{
     position: absolute;
     top: 2vh;
     left: 46%;
+}
+
+.logoW{
+    position: absolute;
+    top: 2vh;
+    left: 46%;
+    display: none;
 }
 
 .svg-icon {
