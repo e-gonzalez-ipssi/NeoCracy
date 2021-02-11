@@ -4,64 +4,36 @@
 
 @tailwind utilities;
 
+.body {
+    background: linear-gradient(#fcfffe, #e0edfd);
+    height: 100vh;
+    width: 100%;
+}
+
 .btnConnect {
     width: 20rem;
     margin: 1.5rem;
     color: #222831;
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08);
-    background: #ffd369;
+    background: #53ffa9;
     padding: 1rem 3rem 1rem 3rem;
     border-radius: 99px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Comfortaa', cursive;
+    top: 65vh;
+    left: 5%;
 }
 
 .btnRegister {
     width: 20rem;
     margin: 1.5rem;
-    color: #eeeeee;
+    color: #222831;
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08);
-    background: #222831;
+    background: #fcfffe;
     padding: 1rem 2rem 1rem 2rem;
     border-radius: 99px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.dayNight {
-    position: absolute;
-    top: 0;
-    right: 10%;
-    background: #ffd369;
-    height: 2.5rem;
-    width: 10rem;
-    border-radius: 0 0 99px 99px;
-}
-
-.dayNight:hover {
-    outline: none;
-}
-
-.dayNight:focus {
-    outline: none;
-}
-
-.dayNight2:hover {
-    outline: none;
-}
-
-.dayNight2:focus {
-    outline: none;
-}
-
-.dayNight2 {
-    position: absolute;
-    top: 10vh;
-    right: 10%;
-    background: #ffd369;
-    height: 2.5rem;
-    width: 10rem;
-    border-radius: 0 0 99px 99px;
-    border: none;
-    display: none;
+    font-family: 'Comfortaa', cursive;
+    top: 65vh;
+    left: 25%;
 }
 
 .btnConnect:focus {
@@ -74,84 +46,120 @@
     outline: none;
 }
 
-.nightDay {
+.theme:hover {
+    outline: none;
+}
+
+.theme:focus {
+    outline: none;
+}
+
+.theme {
     position: absolute;
-    top: 0;
-    height: 10vh;
-    width: 10rem;
-    right: 10%;
-    background: #ffd369;
-    display: none;
+    top: 3vh;
+    right: 5%;
+    background: #53ffa9;
+    height: 2.5rem;
+    width: 5rem;
+    border-radius:99px;
+    border: none;
 }
 
-.arrowUp {
-    display: block;
-    margin-left: auto;
-    margin-right: auto
-}
-
-.arrowDown {
-    display: block;
-    margin-left: auto;
-    margin-right: auto
-}
-
-.cloud{
+.cloud {
     position: absolute;
     height: 100vh;
     width: 100%;
     overflow: hidden;
 }
 
-
-  /* The Modal (background) */
-  .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content */
-  .modal-content {
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+.modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-  }
-  
-  /* The Close Button */
-  .close {
+}
+
+
+.close {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-  }
-
-.card{
-    width: 98%;
-    left: 1%;
-    top: 1%;
-    height: 95vh;
-    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08);
-    border-radius: 20px;
 }
 
-.footer{
-    border-radius: 0 0 20px 20px;
+.card {
+    height: 50vh;
+    width: 20%;
+    border-radius: 99px;
+    position: absolute;
+    background: linear-gradient(#e0e9f8, #c0d3f0);
+    left: 130vh;
+    top: 25vh;
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08);
+}
+
+.title {
+    font-family: 'Comfortaa', cursive;
+    top: 25vh;
+    left: 10%;
+    border-bottom: 4px solid #53ffa9;
+}
+
+.paragraphe {
+    width: 30%;
+    top: 45vh;
+    left: 10%;
+    font-family: 'Comfortaa', cursive;
+    opacity: 60%;
+}
+
+.trait{
+    width: 100%;
+    height: 800px;
+}
+
+.fine{
+    position: relative;
+    height: 100%;
+    width: 1px;
+    background: linear-gradient(#222831, #c0d3f0);
+    opacity: 10%;
+}
+
+.logo{
+    position: absolute;
+    top: 2vh;
+    left: 46%;
 }
