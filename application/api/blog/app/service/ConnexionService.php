@@ -65,7 +65,7 @@ class  ConnexionService {
             throw new Exception("mail-already-used");
         }
 
-        $password = password_hash($password, HASH_CODE);
+        $password = password_hash($password, PASSWORD_BCRYPT);
         $this->userService->addUser($nom, $prenom, $password, $mail, $telephone, $photo);
     }
 
@@ -89,7 +89,7 @@ class  ConnexionService {
         /** @var User $user */
         $user = $this->userService->getUserByMail($mail);
 
-        $password = password_hash($password, HASH_CODE);
+        $password = password_hash($password, PASSWORD_BCRYPT);
 
         $databasePassword = $this->userManager->getPasswordById($user->getId());
 
@@ -124,7 +124,7 @@ class  ConnexionService {
     }
 
     private function generateUserToken(User $user): string {
-        return password_hash($user->getMail(), HASH_CODE);;
+        return password_hash($user->getMail(), PASSWORD_BCRYPT);;
     }
     
 
