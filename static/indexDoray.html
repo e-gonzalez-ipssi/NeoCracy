@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,118 +9,113 @@
     <link href="output.css" rel="stylesheet">
     <title>site a chier</title>
 </head>
-<style>
 
-  /* The Modal (background) */
-  .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content */
-  .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
-  
-  /* The Close Button */
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  </style>
 <body>
-    <div class="bg-grey">
+
+    <div class="bg-grey dark:bg-black">
 
         <img class="z-10 absolute" src="img/header.svg" alt="header"></img>
 
         <img class="z-10 absolute w-40 ml-20 mt-4" src="img/logos.svg" alt="logo"></img>
 
-        <button type="button" class="z-30 dayNight" onclick="myFunction()"></button>
+        <button type="button" class="z-30 dayNight" id="dayNight" onclick="myFunction()">
 
-        <button type="button" class="z-30 dayNight2" id="dayNight2">Night</button>
-    
+            <img class="arrowDown h-8" src="img/arrowdown_111022.svg">
 
+        </button>
+
+        <button type="button" class="z-30 dayNight2" id="dayNight2" onclick="myFunction2()">
+
+            <img class="arrowUp h-8" src="img/arrowup_111030.svg">
+        </button>
+
+        <div class="z-30 nightDay" id="nightDay">
+          <button id="switchTheme">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
 
         <div class="z-20 absolute w-full flex items-center h-screen justify-center">
 
-          <div class="flex justify-between">
+            <div class="flex justify-between">
 
-            <button type="button" id="Inscription"class="z-20 btnConnect tracking-wide text-lg" onclick="inscription()">Inscription</button>
+              <button type="button" id="Inscription"class="z-20 btnConnect tracking-wide text-lg dark:text-white dark:bg-black" onclick="inscription()">Inscription</button>
 
-            <button type="button" id="Connexion" class="z-20 btnRegister tracking-wide text-lg" onclick="connexion()" >Connexion</button>
+              <button type="button" id="Connexion" class="z-20 btnRegister tracking-wide text-lg dark:text-black dark:bg-yellow" onclick="connexion()" >Connexion</button>
+  
+                
+                <div id="myModal" class="modal">
 
-            <div id="myModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                      <span class="close">&times;</span>
+                      <form>
+                        <h1>Connexion :</h1>
+                        <label for="mail">e-mail: </label>
+                        <input class="border-2 border-red-500" type="text" id="mail" name="mail"><br><br>
+                        <label for="password">password: </label>
+                        <input class="border-2 border-red-500" type="text" id="password" name="password">
+                      </form>
+                    </div>
+                  
+                  </div>
+      
+                  
+                  <div id="myModal2" class="modal">
+      
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                      <span id="close" class="close">&times;</span>
+                      <form>
+                        <h1>Inscription :</h1>
+                        <label for="nom">nom:</label>
+                        <input class="border-2 border-red-500" type="text" id="nom" name="nom"><br>
+                        <label for="prenom">prenom:</label>
+                        <input class="border-2 border-red-500" type="text" id="prenom" name="prenom"><br>
+                        <label for="mail">e-mail:</label>
+                        <input class="border-2 border-red-500" type="text" id="mail" name="mail"><br>
+                        <label for="password">password:</label>
+                        <input class="border-2 border-red-500" type="text" id="password" name="password"><br>
+                      </form>
+                    </div>
+                  
+                  </div>
 
-              <!-- Modal content -->
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <form>
-                  <h1>Connexion :</h1>
-                  <label for="mail">e-mail: </label>
-                  <input class="border-2 border-red-500" type="text" id="mail" name="mail"><br><br>
-                  <label for="password">password: </label>
-                  <input class="border-2 border-red-500" type="text" id="password" name="password">
-                </form>
-              </div>
-            
             </div>
-
-            
-            <div id="myModal2" class="modal">
-
-              <!-- Modal content -->
-              <div class="modal-content">
-                <span id="close" class="close">&times;</span>
-                <form>
-                  <h1>Inscription :</h1>
-                  <label for="nom">nom:</label>
-                  <input class="border-2 border-red-500" type="text" id="nom" name="nom"><br>
-                  <label for="prenom">prenom:</label>
-                  <input class="border-2 border-red-500" type="text" id="prenom" name="prenom"><br>
-                  <label for="mail">e-mail:</label>
-                  <input class="border-2 border-red-500" type="text" id="mail" name="mail"><br>
-                  <label for="password">password:</label>
-                  <input class="border-2 border-red-500" type="text" id="password" name="password"><br>
-                </form>
-              </div>
-            
-            </div>
-          </div>
 
         </div>
 
         <img class="z-10 relative" src="img/footer.svg" alt="footer"></img>
 
-      </div>
+    </div>
 
-      <div class="z-0 bg-yellow">
+    <div class="z-0 bg-yellow">
 
         <img class="z-30 relative" src="img/header2.svg" alt="header2"></img>
 
-      </div>
+    </div>
 
 </body>
-<script src="js/indexDoray.js"></script>
+<script src="js/index.js"></script>
+<script>
+  document.getElementById('switchTheme').addEventListener('click', function() {
+      let htmlClasses = document.querySelector('html').classList;
+      if(localStorage.theme == 'dark') {
+          htmlClasses.remove('dark');
+          localStorage.removeItem('theme')
+      } else {
+          htmlClasses.add('dark');
+          localStorage.theme = 'dark';
+      }
+
+      
+  });
+
+  if (localStorage.theme === 'dark' || (!'theme' in localStorage && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.querySelector('html').classList.add('dark')
+    } else if (localStorage.theme === 'dark') {
+        document.querySelector('html').classList.add('dark')
+    }
+</script>
+
 </html>
