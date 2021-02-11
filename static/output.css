@@ -25645,29 +25645,29 @@ video {
           animation: bounce 1s infinite;
 }
 
-.btnConnect{
+.btnConnect {
   width: 20rem;
   margin: 1.5rem;
   color: #222831;
-  box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08);
+  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08);
   background: #ffd369;
   padding: 1rem 3rem 1rem 3rem;
   border-radius: 99px;
   font-family: 'Poppins', sans-serif;
 }
 
-.btnRegister{
+.btnRegister {
   width: 20rem;
   margin: 1.5rem;
   color: #eeeeee;
-  box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08);
+  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08);
   background: #222831;
   padding: 1rem 2rem 1rem 2rem;
   border-radius: 99px;
   font-family: 'Poppins', sans-serif;
 }
 
-.dayNight{
+.dayNight {
   position: absolute;
   top: 0;
   right: 10%;
@@ -25675,18 +25675,25 @@ video {
   height: 2.5rem;
   width: 10rem;
   border-radius: 0 0 99px 99px;
-  box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08);
 }
 
-.dayNight:hover{
+.dayNight:hover {
   outline: none;
 }
 
-.dayNight:focus{
+.dayNight:focus {
   outline: none;
 }
 
-.dayNight2{
+.dayNight2:hover {
+  outline: none;
+}
+
+.dayNight2:focus {
+  outline: none;
+}
+
+.dayNight2 {
   position: absolute;
   top: 10vh;
   right: 10%;
@@ -25694,7 +25701,7 @@ video {
   height: 2.5rem;
   width: 10rem;
   border-radius: 0 0 99px 99px;
-  box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08);
+  border: none;
   display: none;
 }
 
@@ -25708,7 +25715,7 @@ video {
   outline: none;
 }
 
-.nightDay{
+.nightDay {
   position: absolute;
   top: 0;
   height: 10vh;
@@ -25716,6 +25723,18 @@ video {
   right: 10%;
   background: #ffd369;
   display: none;
+}
+
+.arrowUp {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.arrowDown {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
 }
 
 @media (min-width: 400px) {
@@ -150802,3 +150821,4 @@ video {
             animation: bounce 1s infinite;
   }
 }
+

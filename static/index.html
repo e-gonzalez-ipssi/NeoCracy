@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cloud.css">
     <link href="output.css" rel="stylesheet">
     <title>site a chier</title>
 </head>
@@ -18,27 +19,55 @@
 
         <img class="z-10 absolute w-40 ml-20 mt-4" src="img/logos.svg" alt="logo"></img>
 
-        <button type="button" class="z-30 dayNight" id="dayNight" onclick="myFunction()">
+        <button type="button" class="z-40 dayNight" id="dayNight" onclick="myFunction()">
 
             <img class="arrowDown h-8" src="img/arrowdown_111022.svg">
 
         </button>
 
-        <button type="button" class="z-30 dayNight2" id="dayNight2" onclick="myFunction2()">
+        <button type="button" class="z-40 dayNight2" id="dayNight2" onclick="myFunction2()">
 
             <img class="arrowUp h-8" src="img/arrowup_111030.svg">
 
         </button>
 
-        <div class="z-30 nightDay" id="nightDay"></div>
+        <div class="z-40 nightDay" id="nightDay">
 
-        <div class="z-20 absolute w-full flex items-center h-screen justify-center">
+            <!-- Futur bouton de theme -->
+
+        </div>
+
+        <section class="cloud">
+
+            <img class="layer cloudA absolute z-10 h-12" data-speed="2" src="img/cloud2.svg">
+
+            <img class="layer cloudB absolute z-10 h-12" data-speed="7" src="img/cloud.svg">
+
+            <img class="layer cloudC absolute z-10 h-12" data-speed="5" src="img/cloud.svg">
+
+            <img class="layer cloudD absolute z-10 h-12" data-speed="-5" src="img/cloud2.svg">
+ 
+            <img class="layer cloudE absolute z-10 h-12" data-speed="-2" src="img/cloud.svg">
+
+            <img class="layer cloudF absolute z-10 h-12" data-speed="-7" src="img/cloud2.svg">
+
+            <img class="layer cloudG absolute z-10 h-12" data-speed="3" src="img/cloud.svg">
+
+            <img class="layer cloudH absolute z-10 h-12" data-speed="-1" src="img/cloud2.svg">
+
+            <img class="layer cloudI absolute z-10 h-12" data-speed="2" src="img/cloud.svg">
+
+            <img class="layer cloudJ absolute z-10 h-12" data-speed="-6" src="img/cloud.svg">
+
+        </section>
+
+        <div class="z-30 absolute w-full flex items-center h-screen justify-center">
 
             <div class="flex justify-between">
 
-                <button type="button" class="z-20 btnConnect tracking-wide text-lg">Inscription</button>
+                <button type="button" class="z-40 btnConnect tracking-wide text-lg">Inscription</button>
 
-                <button type="button" class="z-20 btnRegister tracking-wide text-lg">Connexion</button>
+                <button type="button" class="z-40 btnRegister tracking-wide text-lg">Connexion</button>
 
             </div>
 
@@ -56,5 +85,25 @@
 
 </body>
 <script src="js/index.js"></script>
+
+<script type="text/javascript">
+
+    document.addEventListener("mousemove", parallax);
+
+function parallax(e){
+  this.getElementByClassName('layer').
+  forEach(layer => {
+
+    const speed = layer.getAttribute('data-speed')
+
+    const x = (window.innerWidth - e.pageX * speed)/100
+
+    const y = (window.innerHeight - e.pageY * speed)/100
+
+    layer.style.transform = 'translateX(${x}px) translateY(${y}px)'
+  })
+};
+
+</script>
 
 </html>
