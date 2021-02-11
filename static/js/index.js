@@ -86,4 +86,4 @@ function connexion(){
         modal.style.display = "none";
       }
     }
-    }
+  }
