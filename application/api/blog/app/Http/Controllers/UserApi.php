@@ -65,7 +65,6 @@ class UserApi extends Api
     /**
      * @route post(api/connect/)
      * 
-     * @param int $id l'id de l'utilisateur que l'on recherche
      * 
      * @return  mixed les informations de l'utilisateur au format JSON
      */
@@ -82,4 +81,33 @@ class UserApi extends Api
         $this->connexionService->connexion($params['mail'], $params['password']);
         return $this->returnOutput($this->ack());
     }
+
+    /**
+     * @route post(api/register/)
+     * 
+     * 
+     * @return  mixed les informations de l'utilisateur au format JSON
+     */
+    public function register(Request $request) {
+        $params = $this->initialize(
+            [
+                ["nom", REQUIRED, TYPE_STRING, $request->input('nom')],
+                ["prenom", REQUIRED, TYPE_STRING, $request->input('prenom')],
+                ["mail", REQUIRED, TYPE_MAIL, $request->input('mail')],
+                ["password", REQUIRED, TYPE_PASSWORD, $request->input('password')],
+                ["confirmPassword", REQUIRED, TYPE_PASSWORD, $request->input('confirmPassword')],
+            ],
+            self::NO_RIGHT, 
+            false,
+        );
+        $this->connexionService->inscription(
+            $params['nom'],
+            $params['prenom'],
+            $params['mail'],
+            $params['password'],
+            $params['confirmPassword']
+        );
+        return $this->returnOutput($this->ack());
+    }
+
 }
