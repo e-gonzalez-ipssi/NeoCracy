@@ -163,3 +163,19 @@
     top: 2vh;
     left: 46%;
 }
+
+.svg-icon {
+    width: 2em;
+    height: 2em;
+  }
+  
+  .svg-icon path,
+  .svg-icon polygon,
+  .svg-icon rect {
+    fill: #222831;
+  }
+  
+  .svg-icon circle {
+    stroke: #222831;
+    stroke-width: 1;
+  }
