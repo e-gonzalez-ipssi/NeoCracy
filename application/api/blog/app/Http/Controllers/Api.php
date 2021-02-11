@@ -9,6 +9,7 @@ use App\Service\ConnexionService;
 use App\Service\UserService;
 use Exception;
 use Laravel\Lumen\Routing\Controller as BaseController;
+use PhpParser\Node\Stmt\ElseIf_;
 
 include "Constant.php";
 
@@ -36,22 +37,21 @@ class Api extends BaseController
 
         foreach ($params as $param) {
             //check sur les types
-            $this->checkType($param[2], $param[3]);
-
+            $value = $this->checkType($param[2], $param[3]);
 
             // on ajoute le paramêtre a la liste
             // check si le paramêtre est REQUIRED ou non
             if ($param[1]) {
-                if (empty($param[3])) {
+                if (is_null($value)) {
                     throw new Exception("param-is-required");
                 }
-                $result [$param[0]] = $param[3];
+                $result [$param[0]] = $value;
             }
-            if (empty($param[3])) {
+            if (is_null($value)) {
                 $result [$param[0]] = null;
             }
             else {
-                $result [$param[0]] = $param[3];
+                $result [$param[0]] = $value;
             }
         }
 
@@ -79,6 +79,22 @@ class Api extends BaseController
             }
         }
 
+        if ($typeRequired === TYPE_BOOLEAN) {
+            $tinyint = (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
+            if($tinyint == 1) {
+                $value = true;
+            }
+            elseif($tinyint == 0) {
+                $value = false;
+            }
+            else {
+                throw new Exception("type-is-invalid");
+            }
+        }
+
+
+
+        return $value;
     }
 
     protected function returnOutput($result){
