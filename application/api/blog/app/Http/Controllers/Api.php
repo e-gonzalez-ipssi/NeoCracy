@@ -36,12 +36,11 @@ class Api extends BaseController
         $result = [];
 
         foreach ($params as $param) {
-            //check sur les types
-            $value = $this->checkType($param[2], $param[3]);
-
             // on ajoute le paramêtre a la liste
             // check si le paramêtre est REQUIRED ou non
             if ($param[1]) {
+                //check sur les types
+                $value = $this->checkType($param[2], $param[3]);
                 if (is_null($value)) {
                     throw new Exception("param-is-required");
                 }
@@ -51,6 +50,8 @@ class Api extends BaseController
                 $result [$param[0]] = null;
             }
             else {
+                //check sur les types
+                $value = $this->checkType($param[2], $param[3]);
                 $result [$param[0]] = $value;
             }
         }
@@ -93,10 +94,26 @@ class Api extends BaseController
         }
 
         if ($typeRequired === TYPE_MAIL) {
+            if(!filter_var($value, FILTER_VALIDATE_EMAIL)){
+                throw new Exception("type-is-invalid");
+            }
+
             if(!is_string($value) && !is_null($value)) {
                 throw new Exception("type-is-invalid");
             }
-            if(!filter_var($value, FILTER_VALIDATE_EMAIL)){
+        }
+
+        if ($typeRequired === TYPE_PASSWORD) {
+            // Vérifier si le mot de passe a bien une sécurité minimum (exemple : 8 characteres (8-20) , 1 chiffres, 1 majuscules)
+            $regex = "((?=.*\\d)(?=.*[A-Z]).{8,20})";
+            $verif_pass = strlen($value) >= 8;
+            $regex_pass = preg_match($regex, $value);
+
+            if(!$verif_pass || !$regex_pass ){
+                throw new Exception("check-password-security");
+            }
+
+            if(!is_string($value) && !is_null($value)) {
                 throw new Exception("type-is-invalid");
             }
         }

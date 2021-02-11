@@ -51,7 +51,7 @@ class  ConnexionService {
         $verif_pass = strlen($password) >= 8;
         $regex_pass = preg_match($regex,$password);
 
-        if($verif_pass && $regex_pass ){
+        if(!$verif_pass || !$regex_pass ){
             throw new Exception("check-password-security");
         }
 
