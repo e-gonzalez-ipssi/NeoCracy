@@ -92,7 +92,14 @@ class Api extends BaseController
             }
         }
 
-
+        if ($typeRequired === TYPE_MAIL) {
+            if(!is_string($value) && !is_null($value)) {
+                throw new Exception("type-is-invalid");
+            }
+            if(!filter_var($value, FILTER_VALIDATE_EMAIL)){
+                throw new Exception("type-is-invalid");
+            }
+        }
 
         return $value;
     }
