@@ -1,3 +1,0 @@
-Ici sera mis tout le code concernant le Front-end
-
-On y retrouvera tout se qui est lié au script java script, au html, css, ...
