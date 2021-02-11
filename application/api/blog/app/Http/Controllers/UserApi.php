@@ -103,9 +103,9 @@ class UserApi extends Api
         $this->connexionService->inscription(
             $params['nom'],
             $params['prenom'],
-            $params['mail'],
             $params['password'],
-            $params['confirmPassword']
+            $params['confirmPassword'],
+            $params['mail']
         );
         return $this->returnOutput($this->ack());
     }

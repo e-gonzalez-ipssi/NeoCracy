@@ -12,9 +12,9 @@ class UserManager extends Manager {
      * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
-    public function createUser(string $nom, string $prenom, string $mdp, string $mail, ?string $telephone = null, ?string $photo = null): array {
+    public function createUser(string $nom, string $prenom, string $mdp, string $mail): array {
         /** @var string $newQuery */
-        $newQuery = "INSERT INTO `Utilisateur` (`nom`, `prenom`, `mdp`, `mail`, `tel`, `photo`) VALUES ($nom, $prenom, $mdp, $mail, $telephone, $photo);";
+        $newQuery = "INSERT INTO `utilisateur` (`nom`, `prenom`, `mdp`, `mail`) VALUES ('$nom', '$prenom', '$mdp', '$mail');";
         $this->setQuery($newQuery);
 
         $this->query();
