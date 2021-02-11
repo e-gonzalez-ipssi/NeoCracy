@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Entity\User;
 use Illuminate\Http\Request;
 
-include "Constant.php";
-
 class UserApi extends Api
 {
     private const NO_RIGHT = 1;
@@ -16,11 +14,17 @@ class UserApi extends Api
         parent::__construct();
     }
 
+    /**
+     * Fonction qui permet d'initialiser la requete
+     *  - initilise les paramêtres requis ou non pour faire fonctionner l'api
+     *  - fait les checks de permissions d'utilisation
+     *  - vérifie si l'utilisateur a besoin d'être connecté ou pas
+     */
     private function initialize(
         array $params = [],
         int $right = self::NO_RIGHT,
         bool $isConnected = true
-    ) {
+    ): array {
         if ($isConnected) {
             $this->me = $this->connexionService->getCurrentUser();
         }
@@ -32,6 +36,10 @@ class UserApi extends Api
         return $paramsClean;
     }
 
+    /**
+     * Permet de faire des différents check de permission
+     * - créer un nouveau case par nouveau type de permission
+     */
     private function checkAccess(int $right, ?User $me) {
         switch ($right) {
             case self::NO_RIGHT:
@@ -64,15 +72,14 @@ class UserApi extends Api
     public function connect(Request $request) {
         $params = $this->initialize(
             [
-                ["mail", true, 2, $request->input('mail')],
-                ["password", true, 1, $request->input('password')],
+                ["mail", REQUIRED, TYPE_MAIL, $request->input('mail')],
+                ["password", REQUIRED, TYPE_PASSWORD, $request->input('password')],
             ],
             self::NO_RIGHT, 
-            false, 
-            $request
+            false,
         );
-        
-        $this->connexionService->connexion();
+
+        $this->connexionService->connexion($params['mail'], $params['password']);
         return $this->returnOutput($this->ack());
     }
 }
