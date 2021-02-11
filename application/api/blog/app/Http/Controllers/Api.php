@@ -35,15 +35,15 @@ class Api extends BaseController
 
         foreach ($params as $param) {
             if ($param[1]) {
-                if (empty($_POST[$param[0]])) {
+                if (empty($param[3])) {
                     throw new Exception("param-is-required");
                 }
-                $result [$param[0]] = $_POST[$param[0]];
+                $result [$param[0]] = $param[3];
             }
-            if (empty($_POST[$param[0]])) {
+            if (empty($param[3])) {
                 $result [$param[0]] = null;
             }
-            $result [$param[0]] = $_POST[$param[0]];
+            $result [$param[0]] = $param[3];
         }
 
         return $result;
