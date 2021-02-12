@@ -87,7 +87,7 @@ class  ConnexionService {
             throw new Exception("bad-password");
         }
 
-        $this->setToken($user, $this->generateUserToken($user), time() + (86400 * 30));
+        $this->setToken($user, $this->generateUserToken(), time() + (86400 * 30));
     }
 
     /**
@@ -101,15 +101,27 @@ class  ConnexionService {
         }
         
         $user = $this->getCurrentUser();
-        $this->setToken($user, $this->generateUserToken($user), time() - 3600);
+        $this->setToken($user, $this->generateUserToken(), time() - 3600);
 
         if ($this->isConnected()) {
             throw new Exception("disconnection-failed");
         }
     }
 
-    private function generateUserToken(User $user): string {
-        return password_hash($user->getMail(), PASSWORD_BCRYPT);;
+    private function rand_string($length):string{ 
+        $str = "";
+        $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz@#$&*";  
+        $size = strlen( $chars );  
+        echo "Random string =";  
+        for( $i = 0; $i < $length; $i++ ) {  
+            $str.= $chars[ rand( 0, $size - 1 ) ];  
+        }  
+        return $str;
+    }   
+
+    private function generateUserToken(){
+        $rand =  $this->rand_string(64);  
+        return $rand;
     }
     
 
@@ -155,11 +167,9 @@ class  ConnexionService {
      * @param string $value La valeur a laquel on souhaite set le token
      * @param int $time temps apres laquel le token expirera (+86400 = +1 jour) 
      */
-    private function setToken(User $user, string $value, ?int $time = null): array {
+    private function setToken(User $user, string $value, ?int $time = null){
         $this->userManager->setUserToken($value, $user->getId());
         setcookie(COOKIE_USER_TOKEN, $value, $time);
-
-        return [];
     }
 
     /**

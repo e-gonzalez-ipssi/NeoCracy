@@ -122,9 +122,9 @@ class UserManager extends Manager {
      * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      */
     public function setUserToken(string $token, int $id): array {
+        
         $newQuery = "UPDATE `utilisateur` SET token = '$token' WHERE id = $id";
         $this->setQuery($newQuery);
-
         $this->querySet();
 
         return $this->ack("Le Token a bien été ajouter a l'utilisateur");

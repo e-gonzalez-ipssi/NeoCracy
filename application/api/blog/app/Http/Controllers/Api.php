@@ -125,7 +125,6 @@ class Api extends BaseController
             return response()->json(
                 [
                     "value" => $result,
-                    "userToken" => $_COOKIE[COOKIE_USER_TOKEN],
                 ]
             );
     }
