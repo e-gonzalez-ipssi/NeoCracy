@@ -100,6 +100,7 @@ class UserApi extends Api
             self::NO_RIGHT, 
             false,
         );
+        
         $this->connexionService->inscription(
             $params['nom'],
             $params['prenom'],

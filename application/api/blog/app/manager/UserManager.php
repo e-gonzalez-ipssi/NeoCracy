@@ -14,7 +14,7 @@ class UserManager extends Manager {
      */
     public function createUser(string $nom, string $prenom, string $mdp, string $mail): array {
         /** @var string $newQuery */
-        $newQuery = "INSERT INTO `utilisateur` (`nom`, `prenom`, `mdp`, `mail`) VALUES ('$nom', '$prenom', '$mdp', '$mail');";
+        $newQuery = "INSERT INTO `utilisateur` (`nom`, `prenom`, `mdp`, `mail`) VALUES ('$nom', '$prenom', '$mdp', '$mail')";
         $this->setQuery($newQuery);
 
         $this->query();
