@@ -33,7 +33,7 @@ abstract class  Manager
      * 
      * @return array
      */
-    protected function query(): array {
+    protected function querySelect(): array {
         try {
             $result = $this->bd->query($this->query);
         } catch (Exception $e) {
@@ -41,7 +41,18 @@ abstract class  Manager
         }
 
         return $result->fetchAll();
-
+    }
+    
+    /**
+     * Cette fonction permet de renvoyer le resultat de la requête faite a la bd sous la forme d'une array exploitable
+     * 
+     * @return array
+     */
+    protected function querySet(): void {
+        try {
+            $result = $this->bd->query($this->query);
+        } catch (Exception $e) {
+        }
     }
 
     /**

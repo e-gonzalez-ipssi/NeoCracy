@@ -43,13 +43,6 @@ class  ConnexionService {
         if(empty($nom) && empty($prenom) && empty($password) && empty($confirmpassword) && empty($mail) && filter_var($mail, FILTER_VALIDATE_EMAIL)){
             throw new Exception("valid-all-details");
         }             
-        
-        // Vérifier si le mot de passe a bien une sécurité minimum (exemple : 8 characteres (8-20) , 1 chiffres, 1 majuscules)
-        $regex = "((?=.*\\d)(?=.*[A-Z]).{8,20})";
-        $verif_pass = strlen($password) >= 8;
-        $regex_pass = preg_match($regex,$password);
-
- 
 
         // on vérifie si les mots de passe rentré match pour voir si l'utilisateur a bien confirmer sont mot de passe
         if ($password != $confirmpassword) {
@@ -90,15 +83,11 @@ class  ConnexionService {
         $databasePassword = $this->userManager->getPasswordById($user->getId());
 
         // si les password ne correspondent pas, renvoyer une erreur a l'utilisateur
-        if ($password != $databasePassword) {
+        if (password_verify($password, $databasePassword)) {
             throw new Exception("bad-password");
         }
 
-        $this->setToken($user, $this->generateUserToken($user), time() + (86400 * 30));
-
-        if (! $this->isConnected()) {
-            throw new Exception("connection-failed");
-        }
+        $this->setToken($user, $this->generateUserToken(), time() + (86400 * 30));
     }
 
     /**
@@ -112,15 +101,27 @@ class  ConnexionService {
         }
         
         $user = $this->getCurrentUser();
-        $this->setToken($user, $this->generateUserToken($user), time() - 3600);
+        $this->setToken($user, $this->generateUserToken(), time() - 3600);
 
         if ($this->isConnected()) {
             throw new Exception("disconnection-failed");
         }
     }
 
-    private function generateUserToken(User $user): string {
-        return password_hash($user->getMail(), PASSWORD_BCRYPT);;
+    private function rand_string($length):string{ 
+        $str = "";
+        $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz@#$&*";  
+        $size = strlen( $chars );  
+        echo "Random string =";  
+        for( $i = 0; $i < $length; $i++ ) {  
+            $str.= $chars[ rand( 0, $size - 1 ) ];  
+        }  
+        return $str;
+    }   
+
+    private function generateUserToken(){
+        $rand =  $this->rand_string(64);  
+        return $rand;
     }
     
 
@@ -135,6 +136,7 @@ class  ConnexionService {
             if(! is_null($this->getCurrentUser())) {
                 return true;
             }
+            return false;
         } catch (Exception $e) {
             return false;
         }
@@ -165,7 +167,7 @@ class  ConnexionService {
      * @param string $value La valeur a laquel on souhaite set le token
      * @param int $time temps apres laquel le token expirera (+86400 = +1 jour) 
      */
-    private function setToken(User $user, string $value, ?int $time = null): void {
+    private function setToken(User $user, string $value, ?int $time = null){
         $this->userManager->setUserToken($value, $user->getId());
         setcookie(COOKIE_USER_TOKEN, $value, $time);
     }

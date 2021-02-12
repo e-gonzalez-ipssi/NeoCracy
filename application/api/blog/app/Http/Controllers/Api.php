@@ -122,7 +122,11 @@ class Api extends BaseController
     }
 
     protected function returnOutput($result){
-            return response()->json($result);
+            return response()->json(
+                [
+                    "value" => $result,
+                ]
+            );
     }
 
     protected function ack() {

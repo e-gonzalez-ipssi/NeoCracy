@@ -16,7 +16,7 @@ CREATE TABLE Utilisateur(
         mdp    Varchar (255) NOT NULL ,
         photo  Varchar (50),
         isAdmin Boolean NOT NUll ,
-        token Varchar (50) 
+        token Varchar (255) 
 );
 
 #------------------------------------------------------------
