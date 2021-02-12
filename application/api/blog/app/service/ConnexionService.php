@@ -16,6 +16,9 @@ class  ConnexionService {
     public function __construct(UserService $userService, UserManager $userManager) {
         $this->userService = $userService;
         $this->userManager = $userManager;
+
+        $this->setCurrentUser();
+        
     }
 
     // Petite fonction pour  échapper les caractères dangereux potentiellement envoyées et effectuer un premier nettoyage des données du formulaire

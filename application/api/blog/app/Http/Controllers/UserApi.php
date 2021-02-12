@@ -83,6 +83,23 @@ class UserApi extends Api
     }
 
     /**
+     * @route post(api/disconnect/)
+     * 
+     * 
+     * @return  mixed les informations de l'utilisateur au format JSON
+     */
+    public function disconnect(Request $request) {
+        $params = $this->initialize(
+            [],
+            self::NO_RIGHT,
+            true,
+        );
+        
+        $this->connexionService->deconnexion();
+        return $this->returnOutput($this->ack());
+    }
+
+    /**
      * @route post(api/register/)
      * 
      * 
