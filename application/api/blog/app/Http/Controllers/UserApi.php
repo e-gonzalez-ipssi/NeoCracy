@@ -78,7 +78,7 @@ class UserApi extends Api
             false,
         );
 
-        $cookie = $this->connexionService->connexion($params['mail'], $params['password']);
+        $this->connexionService->connexion($params['mail'], $params['password']);
         return $this->returnOutput($this->ack());
     }
 
