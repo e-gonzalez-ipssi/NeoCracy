@@ -186,3 +186,8 @@
     stroke: #222831;
     stroke-width: 1;
   }
+
+.btnTheme {
+    display: block;
+    margin: auto;
+}
