@@ -73,7 +73,7 @@ class  ConnexionService {
      * 
      * Note : ces 2 paramêtre peuvent être nul si l'utililsateur utilise sont token pour se connecté
      */
-    public function connexion(?string $mail = null, ?string $password = null): void {
+    public function connexion(?string $mail = null, ?string $password = null): array {
         if($this->isConnected()){
             throw new Exception("user-already-connected");
         }
@@ -94,11 +94,13 @@ class  ConnexionService {
             throw new Exception("bad-password");
         }
 
-        $this->setToken($user, $this->generateUserToken($user), time() + (86400 * 30));
+        $cookie = $this->setToken($user, $this->generateUserToken($user), time() + (86400 * 30));
 
         if (! $this->isConnected()) {
             throw new Exception("connection-failed");
         }
+
+        return $cookie;
     }
 
     /**
@@ -165,9 +167,11 @@ class  ConnexionService {
      * @param string $value La valeur a laquel on souhaite set le token
      * @param int $time temps apres laquel le token expirera (+86400 = +1 jour) 
      */
-    private function setToken(User $user, string $value, ?int $time = null): void {
+    private function setToken(User $user, string $value, ?int $time = null): array {
         $this->userManager->setUserToken($value, $user->getId());
         setcookie(COOKIE_USER_TOKEN, $value, $time);
+
+        return [];
     }
 
     /**

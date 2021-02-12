@@ -17,12 +17,12 @@ class OrganisationManager extends Manager {
         /** @var string $newQuery */
         $newQuery = "INSERT INTO `Organisation` (`nom`, `description`, `lienSite`) VALUES ($nom, $description, $lienSite)";
         $this->setQuery($newQuery);
-        $this->query();
+        $this->querySet();
 
         /** @var string $request */
         $request = "SELECT * FROM `Organisation`  WHERE nom = $nom";
         $this->setQuery($request);
-        $result = $this->query();
+        $result = $this->querySelect();
 
         if(count($result) >= 1){
             throw new Exception("error-creation-organisation-failed");
@@ -32,7 +32,7 @@ class OrganisationManager extends Manager {
             (SELECT id FROM Utilisateur WHERE nom = $userName), 
             (SELECT id FROM Organisation WHERE nom = $nom))";
         $this->setQuery($request2);
-        $this->query();
+        $this->querySet();
 
         return $this->ack("L'Organisation a bien été ajouté a la base de donnée");
     }
@@ -47,7 +47,7 @@ class OrganisationManager extends Manager {
         /** @var string $request2 */    
         $request2 = "INSERT INTO `Appartient` (`id_Organisation`, `id_Utilisateur`) VALUES ($organisationId, $userId)";
         $this->setQuery($request2);
-        $this->query();
+        $this->querySet();
 
         return $this->ack("L'user a bien été ajouté a l'organisation");
     }
@@ -62,7 +62,7 @@ class OrganisationManager extends Manager {
         /** @var string $request2 */    
         $request2 = "DELETE FROM `Appartient`  WHERE id_Organisation = $organisationId  AND id_Utilisateur = $userId ";
         $this->setQuery($request2);
-        $this->query();
+        $this->querySet();
 
         return $this->ack("L'user a bien été supprimé de l'organisation");
     }
@@ -84,7 +84,7 @@ class OrganisationManager extends Manager {
         $newQuery = "SELECT `id`, `nom`, `description`, `lienSite` FROM `Organisation` WHERE id = $id";
         $this->setQuery($newQuery);
 
-        $result = $this->query();
+        $result = $this->querySelect();
 
         if(count($result) < 1) {
             throw new Exception("error-organisation-not-found");
@@ -108,7 +108,7 @@ class OrganisationManager extends Manager {
         $newQuery = "SELECT `id`, `nom`, `description`, `lienSite` FROM `Organisation` WHERE nom = $nom";
         $this->setQuery($newQuery);
 
-        $result = $this->query();
+        $result = $this->querySelect();
 
         if(count($result) < 1) {
             throw new Exception("error-organisation-not-found");
@@ -129,11 +129,11 @@ class OrganisationManager extends Manager {
         $newQuery = "DELETE FROM `estAdmin`  WHERE id_Organisation = (SELECT id FROM Organisation WHERE nom = $nom) AND 
         id_Utilisateur = (SELECT Id FROM Utilisateur WHERE nom = $userName)";
         $this->setQuery($newQuery);
-        $this->query();
+        $this->querySet();
         /** @var string $request */
         $request = "DELETE FROM `Organisation`  WHERE nom = $nom ;";
         $this->setQuery($request);
-        $this->query();
+        $this->querySet();
 
         return $this->ack("L'Organisation a bien été supprimé a la base de donnée");
     }
@@ -149,7 +149,7 @@ class OrganisationManager extends Manager {
         /** @var string $newQuery */
         $newQuery = "SELECT `id_Organisation` FROM `Appartient` WHERE id_Utilisateur = $userId";
         $this->setQuery($newQuery);
-        $result = $this->query();
+        $result = $this->querySelect();
         
         return $result;
     }
@@ -165,7 +165,7 @@ class OrganisationManager extends Manager {
         /** @var string $newQuery */
         $newQuery = "SELECT `id_Utilisateur` FROM `Appartient` WHERE id_Organisation = $orgId";
         $this->setQuery($newQuery);
-        $result = $this->query();
+        $result = $this->querySelect();
         
         return $result;
     }
@@ -181,7 +181,7 @@ class OrganisationManager extends Manager {
         /** @var string $newQuery */
         $newQuery = "SELECT `id_Utilisateur` FROM `estAdmin` WHERE id_Organisation = $orgId";
         $this->setQuery($newQuery);
-        $result = $this->query();
+        $result = $this->querySelect();
         
         return $result;
     }

@@ -17,7 +17,7 @@ class UserManager extends Manager {
         $newQuery = "INSERT INTO `utilisateur` (`nom`, `prenom`, `mdp`, `mail`) VALUES ('$nom', '$prenom', '$mdp', '$mail')";
         $this->setQuery($newQuery);
 
-        $this->query();
+        $this->querySet();
 
         return $this->ack("L'utilisateur a bien été ajouté a la base de donnée");
     }
@@ -39,7 +39,7 @@ class UserManager extends Manager {
         $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `utilisateur` WHERE id = $id";
         $this->setQuery($newQuery);
 
-        $result = $this->query();
+        $result = $this->querySelect();
 
         if(count($result) < 1) {
             throw new Exception("error-user-not-found");
@@ -63,7 +63,7 @@ class UserManager extends Manager {
         $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `utilisateur` WHERE nom = $nom";
         $this->setQuery($newQuery);
 
-        $result = $this->query();
+        $result = $this->querySelect();
 
         if(count($result) < 1) {
             throw new Exception("error-user-not-found");
@@ -85,7 +85,7 @@ class UserManager extends Manager {
         $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `utilisateur` WHERE mail = '$mail'";
         $this->setQuery($newQuery);
 
-        $result = $this->query();
+        $result = $this->querySelect();
 
         if(count($result) < 1) {
             throw new Exception("error-user-not-found");
@@ -107,7 +107,7 @@ class UserManager extends Manager {
         $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `utilisateur` WHERE token = '$token'";
         $this->setQuery($newQuery);
 
-        $result = $this->query();
+        $result = $this->querySelect();
 
         if(count($result) < 1) {
             throw new Exception("error-user-not-found");
@@ -125,7 +125,7 @@ class UserManager extends Manager {
         $newQuery = "UPDATE `utilisateur` SET token = '$token' WHERE id = $id";
         $this->setQuery($newQuery);
 
-        $result = $this->query();
+        $this->querySet();
 
         return $this->ack("Le Token a bien été ajouter a l'utilisateur");
     }
@@ -143,7 +143,7 @@ class UserManager extends Manager {
         $newQuery = "SELECT `mdp` FROM `utilisateur` WHERE id = $id";
         $this->setQuery($newQuery);
 
-        $result = $this->query();
+        $result = $this->querySelect();
 
         if(count($result) < 1) {
             throw new Exception("error-user-not-found");
@@ -160,7 +160,7 @@ class UserManager extends Manager {
     public function getAllUserMail(): array {
         $newQuery = "SELECT `mail` FROM `utilisateur`";
         $this->setQuery($newQuery);
-        $queryResult = $this->query();
+        $queryResult = $this->querySelect();
         
         $result = [];
         foreach($queryResult as $row) {
@@ -180,7 +180,7 @@ class UserManager extends Manager {
         /** @var string $newQuery */
         $newQuery = "DELETE FROM `utilisateur` WHERE id = $id";
         $this->setQuery($newQuery);
-        $this->query();
+        $this->querySet();
         return $this->ack("L'utilisateur a bien été supprimé a la base de donnée");
     }
 }

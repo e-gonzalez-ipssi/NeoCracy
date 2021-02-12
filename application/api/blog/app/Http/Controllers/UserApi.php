@@ -74,11 +74,11 @@ class UserApi extends Api
                 ["mail", REQUIRED, TYPE_MAIL, $request->input('mail')],
                 ["password", REQUIRED, TYPE_PASSWORD, $request->input('password')],
             ],
-            self::NO_RIGHT, 
+            self::NO_RIGHT,
             false,
         );
 
-        $this->connexionService->connexion($params['mail'], $params['password']);
+        $cookie = $this->connexionService->connexion($params['mail'], $params['password']);
         return $this->returnOutput($this->ack());
     }
 
