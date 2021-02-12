@@ -114,6 +114,8 @@ function connexion(){
     let f6 = document.querySelector(".f6");
     let f7 = document.querySelector(".f7");
     let f8 = document.querySelector(".f8");
+    let connect = document.getElementById("Connexion");
+    let register = document.getElementById("Inscription");
     if (localStorage.theme == 'dark') {
         htmlClasses.remove('dark');
         localStorage.removeItem('theme');
@@ -130,6 +132,8 @@ function connexion(){
         f6.style.background = "linear-gradient(#222831, #c0d3f0)";
         f7.style.background = "linear-gradient(#222831, #c0d3f0)";
         f8.style.background = "linear-gradient(#222831, #c0d3f0)";
+        register.style.boxShadow = "0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08)";
+        connect.style.boxShadow = "0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08)";
   
     } else {
         htmlClasses.add('dark');
@@ -147,5 +151,7 @@ function connexion(){
         f6.style.background = "linear-gradient(#e0e9f8, #222831) ";
         f7.style.background = "linear-gradient(#e0e9f8, #222831) ";
         f8.style.background = "linear-gradient(#e0e9f8, #222831) ";
+        register.style.boxShadow = " 0 15px 30px 0 #353535, 0 5px 15px 0 #404040";
+        connect.style.boxShadow = " 0 15px 30px 0 #353535, 0 5px 15px 0 #404040";
     }
 });
