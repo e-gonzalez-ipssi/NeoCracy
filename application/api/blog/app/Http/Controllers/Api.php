@@ -122,7 +122,12 @@ class Api extends BaseController
     }
 
     protected function returnOutput($result){
-            return response()->json($result);
+            return response()->json(
+                [
+                    "value" => $result,
+                    "userToken" => $_COOKIE[COOKIE_USER_TOKEN],
+                ]
+            );
     }
 
     protected function ack() {

@@ -43,13 +43,6 @@ class  ConnexionService {
         if(empty($nom) && empty($prenom) && empty($password) && empty($confirmpassword) && empty($mail) && filter_var($mail, FILTER_VALIDATE_EMAIL)){
             throw new Exception("valid-all-details");
         }             
-        
-        // Vérifier si le mot de passe a bien une sécurité minimum (exemple : 8 characteres (8-20) , 1 chiffres, 1 majuscules)
-        $regex = "((?=.*\\d)(?=.*[A-Z]).{8,20})";
-        $verif_pass = strlen($password) >= 8;
-        $regex_pass = preg_match($regex,$password);
-
- 
 
         // on vérifie si les mots de passe rentré match pour voir si l'utilisateur a bien confirmer sont mot de passe
         if ($password != $confirmpassword) {
@@ -73,7 +66,7 @@ class  ConnexionService {
      * 
      * Note : ces 2 paramêtre peuvent être nul si l'utililsateur utilise sont token pour se connecté
      */
-    public function connexion(?string $mail = null, ?string $password = null): array {
+    public function connexion(?string $mail = null, ?string $password = null): void {
         if($this->isConnected()){
             throw new Exception("user-already-connected");
         }
@@ -94,13 +87,7 @@ class  ConnexionService {
             throw new Exception("bad-password");
         }
 
-        $cookie = $this->setToken($user, $this->generateUserToken($user), time() + (86400 * 30));
-
-        if (! $this->isConnected()) {
-            throw new Exception("connection-failed");
-        }
-
-        return $cookie;
+        $this->setToken($user, $this->generateUserToken($user), time() + (86400 * 30));
     }
 
     /**
@@ -137,6 +124,7 @@ class  ConnexionService {
             if(! is_null($this->getCurrentUser())) {
                 return true;
             }
+            return false;
         } catch (Exception $e) {
             return false;
         }

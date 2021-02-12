@@ -41,44 +41,36 @@ class  User {
         if(!empty($this->photo)) {
             if(empty($this->telephone)){
                 return [
-                    "user" => [
-                        "id" => $this->id,
-                        "nom" => $this->nom,
-                        "prenom" => $this->prenom,
-                        "mail" => $this->mail,
-                        "photo" => $this->photo,
-                    ]
+                    "id" => $this->id,
+                    "nom" => $this->nom,
+                    "prenom" => $this->prenom,
+                    "mail" => $this->mail,
+                    "photo" => $this->photo,
                 ];
             }
             return [
-                "user" => [
-                    "id" => $this->id,
-                    "nom" => $this->nom,
-                    "prenom" => $this->prenom,
-                    "mail" => $this->mail,
-                    "telephone" => $this->telephone,
-                    "photo" => $this->photo,
-                ]
-            ];
-        }
-        elseif(!empty($this->telephone)){
-            return [
-                "user" => [
-                    "id" => $this->id,
-                    "nom" => $this->nom,
-                    "prenom" => $this->prenom,
-                    "mail" => $this->mail,
-                    "telephone" => $this->telephone,
-                ]
-            ];
-        }
-        return [
-            "user" => [
                 "id" => $this->id,
                 "nom" => $this->nom,
                 "prenom" => $this->prenom,
                 "mail" => $this->mail,
-            ]
+                "telephone" => $this->telephone,
+                "photo" => $this->photo,
+            ];
+        }
+        elseif(!empty($this->telephone)){
+            return [
+                "id" => $this->id,
+                "nom" => $this->nom,
+                "prenom" => $this->prenom,
+                "mail" => $this->mail,
+                "telephone" => $this->telephone,
+            ];
+        }
+        return [
+            "id" => $this->id,
+            "nom" => $this->nom,
+            "prenom" => $this->prenom,
+            "mail" => $this->mail,
         ];
     }
 
