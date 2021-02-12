@@ -139,7 +139,7 @@
             <div class="text-center mb-8">
                 <h1 class="font-bold text-2xl font-bold">Register To Neocracy</h1>
             </div>
-            <form action="#">
+            <form action="#" id="registerForm">
                 <div class="mt-5">
                     <label for="lName">Last Name</label>
                     <input type="text" id="lName" class="block w-full p-2 border rounded border-gray-500" />
@@ -157,7 +157,7 @@
                     <input type="password" id="password" class="block w-full p-2 border rounded border-gray-500" />
                 </div>
                 <div class="mt-10">
-                    <input type="submit" value="Login"
+                    <input type="submit" value="Register" id="register" onclick="apiInscription()"
                         class="py-3 bg-green hover:bg-grey rounded text-white text-center w-full" />
                 </div>
             </form>
@@ -165,7 +165,7 @@
     </div>
 
     <script src="js/index.js"></script>
-
+    <script src="js/inscription.js"></script>
     <!-- <script>
         if (localStorage.theme === 'dark' || (!'theme' in localStorage && window.matchMedia(
                 '(prefers-color-scheme: dark)').matches)) {
