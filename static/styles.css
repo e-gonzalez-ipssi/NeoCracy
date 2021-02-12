@@ -61,7 +61,7 @@
     background: #53ffa9;
     height: 2.5rem;
     width: 5rem;
-    border-radius:99px;
+    border-radius: 99px;
     border: none;
 }
 
@@ -159,12 +159,19 @@
     opacity: 60%;
 }
 
-.trait{
+.trait {
     width: 100%;
     height: 800px;
 }
 
-.f1, .f2, .f3, .f4, .f5, .f6, .f7, .f8{
+.f1,
+.f2,
+.f3,
+.f4,
+.f5,
+.f6,
+.f7,
+.f8 {
     position: relative;
     height: 100%;
     width: 1px;
@@ -172,13 +179,13 @@
     opacity: 15%;
 }
 
-.logo{
+.logo {
     position: absolute;
     top: 2vh;
     left: 46%;
 }
 
-.logoW{
+.logoW {
     position: absolute;
     top: 2vh;
     left: 46%;
@@ -188,18 +195,22 @@
 .svg-icon {
     width: 2em;
     height: 2em;
-  }
-  
-  .svg-icon path,
-  .svg-icon polygon,
-  .svg-icon rect {
+}
+
+.btnTheme:focus {
+    outline: none;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
     fill: #222831;
-  }
-  
-  .svg-icon circle {
+}
+
+.svg-icon circle {
     stroke: #222831;
     stroke-width: 1;
-  }
+}
 
 .btnTheme {
     display: block;
