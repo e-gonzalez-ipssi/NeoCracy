@@ -17,7 +17,7 @@ class  User {
         string $nom,
         string $prenom,
         string $mail,
-        string $telephone,
+        ?string $telephone = null,
         ?string $photo = null,
         bool $isAdmin = false
     ) {
@@ -25,7 +25,10 @@ class  User {
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->mail = $mail;
-        $this->telephone = $telephone;
+        
+        if(!empty($telephone)) {
+            $this->telephone = $telephone;
+        }
 
         if(!empty($photo)) {
             $this->photo = $photo;
@@ -46,6 +49,28 @@ class  User {
                     "photo" => $this->photo,
                 ]
             ];
+            if(empty($this->telephone)){
+                return [
+                    "user" => [
+                        "id" => $this->id,
+                        "nom" => $this->nom,
+                        "prenom" => $this->prenom,
+                        "mail" => $this->mail,
+                        "photo" => $this->photo,
+                    ]
+                ];
+            }
+        }
+        elseif(!empty($this->telephone)){
+            return [
+                "user" => [
+                    "id" => $this->id,
+                    "nom" => $this->nom,
+                    "prenom" => $this->prenom,
+                    "mail" => $this->mail,
+                    "telephone" => $this->telephone,
+                ]
+            ];
         }
         return [
             "user" => [
@@ -53,7 +78,6 @@ class  User {
                 "nom" => $this->nom,
                 "prenom" => $this->prenom,
                 "mail" => $this->mail,
-                "telephone" => $this->telephone,
             ]
         ];
     }

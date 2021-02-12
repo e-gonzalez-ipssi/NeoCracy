@@ -36,7 +36,7 @@ class UserManager extends Manager {
             return $this->inventory[$id];
         }
 
-        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE id = $id";
+        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `utilisateur` WHERE id = $id";
         $this->setQuery($newQuery);
 
         $result = $this->query();
@@ -60,7 +60,7 @@ class UserManager extends Manager {
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
     public function getUserByName(string $nom): array {
-        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE nom = $nom";
+        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `utilisateur` WHERE nom = $nom";
         $this->setQuery($newQuery);
 
         $result = $this->query();
@@ -82,7 +82,7 @@ class UserManager extends Manager {
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
     public function getUserByMail(string $mail): User {
-        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE mail = $mail";
+        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `utilisateur` WHERE mail = '$mail'";
         $this->setQuery($newQuery);
 
         $result = $this->query();
@@ -104,7 +104,7 @@ class UserManager extends Manager {
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
     public function getUserByToken(string $token): User {
-        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `Utilisateur` WHERE token = $token";
+        $newQuery = "SELECT `id`, `nom`, `prenom`, `mail`, `tel`, `photo`, `isAdmin` FROM `utilisateur` WHERE token = '$token'";
         $this->setQuery($newQuery);
 
         $result = $this->query();
@@ -122,7 +122,7 @@ class UserManager extends Manager {
      * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      */
     public function setUserToken(string $token, int $id): array {
-        $newQuery = "UPDATE `Utilisateur` SET token = $token WHERE id = $id";
+        $newQuery = "UPDATE `utilisateur` SET token = '$token' WHERE id = $id";
         $this->setQuery($newQuery);
 
         $result = $this->query();
@@ -140,7 +140,7 @@ class UserManager extends Manager {
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
     public function getPasswordById(int $id): string {
-        $newQuery = "SELECT `Password` FROM `Utilisateur` WHERE id = $id";
+        $newQuery = "SELECT `mdp` FROM `utilisateur` WHERE id = $id";
         $this->setQuery($newQuery);
 
         $result = $this->query();
@@ -149,7 +149,7 @@ class UserManager extends Manager {
             throw new Exception("error-user-not-found");
         }
 
-        return $result["password"];
+        return $result[0]["mdp"];
     }
 
     /**
@@ -158,7 +158,7 @@ class UserManager extends Manager {
      * @return array La liste des adresses mail de tout les utilisateurs
      */
     public function getAllUserMail(): array {
-        $newQuery = "SELECT `mail` FROM `Utilisateur`";
+        $newQuery = "SELECT `mail` FROM `utilisateur`";
         $this->setQuery($newQuery);
         $queryResult = $this->query();
         
@@ -178,7 +178,7 @@ class UserManager extends Manager {
      */
     public function deleteUserById(int $id): array {
         /** @var string $newQuery */
-        $newQuery = "DELETE FROM `Utilisateur` WHERE id = $id";
+        $newQuery = "DELETE FROM `utilisateur` WHERE id = $id";
         $this->setQuery($newQuery);
         $this->query();
         return $this->ack("L'utilisateur a bien été supprimé a la base de donnée");

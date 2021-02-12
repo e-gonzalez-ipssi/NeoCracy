@@ -90,7 +90,7 @@ class  ConnexionService {
         $databasePassword = $this->userManager->getPasswordById($user->getId());
 
         // si les password ne correspondent pas, renvoyer une erreur a l'utilisateur
-        if ($password != $databasePassword) {
+        if (password_verify($password, $databasePassword)) {
             throw new Exception("bad-password");
         }
 
