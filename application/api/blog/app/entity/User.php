@@ -39,16 +39,6 @@ class  User {
 
     public function arrayify(): array {
         if(!empty($this->photo)) {
-            return [
-                "user" => [
-                    "id" => $this->id,
-                    "nom" => $this->nom,
-                    "prenom" => $this->prenom,
-                    "mail" => $this->mail,
-                    "telephone" => $this->telephone,
-                    "photo" => $this->photo,
-                ]
-            ];
             if(empty($this->telephone)){
                 return [
                     "user" => [
@@ -60,6 +50,16 @@ class  User {
                     ]
                 ];
             }
+            return [
+                "user" => [
+                    "id" => $this->id,
+                    "nom" => $this->nom,
+                    "prenom" => $this->prenom,
+                    "mail" => $this->mail,
+                    "telephone" => $this->telephone,
+                    "photo" => $this->photo,
+                ]
+            ];
         }
         elseif(!empty($this->telephone)){
             return [
