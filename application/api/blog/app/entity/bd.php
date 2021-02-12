@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use mysqli;
-
+use Exception;
 /*
 Fetch a record from a database:
 $account = $db->query('SELECT * FROM accounts WHERE username = ? AND password = ?', 'test', 'test')->fetchArray();
@@ -120,33 +120,35 @@ class bd
      */
     public function fetchAll($callback = null)
     {
-        $params = array();
-		$row = array();
-		
-        $meta = $this->query->result_metadata();
-        while ($field = $meta->fetch_field()) {
-            $params[] = &$row[$field->name];
-        }
-        call_user_func_array(array($this->query, 'bind_result'), $params);
-        $result = array();
-        while ($this->query->fetch()) {
-            $r = array();
-            foreach ($row as $key => $val) {
-                $r[$key] = $val;
+        try {
+            $params = array();
+            $row = array();
+            $meta = $this->query->result_metadata();
+            while ($field = $meta->fetch_field()) {
+                $params[] = &$row[$field->name];
             }
-            if ($callback != null && is_callable($callback)) {
-                $value = call_user_func($callback, $r);
-                if ($value == 'break') {
-                    break;
+            call_user_func_array(array($this->query, 'bind_result'), $params);
+            $result = array();
+            while ($this->query->fetch()) {
+                $r = array();
+                foreach ($row as $key => $val) {
+                    $r[$key] = $val;
                 }
+                if ($callback != null && is_callable($callback)) {
+                    $value = call_user_func($callback, $r);
+                    if ($value == 'break') {
+                        break;
+                    }
 
-            } else {
-                $result[] = $r;
+                } else {
+                    $result[] = $r;
+                }
             }
+            $this->query->close();
+            $this->query_closed = true;
+            return $result;
+        } catch (Exception $e) {
         }
-        $this->query->close();
-        $this->query_closed = true;
-        return $result;
     }
 
     /**

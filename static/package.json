@@ -4,11 +4,13 @@
   "description": "front of neocracy",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "style": "npx tailwindcss build styles.css -o output.css",
+    "dev": "nodemon -e js  -x npx tailwindcss build styles.css -o output.css"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.3",
     "autoprefixer": "^10.2.4",
     "postcss": "^8.2.5",
     "tailwindcss": "^2.0.3"

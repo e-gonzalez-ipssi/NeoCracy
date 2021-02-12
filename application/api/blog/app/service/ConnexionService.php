@@ -34,9 +34,7 @@ class  ConnexionService {
         string $prenom,
         string $password,
         string $confirmpassword,
-        string $mail,
-        ?string $telephone = null,
-        ?string $photo = null
+        string $mail
     ) {
         $nom = $this->valid_donnees($nom);
         $prenom = $this->valid_donnees($prenom);
@@ -51,9 +49,7 @@ class  ConnexionService {
         $verif_pass = strlen($password) >= 8;
         $regex_pass = preg_match($regex,$password);
 
-        if(!$verif_pass || !$regex_pass ){
-            throw new Exception("check-password-security");
-        }
+ 
 
         // on vérifie si les mots de passe rentré match pour voir si l'utilisateur a bien confirmer sont mot de passe
         if ($password != $confirmpassword) {
@@ -66,7 +62,7 @@ class  ConnexionService {
         }
 
         $password = password_hash($password, PASSWORD_BCRYPT);
-        $this->userService->addUser($nom, $prenom, $password, $mail, $telephone, $photo);
+        $this->userService->addUser($nom, $prenom, $password, $mail);
     }
 
     /**

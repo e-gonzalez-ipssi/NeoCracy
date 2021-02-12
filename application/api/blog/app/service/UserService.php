@@ -26,10 +26,10 @@ class  UserService {
      * 
      * @return array output a renvoyer a l'utilisateur lui indiquant l'état de sa requête
      */
-    public function addUser (string $nom, string $prenom,  string $mdp, string $mail, ?string $telephone = null, ?string $photo = null):array {
-        $mdp = password_hash($mdp, HASH_CODE);
+    public function addUser (string $nom, string $prenom,  string $mdp, string $mail):array {
+        $mdp = password_hash($mdp, PASSWORD_BCRYPT);
 
-        return $this->userManager->createUser($nom, $prenom, $mdp, $mail, $telephone, $photo);
+        return $this->userManager->createUser($nom, $prenom, $mdp, $mail);
     }
 
     /**
