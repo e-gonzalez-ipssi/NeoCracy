@@ -43,7 +43,7 @@ function myFunction2() {
 function connexion(){
 
   // Get the modal
-  var modal = document.getElementById("myModal");
+  var modal = document.getElementById("connect");
   
   // Get the button that opens the modal
   var btn = document.getElementById("Connexion");
@@ -72,13 +72,13 @@ function connexion(){
   function inscription(){
   
     // Get the modal
-    var modal = document.getElementById("myModal2");
+    var modal = document.getElementById("register");
     
     // Get the button that opens the modal
     var btn = document.getElementById("Inscription");
     
     // Get the <span> element that closes the modal
-    var span = document.getElementById("close");
+    var span = document.getElementsByClassName("closes")[0];
     
     // When the user clicks the button, open the modal 
     btn.onclick = function() {
