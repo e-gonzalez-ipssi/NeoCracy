@@ -74,7 +74,7 @@ class UserApi extends Api
                 ["mail", REQUIRED, TYPE_MAIL, $request->input('mail')],
                 ["password", REQUIRED, TYPE_PASSWORD, $request->input('password')],
             ],
-            self::NO_RIGHT, 
+            self::NO_RIGHT,
             false,
         );
 
@@ -100,6 +100,7 @@ class UserApi extends Api
             self::NO_RIGHT, 
             false,
         );
+        
         $this->connexionService->inscription(
             $params['nom'],
             $params['prenom'],
