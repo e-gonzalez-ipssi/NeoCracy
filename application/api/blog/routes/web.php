@@ -21,6 +21,7 @@ $router->post('api/todo/done/{id}','TodosApi@markAsDone');
 $router->delete('api/todo/delete/{id}','TodosApi@deleteTodo');
 
 $router->get('api/user/{id}','UserApi@getUser');
+$router->get('api/me/','UserApi@getMe');
 
 $router->post('api/connect/', 'UserApi@connect');
 $router->post('api/register/', 'UserApi@register');
