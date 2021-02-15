@@ -63,6 +63,17 @@ class UserApi extends Api
     }
 
     /**
+     * @route get(api/me)
+     * 
+     * @return mixed les informations de l'utilisateur au format JSON
+     */
+    public function getMe() {
+        $this->initialize([], self::NO_RIGHT, true);
+
+        return $this->returnOutput($this->me->arrayify());
+    }
+
+    /**
      * @route post(api/connect/)
      * 
      * 
