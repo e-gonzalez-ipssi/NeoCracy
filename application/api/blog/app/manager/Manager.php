@@ -86,11 +86,11 @@ abstract class  Manager
 
     protected function fromQueryToOrganisation($result): Organisation {
         return new Organisation(
-            $result["id"],
-            $result["nom"],
-            $result["description"],
-            $result["lienSite"],
-        );;
+            $result[0]["id"],
+            $result[0]["nom"],
+            $result[0]["description"],
+            $result[0]["lienSite"],
+        );
     }
 
     protected function fromQueryToOrganisations($result): array {

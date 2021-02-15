@@ -25,3 +25,5 @@ $router->get('api/user/{id}','UserApi@getUser');
 $router->post('api/connect/', 'UserApi@connect');
 $router->post('api/register/', 'UserApi@register');
 $router->post('api/disconnect/', 'UserApi@disconnect');
+
+$router->get('api/organisation/{id}','OrganisationApi@getOrg');
