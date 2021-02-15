@@ -22,9 +22,9 @@ class OrganisationManager extends Manager {
         /** @var string $request */
         $request = "SELECT id FROM `Organisation`  WHERE nom = '$nom'";
         $this->setQuery($request);
-        $orgid = $this->querySelect()[0]["id"];
+        $orgId = $this->querySelect()[0]["id"];
 
-        if(!isset($orgid) > 0){
+        if(!isset($orgId) > 0){
             throw new Exception("error-creation-organisation-failed");
         }
 
@@ -32,10 +32,12 @@ class OrganisationManager extends Manager {
         $request2 = 
             "INSERT INTO `estAdmin` (`id_Utilisateur`, `id_Organisation`) VALUES (
                 $userId, 
-                $orgid
+                $orgId
             )";
         $this->setQuery($request2);
         $this->querySet();
+
+        $this->addUserToOrganisation($orgId, $userId);
 
         return $this->ack("L'Organisation a bien été ajouté a la base de donnée");
     }

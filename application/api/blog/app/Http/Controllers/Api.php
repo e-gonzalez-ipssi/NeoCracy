@@ -52,10 +52,10 @@ class Api extends BaseController
                 $result [$param[0]] = $param[4];
             }
             else {
-            //check sur les types
-            $value = $this->checkType($param[2], $param[3]);
-            // on ajoute le paramêtre a la liste
-            $result [$param[0]] = $value;
+                //check sur les types
+                $value = $this->checkType($param[2], $param[3]);
+                // on ajoute le paramêtre a la liste
+                $result [$param[0]] = $value;
             }
         }
 
