@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Entity\User;
 use App\Entity\bd;
+use App\Manager\OrganisationManager;
 use App\Manager\UserManager;
 use App\Service\ConnexionService;
 use App\Service\UserService;
+use App\Service\OrganisationService;
 use Exception;
 use Laravel\Lumen\Routing\Controller as BaseController;
-use PhpParser\Node\Stmt\ElseIf_;
+
 
 include "Constant.php";
 
@@ -17,6 +19,7 @@ class Api extends BaseController
 {
     protected ?User $me = null;
     protected UserService $userService;
+    protected OrganisationService $orgService;
     protected ConnexionService $connexionService;
 
     protected function __construct() 
@@ -24,8 +27,10 @@ class Api extends BaseController
         // ici on instancieras TOUT les services et manager
         $bd = new bd();
         $userManager = new UserManager($bd);
+        $orgManager = new OrganisationManager($bd);
         $this->userService = new UserService($userManager);
         $this->connexionService = new ConnexionService($this->userService, $userManager);
+        $this->orgService = new OrganisationService($orgManager, $this->connexionService);
     }
 
     protected function getParams($params) {

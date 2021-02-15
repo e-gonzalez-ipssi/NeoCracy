@@ -1,9 +1,12 @@
 <?php
 
+namespace App\Service;
+
 use App\Entity\Organisation;
 use App\Entity\User;
 use App\Manager\OrganisationManager;
 use App\Service\ConnexionService;
+use Exception;
 
 class  OrganisationService {
 
@@ -11,7 +14,7 @@ class  OrganisationService {
     private ConnexionService $connexionService;
 
     public function __construct (OrganisationManager $organisationManager, ConnexionService $connexionService) {
-        $this->$organisationManager = $organisationManager;
+        $this->organisationManager = $organisationManager;
         $this->connexionService = $connexionService;
     }
 
@@ -45,7 +48,7 @@ class  OrganisationService {
         }
 
         // Renvoie une erreur si organisation inexistant
-        return $this->organisationManager->deleteOrganisation($org, $user->getNom());
+        $this->organisationManager->deleteOrganisation($org, $user->getNom());
     }
 
     /**

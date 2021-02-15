@@ -48,4 +48,13 @@ class Organisation
     public function getLienSite():string{
         return $this->lienSite;
     }
+
+    public function arrayify(): array {
+        return [
+            "id" => $this->id,
+            "nom" => $this->nom,
+            "description" => $this->description,
+            "lienSite" => $this->lienSite,
+        ];
+    }
 }
