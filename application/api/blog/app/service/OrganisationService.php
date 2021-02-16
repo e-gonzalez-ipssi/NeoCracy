@@ -98,11 +98,6 @@ class  OrganisationService {
      * Permet de récupéré les utilisateurs d'une organisation
      */
     public function getUsersFromOrganisation(int $orgId){
-        // l'utilisateur courant doit être dans l'org pour faire cette demande
-        if (!$this->userIsInOrganisation($this->connexionService->getCurrentUser(), $orgId)) {
-            throw new Exception("error-permission-error");
-        }
-
         $membersId = $this->organisationManager->getUsersFromOrganisation($orgId);
     
         $membersList = [];
@@ -120,7 +115,7 @@ class  OrganisationService {
      */
     public function getAdminsFromOrganisation(Organisation $org){
         // l'utilisateur courant doit être dans l'org pour faire cette demande
-        if ($this->userIsInOrganisation($this->connexionService->getCurrentUser(), $org->getId())) {
+        if (!$this->userIsInOrganisation($this->connexionService->getCurrentUser(), $org->getId())) {
             throw new Exception("error-permission-error");
         }
 
