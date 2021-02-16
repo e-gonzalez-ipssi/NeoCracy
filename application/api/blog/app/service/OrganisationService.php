@@ -63,8 +63,11 @@ class  OrganisationService {
      * @return bool
      */
     public function userIsInOrganisation(User $user, int $orgId): bool{
-        if (in_array($orgId, $this->organisationManager->getOrganisationsFromUser($user->getId()))) {
-            return true;
+        $userOrgs =  $this->organisationManager->getOrganisationsFromUser($user->getId());
+        foreach ($userOrgs as $org) {
+            if($org["id_Organisation"] == $orgId){
+                return true;
+            }
         }
         return false;
     }
@@ -96,7 +99,7 @@ class  OrganisationService {
      */
     public function getUsersFromOrganisation(int $orgId){
         // l'utilisateur courant doit être dans l'org pour faire cette demande
-        if ($this->userIsInOrganisation($this->connexionService->getCurrentUser(), $orgId)) {
+        if (!$this->userIsInOrganisation($this->connexionService->getCurrentUser(), $orgId)) {
             throw new Exception("error-permission-error");
         }
 
