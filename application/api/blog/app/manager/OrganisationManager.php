@@ -24,7 +24,7 @@ class OrganisationManager extends Manager {
         $this->setQuery($request);
         $orgId = $this->querySelect()[0]["id"];
 
-        if(!isset($orgId) > 0){
+        if(!isset($orgId)){
             throw new Exception("error-creation-organisation-failed");
         }
 
