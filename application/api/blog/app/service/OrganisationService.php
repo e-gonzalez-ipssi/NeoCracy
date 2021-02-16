@@ -21,15 +21,33 @@ class  OrganisationService {
         $this->userService = $userService;
     }
 
-    public function createOrganisation (string $nom, string $description, string $lienSite , User $user): array {
-        return $this->organisationManager->createOrganisation($nom, $description, $lienSite, $user->getNom());
+    public function createOrganisation (
+        User $user,
+        string $nom, 
+        ?string $description, 
+        ?string $lienSite
+    ) {
+        // si une organisation avec le même nom éxiste déjà, on renvoie une erreur
+        try {
+            $this->getOrganisationByName($nom);
+            throw new Exception();
+        }
+        catch (Exception $e) {
+            if ($e->getMessage() === "error-organisation-not-found") {
+                $this->organisationManager->createOrganisation($nom, $description, $lienSite, $user->getId());
+            }
+            else {
+                throw new Exception("error-org-already-exist");
+            }
+            
+        }
     }
 
     public function getOrganisationById (int $id): Organisation {
         return $this->organisationManager->getOrganisationById($id);
     }
 
-    public function getOrganisationByName (string $nom): array {
+    public function getOrganisationByName (string $nom): Organisation {
         return $this->organisationManager->getOrganisationByName($nom);
     }
 

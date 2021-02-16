@@ -28,4 +28,8 @@ $router->post('api/register/', 'UserApi@register');
 $router->post('api/disconnect/', 'UserApi@disconnect');
 
 $router->get('api/organisation/{id}','OrganisationApi@getOrg');
+<<<<<<< HEAD
 $router->get('api/organisation/{orgId}/members','OrganisationApi@getOrgMembers');
+=======
+$router->post('api/organisation', 'OrganisationApi@createOrg');
+>>>>>>> 6f615f37f04f2611ac4b3a33f536d7e979d87adf

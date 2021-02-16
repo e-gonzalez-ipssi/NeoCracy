@@ -13,26 +13,31 @@ class OrganisationManager extends Manager {
      * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
-    public function createOrganisation(string $nom, string $description, string $lienSite , string $userName): array {
+    public function createOrganisation(string $nom, string $description, string $lienSite , int $userId): array {
         /** @var string $newQuery */
-        $newQuery = "INSERT INTO `Organisation` (`nom`, `description`, `lienSite`) VALUES ($nom, $description, $lienSite)";
+        $newQuery = "INSERT INTO `Organisation` (`nom`, `description`, `lienSite`) VALUES ('$nom', '$description', '$lienSite')";
         $this->setQuery($newQuery);
         $this->querySet();
 
         /** @var string $request */
-        $request = "SELECT * FROM `Organisation`  WHERE nom = $nom";
+        $request = "SELECT id FROM `Organisation`  WHERE nom = '$nom'";
         $this->setQuery($request);
-        $result = $this->querySelect();
+        $orgId = $this->querySelect()[0]["id"];
 
-        if(count($result) >= 1){
+        if(!isset($orgId)){
             throw new Exception("error-creation-organisation-failed");
         }
-        /** @var string $request2 */    
-        $request2 = "INSERT INTO `estAdmin` (`id_Utilisateur`, `id_Organisation`) VALUES (
-            (SELECT id FROM Utilisateur WHERE nom = $userName), 
-            (SELECT id FROM Organisation WHERE nom = $nom))";
+
+        /** @var string $request2 */
+        $request2 = 
+            "INSERT INTO `estAdmin` (`id_Utilisateur`, `id_Organisation`) VALUES (
+                $userId, 
+                $orgId
+            )";
         $this->setQuery($request2);
         $this->querySet();
+
+        $this->addUserToOrganisation($orgId, $userId);
 
         return $this->ack("L'Organisation a bien été ajouté a la base de donnée");
     }
@@ -104,8 +109,8 @@ class OrganisationManager extends Manager {
      * 
      * @throw Exception Relève une expetion si l'Organisation n'a pas été trouvé
      */
-    public function getOrganisationByName(string $nom): array {
-        $newQuery = "SELECT `id`, `nom`, `description`, `lienSite` FROM `Organisation` WHERE nom = $nom";
+    public function getOrganisationByName(string $nom): Organisation {
+        $newQuery = "SELECT `id`, `nom`, `description`, `lienSite` FROM `Organisation` WHERE nom = '$nom'";
         $this->setQuery($newQuery);
 
         $result = $this->querySelect();
@@ -114,7 +119,7 @@ class OrganisationManager extends Manager {
             throw new Exception("error-organisation-not-found");
         }
 
-        return $this->fromQueryToOrganisations($result);
+        return $this->fromQueryToOrganisation($result);
     }
 
     /**

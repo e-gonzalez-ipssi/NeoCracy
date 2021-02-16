@@ -38,10 +38,7 @@ class Api extends BaseController
             return [];
         }
 
-        $result = [];
-
         foreach ($params as $param) {
-            // on ajoute le paramêtre a la liste
             // check si le paramêtre est REQUIRED ou non
             if ($param[1]) {
                 //check sur les types
@@ -49,14 +46,15 @@ class Api extends BaseController
                 if (is_null($value)) {
                     throw new Exception("param-is-required");
                 }
-                $result [$param[0]] = $value;
             }
-            if (is_null($value)) {
-                $result [$param[0]] = null;
+            
+            if (is_null($param[3])) {
+                $result [$param[0]] = $param[4];
             }
             else {
                 //check sur les types
                 $value = $this->checkType($param[2], $param[3]);
+                // on ajoute le paramêtre a la liste
                 $result [$param[0]] = $value;
             }
         }

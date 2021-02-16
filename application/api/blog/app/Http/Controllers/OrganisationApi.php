@@ -82,4 +82,31 @@ class OrganisationApi extends Api
         $users = $this->orgService->getUsersFromOrganisation($orgId);
         return $this->returnOutput($users);
     }
+    
+    /**
+     * @route post(api/organisation/)
+     * 
+     * @param int $id l'id de l'organisation que l'on recherche
+     * 
+     * @return  mixed les informations de l'organisation au format JSON
+     */
+    public function createOrg(Request $request) {
+        $params = $this->initialize(
+            [
+                ["nom", REQUIRED, TYPE_STRING, $request->input('nom')],
+                ["description", NOT_REQUIRED, TYPE_STRING, $request->input('description'), 'La super description de mon organisation'],
+                ["lienSite", NOT_REQUIRED, TYPE_STRING, $request->input('lienSite'), 'www.neocracy.fr'],
+            ],
+            self::NO_RIGHT, 
+            true
+        );
+
+        $this->orgService->createOrganisation(
+            $this->me,
+            $params["nom"],
+            $params["description"],
+            $params["lienSite"],
+        );
+        return $this->returnOutput($this->ack());
+    }
 }
