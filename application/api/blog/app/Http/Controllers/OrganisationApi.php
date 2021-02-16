@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Entity\User;
 use Illuminate\Http\Request;
+use Exception;
 
 class OrganisationApi extends Api
 {
     private const NO_RIGHT = 1;
+    private const IS_ORG_MEMBER = 2;
 
     public function __construct()
     {
@@ -23,13 +25,14 @@ class OrganisationApi extends Api
     private function initialize(
         array $params = [],
         int $right = self::NO_RIGHT,
-        bool $isConnected = true
+        bool $isConnected = true,
+        int $orgId = null
     ): array {
         if ($isConnected) {
             $this->me = $this->connexionService->getCurrentUser();
         }
 
-        $this->checkAccess($right, $this->me);
+        $this->checkAccess($right, $orgId);
 
         $paramsClean = $this->getParams($params);
 
@@ -40,8 +43,12 @@ class OrganisationApi extends Api
      * Permet de faire des différents check de permission
      * - créer un nouveau case par nouveau type de permission
      */
-    private function checkAccess(int $right, ?User $me) {
+    private function checkAccess(int $right, int $orgId = null) {
         switch ($right) {
+            case self::IS_ORG_MEMBER:
+                if (!$this->orgService->userIsInOrganisation($this->me, $orgId)) {
+                    throw new Exception("error-permission-error");
+                }
             case self::NO_RIGHT:
             default:
                 return;
@@ -62,6 +69,20 @@ class OrganisationApi extends Api
         return $this->returnOutput($org->arrayify());
     }
 
+    /**
+     * @route get(api/organisation/{id}/members)
+     * 
+     * @param int $orgId l'id de l'organisation que l'on recherche
+     * 
+     * @return  mixed les informations de l'organisation au format JSON
+     */
+    public function getOrgMembers(int $orgId) {
+        $this->initialize([], self::IS_ORG_MEMBER, true, $orgId);
+
+        $users = $this->orgService->getUsersFromOrganisation($orgId);
+        return $this->returnOutput($users);
+    }
+    
     /**
      * @route post(api/organisation/)
      * 

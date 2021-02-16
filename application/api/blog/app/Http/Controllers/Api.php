@@ -30,7 +30,7 @@ class Api extends BaseController
         $orgManager = new OrganisationManager($bd);
         $this->userService = new UserService($userManager);
         $this->connexionService = new ConnexionService($this->userService, $userManager);
-        $this->orgService = new OrganisationService($orgManager, $this->connexionService);
+        $this->orgService = new OrganisationService($orgManager, $this->connexionService, $this->userService);
     }
 
     protected function getParams($params) {
