@@ -27,8 +27,9 @@ $router->post('api/connect/', 'UserApi@connect');
 $router->post('api/register/', 'UserApi@register');
 $router->post('api/disconnect/', 'UserApi@disconnect');
 
-$router->get('api/organisation/{id}','OrganisationApi@getOrg');
+$router->get('api/organisation/{orgId}','OrganisationApi@getOrg');
 $router->get('api/organisation/{orgId}/members','OrganisationApi@getOrgMembers');
+$router->get('api/organisation/{orgId}/admins','OrganisationApi@getOrgAdmins');
 $router->post('api/organisation/{orgId}/members','OrganisationApi@addOrgMembers');
 $router->post('api/organisation/{orgId}/admins/{userId}','OrganisationApi@addOrgAdmin');
 $router->post('api/organisation', 'OrganisationApi@createOrg');

@@ -82,11 +82,10 @@ class OrganisationApi extends Api
      * 
      * @return  mixed les informations de l'organisation au format JSON
      */
-    public function getOrg(int $id) {
-        $this->initialize([], self::NO_RIGHT, false);
+    public function getOrg(int $orgId) {
+        $this->initialize([], self::NO_RIGHT, false, $orgId);
 
-        $org = $this->orgService->getOrganisationById($id);
-        return $this->returnOutput($org->arrayify());
+        return $this->returnOutput($this->org->arrayify());
     }
 
     /**
@@ -99,7 +98,21 @@ class OrganisationApi extends Api
     public function getOrgMembers(int $orgId) {
         $this->initialize([], self::IS_ORG_MEMBER, true, $orgId);
 
-        $users = $this->orgService->getUsersFromOrganisation($orgId);
+        $users = $this->orgService->getUsersFromOrganisation($this->org);
+        return $this->returnOutput($users);
+    }
+
+    /**
+     * @route get(api/organisation/{id}/admins)
+     * 
+     * @param int $orgId l'id de l'organisation que l'on recherche
+     * 
+     * @return  mixed les informations de l'organisation au format JSON
+     */
+    public function getOrgAdmins(int $orgId) {
+        $this->initialize([], self::IS_ORG_MEMBER, true, $orgId);
+
+        $users = $this->orgService->getAdminsFromOrganisation($this->org);
         return $this->returnOutput($users);
     }
 
