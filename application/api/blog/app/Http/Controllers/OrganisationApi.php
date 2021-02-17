@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entity\Organisation;
 use App\Entity\User;
 use Illuminate\Http\Request;
 use Exception;
@@ -10,6 +11,9 @@ class OrganisationApi extends Api
 {
     private const NO_RIGHT = 1;
     private const IS_ORG_MEMBER = 2;
+    private const IS_NOT_ORG_MEMBER = 3;
+
+    private Organisation $org;
 
     public function __construct()
     {
@@ -32,6 +36,10 @@ class OrganisationApi extends Api
             $this->me = $this->connexionService->getCurrentUser();
         }
 
+        if(!is_null($orgId)){
+            $this->org = $this->orgService->getOrganisationById($orgId);
+        }
+
         $this->checkAccess($right, $orgId);
 
         $paramsClean = $this->getParams($params);
@@ -49,6 +57,12 @@ class OrganisationApi extends Api
                 if (!$this->orgService->userIsInOrganisation($this->me, $orgId)) {
                     throw new Exception("error-permission-error");
                 }
+                break;
+            case self::IS_NOT_ORG_MEMBER:
+                if ($this->orgService->userIsInOrganisation($this->me, $orgId)) {
+                    throw new Exception("error-permission-error");
+                }
+                break;
             case self::NO_RIGHT:
             default:
                 return;
@@ -81,6 +95,20 @@ class OrganisationApi extends Api
 
         $users = $this->orgService->getUsersFromOrganisation($orgId);
         return $this->returnOutput($users);
+    }
+
+    /**
+     * @route post(api/organisation/{id}/members)
+     * 
+     * @param int $orgId l'id de l'organisation que l'on recherche
+     * 
+     * @return  mixed les informations de l'organisation au format JSON
+     */
+    public function addOrgMembers(int $orgId) {
+        $this->initialize([], self::IS_NOT_ORG_MEMBER, true, $orgId);
+
+        $this->orgService->addUserFromOrganisation($this->org, $this->me);
+        return $this->returnOutput($this->ack());
     }
     
     /**
