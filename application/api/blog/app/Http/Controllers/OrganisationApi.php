@@ -118,16 +118,23 @@ class OrganisationApi extends Api
 
     
     /**
-     * @route post(api/organisation/{orgId}/admin/{userId]})
+     * @route post(api/organisation/{orgId}/admins)
      * 
      * @param int $orgId l'id de l'organisation que l'on recherche
      * 
      * @return  mixed les informations de l'organisation au format JSON
      */
-    public function addOrgAdmin(int $orgId, int $userId) {
-        $this->initialize([], self::IS_ORG_ADMIN, true, $orgId);
+    public function addOrgAdmin(Request $request, int $orgId) {
+        $params = $this->initialize(
+            [                
+                ["mail", REQUIRED, TYPE_MAIL, $request->input('mail')],
+            ], 
+            self::IS_ORG_ADMIN, 
+            true, 
+            $orgId
+        );
 
-        $userToAdd = $this->userService->getUserById($userId);
+        $userToAdd = $this->userService->getUserByMail($params["mail"]);
         $this->orgService->addAdminToOrganisation($this->org, $userToAdd);
         return $this->returnOutput($this->ack());
     }

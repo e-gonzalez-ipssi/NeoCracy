@@ -141,7 +141,16 @@ class  OrganisationService {
     }
 
     public function addAdminToOrganisation(Organisation $org, User $user){
+        if ($this->userIsOrgAdmin($user, $org->getId())) {
+            throw new Exception("user-is-already-admin");
+        }
 
+        // si l'utilisateur n'est pas dans l'organisation on le rajoute
+        if (!$this->userIsInOrganisation($user, $org->getId())) {
+            $this->addUserFromOrganisation($org, $user);
+        }
+
+        $this->organisationManager->addAdminToOrganisation($org->getId(), $user->getId());
     }
 
     public function userIsOrgAdmin(User $user, int $orgId): bool {

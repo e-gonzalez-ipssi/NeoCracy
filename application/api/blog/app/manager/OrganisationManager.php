@@ -175,7 +175,7 @@ class OrganisationManager extends Manager {
         return $result;
     }
 
-        /**
+    /**
      * Permet de récupéré les organisations d'un utilisateur
      * 
      * @param int $orgId l'id de l'organisation dont on veux récupéré les membres admins
@@ -189,5 +189,20 @@ class OrganisationManager extends Manager {
         $result = $this->querySelect();
         
         return $result;
+    }
+
+    /**
+     * Cette fonction permet d'ajouter un admin dans une Organisation
+     * 
+     * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
+     * 
+     */
+    public function addAdminToOrganisation(string $organisationId , string $userId): array {
+        /** @var string $request2 */    
+        $request2 = "INSERT INTO `estAdmin` (`id_Organisation`, `id_Utilisateur`) VALUES ($organisationId, $userId)";
+        $this->setQuery($request2);
+        $this->querySet();
+
+        return $this->ack("L'user a bien été ajouté a l'organisation");
     }
 }
