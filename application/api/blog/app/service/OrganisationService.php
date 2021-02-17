@@ -94,10 +94,6 @@ class  OrganisationService {
      * Permet d'ajouter un utilisateur à une organisation
      */
     public function addUserFromOrganisation(Organisation $org, User $user): void{
-        if ($this->userIsInOrganisation($user, $org->getId())) {
-            throw new Exception("user-is-in-organisation");
-        }
-
         $this->organisationManager->addUserToOrganisation($org->getId(), $user->getId());
     }
 
@@ -132,8 +128,6 @@ class  OrganisationService {
      * Permet de récupéré les administrateurs d'une organisation
      */
     public function getAdminsFromOrganisation(Organisation $org){
-        return $this->organisationManager->getAdminsFromOrganisation($org->getId());
-
         $adminsId = $this->organisationManager->getAdminsFromOrganisation($org->getId());
     
         $adminsList = [];
