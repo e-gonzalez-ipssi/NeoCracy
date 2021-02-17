@@ -65,7 +65,7 @@ class OrganisationApi extends Api
                 }
                 break;
             case self::IS_ORG_ADMIN:
-                if ($this->orgService->userIsOrgAdmin($this->me, $orgId)) {
+                if (!$this->orgService->userIsOrgAdmin($this->me, $orgId)) {
                     throw new Exception("error-permission-error");
                 }
                 break;
@@ -114,6 +114,22 @@ class OrganisationApi extends Api
 
         $users = $this->orgService->getAdminsFromOrganisation($this->org);
         return $this->returnOutput($users);
+    }
+
+    
+    /**
+     * @route post(api/organisation/{orgId}/admin/{userId]})
+     * 
+     * @param int $orgId l'id de l'organisation que l'on recherche
+     * 
+     * @return  mixed les informations de l'organisation au format JSON
+     */
+    public function addOrgAdmin(int $orgId, int $userId) {
+        $this->initialize([], self::IS_ORG_ADMIN, true, $orgId);
+
+        $userToAdd = $this->userService->getUserById($userId);
+        $this->orgService->addAdminToOrganisation($this->org, $userToAdd);
+        return $this->returnOutput($this->ack());
     }
 
     /**
