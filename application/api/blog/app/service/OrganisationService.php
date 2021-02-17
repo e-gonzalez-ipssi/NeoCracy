@@ -132,11 +132,17 @@ class  OrganisationService {
      * Permet de récupéré les administrateurs d'une organisation
      */
     public function getAdminsFromOrganisation(Organisation $org){
-        // l'utilisateur courant doit être dans l'org pour faire cette demande
-        if (!$this->userIsInOrganisation($this->connexionService->getCurrentUser(), $org->getId())) {
-            throw new Exception("error-permission-error");
+        return $this->organisationManager->getAdminsFromOrganisation($org->getId());
+
+        $adminsId = $this->organisationManager->getAdminsFromOrganisation($org->getId());
+    
+        $adminsList = [];
+    
+        foreach($adminsId as $userId) {
+            $user = $this->userService->getUserById($userId["id_Utilisateur"]);
+            array_push($adminsList, $user->arrayify());
         }
 
-        return $this->organisationManager->getAdminsFromOrganisation($org->getId());
+        return $adminsList;
     }
 }
