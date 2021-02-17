@@ -135,4 +135,19 @@ class  OrganisationService {
 
         return $this->organisationManager->getAdminsFromOrganisation($org->getId());
     }
+
+    public function addAdminToOrganisation(Organisation $org, User $user){
+
+    }
+
+    public function userIsOrgAdmin(User $user, int $orgId): bool {
+        $admins = $this->organisationManager->getAdminsFromOrganisation($orgId);
+
+        foreach ($admins as $admin) {
+            if($admin["id_Utilisateur"] == $user->getId()){
+                return true;
+            }
+        }
+        return false;
+    }
 }

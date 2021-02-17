@@ -12,6 +12,7 @@ class OrganisationApi extends Api
     private const NO_RIGHT = 1;
     private const IS_ORG_MEMBER = 2;
     private const IS_NOT_ORG_MEMBER = 3;
+    private const IS_ORG_ADMIN = 4;
 
     private Organisation $org;
 
@@ -63,6 +64,11 @@ class OrganisationApi extends Api
                     throw new Exception("error-permission-error");
                 }
                 break;
+            case self::IS_ORG_ADMIN:
+                if ($this->orgService->userIsOrgAdmin($this->me, $orgId)) {
+                    throw new Exception("error-permission-error");
+                }
+                break;
             case self::NO_RIGHT:
             default:
                 return;
@@ -110,7 +116,7 @@ class OrganisationApi extends Api
         $this->orgService->addUserFromOrganisation($this->org, $this->me);
         return $this->returnOutput($this->ack());
     }
-    
+
     /**
      * @route post(api/organisation/)
      * 
