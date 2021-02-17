@@ -79,7 +79,7 @@ class OrganisationApi extends Api
     public function getOrg(int $orgId) {
         $this->initialize([], self::NO_RIGHT, false, $orgId);
 
-        return $this->returnOutput($this->org);
+        return $this->returnOutput($this->org->arrayify());
     }
 
     /**
@@ -92,7 +92,7 @@ class OrganisationApi extends Api
     public function getOrgMembers(int $orgId) {
         $this->initialize([], self::IS_ORG_MEMBER, true, $orgId);
 
-        $users = $this->orgService->getUsersFromOrganisation($orgId);
+        $users = $this->orgService->getUsersFromOrganisation($this->org);
         return $this->returnOutput($users);
     }
 

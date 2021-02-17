@@ -111,8 +111,8 @@ class  OrganisationService {
     /**
      * Permet de récupéré les utilisateurs d'une organisation
      */
-    public function getUsersFromOrganisation(int $orgId){
-        $membersId = $this->organisationManager->getUsersFromOrganisation($orgId);
+    public function getUsersFromOrganisation(Organisation $org){
+        $membersId = $this->organisationManager->getUsersFromOrganisation($org->getId());
     
         $membersList = [];
     
