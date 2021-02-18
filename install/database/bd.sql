@@ -39,9 +39,29 @@ CREATE TABLE Proposition(
         id          Int  Auto_increment PRIMARY KEY NOT NULL ,
         nom         Varchar (50) NOT NULL ,
         description Varchar (50) NOT NULL ,
-        tag         Int NOT NULL ,
-        date        Date NOT NULL
+        date        int NOT NULL
 );
+
+#------------------------------------------------------------
+# Table: Tags
+#------------------------------------------------------------
+
+CREATE TABLE Tags(
+        id          Int  Auto_increment PRIMARY KEY NOT NULL ,
+        nom         Varchar (50) NOT NULL
+);
+
+#------------------------------------------------------------
+# Table: Tags
+#------------------------------------------------------------
+
+CREATE TABLE haveTags(
+        id_Proposition Int NOT NULL ,
+        id_Tag Int NOT NULL,
+    FOREIGN KEY (id_Proposition) REFERENCES Proposition(id),
+    FOREIGN KEY (id_Tag) REFERENCES Tags(id)
+);
+
 
 
 #------------------------------------------------------------
