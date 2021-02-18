@@ -72,7 +72,7 @@ class PropositionManager extends Manager {
      * Permet de récupéré la liste de like ainsi le nombre de like
      */
     private function getLikeNumber(int $propositionId): int {
-        $requete = "SELECT * FROM `alike` WHERE vote = false and id_proposition = $propositionId";
+        $requete = "SELECT * FROM `alike` WHERE vote = 1 and id_proposition = $propositionId";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
@@ -83,7 +83,7 @@ class PropositionManager extends Manager {
      * Permet de récupéré la liste de like ainsi le nombre de dislike
      */
     private function getDislikeNumber(int $propositionId): int {
-        $requete = "SELECT * FROM `alike` WHERE vote = false and id_proposition = $propositionId";
+        $requete = "SELECT * FROM `alike` WHERE vote = 0 and id_proposition = $propositionId";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
