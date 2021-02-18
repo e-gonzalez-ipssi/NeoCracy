@@ -145,7 +145,6 @@ class  OrganisationService {
             throw new Exception("user-is-already-admin");
         }
 
-        // si l'utilisateur n'est pas dans l'organisation on le rajoute
         if (!$this->userIsInOrganisation($user, $org->getId())) {
             throw new Exception("user-is-not-org-member");
         }
