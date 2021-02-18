@@ -32,3 +32,5 @@ $router->get('api/organisation/{orgId}/members','OrganisationApi@getOrgMembers')
 $router->get('api/organisation/{orgId}/admins','OrganisationApi@getOrgAdmins');
 $router->post('api/organisation/{orgId}/members','OrganisationApi@addOrgMembers');
 $router->post('api/organisation', 'OrganisationApi@createOrg');
+
+$router->get('api/proposition/{id}', 'PropositionApi@getProposition');

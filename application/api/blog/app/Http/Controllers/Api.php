@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Entity\User;
 use App\Entity\bd;
+use App\Entity\Proposition;
 use App\Manager\OrganisationManager;
+use App\Manager\PropositionManager;
 use App\Manager\UserManager;
 use App\Service\ConnexionService;
 use App\Service\UserService;
 use App\Service\OrganisationService;
+use App\Service\PropositionService;
 use Exception;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -21,6 +24,7 @@ class Api extends BaseController
     protected UserService $userService;
     protected OrganisationService $orgService;
     protected ConnexionService $connexionService;
+    protected PropositionService $propositionService;
 
     protected function __construct() 
     {
@@ -31,6 +35,8 @@ class Api extends BaseController
         $this->userService = new UserService($userManager);
         $this->connexionService = new ConnexionService($this->userService, $userManager);
         $this->orgService = new OrganisationService($orgManager, $this->connexionService, $this->userService);
+        $propositionManager = new PropositionManager($bd, $this->userService);
+        $this->propositionService = new PropositionService($propositionManager);
     }
 
     protected function getParams($params) {

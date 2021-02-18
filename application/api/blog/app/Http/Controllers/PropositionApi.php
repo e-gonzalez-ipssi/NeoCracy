@@ -48,4 +48,18 @@ class PropositionApi extends Api
                 return;
         }
     }
+
+    /**
+     * @route get(api/proposition/{id})
+     * 
+     * @param int $id l'id de l'utilisateur que l'on recherche
+     * 
+     * @return  mixed les informations de l'utilisateur au format JSON
+     */
+    public function getProposition(int $id) {
+        $this->initialize([], self::NO_RIGHT, false);
+
+        $proposition = $this->propositionService->getPropositionById($id);
+        return $this->returnOutput($proposition->arrayify());
+    }
 }

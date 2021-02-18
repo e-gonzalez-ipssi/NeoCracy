@@ -3,9 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Proposition;
-use App\Entity\User;
 use App\Manager\PropositionManager;
-use App\Manager\UserManager;
 use Exception;
 
 class  PropositionService {

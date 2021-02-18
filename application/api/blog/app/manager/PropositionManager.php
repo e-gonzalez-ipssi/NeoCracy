@@ -1,6 +1,7 @@
 <?php 
 
 namespace App\Manager;
+
 use App\Entity\bd ;
 Use App\Entity\User;
 Use App\Entity\Proposition;
@@ -24,7 +25,7 @@ class PropositionManager extends Manager {
      * Cette fonction permet de récupéré une proposition exploitable en donnant son id
      */
     public function getPropositionById(int $id): Proposition {
-        $requete = "SELECT * FROM `proposition` WHERE 'id' = '$id'";
+        $requete = "SELECT * FROM `proposition` WHERE id = $id";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
@@ -52,7 +53,7 @@ class PropositionManager extends Manager {
      * Fonction permettant de récupéré l'autheur d'une proposition
      */
     private function getAuthor(int $propositionId): User {
-        $requete = "SELECT 'id_Utilisateur' FROM `acree` WHERE 'id_Proposition' = '$propositionId'";
+        $requete = "SELECT id_Utilisateur FROM `acree` WHERE id_Proposition = $propositionId";
         $this->setQuery($requete);
         $result = $this->querySelect();
 

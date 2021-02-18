@@ -1,11 +1,8 @@
-<php 
-
 <?php 
 
 namespace App\Manager;
 
 use App\Entity\Tag;
-use Exception;
 
 Trait TagManagerTrait {
 

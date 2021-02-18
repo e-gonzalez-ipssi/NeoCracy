@@ -96,7 +96,7 @@ class Proposition
             "author" => $this->author->arrayify(),
             "nom" => $this->nom,
             "description" => $this->description,
-            "tag" => $tags,
+            "tags" => $tags,
             "id" => $this->id,
             "date" => $date,
             "like" => $this->like,
