@@ -147,7 +147,7 @@ class  OrganisationService {
 
         // si l'utilisateur n'est pas dans l'organisation on le rajoute
         if (!$this->userIsInOrganisation($user, $org->getId())) {
-            $this->addUserFromOrganisation($org, $user);
+            throw new Exception("user-is-not-org-member");
         }
 
         $this->organisationManager->addAdminToOrganisation($org->getId(), $user->getId());
