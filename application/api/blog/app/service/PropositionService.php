@@ -18,4 +18,8 @@ class  PropositionService {
     public function getPropositionById(int $id): Proposition {
         return $this->propositionManager->getPropositionById($id);
     }
+
+    public function getPropositionTags(int $id): array {
+        return $this->propositionManager->getTags($id);
+    }
 }

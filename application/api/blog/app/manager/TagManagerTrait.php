@@ -9,8 +9,8 @@ Trait TagManagerTrait {
     /**
      * Permet de récupéré la liste de like ainsi le nombre de dislike
      */
-    private function getTags(int $propositionId): array {
-        $requete = "SELECT 'id_Tag' FROM `havetags` WHERE 'id_Proposition' = '$propositionId'";
+    public function getTags(int $propositionId): array {
+        $requete = "SELECT id_Tag FROM `havetags` WHERE id_Proposition = $propositionId";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
@@ -24,15 +24,13 @@ Trait TagManagerTrait {
         foreach($result as $tag) {
             $tagId = $tag["id_Tag"];
 
-            // faire une requete dans la table getTags
-
-            $requete = "SELECT 'id', 'nom' FROM `havetags` WHERE 'id_tag' = '$tagId'";
+            $requete = "SELECT * FROM `tags` WHERE id = $tagId";
             $this->setQuery($requete);
             $result = $this->querySelect();
 
             $newTag = new Tag(
-                $tag[0]["id"],
-                $tag[0]["nom"]
+                $result[0]["id"],
+                $result[0]["nom"]
             );
             array_push($tags, $newTag);
         }

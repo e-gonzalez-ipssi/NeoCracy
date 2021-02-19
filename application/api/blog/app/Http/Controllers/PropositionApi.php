@@ -62,4 +62,23 @@ class PropositionApi extends Api
         $proposition = $this->propositionService->getPropositionById($id);
         return $this->returnOutput($proposition->arrayify());
     }
+
+    /**
+     * @route get(api/proposition/{id}/tags)
+     * 
+     * @param int $id l'id de l'utilisateur que l'on recherche
+     * 
+     * @return  mixed les informations de l'utilisateur au format JSON
+     */
+    public function getPropositionTags(int $id) {
+        $this->initialize([], self::NO_RIGHT, false);
+
+        $tags = $this->propositionService->getPropositionTags($id);
+
+        $result = [];
+        foreach($tags as $tag) {
+            array_push($result, $tag->arrayify());
+        }
+        return $this->returnOutput($result);
+    }
 }

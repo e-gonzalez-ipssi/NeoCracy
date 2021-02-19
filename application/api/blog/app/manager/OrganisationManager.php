@@ -3,6 +3,7 @@
 namespace App\Manager;
 
 use App\Entity\Organisation;
+use App\Manager\TagManagerTrait;
 use Exception;
 
 class OrganisationManager extends Manager {
