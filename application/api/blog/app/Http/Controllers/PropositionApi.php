@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Entity\User;
-use App\Entity\Proposition;
 use Illuminate\Http\Request;
-use App\Entity\Organisation;
 use Exception;
-use Hamcrest\Type\IsInteger;
 
 class PropositionApi extends Api
 {
