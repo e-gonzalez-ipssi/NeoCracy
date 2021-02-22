@@ -7,7 +7,7 @@ use App\Entity\Tag;
 Trait TagManagerTrait {
 
     /**
-     * Permet de récupéré la liste de like ainsi le nombre de dislike
+     * Permet de récupéré la liste des tags d'une proposition
      */
     public function getTags(int $propositionId): array {
         $requete = "SELECT id_Tag FROM `havetags` WHERE id_Proposition = $propositionId";
