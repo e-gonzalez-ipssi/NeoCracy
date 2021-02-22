@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Entity\User;
 use App\Entity\Proposition;
 use Illuminate\Http\Request;
+use App\Entity\Organisation;
+use Exception;
+use Hamcrest\Type\IsInteger;
 
 class PropositionApi extends Api
 {
     private const NO_RIGHT = 1;
+    private const IS_ORG_MEMBER = 2;
 
     public function __construct()
     {
@@ -30,9 +34,14 @@ class PropositionApi extends Api
             $this->me = $this->connexionService->getCurrentUser();
         }
 
-        $this->checkAccess($right, $this->me);
-
         $paramsClean = $this->getParams($params);
+
+        if($paramsClean['organisation']) {
+            $this->checkAccess($right, $paramsClean['organisation']);
+        }
+        else {
+            $this->checkAccess($right);
+        }
 
         return $paramsClean;
     }
@@ -41,8 +50,13 @@ class PropositionApi extends Api
      * Permet de faire des différents check de permission
      * - créer un nouveau case par nouveau type de permission
      */
-    private function checkAccess(int $right, ?User $me) {
+    private function checkAccess(int $right, ?int $orgId = null) {
         switch ($right) {
+            case self::IS_ORG_MEMBER:
+                if (!$this->orgService->userIsOrgAdmin($this->me, $orgId)) {
+                    throw new Exception("error-permission-error");
+                }
+                break;
             case self::NO_RIGHT:
             default:
                 return;
@@ -53,8 +67,6 @@ class PropositionApi extends Api
      * @route get(api/proposition/{id})
      * 
      * @param int $id l'id de l'utilisateur que l'on recherche
-     * 
-     * @return  mixed les informations de l'utilisateur au format JSON
      */
     public function getProposition(int $id) {
         $this->initialize([], self::NO_RIGHT, false);
@@ -64,11 +76,29 @@ class PropositionApi extends Api
     }
 
     /**
+     * @route post(api/proposition/)
+     */
+    public function createProposition(Request $request) {
+        $params = $this->initialize(
+            [
+                ["organisation", REQUIRED, TYPE_INT, $request->input('organisation')],
+                ["title", REQUIRED, TYPE_STRING, $request->input('title')],
+                ["description", NOT_REQUIRED, TYPE_STRING, $request->input('description'), ""],
+                // ajouter les tags une fois que ca marchera pour le reste
+            ],
+            self::IS_ORG_MEMBER
+        );
+
+        $org = $this->orgService->getOrganisationById($params['organisation']);
+        $this->propositionService->createProposition($org, $this->me, $params['title'], $params['description']);
+
+        return $this->returnOutput($this->ack());
+    }
+
+    /**
      * @route get(api/proposition/{id}/tags)
      * 
      * @param int $id l'id de l'utilisateur que l'on recherche
-     * 
-     * @return  mixed les informations de l'utilisateur au format JSON
      */
     public function getPropositionTags(int $id) {
         $this->initialize([], self::NO_RIGHT, false);

@@ -55,7 +55,12 @@ class Api extends BaseController
             }
             
             if (is_null($param[3])) {
-                $result [$param[0]] = $param[4];
+                if (isset($param[4])) {
+                    $result [$param[0]] = $param[4];
+                }
+                else {
+                    $result [$param[0]] = null;
+                }
             }
             else {
                 //check sur les types
