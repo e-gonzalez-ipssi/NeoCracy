@@ -36,7 +36,7 @@ class PropositionApi extends Api
 
         $paramsClean = $this->getParams($params);
 
-        if($paramsClean['organisation']) {
+        if(array_key_exists('organisation', $paramsClean)) {
             $this->checkAccess($right, $paramsClean['organisation']);
         }
         else {
@@ -53,7 +53,7 @@ class PropositionApi extends Api
     private function checkAccess(int $right, ?int $orgId = null) {
         switch ($right) {
             case self::IS_ORG_MEMBER:
-                if (!$this->orgService->userIsOrgAdmin($this->me, $orgId)) {
+                if (!$this->orgService->userIsInOrganisation($this->me, $orgId)) {
                     throw new Exception("error-permission-error");
                 }
                 break;
@@ -84,14 +84,13 @@ class PropositionApi extends Api
                 ["organisation", REQUIRED, TYPE_INT, $request->input('organisation')],
                 ["title", REQUIRED, TYPE_STRING, $request->input('title')],
                 ["description", NOT_REQUIRED, TYPE_STRING, $request->input('description'), ""],
-                // ajouter les tags une fois que ca marchera pour le reste
+                ["tags", NOT_REQUIRED, TYPE_STRING, $request->input('tags'), ""]
             ],
             self::IS_ORG_MEMBER
         );
 
         $org = $this->orgService->getOrganisationById($params['organisation']);
-        $this->propositionService->createProposition($org, $this->me, $params['title'], $params['description']);
-
+        $result = $this->propositionService->createProposition($org, $this->me, $params['title'], $params['description'], $params['tags']);
         return $this->returnOutput($this->ack());
     }
 

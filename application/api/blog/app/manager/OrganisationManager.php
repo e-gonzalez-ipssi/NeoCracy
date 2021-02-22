@@ -8,6 +8,8 @@ use Exception;
 
 class OrganisationManager extends Manager {
 
+    use TagManagerTrait;
+
     /**
      * Cette fonction permet de setup la query pour créer un Organisation
      * 
