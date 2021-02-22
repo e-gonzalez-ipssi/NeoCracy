@@ -4,6 +4,7 @@ namespace App\Manager;
 
 use App\Entity\bd ;
 use App\Entity\Organisation ;
+use App\Entity\Proposition;
 use App\Entity\User;
 use Exception;
 
@@ -130,6 +131,24 @@ abstract class  Manager
                 $user["tel"],
                 $user["photo"],
                 $user["isAdmin"]
+            );
+            array_push($users, $newUser);
+        }
+        return $users;
+    }
+
+    protected function fromQueryToPropositions(array $result, User $author, array $tags, int $like, int $dislike): array {
+        $users = [];
+        foreach($result as $proposition) {
+            $newUser = new Proposition(
+                $proposition["id"],
+                $author,
+                $proposition["nom"],
+                $proposition["description"],
+                $tags,
+                $proposition["date"],
+                $like,
+                $dislike,
             );
             array_push($users, $newUser);
         }

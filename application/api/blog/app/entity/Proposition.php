@@ -2,24 +2,31 @@
 
 namespace App\Entity;
 
-use date;
+use DateTime;
+use App\Entity\Tag;
 
 class Proposition
 {
     protected int $id;
+    protected User $author;
     protected string $nom;
     protected string $description;
-    protected string $tag ;
-    protected string $date ;
+    protected array $tag = []; // ceci est une array contenant des tags
+    protected int $date;
+    protected int $like;
+    protected int $dislike;
 
 
-    public function __construct(int $id, string $nom, string $description, int $tag, date $date)
+    public function __construct(int $id, User $author, string $nom, string $description, array $tag, int $date, int $like, int $dislike)
     {
         $this->id = $id;
+        $this->author = $author;
         $this->nom = $nom;
         $this->description = $description;
         $this->tag = $tag;
         $this->date = $date;
+        $this->like = $like;
+        $this->dislike = $dislike;
     }
 
     public function getId():int{
@@ -28,6 +35,14 @@ class Proposition
 
     public function setId(int $id){
         $this->id = $id;
+    }
+
+    public function getAuthor(): User{
+        return $this->author;
+    }
+
+    public function setAuthor(User $user){
+        $this->author = $user;
     }
 
     public function getNom():string{
@@ -45,17 +60,47 @@ class Proposition
         return $this->description;
     }
 
-    public function setTag(int $tag){
+    public function setTag(array $tag){
         $this->tag = $tag;
     }
-    public function getTag():int{
+
+    public function getTag(): array{
         return $this->tag;
     }
 
-    public function setDate(date $date){
+    public function addTag(Tag $tag){
+        array_push($this->tag, $tag);
+    }
+
+    public function setDate(int $date){
         $this->date = $date;
     }
-    public function getDate():date{
+    public function getDate(): int{
         return $this->date;
+    }
+
+    public function arrayify(): array {
+        $date = new DateTime();
+        $date->format('U = Y-m-d H:i:s');
+        $date->setTimestamp($this->date);
+
+        $tags = [];
+
+        /** @var Tag $tag */
+        foreach($this->tag as $tag) {
+            array_push($tags, $tag->arrayify());
+        }
+
+        return [
+            "id" => $this->id,
+            "author" => $this->author->arrayify(),
+            "nom" => $this->nom,
+            "description" => $this->description,
+            "tags" => $tags,
+            "id" => $this->id,
+            "date" => $date,
+            "like" => $this->like,
+            "dislike" => $this->dislike,
+        ];
     }
 }
