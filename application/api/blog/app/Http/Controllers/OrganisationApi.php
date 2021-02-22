@@ -12,6 +12,7 @@ class OrganisationApi extends Api
     private const NO_RIGHT = 1;
     private const IS_ORG_MEMBER = 2;
     private const IS_NOT_ORG_MEMBER = 3;
+    private const IS_ORG_ADMIN = 4;
 
     private Organisation $org;
 
@@ -63,6 +64,11 @@ class OrganisationApi extends Api
                     throw new Exception("error-permission-error");
                 }
                 break;
+            case self::IS_ORG_ADMIN:
+                if (!$this->orgService->userIsOrgAdmin($this->me, $orgId)) {
+                    throw new Exception("error-permission-error");
+                }
+                break;
             case self::NO_RIGHT:
             default:
                 return;
@@ -110,6 +116,29 @@ class OrganisationApi extends Api
         return $this->returnOutput($users);
     }
 
+    
+    /**
+     * @route post(api/organisation/{orgId}/admins)
+     * 
+     * @param int $orgId l'id de l'organisation que l'on recherche
+     * 
+     * @return  mixed les informations de l'organisation au format JSON
+     */
+    public function addOrgAdmin(Request $request, int $orgId) {
+        $params = $this->initialize(
+            [                
+                ["mail", REQUIRED, TYPE_MAIL, $request->input('mail')],
+            ], 
+            self::IS_ORG_ADMIN, 
+            true, 
+            $orgId
+        );
+
+        $userToAdd = $this->userService->getUserByMail($params["mail"]);
+        $this->orgService->addAdminToOrganisation($this->org, $userToAdd);
+        return $this->returnOutput($this->ack());
+    }
+
     /**
      * @route post(api/organisation/{id}/members)
      * 
@@ -123,7 +152,7 @@ class OrganisationApi extends Api
         $this->orgService->addUserFromOrganisation($this->org, $this->me);
         return $this->returnOutput($this->ack());
     }
-    
+
     /**
      * @route post(api/organisation/)
      * 
