@@ -86,7 +86,7 @@ class PropositionApi extends Api
         );
 
         $org = $this->orgService->getOrganisationById($params['organisation']);
-        $result = $this->propositionService->createProposition($org, $this->me, $params['title'], $params['description'], $params['tags']);
+        $this->propositionService->createProposition($org, $this->me, $params['title'], $params['description'], $params['tags']);
         return $this->returnOutput($this->ack());
     }
 
