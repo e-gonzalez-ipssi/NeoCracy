@@ -35,4 +35,5 @@ $router->post('api/organisation/{orgId}/admins/','OrganisationApi@addOrgAdmin');
 $router->post('api/organisation', 'OrganisationApi@createOrg');
 
 $router->get('api/proposition/{id}', 'PropositionApi@getProposition');
+$router->post('api/proposition/', 'PropositionApi@createProposition');
 $router->get('api/proposition/{id}/tags','PropositionApi@getPropositionTags');

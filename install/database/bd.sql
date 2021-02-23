@@ -48,7 +48,9 @@ CREATE TABLE Proposition(
 
 CREATE TABLE Tags(
         id          Int  Auto_increment PRIMARY KEY NOT NULL ,
-        nom         Varchar (50) NOT NULL
+        nom         Varchar (50) NOT NULL,
+        id_Organisation          Int NOT NULL ,
+        FOREIGN KEY (id_Organisation) REFERENCES Organisation(id)
 );
 
 #------------------------------------------------------------
@@ -57,9 +59,9 @@ CREATE TABLE Tags(
 
 CREATE TABLE haveTags(
         id_Proposition Int NOT NULL ,
-        id_Tag Int NOT NULL,
+        id Int NOT NULL,
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id),
-    FOREIGN KEY (id_Tag) REFERENCES Tags(id)
+    FOREIGN KEY (id) REFERENCES Tags(id)
 );
 
 

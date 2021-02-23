@@ -12,12 +12,10 @@ use Exception;
 class  OrganisationService {
 
     private OrganisationManager $organisationManager;
-    private ConnexionService $connexionService;
     private UserService $userService;
 
-    public function __construct (OrganisationManager $organisationManager, ConnexionService $connexionService, UserService $userService) {
+    public function __construct (OrganisationManager $organisationManager, UserService $userService) {
         $this->organisationManager = $organisationManager;
-        $this->connexionService = $connexionService;
         $this->userService = $userService;
     }
 
@@ -161,5 +159,17 @@ class  OrganisationService {
             }
         }
         return false;
+    }
+
+    public function getOrganisationTags(Organisation $org): array {
+        return $this->organisationManager->getOrganisationTags($org->getId());
+    }
+
+    public function addTagToOrganisation(Organisation $org, string $tagName) {
+        $this->organisationManager->addTagToOrganisation($org->getid(), $tagName);
+    }
+
+    public function getTagId(Organisation $org, string $tagName) {
+        return $this->organisationManager->getTagId($org->getid(), $tagName);
     }
 }
