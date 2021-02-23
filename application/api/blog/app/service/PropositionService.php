@@ -33,19 +33,12 @@ class  PropositionService {
             array_push($orgTagsName, $orgTag->getName());
         }
 
-        // pour chaque tags vérifier si il éxiste deja dans la db pour l'organisation
-        $tagList = [];
         foreach ($tagsList as $tag) {
+            // pour chaque tags vérifier si il éxiste deja dans la db pour l'organisation
             if (!in_array($tag, $orgTagsName)) {
                 $this->organisationService->addTagToOrganisation($org, $tag);
             }
-            // récupéré l'id du tag via son nom et le mettre dans une array
             $tagId = $this->organisationService->getTagId($org, $tag);
-            array_push($tagList, $tagId);
-        }
-
-        // pour chaque tags, les ajouter séparément à la proposition
-        foreach ($tagList as $tagId) {
             $this->addTagToProposition($propositionId, $tagId);
         }
     }
