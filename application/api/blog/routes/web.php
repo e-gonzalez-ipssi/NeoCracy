@@ -15,10 +15,6 @@
 $router->get('/', function () {
     return 'Hello World';
 });
-$router->get('api/todo','TodosApi@list');
-$router->post('api/todo','TodosApi@saveTodo');
-$router->post('api/todo/done/{id}','TodosApi@markAsDone');
-$router->delete('api/todo/delete/{id}','TodosApi@deleteTodo');
 
 $router->get('api/user/{id}','UserApi@getUser');
 $router->get('api/me/','UserApi@getMe');
