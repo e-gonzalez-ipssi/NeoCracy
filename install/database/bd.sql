@@ -54,10 +54,10 @@ CREATE TABLE Tags(
 );
 
 #------------------------------------------------------------
-# Table: Tags
+# Table: PropositionTags
 #------------------------------------------------------------
 
-CREATE TABLE haveTags(
+CREATE TABLE PropositionTags (
         id_Proposition Int NOT NULL ,
         id Int NOT NULL,
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id),
@@ -67,10 +67,10 @@ CREATE TABLE haveTags(
 
 
 #------------------------------------------------------------
-# Table: Appartient
+# Table: OrgMember
 #------------------------------------------------------------
 
-CREATE TABLE Appartient (
+CREATE TABLE OrgMember (
         id_Organisation Int NOT NULL ,
         id_Utilisateur Int NOT NULL,
     FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
@@ -78,10 +78,10 @@ CREATE TABLE Appartient (
 ); 
 
 #------------------------------------------------------------
-# Table: estAdmin
+# Table: OrgAdmin
 #------------------------------------------------------------
 
-CREATE TABLE estAdmin (
+CREATE TABLE OrgAdmin (
         id_Organisation Int NOT NULL ,
         id_Utilisateur Int NOT NULL,
     FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
@@ -89,10 +89,10 @@ CREATE TABLE estAdmin (
 ); 
 
 #------------------------------------------------------------
-# Table: aCree
+# Table: UtilisateurProposition
 #------------------------------------------------------------
 
-CREATE TABLE aCree (
+CREATE TABLE UtilisateurProposition (
         id_Proposition Int NOT NULL ,
         id_Utilisateur Int NOT NULL,
     FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
@@ -100,10 +100,10 @@ CREATE TABLE aCree (
 ); 
 
 #------------------------------------------------------------
-# Table: peutAvoir
+# Table: OrgProposition
 #------------------------------------------------------------
 
-CREATE TABLE peutAvoir (
+CREATE TABLE OrgProposition (
         id_Proposition Int NOT NULL ,
         id_Organisation Int NOT NULL,
     FOREIGN KEY (id_Organisation) REFERENCES Organisation(id),
@@ -112,10 +112,10 @@ CREATE TABLE peutAvoir (
 
 
 #------------------------------------------------------------
-# Table: aLike
+# Table: PropositionLike
 #------------------------------------------------------------
 
-CREATE TABLE aLike (
+CREATE TABLE PropositionLike (
         id_Proposition Int NOT NULL ,
         id_Utilisateur Int NOT NULL ,
         vote           BOOLEAN NOT NULL,
@@ -125,10 +125,10 @@ CREATE TABLE aLike (
 
 
 #------------------------------------------------------------
-# Table: aCommente
+# Table: PropositionComment
 #------------------------------------------------------------
 
-CREATE TABLE aCommente (
+CREATE TABLE PropositionComment (
         id_Proposition Int NOT NULL ,
         id_Utilisateur Int NOT NULL ,
         commentaire    Varchar (50) NOT NULL ,
