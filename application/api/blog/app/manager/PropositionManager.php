@@ -68,7 +68,7 @@ class PropositionManager extends Manager {
         $this->setQuery($requete);
         $this->querySet();
 
-        $requete = "INSERT INTO `UserProposition` (`id_Proposition`, `id_Utilisateur`) VALUES ($propositionId, $authorId);";
+        $requete = "INSERT INTO `UtilisateurProposition` (`id_Proposition`, `id_Utilisateur`) VALUES ($propositionId, $authorId);";
         $this->setQuery($requete);
         $this->querySet();
 
@@ -79,7 +79,7 @@ class PropositionManager extends Manager {
      * Fonction permettant de récupéré l'autheur d'une proposition
      */
     private function getAuthor(int $propositionId): User {
-        $requete = "SELECT id_Utilisateur FROM `UserProposition` WHERE id_Proposition = $propositionId";
+        $requete = "SELECT id_Utilisateur FROM `UtilisateurProposition` WHERE id_Proposition = $propositionId";
         $this->setQuery($requete);
         $result = $this->querySelect();
 

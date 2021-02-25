@@ -4,10 +4,10 @@
 
 
 #------------------------------------------------------------
-# Table: User
+# Table: Utilisateur
 #------------------------------------------------------------
 
-CREATE TABLE User(
+CREATE TABLE Utilisateur(
         id     Int  Auto_increment PRIMARY KEY NOT NULL ,
         nom    Varchar (50) NOT NULL ,
         prenom Varchar (50) NOT NULL ,
@@ -73,7 +73,7 @@ CREATE TABLE PropositionTags (
 CREATE TABLE OrgMember (
         id_Organisation Int NOT NULL ,
         id_Utilisateur Int NOT NULL,
-    FOREIGN KEY (id_Utilisateur) REFERENCES User(id),
+    FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
     FOREIGN KEY (id_Organisation) REFERENCES Organisation(id)
 ); 
 
@@ -84,18 +84,18 @@ CREATE TABLE OrgMember (
 CREATE TABLE OrgAdmin (
         id_Organisation Int NOT NULL ,
         id_Utilisateur Int NOT NULL,
-    FOREIGN KEY (id_Utilisateur) REFERENCES User(id),
+    FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
     FOREIGN KEY (id_Organisation) REFERENCES Organisation(id)
 ); 
 
 #------------------------------------------------------------
-# Table: UserProposition
+# Table: UtilisateurProposition
 #------------------------------------------------------------
 
-CREATE TABLE UserProposition (
+CREATE TABLE UtilisateurProposition (
         id_Proposition Int NOT NULL ,
         id_Utilisateur Int NOT NULL,
-    FOREIGN KEY (id_Utilisateur) REFERENCES User(id),
+    FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
 ); 
 
@@ -119,7 +119,7 @@ CREATE TABLE PropositionLike (
         id_Proposition Int NOT NULL ,
         id_Utilisateur Int NOT NULL ,
         vote           BOOLEAN NOT NULL,
-    FOREIGN KEY (id_Utilisateur) REFERENCES User(id),
+    FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
 ); 
 
@@ -133,7 +133,7 @@ CREATE TABLE PropositionComment (
         id_Utilisateur Int NOT NULL ,
         commentaire    Varchar (50) NOT NULL ,
         date           Date NOT NULL,
-    FOREIGN KEY (id_Utilisateur) REFERENCES User(id),
+    FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
 ); 
 
