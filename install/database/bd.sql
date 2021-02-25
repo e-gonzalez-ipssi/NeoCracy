@@ -7,7 +7,7 @@
 # Table: User
 #------------------------------------------------------------
 
-CREATE TABLE Utilisateur(
+CREATE TABLE User(
         id     Int  Auto_increment PRIMARY KEY NOT NULL ,
         nom    Varchar (50) NOT NULL ,
         prenom Varchar (50) NOT NULL ,
@@ -57,7 +57,7 @@ CREATE TABLE Tags(
 # Table: PropositionTags
 #------------------------------------------------------------
 
-CREATE TABLE haveTags (
+CREATE TABLE PropositionTags (
         id_Proposition Int NOT NULL ,
         id Int NOT NULL,
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id),
@@ -70,10 +70,10 @@ CREATE TABLE haveTags (
 # Table: OrgMember
 #------------------------------------------------------------
 
-CREATE TABLE Appartient (
+CREATE TABLE OrgMember (
         id_Organisation Int NOT NULL ,
         id_Utilisateur Int NOT NULL,
-    FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
+    FOREIGN KEY (id_Utilisateur) REFERENCES User(id),
     FOREIGN KEY (id_Organisation) REFERENCES Organisation(id)
 ); 
 
@@ -81,10 +81,10 @@ CREATE TABLE Appartient (
 # Table: OrgAdmin
 #------------------------------------------------------------
 
-CREATE TABLE estAdmin (
+CREATE TABLE OrgAdmin (
         id_Organisation Int NOT NULL ,
         id_Utilisateur Int NOT NULL,
-    FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
+    FOREIGN KEY (id_Utilisateur) REFERENCES User(id),
     FOREIGN KEY (id_Organisation) REFERENCES Organisation(id)
 ); 
 
@@ -92,10 +92,10 @@ CREATE TABLE estAdmin (
 # Table: UserProposition
 #------------------------------------------------------------
 
-CREATE TABLE aCree (
+CREATE TABLE UserProposition (
         id_Proposition Int NOT NULL ,
         id_Utilisateur Int NOT NULL,
-    FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
+    FOREIGN KEY (id_Utilisateur) REFERENCES User(id),
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
 ); 
 
@@ -103,7 +103,7 @@ CREATE TABLE aCree (
 # Table: OrgProposition
 #------------------------------------------------------------
 
-CREATE TABLE peutAvoir (
+CREATE TABLE OrgProposition (
         id_Proposition Int NOT NULL ,
         id_Organisation Int NOT NULL,
     FOREIGN KEY (id_Organisation) REFERENCES Organisation(id),
@@ -115,11 +115,11 @@ CREATE TABLE peutAvoir (
 # Table: PropositionLike
 #------------------------------------------------------------
 
-CREATE TABLE aLike (
+CREATE TABLE PropositionLike (
         id_Proposition Int NOT NULL ,
         id_Utilisateur Int NOT NULL ,
         vote           BOOLEAN NOT NULL,
-    FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
+    FOREIGN KEY (id_Utilisateur) REFERENCES User(id),
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
 ); 
 
@@ -128,12 +128,12 @@ CREATE TABLE aLike (
 # Table: PropositionComment
 #------------------------------------------------------------
 
-CREATE TABLE aCommente (
+CREATE TABLE PropositionComment (
         id_Proposition Int NOT NULL ,
         id_Utilisateur Int NOT NULL ,
         commentaire    Varchar (50) NOT NULL ,
         date           Date NOT NULL,
-    FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
+    FOREIGN KEY (id_Utilisateur) REFERENCES User(id),
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
 ); 
 

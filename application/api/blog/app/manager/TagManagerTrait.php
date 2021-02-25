@@ -11,7 +11,7 @@ Trait TagManagerTrait {
      * Permet de récupéré la liste des tags d'une proposition
      */
     public function getTags(int $propositionId): array {
-        $requete = "SELECT id FROM `havetags` WHERE id_Proposition = $propositionId";
+        $requete = "SELECT id FROM `PropositionTags` WHERE id_Proposition = $propositionId";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
@@ -71,7 +71,7 @@ Trait TagManagerTrait {
     }
 
     public function addTagToProposition(int $propositionId, int $tagId) {
-        $requete = "INSERT INTO `havetags` (`id`, `id_Proposition`) VALUES ('$tagId', '$propositionId')";
+        $requete = "INSERT INTO `PropositionTags` (`id`, `id_Proposition`) VALUES ('$tagId', '$propositionId')";
         $this->setQuery($requete);
         $this->querySet();
     }

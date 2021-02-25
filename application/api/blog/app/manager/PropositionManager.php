@@ -64,11 +64,11 @@ class PropositionManager extends Manager {
 
         $propositionId = $result[0]['id'];
 
-        $requete = "INSERT INTO `peutavoir` (`id_Proposition`, `id_Organisation`) VALUES ($propositionId, $orgId)";
+        $requete = "INSERT INTO `OrgProposition` (`id_Proposition`, `id_Organisation`) VALUES ($propositionId, $orgId)";
         $this->setQuery($requete);
         $this->querySet();
 
-        $requete = "INSERT INTO `acree` (`id_Proposition`, `id_Utilisateur`) VALUES ($propositionId, $authorId);";
+        $requete = "INSERT INTO `UserProposition` (`id_Proposition`, `id_Utilisateur`) VALUES ($propositionId, $authorId);";
         $this->setQuery($requete);
         $this->querySet();
 
@@ -79,7 +79,7 @@ class PropositionManager extends Manager {
      * Fonction permettant de récupéré l'autheur d'une proposition
      */
     private function getAuthor(int $propositionId): User {
-        $requete = "SELECT id_Utilisateur FROM `acree` WHERE id_Proposition = $propositionId";
+        $requete = "SELECT id_Utilisateur FROM `UserProposition` WHERE id_Proposition = $propositionId";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
@@ -98,7 +98,7 @@ class PropositionManager extends Manager {
      * Permet de récupéré la liste de like ainsi le nombre de like
      */
     private function getLikeNumber(int $propositionId): int {
-        $requete = "SELECT * FROM `alike` WHERE vote = 1 and id_proposition = $propositionId";
+        $requete = "SELECT * FROM `PropositionLike` WHERE vote = 1 and id_proposition = $propositionId";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
@@ -109,7 +109,7 @@ class PropositionManager extends Manager {
      * Permet de récupéré la liste de like ainsi le nombre de dislike
      */
     private function getDislikeNumber(int $propositionId): int {
-        $requete = "SELECT * FROM `alike` WHERE vote = 0 and id_proposition = $propositionId";
+        $requete = "SELECT * FROM `PropositionLike` WHERE vote = 0 and id_proposition = $propositionId";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
