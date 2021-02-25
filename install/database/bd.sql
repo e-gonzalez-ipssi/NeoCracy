@@ -4,7 +4,7 @@
 
 
 #------------------------------------------------------------
-# Table: Utilisateur
+# Table: User
 #------------------------------------------------------------
 
 CREATE TABLE Utilisateur(
@@ -54,10 +54,10 @@ CREATE TABLE Tags(
 );
 
 #------------------------------------------------------------
-# Table: Tags
+# Table: PropositionTags
 #------------------------------------------------------------
 
-CREATE TABLE haveTags(
+CREATE TABLE haveTags (
         id_Proposition Int NOT NULL ,
         id Int NOT NULL,
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id),
@@ -67,7 +67,7 @@ CREATE TABLE haveTags(
 
 
 #------------------------------------------------------------
-# Table: Appartient
+# Table: OrgMember
 #------------------------------------------------------------
 
 CREATE TABLE Appartient (
@@ -78,7 +78,7 @@ CREATE TABLE Appartient (
 ); 
 
 #------------------------------------------------------------
-# Table: estAdmin
+# Table: OrgAdmin
 #------------------------------------------------------------
 
 CREATE TABLE estAdmin (
@@ -89,7 +89,7 @@ CREATE TABLE estAdmin (
 ); 
 
 #------------------------------------------------------------
-# Table: aCree
+# Table: UserProposition
 #------------------------------------------------------------
 
 CREATE TABLE aCree (
@@ -100,7 +100,7 @@ CREATE TABLE aCree (
 ); 
 
 #------------------------------------------------------------
-# Table: peutAvoir
+# Table: OrgProposition
 #------------------------------------------------------------
 
 CREATE TABLE peutAvoir (
@@ -112,7 +112,7 @@ CREATE TABLE peutAvoir (
 
 
 #------------------------------------------------------------
-# Table: aLike
+# Table: PropositionLike
 #------------------------------------------------------------
 
 CREATE TABLE aLike (
@@ -125,7 +125,7 @@ CREATE TABLE aLike (
 
 
 #------------------------------------------------------------
-# Table: aCommente
+# Table: PropositionComment
 #------------------------------------------------------------
 
 CREATE TABLE aCommente (
