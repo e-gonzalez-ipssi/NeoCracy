@@ -4,7 +4,7 @@ namespace App\Manager;
 
 use Exception;
 
-Trait TagManagerTrait {
+Trait LikeManagerTrait {
 
     /**
      * Permet de récupéré le nombre de like
@@ -48,5 +48,23 @@ Trait TagManagerTrait {
         $result = $this->querySelect();
 
         return $result;
+    }
+
+    public function likeProposition(int $propositionId, int $authorid): void {
+        $requete = "INSERT INTO `propositionlike` (`id_Proposition`, `id_Utilisateur`, `vote`) VALUES ('$propositionId', '$authorid', '1')";
+        $this->setQuery($requete);
+        $this->querySet();
+    }
+
+    public function dislikeProposition(int $propositionId, int $authorid): void {
+        $requete = "INSERT INTO `propositionlike` (`id_Proposition`, `id_Utilisateur`, `vote`) VALUES ('$propositionId', '$authorid', '0')";
+        $this->setQuery($requete);
+        $this->querySet();
+    }
+
+    public function removeLikeProposition(int $propositionId, int $authorid): void {
+        $requete = "DELETE FROM `propositionlike` WHERE `id_Proposition` = $propositionId and `id_Utilisateur` = $authorid";
+        $this->setQuery($requete);
+        $this->querySet();
     }
 }

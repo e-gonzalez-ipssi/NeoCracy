@@ -81,7 +81,7 @@ class  PropositionService {
         }
 
         if ($this->isAlreadyDisliked($proposition, $author)) {
-            $this->propositionManager->removeDislikeProposition($proposition->getId(), $author->getId());
+            $this->propositionManager->removeLikeProposition($proposition->getId(), $author->getId());
         }
         else {
             $this->propositionManager->dislikeProposition($proposition->getId(), $author->getId());

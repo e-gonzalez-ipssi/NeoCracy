@@ -11,6 +11,7 @@ use Exception;
 class PropositionManager extends Manager {
 
     use TagManagerTrait;
+    use LikeManagerTrait;
 
     protected UserService $userService;
 
