@@ -98,10 +98,10 @@ class PropositionApi extends Api
     public function getPropositionTags(int $id) {
         $this->initialize([], self::NO_RIGHT, false);
 
-        $tags = $this->propositionService->getPropositionTags($id);
+        $proposition = $this->propositionService->getPropositionById($id);
 
         $result = [];
-        foreach($tags as $tag) {
+        foreach($proposition->getTag() as $tag) {
             array_push($result, $tag->arrayify());
         }
         return $this->returnOutput($result);
