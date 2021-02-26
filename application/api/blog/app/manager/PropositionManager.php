@@ -93,26 +93,4 @@ class PropositionManager extends Manager {
 
         return $this->userService->getUserById($result[0]["id_Utilisateur"]);
     }
-
-    /**
-     * Permet de récupéré la liste de like ainsi le nombre de like
-     */
-    private function getLikeNumber(int $propositionId): int {
-        $requete = "SELECT * FROM `PropositionLike` WHERE vote = 1 and id_proposition = $propositionId";
-        $this->setQuery($requete);
-        $result = $this->querySelect();
-
-        return count($result);
-    }
-
-    /**
-     * Permet de récupéré la liste de like ainsi le nombre de dislike
-     */
-    private function getDislikeNumber(int $propositionId): int {
-        $requete = "SELECT * FROM `PropositionLike` WHERE vote = 0 and id_proposition = $propositionId";
-        $this->setQuery($requete);
-        $result = $this->querySelect();
-
-        return count($result);
-    }
 }
