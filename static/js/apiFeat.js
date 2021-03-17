@@ -35,7 +35,8 @@ function apiConnexion(){
 
     fetch(urlFull  ,{
         method:"post",
-        mode: "no-cors"        
+        mode: "no-cors"
+            
     })
     .then((data) => data.json())
     .then((json) => console.log(json))
