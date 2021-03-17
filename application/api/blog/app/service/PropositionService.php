@@ -50,4 +50,61 @@ class  PropositionService {
     public function addTagToProposition(int $propositionId, int $tagId) {
         $this->propositionManager->addTagToProposition($propositionId, $tagId);
     }
+
+
+    /**
+     * Permet de like une proposition
+     */
+    public function likeProposition(Proposition $proposition, User $author) {
+        if ($this->isAlreadyDisliked($proposition, $author)) {
+            throw new Exception('proposition-already-disliked');
+        }
+
+        if ($this->isAlreadyLiked($proposition, $author)) {
+            $this->propositionManager->removeLikeProposition($proposition->getId(), $author->getId());
+        }
+        else {
+            $this->propositionManager->likeProposition($proposition->getId(), $author->getId());
+        }
+    }
+
+    /**
+     * Permet de dislike une proposition
+     */
+    public function dislikeProposition(Proposition $proposition, User $author) {
+        if ($this->isAlreadyLiked($proposition, $author)) {
+            throw new Exception('proposition-already-liked');
+        }
+
+        if ($this->isAlreadyDisliked($proposition, $author)) {
+            $this->propositionManager->removeLikeProposition($proposition->getId(), $author->getId());
+        }
+        else {
+            $this->propositionManager->dislikeProposition($proposition->getId(), $author->getId());
+        }
+    }
+
+    public function isAlreadyLiked(Proposition $proposition, User $author): bool {
+        $likeList = $this->propositionManager->getLike($proposition->getId());
+
+        foreach($likeList as $like) {
+            if ($like["id_Utilisateur"] = $author->getId()) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    public function isAlreadyDisliked(Proposition $proposition, User $author): bool {
+        $dislikeList = $this->propositionManager->getDislike($proposition->getId());
+
+        foreach($dislikeList as $like) {
+            if ($like["id_Utilisateur"] = $author->getId()) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }

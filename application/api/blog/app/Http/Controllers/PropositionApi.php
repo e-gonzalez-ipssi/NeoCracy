@@ -106,4 +106,39 @@ class PropositionApi extends Api
         }
         return $this->returnOutput($result);
     }
+
+    /**
+     * @route post(api/proposition/{id}/like)
+     * 
+     * @param int $id l'id de l'utilisateur que l'on recherche
+     */
+    public function likeProposition(Request $request, int $id) {
+        $this->initialize(
+            [
+                ["organisation", REQUIRED, TYPE_INT, $request->input('organisation')],
+            ], self::IS_ORG_MEMBER, true);
+
+
+        $proposition = $this->propositionService->getPropositionById($id);
+        $this->propositionService->likeProposition($proposition, $this->me);
+
+        return $this->returnOutput($this->ack());
+    }
+    
+    /**
+     * @route post(api/proposition/{id}/dislike)
+     * 
+     * @param int $id l'id de l'utilisateur que l'on recherche
+     */
+    public function dislikeProposition(Request $request, int $id) {
+        $this->initialize(
+            [
+                ["organisation", REQUIRED, TYPE_INT, $request->input('organisation')],
+            ], self::IS_ORG_MEMBER, true);
+
+        $proposition = $this->propositionService->getPropositionById($id);
+        $this->propositionService->dislikeProposition($proposition, $this->me);
+
+        return $this->returnOutput($this->ack());
+    }
 }
