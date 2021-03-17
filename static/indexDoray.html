@@ -119,7 +119,7 @@
 
                     <label for="username">Email</label>
 
-                    <input type="text" id="username" class="block w-full p-2 border rounded border-gray-500" />
+                    <input type="text" id="mailCo" class="block w-full p-2 border rounded border-gray-500" />
 
                 </div>
 
@@ -127,13 +127,13 @@
 
                     <label for="password">Password</label>
 
-                    <input type="password" id="password" class="block w-full p-2 border rounded border-gray-500" />
+                    <input type="password" id="passCo" class="block w-full p-2 border rounded border-gray-500" />
 
                 </div>
 
                 <div class="mt-10">
 
-                    <input type="submit" value="Login"
+                    <input type="submit" value="Login" onclick="apiConnexion()"
                         class="py-3 bg-green hover:bg-grey rounded text-white text-center w-full" />
 
                 </div>
@@ -192,8 +192,6 @@
 
                 </div>
 
-                
-
                 <div class="mt-10">
 
                     <input type="submit" value="Register" id="register" onclick="apiInscription()"
@@ -208,7 +206,7 @@
     </div>
 
     <script src="js/index.js"></script>
-    <script src="js/inscription.js"></script>
+    <script src="js/apiFeat.js"></script>
     <!-- <script>
         if (localStorage.theme === 'dark' || (!'theme' in localStorage && window.matchMedia(
                 '(prefers-color-scheme: dark)').matches)) {
