@@ -99,12 +99,6 @@
 
         </div>
 
-        <div class="z-10 right w-2/5 xl:w-2/5 block justify-end md:w-full block justify-center sm:w-full block justify-center xs:w-full block justify-center">
-
-            <img class="placeholder rounded-xl shadow-lg" src="img/DORAYLEGAY.png" alt="PLACEHOLDER">
-
-        </div>
-
     </section>
 
     <div class="modal" id="connect">
@@ -165,7 +159,7 @@
 
             </div>
           
-            <form action="#" id="registerForm">
+            <form action="" method= "POST" id="registerForm">
                 <div class="mt-5">
 
                     <label for="lName">Last Name</label>
@@ -194,9 +188,11 @@
 
                     <label for="password">Password</label>
 
-                    <input type="password" id="password" class="block w-full p-2 border rounded border-gray-500" />
+                    <input type="password" id="pass" class="block w-full p-2 border rounded border-gray-500" />
 
                 </div>
+
+                
 
                 <div class="mt-10">
 
@@ -220,7 +216,7 @@
         } else if (localStorage.theme === 'dark') {
             document.querySelector('html').classList.add('dark');
         }
-    </script> -->
+    </script> 
 
 </body>
 
