@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <title>Fil d'actualité | Neocracy</title>
+</head>
+
+<body>
+
+    <div class="header">
+
+        <div class="leftHead flex justify-end w-1/3">
+
+            <img class="logo ml-12" src="../img/logo.svg" alt="logo">
+
+        </div>
+
+        <div class="midHead flex justify-center w-1/3">
+
+            <li-icon aria-hidden="true" type="search-icon"
+                class="loupe search-global-typeahead__collapsed-search-button-icon" size="medium"><svg
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24"
+                    fill="currentColor" class="mercado-match" width="24" height="24" focusable="false">
+                    <path id="iconloupe"
+                        d="M21.41 18.59l-5.27-5.28A6.83 6.83 0 0017 10a7 7 0 10-7 7 6.83 6.83 0 003.31-.86l5.28 5.27a2 2 0 002.82-2.82zM5 10a5 5 0 115 5 5 5 0 01-5-5z">
+                    </path>
+                </svg>
+            </li-icon>
+
+            <input class="search rounded-full" type="text" placeholder="Recherche">
+
+        </div>
+
+        <div class="rightHead flex justify-center w-1/3">
+        
+            <img class="pdp rounded-full mt-1" src="https://via.placeholder.com/50">
+
+        </div>
+
+    </div>
+
+    <main class="main m-auto ">
+
+        <section class="share-box w-full rounded-xl bg-white">
+
+            <div class="flex justify-around py-1 px-10">
+
+                <img class="profil rounded-full mt-4" src="https://via.placeholder.com/50">
+
+                <button type="button" id="shareBox" class="create-post w-4/5 rounded-xl text-left"
+                    onclick="shareBox()">Rédiger un post</button>
+
+            </div>
+
+        </section>
+
+        
+
+
+    </main>
+
+    <div class="modal rounded-xl" id="createBox">
+
+        <div class="max-w-sm mx-auto my-24 bg-white p-3 rounded shadow-xl">
+
+            <div class="text-center flex justify-center mb-8">
+
+                <h1 class="write font-bold ml-20 text-center text-black text-2xl font-bold">Rédiger un post</h1>
+                
+                <span class="close ml-20 text-2xl font-bold">&times;</span>
+
+            </div>
+
+            <div class="hr"></div>
+
+            <textarea class="post" placeholder="Que voulez vous dire ?"></textarea>
+            
+            <button type="button" class="sendIt w-full rounded-full text-white">Publier</button>
+
+        </div>
+
+    </div>
+
+</body>
+
+<script src="../js/home.js"></script>
+
+</html>
