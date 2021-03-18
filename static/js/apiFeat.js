@@ -28,7 +28,7 @@ function apiConnexion(){
     let email = document.getElementById("mailCo").value;
     let password = document.getElementById("passCo").value;
 
-    var url = 'http://localhost:8000/api/connect/?';
+    var url = 'http://localhost:8000/api/connect?';
     var params = 'mail=' + email + '&'+ 'password=' + password ;
     var urlFull = url + params ;
     // var urltest = "http://localhost:8000/api/register?nom=Gonzalez&prenom=Esteban&mail=test@test.com&password=0123456Az&confirmPassword=0123456Az";
@@ -38,9 +38,17 @@ function apiConnexion(){
         mode: "no-cors"
             
     })
-    .then((data) => data.json())
-    .then((json) => console.log(json))
+    .then((data) => {
+        data.json();
+        
+    })
+    .then((json) => {
+        console.log(json)
+        location.replace("../../static/fileActu.html");
+    })
     .catch((err) => {
-        console.log(err)
+        console.log(err);
     });
+
+  
 }
