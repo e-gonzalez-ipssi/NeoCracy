@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../output.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
@@ -14,11 +15,32 @@
 
 <body>
 
-    <div class="header">
+    <div class="wrap fixed z-50">
+        <div id="wrap">
+            <header class="head z-50">
+                <nav class="nav tracking-wide">
+                    <a href="#wrap" id="open">
+                        <svg class="burger float-right" xmlns="http://www.w3.org/2000/svg" width="34px" height="27px"
+                            viewBox="0 0 34 27" enable-background="new 0 0 34 27" xml:space="preserve">
+                            <rect fill="#222831" width="34" height="4" />
+                            <rect y="11" fill="#222831" width="34" height="4" />
+                            <rect y="23" fill="#222831" width="34" height="4" />
+                        </svg>
+                    </a>
+                    <a href="#" id="close">&times;</a>
+                    <h1 class="navTitle top-0"><a href="#">Neocracy</a></h1>
+                    <a href="#">Paramètres</a>
+                    <a href="#">Profil</a>
+                </nav>
+            </header>
+        </div>
+    </div>
+
+    <div class="header z-40">
 
         <div class="leftHead flex justify-end w-1/3">
 
-            <img class="logo ml-12" src="../img/logo.svg" alt="logo">
+            <a href="home.html" class="a-logo"><img class="logo ml-12" src="../img/logo.svg" alt="logo"></a>
 
         </div>
 
@@ -34,12 +56,12 @@
                 </svg>
             </li-icon>
 
-            <input class="search rounded-full" type="text" placeholder="Recherche">
+            <input class="search rounded-full tracking-wide" type="text" placeholder="Recherche">
 
         </div>
 
         <div class="rightHead flex justify-center w-1/3">
-        
+
             <img class="pdp rounded-full mt-1" src="https://via.placeholder.com/50">
 
         </div>
@@ -48,32 +70,120 @@
 
     <main class="main m-auto ">
 
-        <section class="share-box w-full rounded-xl bg-white">
+        <section class="share-box w-full rounded-xl bg-white mb-4">
 
             <div class="flex justify-around py-1 px-10">
 
                 <img class="profil rounded-full mt-4" src="https://via.placeholder.com/50">
 
-                <button type="button" id="shareBox" class="create-post w-4/5 rounded-xl text-left"
-                    onclick="shareBox()">Rédiger un post</button>
+                <button type="button" id="shareBox" class="create-post w-4/5 rounded-xl text-left tracking-wide"
+                    onclick="shareBox()">Rédiger un post ...</button>
 
             </div>
 
         </section>
 
-        
+        <section class="post-box row w-full rounded-xl bg-white mb-4">
 
+            <div class="profil-post w-full flex py-1 px-10">
+
+                <div class="post-left w-B">
+
+                    <a href="#"><img class="profil w-4/5 rounded-full mt-4" src="https://via.placeholder.com/50"></a>
+
+                </div>
+
+                <div class="post-mid flex justify-start w-full mt-4">
+
+                    <div class="info-post w-full px-5">
+
+                        <div class="row">
+
+                            <div class="row">
+
+                                <h3 class="who-post tracking-wide text-md">
+
+                                    <a href="#">Louis Poulin</a>
+
+                            </div>
+
+                            <small class="opacity-75 text-xs">de</small>
+
+                            <a href="#">Neocracy</a>
+
+                        </h3>
+
+                        </div>
+
+                        <small class="opacity-75 text-xs">3 jours</small>
+
+                    </div>
+
+                </div>
+
+                <div class="post-right w-full flex justify-end mt-4">
+
+                    <button class="post-share flex justify-start h-6 rounded-full" onclick="myFunction()" class="dropbtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24"
+                        fill="currentColor" class="mercado-match" width="24" height="24" focusable="false">
+                        <path
+                            d="M14 12a2 2 0 11-2-2 2 2 0 012 2zM4 10a2 2 0 102 2 2 2 0 00-2-2zm16 0a2 2 0 102 2 2 2 0 00-2-2z">
+                        </path>
+                    </svg>
+                </button>
+                <div class="dropdown">
+                <div id="myDropdown" class="dropdown-content rounded-xl">
+                    <a href="#" class=" rounded-xl m-2">Partager</a>
+                    <a href="#" class=" rounded-xl m-2">Signaler</a>
+                  </div>
+                </div>
+            
+                </div>
+
+                </div>
+
+            <div class="post-content tracking-wide">
+
+                <h2 class="post-title w-full px-6 text-2xl mb-4 text-center">Titre de l'article</h2>
+
+                <p class="post-para w-full px-6 m-auto">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum
+                    eveniet
+                    fugit alias
+                    possimus quam libero, quasi sed praesentium nisi in odit sunt voluptas explicabo molestiae porro
+                    nostrum, quos quia pariatur impedit natus! Sapiente molestiae praesentium tempora at velit
+                    recusandae
+                    provident sequi voluptates, non quia enim veritatis fuga, repellat explicabo voluptatum. 
+                    <br>
+                    <b>#dev #onestlàpoto</b>
+                </p>
+
+                <img class="post-img mt-4 w-full m-auto" src="https://via.placeholder.com/800x400">
+
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="post-button flex justify-around mb-14">
+
+                <button class="post-like w-full rounded-xl h-10 mb-3">J'aime</button>
+
+                <button class="post-dislike w-full rounded-xl h-10 mb-3">Je n'aime pas</button>
+
+                <button class="post-comment w-full rounded-xl h-10 mb-3">Commenter</button>
+
+            </div>
+
+        </section>
 
     </main>
 
-    <div class="modal rounded-xl" id="createBox">
+    <div class="modal rounded-xl tracking-wide" id="createBox">
 
         <div class="max-w-sm mx-auto my-24 bg-white p-3 rounded shadow-xl">
 
             <div class="text-center flex justify-center mb-8">
 
                 <h1 class="write font-bold ml-20 text-center text-black text-2xl font-bold">Rédiger un post</h1>
-                
+
                 <span class="close ml-20 text-2xl font-bold">&times;</span>
 
             </div>
@@ -81,12 +191,14 @@
             <div class="hr"></div>
 
             <textarea class="post" placeholder="Que voulez vous dire ?"></textarea>
-            
+
             <button type="button" class="sendIt w-full rounded-full text-white">Publier</button>
 
         </div>
 
     </div>
+
+    <div class="scroll"></div>
 
 </body>
 
