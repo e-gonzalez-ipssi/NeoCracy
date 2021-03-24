@@ -47,6 +47,10 @@ class  PropositionService {
         return $this->propositionManager->getPropositionById($id);
     }
 
+    public function getPropositionByOrgId(int $orgId): array {
+        return $this->propositionManager->getPropositionByOrgId($orgId);
+    }
+
     public function addTagToProposition(int $propositionId, int $tagId) {
         $this->propositionManager->addTagToProposition($propositionId, $tagId);
     }

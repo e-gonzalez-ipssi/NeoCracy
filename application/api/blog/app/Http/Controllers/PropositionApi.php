@@ -141,4 +141,22 @@ class PropositionApi extends Api
 
         return $this->returnOutput($this->ack());
     }
+
+    /**
+     * @route get(api/proposition/organisation/{orgId})
+     * 
+     * @param int $id l'id de l'utilisateur que l'on recherche
+     */
+    public function getPropositionByOrgId(int $orgId) {
+        $this->initialize([], self::NO_RIGHT, false);
+
+        $propositions = $this->propositionService->getPropositionByOrgId($orgId);
+
+        $result = [];
+        foreach($propositions as $proposition) {
+            array_push($result, $proposition->arrayify());
+        }
+
+        return $this->returnOutput($result);
+    }
 }
