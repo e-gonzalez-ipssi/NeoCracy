@@ -21,7 +21,9 @@ class  ConnexionService {
         
     }
 
-    // Petite fonction pour  échapper les caractères dangereux potentiellement envoyées et effectuer un premier nettoyage des données du formulaire
+    /**
+    * Petite fonction pour  échapper les caractères dangereux potentiellement envoyées et effectuer un premier nettoyage des données du formulaire
+    */
     private function valid_donnees($donnees){
         $donnees = trim($donnees);
         $donnees = stripslashes($donnees);
@@ -111,6 +113,9 @@ class  ConnexionService {
         }
     }
 
+    /**
+     * Permet d'obtenir un token randomiser
+     */
     private function rand_string($length):string{ 
         $str = "";
         $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz@#$&*";  

@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Entity\Organisation;
 use App\Entity\User;
 use App\Manager\OrganisationManager;
-use App\Service\ConnexionService;
 use App\Service\UserService;
 use Exception;
 
@@ -19,6 +18,14 @@ class  OrganisationService {
         $this->userService = $userService;
     }
 
+    /**
+     * Fonction permettant de créer une organisation
+     * 
+     * @param User $user L'utilisateur qui créer l'organisation
+     * @param string $nom Le nom de l'organisation a créer
+     * @param string $descritpion Une description pour l'organisation
+     * @param string $lienSite Un lien vers le site de l'organisation
+     */
     public function createOrganisation (
         User $user,
         string $nom, 
@@ -41,10 +48,24 @@ class  OrganisationService {
         }
     }
 
+    /**
+     * Permet de récupéré un object Organisation via son id
+     * 
+     * @param int $id L'id de l'organisation a rechercher
+     * 
+     * @return Organisation L'organisation recherchée
+     */
     public function getOrganisationById (int $id): Organisation {
         return $this->organisationManager->getOrganisationById($id);
     }
 
+    /**
+     * Permet de récupéré un object Organisation via son nom
+     * 
+     * @param string $nom Le nom de l'organisation a rechercher
+     * 
+     * @return Organisation L'organisation recherchée
+     */
     public function getOrganisationByName (string $nom): Organisation {
         return $this->organisationManager->getOrganisationByName($nom);
     }
@@ -138,6 +159,12 @@ class  OrganisationService {
         return $adminsList;
     }
 
+    /**
+     * Permet d'ajouter un admin a une organisation
+     * 
+     * @param Organisation $org L'organisation dans laquelle on souhaite ajouter un admin
+     * @param User $user L'utilisateur à ajouter en temps qu'admin
+     */
     public function addAdminToOrganisation(Organisation $org, User $user){
         if ($this->userIsOrgAdmin($user, $org->getId())) {
             throw new Exception("user-is-already-admin");
@@ -150,6 +177,16 @@ class  OrganisationService {
         $this->organisationManager->addAdminToOrganisation($org->getId(), $user->getId());
     }
 
+    /**
+     * Vérifie si un utilisateur est admin de l'organisation
+     * 
+     * @param User $user L'utilisateur d'on on souhaite vérifier les droits
+     * @param int $orgId L'id de l'organisation
+     * 
+     * @return bool True = est admin / False = n'est pas admin
+     * 
+     * TODO ne plus utiliser $orgId mais $org
+     */
     public function userIsOrgAdmin(User $user, int $orgId): bool {
         $admins = $this->organisationManager->getAdminsFromOrganisation($orgId);
 
@@ -161,15 +198,36 @@ class  OrganisationService {
         return false;
     }
 
+    /**
+     * Permet de récupéré la listes des tags déjà éxistant d'une organisation
+     * 
+     * @param Organisation $org L'organisation d'on on souhaite récupéré les tags
+     * 
+     * @return array La liste des tags d'une organisation
+     */
     public function getOrganisationTags(Organisation $org): array {
         return $this->organisationManager->getOrganisationTags($org->getId());
     }
 
+    /**
+     * Permet d'ajouter un tag à la listes des tags déjà éxistant d'une organisation
+     * 
+     * @param Organisation $org L'organisation ou on veux ajouter les tags
+     * @param string $tagName Le nom du tag a ajouter
+     */
     public function addTagToOrganisation(Organisation $org, string $tagName) {
         $this->organisationManager->addTagToOrganisation($org->getid(), $tagName);
     }
 
-    public function getTagId(Organisation $org, string $tagName) {
+    /**
+     * Permet de récupéré l'id d'un tag d'une organisation via son nom
+     * 
+     * @param Organisation $org L'organisation ou on veux chercher le tag
+     * @param string $tagName Le nom du tag a récupérer
+     * 
+     * @return int L'id du tag
+     */
+    public function getTagId(Organisation $org, string $tagName): int {
         return $this->organisationManager->getTagId($org->getid(), $tagName);
     }
 }
