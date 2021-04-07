@@ -20,4 +20,3 @@ function myFunction() {
   var toggle = document.getElementById("myDropdown");
   toggle.classList.toggle("show");
 }
-
