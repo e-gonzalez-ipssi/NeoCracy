@@ -44,7 +44,7 @@ function apiConnexion(){
     })
     .then((json) => {
         console.log(json)
-        location.replace("../../static/fileActu.html");
+        location.replace("../../static/vue/home.html");
     })
     .catch((err) => {
         console.log(err);

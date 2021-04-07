@@ -14,13 +14,12 @@ body {
     width: 100%;
     background: #fff;
     height: 80px;
-    border-bottom: 1px solid rgb(230, 230, 230);
     display: flex;
     justify-content: center;
-    -moz-box-shadow: 0px 0px 5px 1px #cfcfcf;
-    -webkit-box-shadow: 0px 0px 5px 1px #cfcfcf;
-    -o-box-shadow: 0px 0px 5px 1px #cfcfcf;
-    box-shadow: 0px 0px 5px 1px #cfcfcf;
+    -moz-box-shadow: 0px 0px 5px 0px #cfcfcf;
+    -webkit-box-shadow: 0px 0px 5px 0px #cfcfcf;
+    -o-box-shadow: 0px 0px 5px 0px #cfcfcf;
+    box-shadow: 0px 0px 5px 0px #cfcfcf;
     filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=NaN, Strength=5);
 }
 
@@ -67,7 +66,6 @@ body {
 }
 
 .share-box {
-
     padding: 5px 20px 20px 20px;
     -moz-box-shadow: 0px 1px 2px 1px #cfcfcf;
     -webkit-box-shadow: 0px 1px 2px 1px #cfcfcf;
@@ -76,25 +74,28 @@ body {
     filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=180, Strength=2);
 }
 
-.create-post {
-    border: 1px solid #e6e6e6;
+.post-create {
     padding: 5px 20px 5px 20px;
     height: 50px;
     width: 300px;
     margin-top: 15px;
     background: #fff;
+    -moz-box-shadow: 0px 1px 2px 1px #cfcfcf;
+    -webkit-box-shadow: 0px 1px 2px 1px #cfcfcf;
+    -o-box-shadow: 0px 1px 2px 1px #cfcfcf;
+    box-shadow: 0px 1px 2px 1px #cfcfcf;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=180, Strength=2);
 }
-
 
 .modal {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 100px;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
+    top: 50px;
     overflow: auto;
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
@@ -103,9 +104,13 @@ body {
 .modal-content {
     background-color: #fff;
     margin: auto;
-    padding: 10px;
     border: 1px solid #888;
     width: 100%;
+}
+
+.modal-post {
+    width: 500px;
+    background: #fff;
 }
 
 .close {
@@ -139,28 +144,51 @@ body {
 
 .hr {
     background: #bebebe;
-    width: 80%;
+    width: 95%;
     height: 1px;
     margin: auto;
     margin-bottom: 10px;
     margin-top: 10px;
 }
 
-.post {
-    height: 400px;
-    max-height: 400px;
-    width: 100%;
+.create-title,
+.create-file,
+.create-url,
+.create-tags {
+    border: 1px solid rgb(230, 230, 230);
+    padding: 5px 20px 5px 20px;
+    height: 45px;
+    background: #eeeeee;
+    letter-spacing: 0.025em;
 }
 
-.post:focus,
+.create-text {
+    height: 200px;
+    max-height: 200px;
+    width: 100%;
+    padding: 5px 20px 5px 20px;
+    background: #eeeeee;
+    letter-spacing: 0.025em;
+}
+
+.create-file:focus,
+.create-url:focus,
+.create-text:focus,
+.create-title:focus,
+.create-tags:focus,
 .search:focus,
-.create-post:focus {
+.sendIt:focus,
+.post-create:focus {
     outline: none;
 }
 
-.post:hover,
+.create-file:hover,
+.create-url:hover,
+.create-text:hover,
+.create-title:hover,
+.create-tags:hover,
 .search:hover,
-.create-post:hover {
+.post-create:hover {
     outline: none;
 }
 
@@ -168,7 +196,11 @@ body {
     background: #53ffa9;
     padding: 5px 20px 5px 20px;
     font-family: 'Comfortaa', cursive;
-    letter-spacing: 0.025em;
+}
+
+.sendIt:hover{
+    background: #222831;
+    color: #fff;
 }
 
 #wrap {
@@ -189,15 +221,6 @@ body {
     transform: translate3d(0, 0, 0);
 }
 
-#open,
-#close {
-    height: 50px;
-    text-align: right;
-    display: block;
-    margin-right: -15px;
-    color: #222831;
-}
-
 #wrap:target #open,
 #wrap:not(:target) #close {
     display: none;
@@ -205,6 +228,15 @@ body {
 
 #wrap:target #open {
     display: none;
+}
+
+#open,
+#close {
+    height: 50px;
+    text-align: right;
+    display: block;
+    margin-right: -15px;
+    color: #222831;
 }
 
 .nav a {
@@ -220,6 +252,19 @@ body {
     padding: 0 20px;
     display: inline-block;
     vertical-align: top;
+}
+
+.head2 {
+    background: #fff;
+    width: 360px;
+    padding: 0 20px;
+    display: inline-block;
+    vertical-align: top;
+    -moz-box-shadow: 0px 0px 5px 0px #cfcfcf;
+    -webkit-box-shadow: 0px 0px 5px 0px #cfcfcf;
+    -o-box-shadow: 0px 0px 5px 0px #cfcfcf;
+    box-shadow: 0px 0px 5px 0px #cfcfcf;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=NaN, Strength=5);
 }
 
 .nav {
@@ -283,14 +328,14 @@ body {
 
 .dropdown {
     display: inline-block;
-    
+
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
     float: right;
-    margin-left:20px;
+    margin-left: 20px;
     background: #fff;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
