@@ -36,3 +36,5 @@ $router->get('api/proposition/{id}/tags','PropositionApi@getPropositionTags');
 $router->post('api/proposition/{id}/like','PropositionApi@likeProposition');
 $router->post('api/proposition/{id}/dislike','PropositionApi@dislikeProposition');
 $router->get('api/proposition/{id}/vote','PropositionApi@getVote');
+$router->get('api/proposition/organisation/{orgId}', 'PropositionApi@getPropositionByOrgId');
+
