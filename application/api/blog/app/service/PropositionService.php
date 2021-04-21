@@ -94,7 +94,7 @@ class  PropositionService {
         $likeList = $this->propositionManager->getLike($proposition->getId());
 
         foreach($likeList as $like) {
-            if ($like["id_Utilisateur"] = $author->getId()) {
+            if ($like["id_Utilisateur"] == $author->getId()) {
                 return true;
             }
         }
@@ -105,8 +105,8 @@ class  PropositionService {
     public function isAlreadyDisliked(Proposition $proposition, User $author): bool {
         $dislikeList = $this->propositionManager->getDislike($proposition->getId());
 
-        foreach($dislikeList as $like) {
-            if ($like["id_Utilisateur"] = $author->getId()) {
+        foreach($dislikeList as $dislike) {
+            if ($dislike["id_Utilisateur"] == $author->getId()) {
                 return true;
             }
         }
