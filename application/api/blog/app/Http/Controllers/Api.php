@@ -36,7 +36,7 @@ class Api extends BaseController
         $this->connexionService = new ConnexionService($this->userService, $userManager);
         $this->orgService = new OrganisationService($orgManager, $this->userService);
         $propositionManager = new PropositionManager($bd, $this->userService);
-        $this->propositionService = new PropositionService($propositionManager, $this->orgService);
+        $this->propositionService = new PropositionService($propositionManager, $this->orgService, $this->userService);
     }
 
     protected function getParams($params) {

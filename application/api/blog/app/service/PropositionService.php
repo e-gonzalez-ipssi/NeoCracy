@@ -12,11 +12,13 @@ class  PropositionService {
 
     private PropositionManager $propositionManager;
     private OrganisationService $organisationService;
+    private UserService $userService;
 
-    public function __construct(PropositionManager $propositionManager, OrganisationService $organisationService)
+    public function __construct(PropositionManager $propositionManager, OrganisationService $organisationService,  UserService $userService)
     {
         $this->propositionManager = $propositionManager;
         $this->organisationService = $organisationService;
+        $this->userService = $userService;
     }
 
     public function createProposition(Organisation $org, User $author, string $title, string $description, string $tags) {
@@ -116,11 +118,12 @@ class  PropositionService {
      * Permet de récupéré la liste des utilisateurs ayant like une proposition
      */
     public function getLikers(Proposition $proposition): array {
-        $likers = $this->propositionManager->getLikers($proposition->getId());
+        $likers = $this->propositionManager->getLike($proposition->getId());
     
         $return = [];
         foreach($likers as $liker) {
-            array_push($return, $liker->arrayify());
+            $like = $this->userService->getUserById($liker["id_Utilisateur"]);
+            array_push($return, $like->arrayify());
         }
 
         return $return;
@@ -130,11 +133,12 @@ class  PropositionService {
      * Permet de récupéré la liste des utilisateurs ayant dislike une proposition
      */
     public function getDislikers(Proposition $proposition): array {
-        $dislikers = $this->propositionManager->getDislikers($proposition->getId());
+        $dislikers = $this->propositionManager->getDislike($proposition->getId());
 
         $return = [];
         foreach($dislikers as $disliker) {
-            array_push($return, $disliker->arrayify());
+            $dislike = $this->userService->getUserById($disliker["id_Utilisateur"]);
+            array_push($return, $dislike->arrayify());
         }
 
         return $return;
