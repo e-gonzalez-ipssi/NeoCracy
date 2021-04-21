@@ -141,4 +141,35 @@ class PropositionApi extends Api
 
         return $this->returnOutput($this->ack());
     }
+
+    /**
+     * @route get(api/proposition/{id}/vote)
+     * 
+     * @param int $id l'id de l'utilisateur que l'on recherche
+     */
+    public function getVote(Request $request, int $id) {
+        $this->initialize(
+            [
+            ],  self::NO_RIGHT, true);
+
+        $proposition = $this->propositionService->getPropositionById($id);
+        $like = $proposition->getLike();
+        $dislike = $proposition->getDislike();
+
+        $likers = $this->propositionService->getLikers($proposition);
+        $dislikers = $this->propositionService->getDislikers($proposition);
+
+        $return = [];
+
+        $return["like"] = [
+            "number" => $like,
+            "users" => $likers,
+        ];
+        $return["dislike"] = [
+            "number" => $dislike,
+            "users" => $dislikers,
+        ];
+
+        return $this->returnOutput($return);
+    }
 }

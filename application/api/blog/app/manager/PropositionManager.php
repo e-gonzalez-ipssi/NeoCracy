@@ -94,4 +94,48 @@ class PropositionManager extends Manager {
 
         return $this->userService->getUserById($result[0]["id_Utilisateur"]);
     }
+
+    /**
+     * Fonction permettant de récupéré la liste des likers a une proposition
+     */
+    public function getLikers(int $propositionId): array {
+        $requete = "SELECT id_Utilisateur FROM `propositionlike` WHERE id_Proposition = $propositionId and vote = 1";
+        $this->setQuery($requete);
+        $result = $this->querySelect();
+
+        if(count($result) < 1) {
+            return [];
+        }
+
+        $userList = [];
+    
+        foreach($result as $userId) {
+            $user = $this->userService->getUserById($userId["id_Utilisateur"]);
+            array_push($userList, $user);
+        }
+
+        return $userList;
+    }
+
+    /**
+     * Fonction permettant de récupéré la liste des dislikers a une proposition
+     */
+    public function getDislikers(int $propositionId): array {
+        $requete = "SELECT id_Utilisateur FROM `propositionlike` WHERE id_Proposition = $propositionId and vote = 0";
+        $this->setQuery($requete);
+        $result = $this->querySelect();
+
+        if(count($result) < 1) {
+            return [];
+        }
+
+        $userList = [];
+    
+        foreach($result as $userId) {
+            $user = $this->userService->getUserById($userId["id_Utilisateur"]);
+            array_push($userList, $user);
+        }
+
+        return $userList;
+    }
 }

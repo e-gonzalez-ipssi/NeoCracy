@@ -107,4 +107,32 @@ class  PropositionService {
         
         return false;
     }
+
+    /**
+     * Permet de récupéré la liste des utilisateurs ayant like une proposition
+     */
+    public function getLikers(Proposition $proposition): array {
+        $likers = $this->propositionManager->getLikers($proposition->getId());
+    
+        $return = [];
+        foreach($likers as $liker) {
+            array_push($return, $liker->arrayify());
+        }
+
+        return $return;
+    }
+
+    /**
+     * Permet de récupéré la liste des utilisateurs ayant dislike une proposition
+     */
+    public function getDislikers(Proposition $proposition): array {
+        $dislikers = $this->propositionManager->getDislikers($proposition->getId());
+
+        $return = [];
+        foreach($dislikers as $disliker) {
+            array_push($return, $disliker->arrayify());
+        }
+
+        return $return;
+    }
 }
