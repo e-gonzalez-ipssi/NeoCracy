@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entity\User;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -157,17 +158,30 @@ class PropositionApi extends Api
         $dislike = $proposition->getDislike();
 
         $likers = $this->propositionService->getLikers($proposition);
+        $usersLike = [];
+
+        /** @var User $liker */
+        foreach($likers as $liker) {
+            array_push($usersLike, $liker->arrayify());
+        }
+
         $dislikers = $this->propositionService->getDislikers($proposition);
+        $usersDislike = [];
+
+        /** @var User $disliker */
+        foreach($dislikers as $disliker) {
+            array_push($usersDislike, $disliker->arrayify());
+        }
 
         $return = [];
 
         $return["like"] = [
             "number" => $like,
-            "users" => $likers,
+            "users" => $usersLike,
         ];
         $return["dislike"] = [
             "number" => $dislike,
-            "users" => $dislikers,
+            "users" => $usersDislike,
         ];
 
         return $this->returnOutput($return);

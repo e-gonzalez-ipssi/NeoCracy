@@ -116,14 +116,16 @@ class  PropositionService {
 
     /**
      * Permet de récupéré la liste des utilisateurs ayant like une proposition
+     * 
+     * @return array La liste des objets utilisateurs qui ont liker la proposition
      */
     public function getLikers(Proposition $proposition): array {
         $likers = $this->propositionManager->getLike($proposition->getId());
     
         $return = [];
         foreach($likers as $liker) {
-            $like = $this->userService->getUserById($liker["id_Utilisateur"]);
-            array_push($return, $like->arrayify());
+            $user = $this->userService->getUserById($liker["id_Utilisateur"]);
+            array_push($return, $user);
         }
 
         return $return;
@@ -131,14 +133,16 @@ class  PropositionService {
 
     /**
      * Permet de récupéré la liste des utilisateurs ayant dislike une proposition
+     * 
+     * @return array La liste des objets utilisateurs qui ont disliker la proposition
      */
     public function getDislikers(Proposition $proposition): array {
         $dislikers = $this->propositionManager->getDislike($proposition->getId());
 
         $return = [];
         foreach($dislikers as $disliker) {
-            $dislike = $this->userService->getUserById($disliker["id_Utilisateur"]);
-            array_push($return, $dislike->arrayify());
+            $user = $this->userService->getUserById($disliker["id_Utilisateur"]);
+            array_push($return, $user);
         }
 
         return $return;
