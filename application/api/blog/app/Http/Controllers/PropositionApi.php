@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entity\User;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -142,6 +143,50 @@ class PropositionApi extends Api
         return $this->returnOutput($this->ack());
     }
 
+    /**
+     * @route get(api/proposition/{id}/vote)
+     * 
+     * @param int $id l'id de l'utilisateur que l'on recherche
+     */
+    public function getVote(Request $request, int $id) {
+        $this->initialize(
+            [
+            ],  self::NO_RIGHT, true);
+
+        $proposition = $this->propositionService->getPropositionById($id);
+        $like = $proposition->getLike();
+        $dislike = $proposition->getDislike();
+
+        $likers = $this->propositionService->getLikers($proposition);
+        $usersLike = [];
+
+        /** @var User $liker */
+        foreach($likers as $liker) {
+            array_push($usersLike, $liker->arrayify());
+        }
+
+        $dislikers = $this->propositionService->getDislikers($proposition);
+        $usersDislike = [];
+
+        /** @var User $disliker */
+        foreach($dislikers as $disliker) {
+            array_push($usersDislike, $disliker->arrayify());
+        }
+
+        $return = [];
+
+        $return["like"] = [
+            "number" => $like,
+            "users" => $usersLike,
+        ];
+        $return["dislike"] = [
+            "number" => $dislike,
+            "users" => $usersDislike,
+        ];
+
+        return $this->returnOutput($return);
+    }
+    
     /**
      * @route get(api/proposition/organisation/{orgId})
      * 

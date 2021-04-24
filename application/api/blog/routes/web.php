@@ -12,10 +12,6 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-$router->get('/', function () {
-    return 'Hello World';
-});
-
 $router->get('api/user/{id}','UserApi@getUser');
 $router->get('api/me/','UserApi@getMe');
 
@@ -35,5 +31,6 @@ $router->post('api/proposition/', 'PropositionApi@createProposition');
 $router->get('api/proposition/{id}/tags','PropositionApi@getPropositionTags');
 $router->post('api/proposition/{id}/like','PropositionApi@likeProposition');
 $router->post('api/proposition/{id}/dislike','PropositionApi@dislikeProposition');
+$router->get('api/proposition/{id}/vote','PropositionApi@getVote');
 $router->get('api/proposition/organisation/{orgId}', 'PropositionApi@getPropositionByOrgId');
 

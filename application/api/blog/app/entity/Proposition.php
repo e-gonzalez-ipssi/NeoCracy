@@ -79,6 +79,14 @@ class Proposition
         return $this->date;
     }
 
+    public function getLike(): int{
+        return $this->like;
+    }
+
+    public function getDislike(): int{
+        return $this->dislike;
+    }
+
     public function arrayify(): array {
         $date = new DateTime();
         $date->format('U = Y-m-d H:i:s');
