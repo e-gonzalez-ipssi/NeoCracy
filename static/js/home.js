@@ -20,3 +20,13 @@ function myFunction() {
   var toggle = document.getElementById("myDropdown");
   toggle.classList.toggle("show");
 }
+
+
+var data = sessionStorage.getItem('userMail'); 
+let userMail = document.getElementById("userMail");
+userMail.innerHTML = data;
+
+
+
+
+
