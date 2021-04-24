@@ -283,10 +283,10 @@ body {
     filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=180, Strength=2);
 }
 
-.post-img {
+/* .post-img {
     border-top: 1px solid #c5c5c5;
     border-bottom: 1px solid #c5c5c5;
-}
+} */
 
 .post-like,
 .post-comment,
@@ -306,12 +306,6 @@ body {
 .post-dislike:hover {
     background: #cfcfcf;
 }
-
-
-
-
-
-
 
 .post-share {
     cursor: pointer;

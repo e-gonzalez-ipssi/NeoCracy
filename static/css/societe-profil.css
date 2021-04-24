@@ -1,0 +1,27 @@
+.mainProfil {
+    position: relative;
+    top: 100px;
+    min-height: auto;
+    max-height: auto;
+    width: 50%;
+    padding: 20px 20px 20px 20px;
+    -moz-box-shadow: 0px 1px 2px 1px #cfcfcf;
+    -webkit-box-shadow: 0px 1px 2px 1px #cfcfcf;
+    -o-box-shadow: 0px 1px 2px 1px #cfcfcf;
+    box-shadow: 0px 1px 2px 1px #cfcfcf;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=180, Strength=2);
+}
+
+.followProfil{
+    background: #53ffa9;
+    padding: 5px 20px 5px 20px;
+}
+
+.followProfil:hover{
+    background: #222831;
+    color: #fff;
+}
+
+.followProfil:focus {
+    outline: none;
+}
