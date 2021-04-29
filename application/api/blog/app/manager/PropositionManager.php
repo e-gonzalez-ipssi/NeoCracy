@@ -26,7 +26,7 @@ class PropositionManager extends Manager {
      * Cette fonction permet de récupéré une proposition exploitable en donnant son id
      */
     public function getPropositionById(int $id): Proposition {
-        $requete = "SELECT * FROM `proposition` WHERE id = $id";
+        $requete = "SELECT * FROM `Proposition` WHERE id = $id";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
@@ -72,11 +72,11 @@ class PropositionManager extends Manager {
      */
     public function createProposition(int $orgId, int $authorId, string $title, string $description): int{
         $timestamp = time();
-        $requete = "INSERT INTO `proposition` (`nom`, `description`, `date`) VALUES ('$title', '$description', '$timestamp')";
+        $requete = "INSERT INTO `Proposition` (`nom`, `description`, `date`) VALUES ('$title', '$description', '$timestamp')";
         $this->setQuery($requete);
         $this->querySet();
 
-        $requete = "SELECT id FROM `proposition` WHERE date = $timestamp";
+        $requete = "SELECT id FROM `Proposition` WHERE date = $timestamp";
         $this->setQuery($requete);
         $result = $this->querySelect();
 

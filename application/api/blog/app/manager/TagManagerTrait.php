@@ -21,7 +21,7 @@ Trait TagManagerTrait {
     }
 
     public function getOrganisationTags(int $orgId): array {
-        $requete = "SELECT id FROM `tags` WHERE id_Organisation = $orgId";
+        $requete = "SELECT id FROM `Tags` WHERE id_Organisation = $orgId";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
@@ -35,7 +35,7 @@ Trait TagManagerTrait {
         foreach($result as $tag) {
             $tagId = $tag["id"];
 
-            $requete = "SELECT * FROM `tags` WHERE id = $tagId";
+            $requete = "SELECT * FROM `Tags` WHERE id = $tagId";
             $this->setQuery($requete);
             $result = $this->querySelect();
 
@@ -49,11 +49,11 @@ Trait TagManagerTrait {
     }
 
     public function addTagToOrganisation(int $orgId, string $tagName) {
-        $requete = "INSERT INTO `tags` (`nom`, `id_Organisation`) VALUES ('$tagName', '$orgId')";
+        $requete = "INSERT INTO `Tags` (`nom`, `id_Organisation`) VALUES ('$tagName', '$orgId')";
         $this->setQuery($requete);
         $this->querySet();
 
-        $requete = "SELECT `id` FROM `tags` WHERE `nom` = '$tagName' and `id_Organisation` = '$orgId'";
+        $requete = "SELECT `id` FROM `Tags` WHERE `nom` = '$tagName' and `id_Organisation` = '$orgId'";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
@@ -63,7 +63,7 @@ Trait TagManagerTrait {
     }
 
     public function getTagId(int $orgId, string $tagName): int{
-        $requete = "SELECT `id` FROM `tags` WHERE `nom` = '$tagName' and `id_Organisation` = '$orgId'";
+        $requete = "SELECT `id` FROM `Tags` WHERE `nom` = '$tagName' and `id_Organisation` = '$orgId'";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
