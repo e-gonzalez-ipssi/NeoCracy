@@ -61,7 +61,6 @@ class bd
             $this->error('Failed to connect to MySQL - ' . $this->connection->connect_error);
         }
         $this->connection->set_charset($charset);
-        echo 'connected';
     }
 
     /**
