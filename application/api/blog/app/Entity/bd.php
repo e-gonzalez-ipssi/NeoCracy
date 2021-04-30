@@ -54,13 +54,14 @@ class bd
     protected $query_closed = true;
     public $query_count = 0;
 
-    public function __construct($dbhost = 'localhost', $dbuser = 'user', $dbpass = 'neocracy', $dbname = 'neocracydb', $charset = 'utf8', $port = 3307)
+    public function __construct($dbhost = 'neocracy-db', $dbuser = 'user', $dbpass = 'neocracy', $dbname = 'neocracydb', $charset = 'utf8', $port = 3306)
     {
         $this->connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname, $port);
         if ($this->connection->connect_error) {
             $this->error('Failed to connect to MySQL - ' . $this->connection->connect_error);
         }
         $this->connection->set_charset($charset);
+        echo 'connected';
     }
 
     /**

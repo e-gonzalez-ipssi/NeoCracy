@@ -29,7 +29,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
     networks:
       - neocracy
-      - web
 
   portainer:
     container_name: portainer
@@ -42,10 +41,29 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./portainer:/data
     networks:
-      - web
+      - neocracy
+
+  neocracy-backend:
+    container_name: neocracy-backend
+    build:
+      context: ./application/api/blog
+      dockerfile: Dockerfile
+    image: neocracy-backend
+    restart: unless-stopped
+    command: php -S 0.0.0.0:8000 -t ./public
+    volumes:
+      - ./application/api/blog:/app
+    ports:
+      - 8000:8000
+    networks:
+      - neocracy
+    depends_on:
+      - neocracy-db
+    links:
+      - neocracy-db
+    networks:
+        - neocracy
 
 networks:
   neocracy:
     name: neocracy
-  web:
-    name: web
