@@ -21,4 +21,28 @@ Trait ReportManagerTrait {
         return $result;
     }
 
+    public function getReports(): array {
+        $requete = "SELECT * FROM `PropositionSignalee`";
+        $this->setQuery($requete);
+        $results = $this->querySelect();
+
+        $return = [];
+        foreach($results as $report) {
+            $reportPrep = [];
+
+            $proposition = $this->getPropositionById($report["id_Proposition"]);
+            $reportPrep["Proposition"] = $proposition;
+
+            $user = $this->userService->getUserById($report["id_Utilisateur"]);
+            $reportPrep["User"] = $user;
+
+            $reportPrep["Message"] = $report["message"];
+            $reportPrep["Timestamp"] = $report["date"];
+
+            array_push($return, $reportPrep);
+        }
+
+        return $return;
+    }
+
 }

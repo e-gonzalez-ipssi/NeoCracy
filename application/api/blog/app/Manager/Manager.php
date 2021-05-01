@@ -138,9 +138,9 @@ abstract class  Manager
     }
 
     protected function fromQueryToPropositions(array $result, User $author, array $tags, int $like, int $dislike): array {
-        $users = [];
+        $return = [];
         foreach($result as $proposition) {
-            $newUser = new Proposition(
+            $newProposition = new Proposition(
                 $proposition["id"],
                 $author,
                 $proposition["nom"],
@@ -150,8 +150,8 @@ abstract class  Manager
                 $like,
                 $dislike,
             );
-            array_push($users, $newUser);
+            array_push($return, $newProposition);
         }
-        return $users;
+        return $return;
     }
 }

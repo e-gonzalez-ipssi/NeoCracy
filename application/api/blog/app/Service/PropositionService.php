@@ -167,4 +167,9 @@ class  PropositionService {
         
         return true;
     }
+
+    public function getReports(): array{
+        $reports = $this->propositionManager->getReports();
+        return $reports;
+    }
 }

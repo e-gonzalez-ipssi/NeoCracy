@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Entity\User;
 use Illuminate\Http\Request;
 use Exception;
@@ -9,7 +10,8 @@ use Exception;
 class PropositionApi extends Api
 {
     private const NO_RIGHT = 1;
-    private const IS_ORG_MEMBER = 2;
+    private const IS_ADMIN = 2;
+    private const IS_ORG_MEMBER = 3;
 
     public function __construct()
     {
@@ -51,7 +53,12 @@ class PropositionApi extends Api
         switch ($right) {
             case self::IS_ORG_MEMBER:
                 if (!$this->orgService->userIsInOrganisation($this->me, $orgId)) {
-                    throw new Exception("error-permission-error");
+                    throw new Exception("error-permission");
+                }
+                break;
+            case self::IS_ADMIN:
+                if (!$this->me->isAdmin()) {
+                    throw new Exception("error-permission");
                 }
                 break;
             case self::NO_RIGHT:
@@ -224,6 +231,40 @@ class PropositionApi extends Api
         $this->propositionService->reportProposition($proposition, $this->me, $params["message"]);
 
         return $this->returnOutput($this->ack());
+    }
+
+    /**
+     * @route get(api/reports)
+     * 
+     * @param int $id l'id de l'utilisateur que l'on recherche
+     */
+    public function getReports(Request $request) {
+        $this->initialize(
+            [],
+            self::IS_ADMIN,
+            true
+        );
+
+        // récupéré la liste des reports
+        $reports = $this->propositionService->getReports();
+
+        $return = [];
+        // pour chaque report
+        foreach($reports as $report){
+            $date = new DateTime();
+            $date->format('U = Y-m-d H:i:s');
+            $date->setTimestamp($report["Timestamp"]);
+            $newReport = [
+                "Proposition" => $report["Proposition"]->arrayify(),
+                "User" => $report["User"]->arrayify(),
+                "Message" => $report["Message"],
+                "Date" => $date
+            ];
+
+            array_push($return, $newReport);
+        }
+
+        return $return;
     }
 
 }
