@@ -245,15 +245,15 @@ class PropositionApi extends Api
             true
         );
 
-        // récupéré la liste des reports
         $reports = $this->propositionService->getReports();
 
         $return = [];
-        // pour chaque report
+
         foreach($reports as $report){
             $date = new DateTime();
             $date->format('U = Y-m-d H:i:s');
             $date->setTimestamp($report["Timestamp"]);
+
             $newReport = [
                 "Proposition" => $report["Proposition"]->arrayify(),
                 "User" => $report["User"]->arrayify(),
