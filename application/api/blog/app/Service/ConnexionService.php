@@ -92,7 +92,7 @@ class  ConnexionService {
             throw new Exception("bad-password");
         }
 
-        $this->setToken($user, $this->generateUserToken(), time() + (86400 * 30));
+        $this->setToken($user, $_COOKIE[COOKIE_USER_TOKEN], time() + (86400 * 30));
     }
 
     /**
@@ -177,7 +177,7 @@ class  ConnexionService {
      */
     private function setToken(User $user, string $value, ?int $time = null){
         $this->userManager->setUserToken($value, $user->getId());
-        setcookie(COOKIE_USER_TOKEN, $value, $time);
+        //setcookie(COOKIE_USER_TOKEN, $value, $time);
     }
 
     /**

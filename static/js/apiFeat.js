@@ -38,8 +38,14 @@ function apiConnexion(){
     let email = document.getElementById("mailCo").value;
     let password = document.getElementById("passCo").value;
 
+    const rand=()=>Math.random(0).toString(36).substr(2);
+    const token=(length)=>(rand()+rand()+rand()+rand()).substr(0,length);
+    const myToken = token(64);
+
     var url = 'http://localhost:8000/api/connect?';
-    var params = 'mail=' + email + '&'+ 'password=' + password ;
+    var params = 'mail=' + email + '&'+ 'password=' + password;
+    //var params = `mail=${email}&password=${password}&token=${myToken}`;
+
     var urlFull = url + params ;
 
     var urlInfosUser = "http://localhost:8000/api/me";
@@ -67,7 +73,7 @@ function apiConnexion(){
 
     //fetch(urlInfosUser, {method:""})
 
-
+    document.cookie = "userToken=" + myToken ;
     sessionStorage.setItem('userMail' , email);
 }
 
@@ -104,6 +110,7 @@ function apiDeconnexion(){
 
     modal.style.display = "none";
 }
+
 
 
 
