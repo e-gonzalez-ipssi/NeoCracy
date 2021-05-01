@@ -131,9 +131,22 @@ CREATE TABLE PropositionLike (
 CREATE TABLE PropositionComment (
         id_Proposition Int NOT NULL ,
         id_Utilisateur Int NOT NULL ,
-        commentaire    Varchar (50) NOT NULL ,
-        date           Date NOT NULL,
+        commentaire    Varchar (255) NOT NULL ,
+        date           Int NOT NULL,
     FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
 ); 
+
+#------------------------------------------------------------
+# Table: PropositionSignalée
+#------------------------------------------------------------
+
+CREATE TABLE PropositionSignalee (
+        id_Proposition Int NOT NULL ,
+        id_Utilisateur Int NOT NULL ,
+        message    Varchar (255) NOT NULL ,
+        date           Int NOT NULL,
+    FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
+    FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
+);
 

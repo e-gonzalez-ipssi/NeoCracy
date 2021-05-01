@@ -90,7 +90,7 @@ class  PropositionService {
         }
     }
 
-    public function isAlreadyLiked(Proposition $proposition, User $author): bool {
+    private function isAlreadyLiked(Proposition $proposition, User $author): bool {
         $likeList = $this->propositionManager->getLike($proposition->getId());
 
         foreach($likeList as $like) {
@@ -102,7 +102,7 @@ class  PropositionService {
         return false;
     }
 
-    public function isAlreadyDisliked(Proposition $proposition, User $author): bool {
+    private function isAlreadyDisliked(Proposition $proposition, User $author): bool {
         $dislikeList = $this->propositionManager->getDislike($proposition->getId());
 
         foreach($dislikeList as $dislike) {
@@ -146,5 +146,25 @@ class  PropositionService {
         }
 
         return $return;
+    }
+
+    public function reportProposition(Proposition $proposition, User $user, string $message): void{
+        // on vérifie si le report n'éxiste pas déjà afin de ne pas le dupliquer
+        if($this->isAlreadyReported($proposition, $user)){
+            throw new Exception("user-already-report-proposition");
+        }
+
+        // création du report
+        $this->propositionManager->reportProposition($proposition->getId(), $user->getId(), $message);
+    }
+
+    private function isAlreadyReported(Proposition $proposition, User $user){
+        $report = $this->propositionManager->getReportByPropositionAndUserIds($proposition->getId(), $user->getId());
+
+        if (count($report) < 1) {
+            return false;
+        }
+        
+        return true;
     }
 }

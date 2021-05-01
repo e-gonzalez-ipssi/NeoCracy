@@ -109,6 +109,24 @@ class PropositionApi extends Api
     }
 
     /**
+     * @route get(api/proposition/organisation/{orgId})
+     * 
+     * @param int $id l'id de l'utilisateur que l'on recherche
+     */
+    public function getPropositionByOrgId(int $orgId) {
+        $this->initialize([], self::NO_RIGHT, false);
+
+        $propositions = $this->propositionService->getPropositionByOrgId($orgId);
+
+        $result = [];
+        foreach($propositions as $proposition) {
+            array_push($result, $proposition->arrayify());
+        }
+
+        return $this->returnOutput($result);
+    }
+
+    /**
      * @route post(api/proposition/{id}/like)
      * 
      * @param int $id l'id de l'utilisateur que l'on recherche
@@ -186,22 +204,26 @@ class PropositionApi extends Api
 
         return $this->returnOutput($return);
     }
-    
+
     /**
-     * @route get(api/proposition/organisation/{orgId})
+     * @route post(api/proposition/{id}/report)
      * 
      * @param int $id l'id de l'utilisateur que l'on recherche
      */
-    public function getPropositionByOrgId(int $orgId) {
-        $this->initialize([], self::NO_RIGHT, false);
+    public function reportProposition(Request $request, int $id) {
+        $params = $this->initialize(
+            [
+                ["message", REQUIRED, TYPE_STRING, $request->input('message')],
+            ],
+            self::NO_RIGHT,
+            true
+        );
 
-        $propositions = $this->propositionService->getPropositionByOrgId($orgId);
+        $proposition = $this->propositionService->getPropositionById($id);
 
-        $result = [];
-        foreach($propositions as $proposition) {
-            array_push($result, $proposition->arrayify());
-        }
+        $this->propositionService->reportProposition($proposition, $this->me, $params["message"]);
 
-        return $this->returnOutput($result);
+        return $this->returnOutput($this->ack());
     }
+
 }
