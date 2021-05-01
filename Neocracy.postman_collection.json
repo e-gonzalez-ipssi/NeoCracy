@@ -8,10 +8,10 @@
 		{
 			"name": "Requete test",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/connect?mail=test@test.com&password=0123456Az",
+					"raw": "http://localhost:8000/api/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -21,21 +21,7 @@
 						"api",
 						"connect"
 					],
-					"query": [
-						{
-							"key": "mail",
-							"value": "test@test.com"
-						},
-						{
-							"key": "password",
-							"value": "0123456Az"
-						},
-						{
-							"key": null,
-							"value": "",
-							"disabled": true
-						}
-					]
+					"query": []
 				}
 			},
 			"response": []
@@ -157,7 +143,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/connect?mail=test@test.com&password=0123456AZERTY",
+					"raw": "http://localhost:8000/api/register?nom=Gonzalez&prenom=Esteban&mail=test@test.com&password=0123456Az&confirmPassword=0123456Az",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -169,17 +155,24 @@
 					],
 					"query": [
 						{
+							"key": "nom",
+							"value": "Gonzalez"
+						},
+						{
+							"key": "prenom",
+							"value": "Esteban"
+						},
+						{
 							"key": "mail",
 							"value": "test@test.com"
 						},
 						{
 							"key": "password",
-							"value": "0123456AZERTY"
+							"value": "0123456Az"
 						},
 						{
-							"key": null,
-							"value": "",
-							"disabled": true
+							"key": "confirmPassword",
+							"value": "0123456Az"
 						}
 					]
 				}
