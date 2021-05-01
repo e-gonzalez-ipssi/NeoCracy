@@ -61,8 +61,6 @@ services:
       - neocracy-db
     links:
       - neocracy-db
-    networks:
-        - neocracy
 
 networks:
   neocracy:
