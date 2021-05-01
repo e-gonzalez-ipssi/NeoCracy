@@ -41,15 +41,17 @@ function apiConnexion(){
     var url = 'http://localhost:8000/api/connect?';
     var params = 'mail=' + email + '&'+ 'password=' + password ;
     var urlFull = url + params ;
+
+    var urlInfosUser = "http://localhost:8000/api/me";
     // var urltest = "http://localhost:8000/api/register?nom=Gonzalez&prenom=Esteban&mail=test@test.com&password=0123456Az&confirmPassword=0123456Az";
 
 
-    fetch(urlFull  ,{method:"post",mode: "no-cors"})
+    fetch(urlFull  ,{method:"post"})
         .then(
             function(response) {
                 console.log(response);
-                if (response.status == 0){
-                    console.log(response);
+                if (response.status == 200){
+                    console.log(response.status);
                     alert("Connexion réussi " );
                     location.replace("../../static/vue/assets/home.html");
                 }
@@ -62,6 +64,9 @@ function apiConnexion(){
         .catch(function(err){
             console.log(err);
     });
+
+    //fetch(urlInfosUser, {method:""})
+
 
     sessionStorage.setItem('userMail' , email);
 }

@@ -23,6 +23,18 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
+/*
+|--------------------------------------------------------------------------
+| No cors errors with https request
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+$app->middleware([
+    App\Http\Middleware\CorsMiddleware::class
+ ]);
+
 // $app->withFacades();
 
 $app->withEloquent();
