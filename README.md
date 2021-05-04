@@ -1,9 +1,18 @@
-# NewCratie
+# Neocracy
 
-Ceci est le début du projet NeoCracy
+## Bienvenu sur la documentation de Neocracy 
 
-Faire une doc ici : 
+### Pour récupérer le projet utiliser la commande :
 
-Commit de Louis le charismatique/humble
-Commit de doray le chef
-Commit de maxime
+git clone https://github.com/e-gonzalez-ipssi/NeoCracy.git
+
+### Pour lancer le projet en local :
+
+- Placez-vous dans le dossier :
+
+cd application\api\blog
+
+- Lancement du back :
+
+php -S localhost:8000 -t ./public
+
