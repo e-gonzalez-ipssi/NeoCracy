@@ -6,19 +6,13 @@ Chaques changements est indexé dans ce document pour suivre l'évolution du pro
 ## [EXEMPLE] - yyyy-mm-dd
  
 Ecrire ici chaque semaine, les nouvelles fonctionnalitées/MAJ ajouté lors de chaque PR.
- 
+
+## Louis - 2021-05-05
+
 ### Ajouté
 
-- Création d'un changelog pour documenter notre code
- 
+- Ajout de NuxtJS
+
 ### Changé
 
-- Création d'un changelog pour documenter notre code
- 
-### Fixé
-
-- Création d'un changelog pour documenter notre code
-
-
-
- 
+- Suppression de TailwindCSS
