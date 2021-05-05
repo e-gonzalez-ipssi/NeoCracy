@@ -56,17 +56,17 @@ class OrganisationApi extends Api
         switch ($right) {
             case self::IS_ORG_MEMBER:
                 if (!$this->orgService->userIsInOrganisation($this->me, $orgId)) {
-                    throw new Exception("error-permission-error");
+                    throw new Exception("error-permission");
                 }
                 break;
             case self::IS_NOT_ORG_MEMBER:
                 if ($this->orgService->userIsInOrganisation($this->me, $orgId)) {
-                    throw new Exception("error-permission-error");
+                    throw new Exception("error-permission");
                 }
                 break;
             case self::IS_ORG_ADMIN:
                 if (!$this->orgService->userIsOrgAdmin($this->me, $orgId)) {
-                    throw new Exception("error-permission-error");
+                    throw new Exception("error-permission");
                 }
                 break;
             case self::NO_RIGHT:

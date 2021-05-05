@@ -33,4 +33,5 @@ $router->post('api/proposition/{id}/like','PropositionApi@likeProposition');
 $router->post('api/proposition/{id}/dislike','PropositionApi@dislikeProposition');
 $router->get('api/proposition/{id}/vote','PropositionApi@getVote');
 $router->get('api/proposition/organisation/{orgId}', 'PropositionApi@getPropositionByOrgId');
-
+$router->post('api/proposition/{id}/report', 'PropositionApi@reportProposition');
+$router->get('api/reports', 'PropositionApi@getReports');
