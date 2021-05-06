@@ -78,8 +78,8 @@ services:
       - neocracy-backend
     links:
       - neocracy-backend
-    #volumes:
-      #- ../frontend:/usr/src/app
+    volumes:
+      - ../frontend:/usr/src/app
     networks:
       - neocracy
 
