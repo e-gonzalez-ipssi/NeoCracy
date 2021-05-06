@@ -46,13 +46,13 @@ services:
   neocracy-backend:
     container_name: neocracy-backend
     build:
-      context: ./application/api/blog
+      context: ../backend
       dockerfile: Dockerfile
     image: neocracy-backend
     restart: unless-stopped
     command: php -S 0.0.0.0:8000 -t ./public
     volumes:
-      - ./application/api/blog:/app
+      - ../backend:/app
     ports:
       - 8000:8000
     networks:
@@ -61,6 +61,27 @@ services:
       - neocracy-db
     links:
       - neocracy-db
+
+  neocracy-front:
+    container_name: neocracy-front
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    image: neocracy-front
+    restart: unless-stopped
+    ports:
+      - 3333:3000
+    environment:
+      HOST: 0.0.0.0
+    depends_on:
+      - neocracy-db
+      - neocracy-backend
+    links:
+      - neocracy-backend
+    #volumes:
+      #- ../frontend:/usr/src/app
+    networks:
+      - neocracy
 
 networks:
   neocracy:
