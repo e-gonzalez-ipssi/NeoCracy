@@ -1,32 +1,40 @@
 <template>
-  <div class="container">
+  <div>
     <div>
-      <Logo />
-      <h1 class="title">NeoCracy</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <h3>Register</h3>
+      <input v-model="email" type="text" placeholder="email" />
+      <input v-model="password" type="password" placeholder="password" />
+      <button @click="onRegister">Register</button>
+    </div>
+    <div>
+      <h3>Login</h3>
+      <input v-model="email" type="text" placeholder="email" />
+      <input v-model="password" type="password" placeholder="password" />
+      <button @click="onLogin">Login</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    }
+  },
+
+  methods: {
+    async onLogin() {
+      const response = await this.$api.auth.login(this.email, this.password)
+      console.log(response)
+    },
+    async onRegister() {
+      const response = await this.$api.auth.register(this.email, this.password)
+      console.log(response)
+    },
+  },
+}
 </script>
 
 <style>
