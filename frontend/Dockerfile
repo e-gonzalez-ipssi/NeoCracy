@@ -8,7 +8,7 @@ WORKDIR ${APP_ROOT}
 
 # COPY package*.json ${APP_ROOT}
 
-# RUN npm install
+RUN npm install
 
 # ADD . ${APP_ROOT}
 
