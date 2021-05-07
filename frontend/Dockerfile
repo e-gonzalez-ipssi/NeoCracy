@@ -6,7 +6,7 @@ ENV PATH=/usr/src/app/node_modules/.bin:$PATH
 RUN mkdir ${APP_ROOT}
 WORKDIR ${APP_ROOT}
 
-# COPY package*.json ${APP_ROOT}
+COPY package*.json ${APP_ROOT}
 
 RUN npm install
 

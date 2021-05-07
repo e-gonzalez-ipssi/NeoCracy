@@ -8,11 +8,10 @@ git clone https://github.com/e-gonzalez-ipssi/NeoCracy.git
 
 ### Pour lancer le projet en local :
 
-- Placez-vous dans le dossier :
+start.sh
 
-cd application\api\blog
+### Si le docker du front ne se lance pas :
 
-- Lancement du back :
+-> se placer dans le dossier front
 
-php -S localhost:8000 -t ./public
-
+-> npm install
