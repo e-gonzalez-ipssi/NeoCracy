@@ -14,7 +14,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: '@/plugins/api.js' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -31,17 +31,29 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    // https://auth.nuxtjs.org/
+    // '@nuxtjs/auth',
+    ['cookie-universal-nuxt', { parseJSON: false }],
   ],
-  
-  plugins: [{ src: "@/plugins/api.js" }],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: { baseURL: 'http://localhost:8000/api/' },
+
+  // auth: {
+  //   localStorage: false,
+  //   cookie: {
+  //     prefix: 'auth.',
+  //     options: {
+  //       path: '/',
+  //       maxAge: 10800,
+  //     },
+  //   },
+  // },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en',
+      lang: 'fr',
     },
   },
 

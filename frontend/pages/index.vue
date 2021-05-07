@@ -2,15 +2,34 @@
   <div>
     <div>
       <h3>Register</h3>
-      <input v-model="email" type="text" placeholder="email" />
-      <input v-model="password" type="password" placeholder="password" />
+      <input v-model="nom" type="text" placeholder="nom" />
+      <input v-model="prenom" type="text" placeholder="prenom" />
+      <input v-model="mailRegister" type="text" placeholder="mailRegister" />
+      <input
+        v-model="passwordRegister"
+        type="password"
+        placeholder="passwordRegister"
+      />
+      <input
+        v-model="confirmPassword"
+        type="password"
+        placeholder="confirmPassword"
+      />
       <button @click="onRegister">Register</button>
     </div>
     <div>
       <h3>Login</h3>
-      <input v-model="email" type="text" placeholder="email" />
-      <input v-model="password" type="password" placeholder="password" />
+      <input v-model="emailLogin" type="text" placeholder="emailLogin" />
+      <input
+        v-model="passwordLogin"
+        type="password"
+        placeholder="passwordLogin"
+      />
       <button @click="onLogin">Login</button>
+    </div>
+    <div>
+      <h3>Logout</h3>
+      <button @click="onLogout">Logout</button>
     </div>
   </div>
 </template>
@@ -19,18 +38,45 @@
 export default {
   data() {
     return {
-      email: '',
-      password: '',
+      nom: 'Gonzalez',
+      prenom: 'Esteban',
+      mailRegister: 'test@test.com',
+      passwordRegister: '0123456Az',
+      confirmPassword: '0123456Az',
+      emailLogin: 'test@test.com',
+      passwordLogin: '0123456Az',
     }
   },
 
   methods: {
-    async onLogin() {
-      const response = await this.$api.auth.login(this.email, this.password)
+    async onRegister() {
+      const response = await this.$api.auth.register(
+        this.nom,
+        this.prenom,
+        this.mailRegister,
+        this.passwordRegister,
+        this.confirmPassword
+      )
       console.log(response)
     },
-    async onRegister() {
-      const response = await this.$api.auth.register(this.email, this.password)
+    async onLogin() {
+      console.log('1 emailLogin -->', this.emailLogin)
+      console.log('1 passwordLogin -->', this.passwordLogin)
+      this.$cookies.set('userToken', '123', {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7,
+      })
+      const userToken = this.$cookies.get('userToken')
+      console.log('1 userToken -->', userToken)
+      const response = await this.$api.auth.login(
+        this.emailLogin,
+        this.passwordLogin,
+        userToken
+      )
+      console.log(response)
+    },
+    async onLogout() {
+      const response = await this.$api.auth.logout()
       console.log(response)
     },
   },
