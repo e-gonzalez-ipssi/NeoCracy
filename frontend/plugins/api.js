@@ -1,4 +1,4 @@
-import Auth from '@/service/auth'
+import Auth from '@/service/Auth'
 
 export default (context, inject) => {
   // Initialize API factories
