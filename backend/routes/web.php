@@ -15,7 +15,7 @@
 $router->get('api/user/{id}','UserApi@getUser');
 $router->get('api/me/','UserApi@getMe');
 
-$router->post('api/connect/', 'UserApi@connect');
+$router->post('api/connect/', 'UserApi@test');
 $router->post('api/register/', 'UserApi@register');
 $router->post('api/disconnect/', 'UserApi@disconnect');
 

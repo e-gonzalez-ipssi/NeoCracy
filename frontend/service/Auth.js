@@ -20,7 +20,7 @@ export default (axios) => ({
           },
         }
       )
-      .then((response) => response.status)
+      .then((response) => response)
       .catch((err) => alert(err.message))
     return res
   },

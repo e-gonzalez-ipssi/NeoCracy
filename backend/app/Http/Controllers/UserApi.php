@@ -139,4 +139,8 @@ class UserApi extends Api
         return $this->returnOutput($this->ack());
     }
 
+    public function test(Request $request) {
+        return $this->returnOutput($request->toArray());
+    }
+
 }
