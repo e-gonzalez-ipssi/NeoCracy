@@ -8,10 +8,8 @@ git clone https://github.com/e-gonzalez-ipssi/NeoCracy.git
 
 ### Pour lancer le projet en local :
 
-start.sh
+- ./start.sh
 
-### Si le docker du front ne se lance pas :
+### Pour initialiser la base de données :
 
--> se placer dans le dossier front
-
--> npm install
+- divers\install\database\bd.sql
