@@ -1,8 +1,5 @@
 export default (axios) => ({
   login(mail, password, userToken) {
-    console.log('2 email -->', mail)
-    console.log('2 password -->', password)
-    console.log('2 userToken -->', userToken)
     const res = axios
       .post(
         'connect',
@@ -21,7 +18,7 @@ export default (axios) => ({
         }
       )
       .then((response) => response)
-      .catch((err) => alert(err.message))
+      .catch((err) => console.warn(err.message))
     return res
   },
 
@@ -29,16 +26,11 @@ export default (axios) => ({
     const res = axios
       .post('disconnect')
       .then((response) => response.status)
-      .catch((err) => alert(err.message))
+      .catch((err) => console.warn(err.message))
     return res
   },
 
   register(nom, prenom, mail, password, confirmPassword) {
-    console.log('2 nom -->', nom)
-    console.log('2 prenom -->', prenom)
-    console.log('2 mail -->', mail)
-    console.log('2 password -->', password)
-    console.log('2 confirmPassword -->', confirmPassword)
     const res = axios
       .post('register', null, {
         params: {

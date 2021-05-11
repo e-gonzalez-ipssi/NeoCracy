@@ -1,117 +1,53 @@
 <template>
   <div>
     <div>
-      <h3>Register</h3>
-      <input v-model="nom" type="text" placeholder="nom" />
-      <input v-model="prenom" type="text" placeholder="prenom" />
-      <input v-model="mailRegister" type="text" placeholder="mailRegister" />
-      <input
-        v-model="passwordRegister"
-        type="password"
-        placeholder="passwordRegister"
-      />
-      <input
-        v-model="confirmPassword"
-        type="password"
-        placeholder="confirmPassword"
-      />
-      <button @click="onRegister">Register</button>
+      <ModalFormRegister
+        :revele="reveleFormRegister"
+        :toggle-modale-form-register="toggleModaleFormRegister"
+      ></ModalFormRegister>
+      <button @click="toggleModaleFormRegister">Inscription</button>
     </div>
     <div>
-      <h3>Login</h3>
-      <input v-model="emailLogin" type="text" placeholder="emailLogin" />
-      <input
-        v-model="passwordLogin"
-        type="password"
-        placeholder="passwordLogin"
-      />
-      <button @click="onLogin">Login</button>
+      <ModalFormLogin
+        :revele="reveleFormLogin"
+        :toggle-modale-form-login="toggleModaleFormLogin"
+      ></ModalFormLogin>
+      <button @click="toggleModaleFormLogin">Connexion</button>
     </div>
     <div>
-      <h3>Logout</h3>
       <button @click="onLogout">Logout</button>
     </div>
+    <nuxt-link to="/acceuil">Page d'accueil</nuxt-link>
   </div>
 </template>
 
 <script>
+import ModalFormRegister from '@/components/Modals/Auth/ModalFormRegister'
+import ModalFormLogin from '@/components/Modals/Auth/ModalFormLogin'
 export default {
+  components: {
+    ModalFormRegister,
+    ModalFormLogin,
+  },
   data() {
     return {
-      nom: 'Gonzalez',
-      prenom: 'Esteban',
-      mailRegister: 'test@test.com',
-      passwordRegister: '0123456Az',
-      confirmPassword: '0123456Az',
-      emailLogin: 'test@test.com',
-      passwordLogin: '0123456Az',
+      reveleFormRegister: false,
+      reveleFormLogin: false,
     }
   },
 
   methods: {
-    async onRegister() {
-      const response = await this.$api.auth.register(
-        this.nom,
-        this.prenom,
-        this.mailRegister,
-        this.passwordRegister,
-        this.confirmPassword
-      )
-      console.log(response)
+    toggleModaleFormRegister() {
+      this.reveleFormRegister = !this.reveleFormRegister
     },
-    async onLogin() {
-      console.log('1 emailLogin -->', this.emailLogin)
-      console.log('1 passwordLogin -->', this.passwordLogin)
-      this.$cookies.set('userToken', '123', {
-        path: '/',
-        maxAge: 60 * 60 * 24 * 7,
-      })
-      const userToken = this.$cookies.get('userToken')
-      console.log('1 userToken -->', userToken)
-      const response = await this.$api.auth.login(
-        this.emailLogin,
-        this.passwordLogin,
-        userToken
-      )
-      console.log(response)
+    toggleModaleFormLogin() {
+      this.reveleFormLogin = !this.reveleFormLogin
     },
     async onLogout() {
-      const response = await this.$api.auth.logout()
-      console.log(response)
+      await this.$api.auth.logout()
     },
   },
 }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
+<style></style>
