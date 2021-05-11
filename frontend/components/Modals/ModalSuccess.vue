@@ -15,6 +15,14 @@ export default {
     revele: Boolean,
     toggleModaleSuccess: { type: Function, required: true },
   },
+  methods: {
+    toggleModaleSuccess() {
+      this.reveleSuccess = !this.reveleSuccess
+    },
+    toggleModaleFail() {
+      this.reveleFail = !this.reveleFail
+    },
+  }
 }
 </script>
 

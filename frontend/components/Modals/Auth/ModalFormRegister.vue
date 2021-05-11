@@ -17,38 +17,22 @@
         type="password"
         placeholder="confirmPassword"
       />
-      <ModalSuccess
-        :revele="reveleSuccess"
-        :toggle-modale-success="toggleModaleSuccess"
-      ></ModalSuccess>
-      <button @click="toggleModaleSuccess()">Test Success</button>
-      <ModalFail
-        :revele="reveleFail"
-        :toggle-modale-fail="toggleModaleFail"
-      ></ModalFail>
-      <button @click="toggleModaleFail()">Test Fail</button>
       <button @click="onRegister()">Register</button>
     </div>
   </div>
 </template>
 
 <script>
-import ModalSuccess from '@/components/Modals/ModalSuccess'
-import ModalFail from '@/components/Modals/ModalFail'
 export default {
   name: 'ModaleFormRegister',
-  components: {
-    ModalSuccess,
-    ModalFail,
-  },
   props: {
     revele: Boolean,
+    reveleSuccess: Boolean,
+    reveleFail: Boolean,
     toggleModaleFormRegister: { type: Function, required: true },
   },
   data() {
     return {
-      reveleSuccess: false,
-      reveleFail: false,
       nom: 'Gonzales',
       prenom: 'Esteban',
       mailRegister: 'test@test.com',
@@ -67,15 +51,10 @@ export default {
       )
       if (res === 200) {
         this.reveleSuccess = !this.reveleSuccess
+        this.revele = !this.revele
       } else {
         this.reveleFail = !this.reveleFail
       }
-    },
-    toggleModaleSuccess() {
-      this.reveleSuccess = !this.reveleSuccess
-    },
-    toggleModaleFail() {
-      this.reveleFail = !this.reveleFail
     },
   },
 }
