@@ -1,6 +1,6 @@
 #/bin/bash
 cd frontend
-npm install
+npm install nuxt
 cd ..
 cd docker
 docker-compose up -d
