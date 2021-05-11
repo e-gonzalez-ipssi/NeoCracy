@@ -89,7 +89,7 @@ class UserApi extends Api
             false,
         );
 
-        $this->connexionService->connexion($params['mail'], $params['password']);
+        $this->connexionService->connexion($params['mail'], $params['password'], $request->cookies->get("userToken"));
         return $this->returnOutput($this->ack());
     }
 

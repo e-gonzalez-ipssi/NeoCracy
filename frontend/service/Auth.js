@@ -9,8 +9,7 @@ export default (axios) => ({
         {
           withCredentials: true,
           headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${userToken}`,
+            Cookie: "userToken=l6GvF%26a14ep9bFpRkV5R9hVl1Zck%2AS%2ArhIjnhsv4kLAay6rAUA0%2AWD%26%2AzI1BIWb%2A; Path=/api; Expires=Mon, 31 May 2021 09:59:17 GMT;",
           },
         },
         {

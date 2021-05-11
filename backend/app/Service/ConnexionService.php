@@ -71,7 +71,7 @@ class  ConnexionService {
      * 
      * Note : ces 2 paramêtre peuvent être nul si l'utililsateur utilise sont token pour se connecté
      */
-    public function connexion(?string $mail = null, ?string $password = null): void {
+    public function connexion(?string $mail = null, ?string $password = null, string $cookie): void {
         if($this->isConnected()){
             throw new Exception("user-already-connected");
         }
@@ -92,7 +92,7 @@ class  ConnexionService {
             throw new Exception("bad-password");
         }
 
-        $this->setToken($user, $_COOKIE[COOKIE_USER_TOKEN], time() + (86400 * 30));
+        $this->setToken($user, $cookie, time() + (86400 * 30));
     }
 
     /**
