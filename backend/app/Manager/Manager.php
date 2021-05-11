@@ -88,9 +88,12 @@ abstract class  Manager
     protected function fromQueryToOrganisation($result): Organisation {
         return new Organisation(
             $result[0]["id"],
-            $result[0]["nom"],
-            $result[0]["description"],
-            $result[0]["lienSite"],
+            $result[0]["orgName"],
+            $result[0]["content"],
+            $result[0]["orgUrl"],
+            $result[0]["orgMail"],
+            $result[0]["phone"],
+            $result[0]["backImg"],
         );
     }
 
@@ -99,9 +102,12 @@ abstract class  Manager
         foreach($result as $organisation) {
             $newOrganisation = new Organisation(
                 $organisation["id"],
-                $organisation["nom"],
-                $organisation["description"],
-                $organisation["lienSite"],
+                $organisation["orgName"],
+                $organisation["content"],
+                $organisation["orgUrl"],
+                $organisation["orgMail"],
+                $organisation["phone"],
+                $organisation["backImg"],
             );
             array_push($organisations, $newOrganisation);
         }
@@ -111,11 +117,11 @@ abstract class  Manager
     protected function fromQueryToUser(array $result): User {
         return new User(
             $result[0]["id"],
-            $result[0]["nom"],
-            $result[0]["prenom"],
+            $result[0]["lastName"],
+            $result[0]["firstName"],
             $result[0]["mail"],
-            $result[0]["tel"],
-            $result[0]["photo"],
+            $result[0]["phone"],
+            $result[0]["img"],
             $result[0]["isAdmin"]
         );
     }
@@ -125,11 +131,11 @@ abstract class  Manager
         foreach($result as $user) {
             $newUser = new User(
                 $user["id"],
-                $user["nom"],
-                $user["prenom"],
+                $user["lastName"],
+                $user["firstName"],
                 $user["mail"],
-                $user["tel"],
-                $user["photo"],
+                $user["phone"],
+                $user["img"],
                 $user["isAdmin"]
             );
             array_push($users, $newUser);
@@ -143,8 +149,8 @@ abstract class  Manager
             $newProposition = new Proposition(
                 $proposition["id"],
                 $author,
-                $proposition["nom"],
-                $proposition["description"],
+                $proposition["title"],
+                $proposition["content"],
                 $tags,
                 $proposition["date"],
                 $like,
