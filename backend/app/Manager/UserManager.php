@@ -36,7 +36,7 @@ class UserManager extends Manager {
             return $this->inventory[$id];
         }
 
-        $newQuery = "SELECT `id`, `lastName`, `firstName`, `mail`, `phone`, `img`, `isAdmin` FROM `Users` WHERE id = $id";
+        $newQuery = "SELECT * FROM `Users` WHERE id = $id";
         $this->setQuery($newQuery);
 
         $result = $this->querySelect();
@@ -60,7 +60,7 @@ class UserManager extends Manager {
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
     public function getUserByName(string $nom): array {
-        $newQuery = "SELECT `id`, `lastName`, `firstName`, `mail`, `phone`, `img`, `isAdmin` FROM `Users` WHERE nom = $nom";
+        $newQuery = "SELECT * FROM `Users` WHERE nom = $nom";
         $this->setQuery($newQuery);
 
         $result = $this->querySelect();
@@ -82,7 +82,7 @@ class UserManager extends Manager {
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
     public function getUserByMail(string $mail): User {
-        $newQuery = "SELECT `id`, `lastName`, `firstName`, `mail`, `phone`, `img`, `isAdmin` FROM `Users` WHERE mail = '$mail'";
+        $newQuery = "SELECT * FROM `Users` WHERE mail = '$mail'";
         $this->setQuery($newQuery);
 
         $result = $this->querySelect();
@@ -104,7 +104,7 @@ class UserManager extends Manager {
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
     public function getUserByToken(string $token): User {
-        $newQuery = "SELECT `id`, `lastName`, `firstName`, `mail`, `phone`, `img`, `isAdmin` FROM `Users` WHERE token = '$token'";
+        $newQuery = "SELECT * FROM `Users` WHERE token = '$token'";
         $this->setQuery($newQuery);
 
         $result = $this->querySelect();

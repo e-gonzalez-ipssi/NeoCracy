@@ -84,7 +84,7 @@ class OrganisationManager extends Manager {
             return $this->inventory[$id];
         }
 
-        $newQuery = "SELECT `id`, `orgName`, `content`, `orgUrl` FROM `Organization` WHERE id = $id";
+        $newQuery = "SELECT * FROM `Organization` WHERE id = $id";
         $this->setQuery($newQuery);
 
         $result = $this->querySelect();
@@ -108,7 +108,7 @@ class OrganisationManager extends Manager {
      * @throw Exception Relève une expetion si l'Organisation n'a pas été trouvé
      */
     public function getOrganisationByName(string $nom): Organisation {
-        $newQuery = "SELECT `id`, `orgName`, `content`, `orgUrl` FROM `Organization` WHERE orgName = '$nom'";
+        $newQuery = "SELECT * FROM `Organization` WHERE orgName = '$nom'";
         $this->setQuery($newQuery);
 
         $result = $this->querySelect();
