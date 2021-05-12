@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Entity\User;
+use App\Entity\Users;
 use App\Entity\bd;
-use App\Entity\Proposition;
+use App\Entity\Post;
 use App\Manager\OrganisationManager;
 use App\Manager\PropositionManager;
 use App\Manager\UserManager;
@@ -20,7 +20,7 @@ include "Constant.php";
 
 class Api extends BaseController
 {
-    protected ?User $me = null;
+    protected ?Users $me = null;
     protected UserService $userService;
     protected OrganisationService $orgService;
     protected ConnexionService $connexionService;

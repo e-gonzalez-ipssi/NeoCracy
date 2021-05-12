@@ -3,9 +3,9 @@
 namespace App\Manager;
 
 use App\Entity\bd ;
-use App\Entity\Organisation ;
-use App\Entity\Proposition;
-use App\Entity\User;
+use App\Entity\Organization ;
+use App\Entity\Post;
+use App\Entity\Users;
 use Exception;
 
 abstract class  Manager
@@ -85,8 +85,8 @@ abstract class  Manager
         ];
     }
 
-    protected function fromQueryToOrganisation($result): Organisation {
-        return new Organisation(
+    protected function fromQueryToOrganisation($result): Organization {
+        return new Organization(
             $result[0]["id"],
             $result[0]["orgName"],
             $result[0]["content"],
@@ -100,7 +100,7 @@ abstract class  Manager
     protected function fromQueryToOrganisations($result): array {
         $organisations = [];
         foreach($result as $organisation) {
-            $newOrganisation = new Organisation(
+            $newOrganisation = new Organization(
                 $organisation["id"],
                 $organisation["orgName"],
                 $organisation["content"],
@@ -114,8 +114,8 @@ abstract class  Manager
         return $organisations;
     }
 
-    protected function fromQueryToUser(array $result): User {
-        return new User(
+    protected function fromQueryToUser(array $result): Users {
+        return new Users(
             $result[0]["id"],
             $result[0]["lastName"],
             $result[0]["firstName"],
@@ -129,7 +129,7 @@ abstract class  Manager
     protected function fromQueryToUsers(array $result): array {
         $users = [];
         foreach($result as $user) {
-            $newUser = new User(
+            $newUser = new Users(
                 $user["id"],
                 $user["lastName"],
                 $user["firstName"],
@@ -143,20 +143,21 @@ abstract class  Manager
         return $users;
     }
 
-    protected function fromQueryToPropositions(array $result, User $author, array $tags, int $like, int $dislike): array {
+    protected function fromQueryToPropositions(array $result, Users $author, array $tags, int $like, int $dislike): array {
         $return = [];
-        foreach($result as $proposition) {
-            $newProposition = new Proposition(
-                $proposition["id"],
+        foreach($result as $post) {
+            $newPost = new Post(
+                $post["id"],
                 $author,
-                $proposition["title"],
-                $proposition["content"],
+                $post["title"],
+                $post["content"],
+                $post["img"],
                 $tags,
-                $proposition["date"],
+                $post["date"],
                 $like,
                 $dislike,
             );
-            array_push($return, $newProposition);
+            array_push($return, $newPost);
         }
         return $return;
     }

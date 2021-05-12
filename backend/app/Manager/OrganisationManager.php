@@ -2,7 +2,7 @@
 
 namespace App\Manager;
 
-use App\Entity\Organisation;
+use App\Entity\Organization;
 use App\Manager\TagManagerTrait;
 use Exception;
 
@@ -79,7 +79,7 @@ class OrganisationManager extends Manager {
      * 
      * @throw Exception Relève une expetion si l'Organisation n'a pas été trouvé
      */
-    public function getOrganisationById(int $id): Organisation {
+    public function getOrganisationById(int $id): Organization {
         if (!empty($this->inventory[$id])) {
             return $this->inventory[$id];
         }
@@ -107,7 +107,7 @@ class OrganisationManager extends Manager {
      * 
      * @throw Exception Relève une expetion si l'Organisation n'a pas été trouvé
      */
-    public function getOrganisationByName(string $nom): Organisation {
+    public function getOrganisationByName(string $nom): Organization {
         $newQuery = "SELECT * FROM `Organization` WHERE orgName = '$nom'";
         $this->setQuery($newQuery);
 
@@ -126,8 +126,8 @@ class OrganisationManager extends Manager {
      * @return string Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
-    public function deleteOrganisation(Organisation $org, string $userName): array {
-        $nom = $org->getNom();
+    public function deleteOrganisation(Organization $org, string $userName): array {
+        $nom = $org->getOrgName();
         /** @var string $newQuery */
         $newQuery = "DELETE FROM `OrgAdmin`  WHERE id_Organization = (SELECT id FROM Organization WHERE orgName = $nom) AND 
         id_Users = (SELECT id FROM Users WHERE lastName = $userName)";

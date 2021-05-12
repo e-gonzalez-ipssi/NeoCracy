@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use DateTime;
-use App\Entity\User;
+use App\Entity\Users;
 use Illuminate\Http\Request;
 use Exception;
 
-class PropositionApi extends Api
+class PostApi extends Api
 {
     private const NO_RIGHT = 1;
     private const IS_ADMIN = 2;
@@ -87,14 +87,14 @@ class PropositionApi extends Api
             [
                 ["organisation", REQUIRED, TYPE_INT, $request->input('organisation')],
                 ["title", REQUIRED, TYPE_STRING, $request->input('title')],
-                ["description", NOT_REQUIRED, TYPE_STRING, $request->input('description'), ""],
+                ["content", NOT_REQUIRED, TYPE_STRING, $request->input('content'), ""],
                 ["tags", NOT_REQUIRED, TYPE_STRING, $request->input('tags'), ""]
             ],
             self::IS_ORG_MEMBER
         );
 
         $org = $this->orgService->getOrganisationById($params['organisation']);
-        $this->propositionService->createProposition($org, $this->me, $params['title'], $params['description'], $params['tags']);
+        $this->propositionService->createProposition($org, $this->me, $params['title'], $params['content'], $params['tags']);
         return $this->returnOutput($this->ack());
     }
 
@@ -185,7 +185,7 @@ class PropositionApi extends Api
         $likers = $this->propositionService->getLikers($proposition);
         $usersLike = [];
 
-        /** @var User $liker */
+        /** @var Users $liker */
         foreach($likers as $liker) {
             array_push($usersLike, $liker->arrayify());
         }
@@ -193,7 +193,7 @@ class PropositionApi extends Api
         $dislikers = $this->propositionService->getDislikers($proposition);
         $usersDislike = [];
 
-        /** @var User $disliker */
+        /** @var Users $disliker */
         foreach($dislikers as $disliker) {
             array_push($usersDislike, $disliker->arrayify());
         }
@@ -256,7 +256,7 @@ class PropositionApi extends Api
 
             $newReport = [
                 "Proposition" => $report["Proposition"]->arrayify(),
-                "User" => $report["User"]->arrayify(),
+                "Users" => $report["Users"]->arrayify(),
                 "Message" => $report["Message"],
                 "Date" => $date
             ];

@@ -2,8 +2,8 @@
 
 namespace App\Service;
 
-use App\Entity\Organisation;
-use App\Entity\User;
+use App\Entity\Organization;
+use App\Entity\Users;
 use App\Manager\OrganisationManager;
 use App\Service\UserService;
 use Exception;
@@ -27,7 +27,7 @@ class  OrganisationService {
      * @param string $lienSite Un lien vers le site de l'organisation
      */
     public function createOrganisation (
-        User $user,
+        Users $user,
         string $nom, 
         ?string $description, 
         ?string $lienSite
@@ -55,7 +55,7 @@ class  OrganisationService {
      * 
      * @return Organisation L'organisation recherchée
      */
-    public function getOrganisationById (int $id): Organisation {
+    public function getOrganisationById (int $id): Organization {
         return $this->organisationManager->getOrganisationById($id);
     }
 
@@ -66,7 +66,7 @@ class  OrganisationService {
      * 
      * @return Organisation L'organisation recherchée
      */
-    public function getOrganisationByName (string $nom): Organisation {
+    public function getOrganisationByName (string $nom): Organization {
         return $this->organisationManager->getOrganisationByName($nom);
     }
 
@@ -78,7 +78,7 @@ class  OrganisationService {
      * 
      * @return void
      */
-    public function deleteOrganisation(Organisation $org , User $user): void{
+    public function deleteOrganisation(Organization $org , Users $user): void{
         if(
             !in_array($user, $this->getAdminsFromOrganisation($org))
             && !$user->isAdmin() // si l'utilisateur est admin du site il peut supprimer n'importe quel org
@@ -88,7 +88,7 @@ class  OrganisationService {
         }
 
         // Renvoie une erreur si organisation inexistant
-        $this->organisationManager->deleteOrganisation($org, $user->getNom());
+        $this->organisationManager->deleteOrganisation($org, $user->getLastName());
     }
 
     /**
@@ -99,7 +99,7 @@ class  OrganisationService {
      * 
      * @return bool
      */
-    public function userIsInOrganisation(User $user, int $orgId): bool{
+    public function userIsInOrganisation(Users $user, int $orgId): bool{
         $userOrgs =  $this->organisationManager->getOrganisationsFromUser($user->getId());
         foreach ($userOrgs as $org) {
             if($org["id_Organisation"] == $orgId){
@@ -112,14 +112,14 @@ class  OrganisationService {
     /**
      * Permet d'ajouter un utilisateur à une organisation
      */
-    public function addUserFromOrganisation(Organisation $org, User $user): void{
+    public function addUserFromOrganisation(Organization $org, Users $user): void{
         $this->organisationManager->addUserToOrganisation($org->getId(), $user->getId());
     }
 
     /**
      * Permet de supprimer un utilisateur d'une organisation de la database
      */
-    public function removeUserFromOrganisation(Organisation $org, User $user): void{
+    public function removeUserFromOrganisation(Organization $org, Users $user): void{
         if ($this->userIsInOrganisation($user, $org->getId())) {
             throw new Exception("user-not-in-organisation");
         }
@@ -130,7 +130,7 @@ class  OrganisationService {
     /**
      * Permet de récupéré les utilisateurs d'une organisation
      */
-    public function getUsersFromOrganisation(Organisation $org){
+    public function getUsersFromOrganisation(Organization $org){
         $membersId = $this->organisationManager->getUsersFromOrganisation($org->getId());
     
         $membersList = [];
@@ -146,7 +146,7 @@ class  OrganisationService {
     /**
      * Permet de récupéré les administrateurs d'une organisation
      */
-    public function getAdminsFromOrganisation(Organisation $org){
+    public function getAdminsFromOrganisation(Organization $org){
         $adminsId = $this->organisationManager->getAdminsFromOrganisation($org->getId());
     
         $adminsList = [];
@@ -165,7 +165,7 @@ class  OrganisationService {
      * @param Organisation $org L'organisation dans laquelle on souhaite ajouter un admin
      * @param User $user L'utilisateur à ajouter en temps qu'admin
      */
-    public function addAdminToOrganisation(Organisation $org, User $user){
+    public function addAdminToOrganisation(Organization $org, Users $user){
         if ($this->userIsOrgAdmin($user, $org->getId())) {
             throw new Exception("user-is-already-admin");
         }
@@ -187,7 +187,7 @@ class  OrganisationService {
      * 
      * TODO ne plus utiliser $orgId mais $org
      */
-    public function userIsOrgAdmin(User $user, int $orgId): bool {
+    public function userIsOrgAdmin(Users $user, int $orgId): bool {
         $admins = $this->organisationManager->getAdminsFromOrganisation($orgId);
 
         foreach ($admins as $admin) {
@@ -205,7 +205,7 @@ class  OrganisationService {
      * 
      * @return array La liste des tags d'une organisation
      */
-    public function getOrganisationTags(Organisation $org): array {
+    public function getOrganisationTags(Organization $org): array {
         return $this->organisationManager->getOrganisationTags($org->getId());
     }
 
@@ -215,7 +215,7 @@ class  OrganisationService {
      * @param Organisation $org L'organisation ou on veux ajouter les tags
      * @param string $tagName Le nom du tag a ajouter
      */
-    public function addTagToOrganisation(Organisation $org, string $tagName) {
+    public function addTagToOrganisation(Organization $org, string $tagName) {
         $this->organisationManager->addTagToOrganisation($org->getid(), $tagName);
     }
 
@@ -227,7 +227,7 @@ class  OrganisationService {
      * 
      * @return int L'id du tag
      */
-    public function getTagId(Organisation $org, string $tagName): int {
+    public function getTagId(Organization $org, string $tagName): int {
         return $this->organisationManager->getTagId($org->getid(), $tagName);
     }
 }

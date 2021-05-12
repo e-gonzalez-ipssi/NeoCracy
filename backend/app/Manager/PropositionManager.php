@@ -3,8 +3,8 @@
 namespace App\Manager;
 
 use App\Entity\bd ;
-Use App\Entity\User;
-Use App\Entity\Proposition;
+use App\Entity\Users;
+use App\Entity\Post;
 use App\Service\UserService;
 use Exception;
 
@@ -26,7 +26,7 @@ class PropositionManager extends Manager {
     /**
      * Cette fonction permet de récupéré une proposition exploitable en donnant son id
      */
-    public function getPropositionById(int $id): Proposition {
+    public function getPropositionById(int $id): Post {
         $requete = "SELECT * FROM `Post` WHERE id = $id";
         $this->setQuery($requete);
         $result = $this->querySelect();
@@ -97,7 +97,7 @@ class PropositionManager extends Manager {
     /**
      * Fonction permettant de récupéré l'autheur d'une proposition
      */
-    private function getAuthor(int $propositionId): User {
+    private function getAuthor(int $propositionId): Users {
         $requete = "SELECT id_Users FROM `UsersPost` WHERE id_Post = $propositionId";
         $this->setQuery($requete);
         $result = $this->querySelect();
