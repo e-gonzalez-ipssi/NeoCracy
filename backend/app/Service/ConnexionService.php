@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\Users;
+use App\Entity\User;
 use App\Manager\UserManager;
 use App\Service\UserService;
 use Exception;
@@ -11,7 +11,7 @@ class  ConnexionService {
 
     private UserService $userService;
     private UserManager $userManager;
-    private ?Users $me = null;
+    private ?User $me = null;
 
     public function __construct(UserService $userService, UserManager $userManager) {
         $this->userService = $userService;
@@ -80,7 +80,7 @@ class  ConnexionService {
             throw new Exception("bad-input-data");
         }
 
-        /** @var Users $user */
+        /** @var User $user */
         $user = $this->userService->getUserByMail($mail);
 
         $password = password_hash($password, PASSWORD_BCRYPT);
@@ -171,11 +171,11 @@ class  ConnexionService {
     /**
      * Cette fonction permet de set le token utilisateur dans la database ainsi que dans les cookie de l'utilisateur
      * 
-     * @param Users $user L'utilisateur a qui on souhaite changer le token
+     * @param User $user L'utilisateur a qui on souhaite changer le token
      * @param string $value La valeur a laquel on souhaite set le token
      * @param int $time temps apres laquel le token expirera (+86400 = +1 jour) 
      */
-    private function setToken(Users $user, string $value, ?int $time = null){
+    private function setToken(User $user, string $value, ?int $time = null){
         $this->userManager->setUserToken($value, $user->getId());
         //setcookie(COOKIE_USER_TOKEN, $value, $time);
     }
@@ -183,9 +183,9 @@ class  ConnexionService {
     /**
      * Permet de récupéré l'utilisateur courant
      * 
-     * @return Users L'utilisateur courant au format Users
+     * @return User L'utilisateur courant au format User
      */
-    public function getCurrentUser(): Users {
+    public function getCurrentUser(): User {
         if (is_null($this->me)) {
             throw new Exception("error-not-connected");
         }

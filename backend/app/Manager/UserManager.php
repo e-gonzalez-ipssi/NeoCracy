@@ -1,7 +1,7 @@
 <?php 
 
 namespace App\Manager;
-Use App\Entity\Users;
+Use App\Entity\User;
 use Exception;
 
 class UserManager extends Manager {
@@ -31,7 +31,7 @@ class UserManager extends Manager {
      * 
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
-    public function getUserById(int $id): Users {
+    public function getUserById(int $id): User {
         if (!empty($this->inventory[$id])) {
             return $this->inventory[$id];
         }
@@ -81,7 +81,7 @@ class UserManager extends Manager {
      * 
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
-    public function getUserByMail(string $mail): Users {
+    public function getUserByMail(string $mail): User {
         $newQuery = "SELECT * FROM `Users` WHERE mail = '$mail'";
         $this->setQuery($newQuery);
 
@@ -103,7 +103,7 @@ class UserManager extends Manager {
      * 
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
-    public function getUserByToken(string $token): Users {
+    public function getUserByToken(string $token): User {
         $newQuery = "SELECT * FROM `Users` WHERE token = '$token'";
         $this->setQuery($newQuery);
 

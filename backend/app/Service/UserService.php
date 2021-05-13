@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\Users;
+use App\Entity\User;
 use App\Manager\UserManager;
 use Exception;
 
@@ -39,7 +39,7 @@ class  UserService {
      * 
      * @return User L'utilisateur correspondant a l'id
      */
-    public function getUserById (int $id): Users {
+    public function getUserById (int $id): User {
         return $this->userManager->getUserById($id);
     }
 
@@ -50,7 +50,7 @@ class  UserService {
      * 
      * @return User L'utilisateur correspondant au mail
      */
-    public function getUserByMail (string $mail): Users {
+    public function getUserByMail (string $mail): User {
         return $this->userManager->getUserByMail($mail);
     }
 
@@ -76,7 +76,7 @@ class  UserService {
      * 
      * @throw Exception renvoie une exception si l'utilisateur n'a pas les permissions
      */
-    public function deleteUserById (Users $currentUser, int $id): array{
+    public function deleteUserById (User $currentUser, int $id): array{
         if (
             $currentUser->getId() != $id
             || ! $currentUser->isAdmin()

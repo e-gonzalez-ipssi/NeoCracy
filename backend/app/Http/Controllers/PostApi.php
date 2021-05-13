@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use DateTime;
-use App\Entity\Users;
+use App\Entity\User;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -185,7 +185,7 @@ class PostApi extends Api
         $likers = $this->propositionService->getLikers($proposition);
         $usersLike = [];
 
-        /** @var Users $liker */
+        /** @var User $liker */
         foreach($likers as $liker) {
             array_push($usersLike, $liker->arrayify());
         }
@@ -193,7 +193,7 @@ class PostApi extends Api
         $dislikers = $this->propositionService->getDislikers($proposition);
         $usersDislike = [];
 
-        /** @var Users $disliker */
+        /** @var User $disliker */
         foreach($dislikers as $disliker) {
             array_push($usersDislike, $disliker->arrayify());
         }
@@ -202,11 +202,11 @@ class PostApi extends Api
 
         $return["like"] = [
             "number" => $like,
-            "users" => $usersLike,
+            "User" => $usersLike,
         ];
         $return["dislike"] = [
             "number" => $dislike,
-            "users" => $usersDislike,
+            "User" => $usersDislike,
         ];
 
         return $this->returnOutput($return);
@@ -256,7 +256,7 @@ class PostApi extends Api
 
             $newReport = [
                 "Proposition" => $report["Proposition"]->arrayify(),
-                "Users" => $report["Users"]->arrayify(),
+                "User" => $report["User"]->arrayify(),
                 "Message" => $report["Message"],
                 "Date" => $date
             ];

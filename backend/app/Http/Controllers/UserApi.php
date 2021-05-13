@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Entity\Users;
+use App\Entity\User;
 use Illuminate\Http\Request;
 
 class UserApi extends Api
@@ -40,7 +40,7 @@ class UserApi extends Api
      * Permet de faire des différents check de permission
      * - créer un nouveau case par nouveau type de permission
      */
-    private function checkAccess(int $right, ?Users $me) {
+    private function checkAccess(int $right, ?User $me) {
         switch ($right) {
             case self::NO_RIGHT:
             default:

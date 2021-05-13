@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entity\Organization;
-use App\Entity\Users;
+use App\Entity\User;
 use Illuminate\Http\Request;
 use Exception;
 

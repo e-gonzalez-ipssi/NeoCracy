@@ -3,12 +3,12 @@
 namespace App\Entity;
 
 use DateTime;
-use App\Entity\Tags;
+use App\Entity\Tag;
 
 class Post
 {
     protected int $id;
-    protected Users $author;
+    protected User $author;
     protected string $title;
     protected string $content;
     protected string $img;
@@ -18,7 +18,7 @@ class Post
     protected int $dislike;
 
 
-    public function __construct(int $id, Users $author, string $title, string $content, string $img, array $tag, int $date, int $like, int $dislike)
+    public function __construct(int $id, User $author, string $title, string $content, string $img, array $tag, int $date, int $like, int $dislike)
     {
         $this->id = $id;
         $this->author = $author;
@@ -39,11 +39,11 @@ class Post
         $this->id = $id;
     }
 
-    public function getAuthor(): Users{
+    public function getAuthor(): User{
         return $this->author;
     }
 
-    public function setAuthor(Users $user){
+    public function setAuthor(User $user){
         $this->author = $user;
     }
 
@@ -77,7 +77,7 @@ class Post
         return $this->tag;
     }
 
-    public function addTag(Tags $tag){
+    public function addTag(Tag $tag){
         array_push($this->tag, $tag);
     }
 
@@ -103,7 +103,7 @@ class Post
 
         $tags = [];
 
-        /** @var Tags $tag */
+        /** @var Tag $tag */
         foreach($this->tag as $tag) {
             array_push($tags, $tag->arrayify());
         }

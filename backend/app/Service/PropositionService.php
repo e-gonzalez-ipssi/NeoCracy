@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\Users;
+use App\Entity\User;
 use App\Entity\Organization;
 use App\Entity\Post;
 use App\Manager\PropositionManager;
@@ -21,7 +21,7 @@ class  PropositionService {
         $this->userService = $userService;
     }
 
-    public function createProposition(Organization $org, Users $author, string $title, string $description, string $tags) {
+    public function createProposition(Organization $org, User $author, string $title, string $description, string $tags) {
         // on créer une proposition
         $propositionId = $this->propositionManager->createProposition($org->getId(), $author->getId(), $title, $description);
 
@@ -61,7 +61,7 @@ class  PropositionService {
     /**
      * Permet de like une proposition
      */
-    public function likeProposition(Post $proposition, Users $author) {
+    public function likeProposition(Post $proposition, User $author) {
         if ($this->isAlreadyDisliked($proposition, $author)) {
             throw new Exception('proposition-already-disliked');
         }
@@ -77,7 +77,7 @@ class  PropositionService {
     /**
      * Permet de dislike une proposition
      */
-    public function dislikeProposition(Post $proposition, Users $author) {
+    public function dislikeProposition(Post $proposition, User $author) {
         if ($this->isAlreadyLiked($proposition, $author)) {
             throw new Exception('proposition-already-liked');
         }
@@ -90,7 +90,7 @@ class  PropositionService {
         }
     }
 
-    private function isAlreadyLiked(Post $proposition, Users $author): bool {
+    private function isAlreadyLiked(Post $proposition, User $author): bool {
         $likeList = $this->propositionManager->getLike($proposition->getId());
 
         foreach($likeList as $like) {
@@ -102,7 +102,7 @@ class  PropositionService {
         return false;
     }
 
-    private function isAlreadyDisliked(Post $proposition, Users $author): bool {
+    private function isAlreadyDisliked(Post $proposition, User $author): bool {
         $dislikeList = $this->propositionManager->getDislike($proposition->getId());
 
         foreach($dislikeList as $dislike) {
@@ -148,7 +148,7 @@ class  PropositionService {
         return $return;
     }
 
-    public function reportProposition(Post $proposition, Users $user, string $message): void{
+    public function reportProposition(Post $proposition, User $user, string $message): void{
         // on vérifie si le report n'éxiste pas déjà afin de ne pas le dupliquer
         if($this->isAlreadyReported($proposition, $user)){
             throw new Exception("user-already-report-proposition");
@@ -158,7 +158,7 @@ class  PropositionService {
         $this->propositionManager->reportProposition($proposition->getId(), $user->getId(), $message);
     }
 
-    private function isAlreadyReported(Post $proposition, Users $user){
+    private function isAlreadyReported(Post $proposition, User $user){
         $report = $this->propositionManager->getReportByPropositionAndUserIds($proposition->getId(), $user->getId());
 
         if (count($report) < 1) {

@@ -2,7 +2,7 @@
 
 namespace App\Manager;
 
-use App\Entity\Tags;
+use App\Entity\Tag;
 use Exception;
 
 Trait TagManagerTrait {
@@ -39,7 +39,7 @@ Trait TagManagerTrait {
             $this->setQuery($requete);
             $result = $this->querySelect();
 
-            $newTag = new Tags(
+            $newTag = new Tag(
                 $result[0]["id"],
                 $result[0]["nom"]
             );

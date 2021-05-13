@@ -5,7 +5,7 @@ namespace App\Manager;
 use App\Entity\bd ;
 use App\Entity\Organization ;
 use App\Entity\Post;
-use App\Entity\Users;
+use App\Entity\User;
 use Exception;
 
 abstract class  Manager
@@ -114,8 +114,8 @@ abstract class  Manager
         return $organisations;
     }
 
-    protected function fromQueryToUser(array $result): Users {
-        return new Users(
+    protected function fromQueryToUser(array $result): User {
+        return new User(
             $result[0]["id"],
             $result[0]["lastName"],
             $result[0]["firstName"],
@@ -129,7 +129,7 @@ abstract class  Manager
     protected function fromQueryToUsers(array $result): array {
         $users = [];
         foreach($result as $user) {
-            $newUser = new Users(
+            $newUser = new User(
                 $user["id"],
                 $user["lastName"],
                 $user["firstName"],
@@ -143,7 +143,7 @@ abstract class  Manager
         return $users;
     }
 
-    protected function fromQueryToPropositions(array $result, Users $author, array $tags, int $like, int $dislike): array {
+    protected function fromQueryToPropositions(array $result, User $author, array $tags, int $like, int $dislike): array {
         $return = [];
         foreach($result as $post) {
             $newPost = new Post(

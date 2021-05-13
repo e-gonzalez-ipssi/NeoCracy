@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class Tags {
+class Tag {
 
     private int $id;
     private string $tagsName;
