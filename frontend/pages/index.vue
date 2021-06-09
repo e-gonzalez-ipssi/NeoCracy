@@ -31,6 +31,10 @@
       <h3>Logout</h3>
       <button @click="onLogout">Logout</button>
     </div>
+    <div>
+      <h1>Page d'accueil</h1>
+      <NuxtLink to="/home">Home page</NuxtLink>
+    </div>
   </div>
 </template>
 
