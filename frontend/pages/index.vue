@@ -68,18 +68,35 @@ export default {
       })
       const userToken = this.$cookies.get('userToken')
       console.log('1 userToken -->', userToken)
-      const response = await this.$api.auth.login(
-        this.emailLogin,
-        this.passwordLogin,
-        userToken
-      )
-      console.log(response)
+
+      var xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+
+      xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+          console.log(this.responseText);
+        }
+      });
+
+      xhr.open("POST", "http://localhost:8000/api/connect?password=0123456Az&mail=test@test.com");
+
+      xhr.send();
     },
-    async onLogout() {
-      const response = await this.$api.auth.logout()
-      console.log(response)
+      async onLogout() {
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function() {
+          if(this.readyState === 4) {
+            console.log(this.responseText);
+          }
+        });
+
+        xhr.open("POST", "http://localhost:8000/api/disconnect");
+
+        xhr.send();
+      },
     },
-  },
 }
 </script>
 
