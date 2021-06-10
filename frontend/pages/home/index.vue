@@ -4,12 +4,15 @@
     <div class="container">
       <section>
         <div id="writeContent">
-          <a href="#">
-            <div class="inputContent">
-              <i class="fi-rr-pencil"></i>
-              <h3>Rédiger un article ...</h3>
-            </div>
-          </a>
+          <ModalFormPost
+            :revele="reveleFormPost"
+            :toggle-modale-form-post="toggleModaleFormPost"
+          ></ModalFormPost>
+          <div class="inputContent" @click="toggleModaleFormPost">
+            <i class="fi-rr-pencil"></i>
+
+            Rédiger un article ...
+          </div>
         </div>
         <main>
           <div class="topBox">
@@ -68,7 +71,22 @@
 </template>
 
 <script>
-export default {}
+import ModalFormPost from '@/components/Modals/Forms/ModalFormPost'
+export default {
+  components: {
+    ModalFormPost,
+  },
+  data() {
+    return {
+      reveleFormPost: false,
+    }
+  },
+  methods: {
+    toggleModaleFormPost() {
+      this.reveleFormPost = !this.reveleFormPost
+    },
+  },
+}
 </script>
 
 <style>
