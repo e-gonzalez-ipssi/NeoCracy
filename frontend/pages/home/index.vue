@@ -1,65 +1,69 @@
 <template>
-  <div class="container">
+  <div>
     <Nav />
-    <section>
-      <div id="writeContent">
-        <a href="#">
-          <div class="inputContent">
-            <i class="fi-rr-pencil"></i>
-            <h3>Rédiger un article ...</h3>
-          </div>
-        </a>
-      </div>
-      <main>
-        <div class="topBox">
-          <div class="blockOne">
-            <img src="https://via.placeholder.com/150" />
-            <div class="author">
-              <h5>Louis Poulin</h5>
-              <div>
-                <small>de</small>
-                <h6>Neocracy</h6>
+    <div class="container">
+      <section>
+        <div id="writeContent">
+          <a href="#">
+            <div class="inputContent">
+              <i class="fi-rr-pencil"></i>
+              <h3>Rédiger un article ...</h3>
+            </div>
+          </a>
+        </div>
+        <main>
+          <div class="topBox">
+            <div class="blockOne">
+              <img src="https://via.placeholder.com/150" />
+              <div class="author">
+                <h5>Louis Poulin</h5>
+                <div>
+                  <small>de</small>
+                  <h6>Neocracy</h6>
+                </div>
               </div>
             </div>
+            <div class="blockTwo">
+              <i class="fi-rr-menu-dots-vertical"></i>
+            </div>
           </div>
-          <div class="blockTwo"><i class="fi-rr-menu-dots-vertical"></i></div>
-        </div>
-        <div class="midBox">
-          <div class="blockOne">
-            <h3>Titre du poste</h3>
+          <div class="midBox">
+            <div class="blockOne">
+              <h3>Titre du poste</h3>
+            </div>
+            <div class="blockTwo">
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim
+                iure voluptate distinctio optio sed sint vitae ab nulla eius
+                libero. Assumenda obcaecati, dolores minus voluptatibus ipsa
+                omnis sit quibusdam odit!
+              </p>
+            </div>
+            <div class="blockThree">
+              <img
+                src="https://nsa40.casimages.com/img/2020/09/20/200920115309285360.jpg"
+              />
+            </div>
           </div>
-          <div class="blockTwo">
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim
-              iure voluptate distinctio optio sed sint vitae ab nulla eius
-              libero. Assumenda obcaecati, dolores minus voluptatibus ipsa omnis
-              sit quibusdam odit!
-            </p>
+          <div class="bottomBox">
+            <div class="blockOne">
+              <i class="fi-rr-thumbs-up"></i>
+              <p>J'aime</p>
+            </div>
+            <div class="hr"></div>
+            <div class="blockTwo">
+              <i class="fi-rr-thumbs-down"></i>
+              <p>Je n'aime pas</p>
+            </div>
+            <div class="hr"></div>
+            <div class="blockThree">
+              <i class="fi-rr-comment"></i>
+              <p>Commenter</p>
+            </div>
           </div>
-          <div class="blockThree">
-            <img
-              src="https://www.so-buzz.fr/wp-content/uploads/2020/08/img-dev-sobuzz.jpg"
-            />
-          </div>
-        </div>
-        <div class="bottomBox">
-          <div class="blockOne">
-            <i class="fi-rr-thumbs-up"></i>
-            <p>J'aime</p>
-          </div>
-          <div class="hr"></div>
-          <div class="blockTwo">
-            <i class="fi-rr-thumbs-down"></i>
-            <p>Je n'aime pas</p>
-          </div>
-          <div class="hr"></div>
-          <div class="blockThree">
-            <i class="fi-rr-comment"></i>
-            <p>Commenter</p>
-          </div>
-        </div>
-      </main>
-    </section>
+        </main>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -85,12 +89,12 @@ section {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  margin-top: 150px;
+  margin-top: 120px;
 }
 
 #writeContent {
   width: 700px;
-  padding: 30px;
+  padding: 20px 30px;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.01);
   background-image: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);
@@ -111,7 +115,7 @@ section {
 }
 
 .inputContent:hover {
-  border: 2px solid #424347;
+  border: 1px solid #424347;
   outline: none;
   transition: 0.1s ease-in-out;
 }
@@ -126,18 +130,13 @@ section {
   font-size: 15px;
   color: #757588;
   margin-left: 10px;
-  transition: 0.1s ease-in-out;
-}
-
-.inputContent:hover h3 {
-  margin-left: 15px;
-  transition: 0.1s ease-in-out;
 }
 
 main {
   box-sizing: border-box;
   width: 700px;
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-bottom: 100px;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.01);
   background-image: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);
@@ -149,7 +148,7 @@ main {
 .topBox {
   display: flex;
   justify-content: center;
-  padding: 30px;
+  padding: 20px 30px;
   color: #424347;
   font-weight: bold;
   font-size: 15px;
@@ -196,7 +195,7 @@ main {
 .topBox .author small {
   margin-top: 5px;
   font-size: 10px;
-  color: #424347;
+  color: #757588;
 }
 
 .topBox .blockTwo {
@@ -220,6 +219,7 @@ main {
   margin: auto;
   font-size: 20px;
   font-weight: bold;
+  text-align: left;
   color: #424347;
   margin-bottom: 10px;
 }
@@ -233,16 +233,22 @@ main {
   margin-bottom: 15px;
 }
 
+.midBox .blockThree {
+  background: #eeeeee;
+  max-height: 500px;
+  max-width: 700px;
+}
+
 .midBox .blockThree img {
-  width: 100%;
-  height: 100%;
+  max-height: 500px;
+  max-width: 700px;
 }
 
 .bottomBox {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 15px 30px 30px 30px;
+  padding: 20px 30px;
   color: #424347;
   font-weight: bold;
   font-size: 15px;

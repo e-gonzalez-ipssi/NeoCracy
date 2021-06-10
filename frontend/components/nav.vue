@@ -14,7 +14,7 @@
           href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
           rel="stylesheet"
         />
-        <title>NAV</title>
+        <title>Home</title>
       </head>
       <nav>
         <div class="navLeft">
@@ -23,28 +23,28 @@
             <h2>Menu</h2>
 
             <li>
-              <a href="#">
+              <NuxtLink to="/home">
                 <div></div>
-                <i class="fi-rr-home"></i><span>Acceuil</span>
-              </a>
+                <i class="fi-rr-home"></i><span>Accueil</span>
+              </NuxtLink>
             </li>
             <li>
-              <a href="#">
+              <NuxtLink to="/profil">
                 <div></div>
                 <i class="fi-rr-user"></i><span>Mon profil</span>
-              </a>
+              </NuxtLink>
             </li>
             <li>
-              <a href="#">
+              <NuxtLink to="/org">
                 <div></div>
                 <i class="fi-rr-bank"></i><span>Mon organisation</span>
-              </a>
+              </NuxtLink>
             </li>
             <li>
-              <a href="#">
+              <NuxtLink to="/subscribe">
                 <div></div>
                 <i class="fi-rr-following"></i><span>Mes abonnements</span>
-              </a>
+              </NuxtLink>
             </li>
 
             <h2>Général</h2>
@@ -77,7 +77,7 @@
         <div class="navTop">
           <div class="navBox1">
             <div class="arrows">
-              <a href="#"><img src="https://via.placeholder.com/150" /></a>
+              <NuxtLink to="/home"><img src="@/assets/logo.svg" /></NuxtLink>
             </div>
             <div class="search">
               <a href="#"><i class="loupe fi-rr-search"></i></a>
@@ -123,9 +123,8 @@ export default {}
 header {
   position: fixed;
   z-index: 5;
-  width: 100vw;
-  height: 100vh;
   font-family: 'Open Sans', sans-serif;
+  background: transparent;
 }
 
 .navTop {
@@ -203,7 +202,7 @@ header {
 }
 
 .navBox1 input:focus {
-  border: 2px solid #424347;
+  border: 1px solid #424347;
   padding: 5px 20px 5px 55px;
   transition: 0.1s ease-in-out;
   outline: none;
@@ -294,12 +293,26 @@ header {
   font-weight: 900;
 }
 
-.navLeft li:active i {
+.navLeft a.nuxt-link-active i {
   color: #ec7533;
   font-weight: 900;
 }
 
 .navLeft li:hover div {
+  position: absolute;
+  left: 0;
+  height: 25px;
+  width: 6px;
+  background-color: #ec7533;
+  background: linear-gradient(
+    317deg,
+    rgba(226, 81, 0, 1) 0%,
+    rgba(236, 117, 51, 1) 50%
+  );
+  border-radius: 999px;
+}
+
+.navLeft a.nuxt-link-active div {
   position: absolute;
   left: 0;
   height: 25px;
@@ -325,7 +338,7 @@ header {
   font-weight: bold;
 }
 
-.navLeft li:active span {
+.navLeft a.nuxt-link-active span {
   color: #ec7533;
   font-weight: bold;
 }
