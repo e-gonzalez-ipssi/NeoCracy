@@ -3,27 +3,17 @@
     <Nav />
     <div class="container">
       <div id="writeContent">
-        <a href="#">
-          <div class="inputContent">
-            <i class="fi-rr-pencil"></i>
-            <h3>Rédiger un article ...</h3>
-          </div>
-        </a>
+        <ModalFormPost
+          :revele="reveleFormPost"
+          :toggle-modale-form-post="toggleModaleFormPost"
+        ></ModalFormPost>
+        <div class="inputContent">
+          <i class="fi-rr-pencil"></i>
+          <h3>Rédiger un article ...</h3>
+        </div>
       </div>
       <section>
         <main id="main" v-for="post in posts" :key="post">
-        <div id="writeContent">
-          <ModalFormPost
-            :revele="reveleFormPost"
-            :toggle-modale-form-post="toggleModaleFormPost"
-          ></ModalFormPost>
-          <div class="inputContent" @click="toggleModaleFormPost">
-            <i class="fi-rr-pencil"></i>
-
-            Rédiger un article ...
-          </div>
-        </div>
-        <main>
           <div class="topBox">
             <div class="blockOne">
               <img src="https://via.placeholder.com/150" />
@@ -80,13 +70,6 @@
 </template>
 
 <script>
-export default {
-  scrollToTop: true,
-  data() {
-    return {
-      posts: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-    }
-  },
 import ModalFormPost from '@/components/Modals/Forms/ModalFormPost'
 export default {
   components: {
@@ -95,6 +78,7 @@ export default {
   data() {
     return {
       reveleFormPost: false,
+      posts: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     }
   },
   methods: {
@@ -102,6 +86,7 @@ export default {
       this.reveleFormPost = !this.reveleFormPost
     },
   },
+  scrollToTop: true,
 }
 </script>
 
