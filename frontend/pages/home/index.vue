@@ -12,6 +12,18 @@
       </div>
       <section>
         <main id="main" v-for="post in posts" :key="post">
+        <div id="writeContent">
+          <ModalFormPost
+            :revele="reveleFormPost"
+            :toggle-modale-form-post="toggleModaleFormPost"
+          ></ModalFormPost>
+          <div class="inputContent" @click="toggleModaleFormPost">
+            <i class="fi-rr-pencil"></i>
+
+            Rédiger un article ...
+          </div>
+        </div>
+        <main>
           <div class="topBox">
             <div class="blockOne">
               <img src="https://via.placeholder.com/150" />
@@ -74,6 +86,21 @@ export default {
     return {
       posts: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     }
+  },
+import ModalFormPost from '@/components/Modals/Forms/ModalFormPost'
+export default {
+  components: {
+    ModalFormPost,
+  },
+  data() {
+    return {
+      reveleFormPost: false,
+    }
+  },
+  methods: {
+    toggleModaleFormPost() {
+      this.reveleFormPost = !this.reveleFormPost
+    },
   },
 }
 </script>
