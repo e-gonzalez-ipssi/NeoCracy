@@ -2,7 +2,16 @@
   <div>
     <Nav />
     <div class="container">
+      <div id="writeContent">
+        <a href="#">
+          <div class="inputContent">
+            <i class="fi-rr-pencil"></i>
+            <h3>Rédiger un article ...</h3>
+          </div>
+        </a>
+      </div>
       <section>
+        <main id="main" v-for="post in posts" :key="post">
         <div id="writeContent">
           <ModalFormPost
             :revele="reveleFormPost"
@@ -44,7 +53,7 @@
             </div>
             <div class="blockThree">
               <img
-                src="https://nsa40.casimages.com/img/2020/09/20/200920115309285360.jpg"
+                src="https://assets.website-files.com/5aac3a69b2d9acb3144c8171/5ed4ff9b6b5b2be3deac22ff_final.001.png"
               />
             </div>
           </div>
@@ -71,6 +80,13 @@
 </template>
 
 <script>
+export default {
+  scrollToTop: true,
+  data() {
+    return {
+      posts: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    }
+  },
 import ModalFormPost from '@/components/Modals/Forms/ModalFormPost'
 export default {
   components: {
@@ -89,13 +105,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   width: 100%;
   z-index: 1;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding-top: 120px;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -104,14 +121,15 @@ a {
 }
 
 section {
+  height: auto;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  margin-top: 120px;
 }
 
 #writeContent {
   width: 700px;
+  margin: 0 auto;
   padding: 20px 30px;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.01);
@@ -129,13 +147,14 @@ section {
   box-sizing: border-box;
   border-radius: 20px;
   background: #eeeeee;
-  transition: 0.1s ease-in-out;
+  transition: 0.3s ease-in-out;
+  box-shadow: 1px 2px 2px 2px #cfcfcf;
 }
 
 .inputContent:hover {
-  border: 1px solid #424347;
+  border: 1px solid #aaaaaa;
   outline: none;
-  transition: 0.1s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .inputContent i {
@@ -150,11 +169,10 @@ section {
   margin-left: 10px;
 }
 
-main {
+#main {
   box-sizing: border-box;
   width: 700px;
   margin-top: 20px;
-  margin-bottom: 100px;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.01);
   background-image: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);
@@ -174,7 +192,7 @@ main {
 
 .topBox img {
   width: 60px;
-  border: 2px solid #ec7533;
+  border: 2px solid #00d699;
   border-radius: 9999px;
 }
 
