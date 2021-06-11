@@ -163,7 +163,7 @@ header {
   width: 60px;
   margin-top: 10px;
   margin-left: 30px;
-  color: #ec7533;
+  color: #00d699;
 }
 
 .navBox1 img:hover {
@@ -192,7 +192,8 @@ header {
   border-radius: 20px;
   border: none;
   background: #eeeeee;
-  transition: 0.1s ease-in-out;
+  transition: 0.3s ease-in-out;
+  box-shadow: 1px 2px 2px 2px #cfcfcf;
 }
 
 .navBox1 input::placeholder {
@@ -202,9 +203,9 @@ header {
 }
 
 .navBox1 input:focus {
-  border: 1px solid #424347;
+  border: 1px solid #aaaaaa;
   padding: 5px 20px 5px 55px;
-  transition: 0.1s ease-in-out;
+  transition: 0.3s ease-in-out;
   outline: none;
 }
 
@@ -224,7 +225,7 @@ header {
   height: 70px;
   width: 70px;
   border-radius: 9999px;
-  border: 2px solid #ec7533;
+  border: 2px solid #00d699;
   box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
 }
 
@@ -256,7 +257,7 @@ header {
 
 .navLeft h1 span {
   font-size: 40px;
-  color: #ec7533;
+  color: #00d699;
 }
 
 .navLeft h2 {
@@ -289,12 +290,12 @@ header {
 }
 
 .navLeft li:hover i {
-  color: #ec7533;
+  color: #00d699;
   font-weight: 900;
 }
 
 .navLeft a.nuxt-link-active i {
-  color: #ec7533;
+  color: #00d699;
   font-weight: 900;
 }
 
@@ -303,12 +304,8 @@ header {
   left: 0;
   height: 25px;
   width: 6px;
-  background-color: #ec7533;
-  background: linear-gradient(
-    317deg,
-    rgba(226, 81, 0, 1) 0%,
-    rgba(236, 117, 51, 1) 50%
-  );
+  background-color: #00d699;
+  background: linear-gradient(317deg, #00d699 30%, #00eeaa 100%);
   border-radius: 999px;
 }
 
@@ -317,12 +314,8 @@ header {
   left: 0;
   height: 25px;
   width: 6px;
-  background-color: #ec7533;
-  background: linear-gradient(
-    317deg,
-    rgba(226, 81, 0, 1) 0%,
-    rgba(236, 117, 51, 1) 50%
-  );
+  background-color: #00d699;
+  background: linear-gradient(317deg, #00d699 30%, #00eeaa 100%);
   border-radius: 999px;
 }
 
@@ -334,12 +327,12 @@ header {
 }
 
 .navLeft li:hover span {
-  color: #ec7533;
+  color: #00d699;
   font-weight: bold;
 }
 
 .navLeft a.nuxt-link-active span {
-  color: #ec7533;
+  color: #00d699;
   font-weight: bold;
 }
 
@@ -350,11 +343,8 @@ header {
   width: 80%;
   height: 100px;
   border-radius: 30px;
-  background: linear-gradient(
-    317deg,
-    rgba(226, 81, 0, 1) 0%,
-    rgba(236, 117, 51, 1) 50%
-  );
+  background-color: #00d699;
+  background: linear-gradient(317deg, #00d699 30%, #00eeaa 100%);
   box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
 }
 
@@ -384,11 +374,8 @@ header {
   font-size: 25px;
   color: #fff;
   padding-top: 5px;
-  background: linear-gradient(
-    317deg,
-    rgba(226, 81, 0, 1) 0%,
-    rgba(236, 117, 51, 1) 50%
-  );
+  background-color: #00d699;
+  background: linear-gradient(317deg, #00d699 30%, #00eeaa 100%);
   border: transparent;
 }
 
