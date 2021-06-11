@@ -7,7 +7,7 @@
           :revele="reveleFormPost"
           :toggle-modale-form-post="toggleModaleFormPost"
         ></ModalFormPost>
-        <div class="inputContent">
+        <div class="inputContent" @click="toggleModaleFormPost">
           <i class="fi-rr-pencil"></i>
           <h3>Rédiger un article ...</h3>
         </div>
