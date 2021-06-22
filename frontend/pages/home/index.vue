@@ -113,7 +113,7 @@ section {
 }
 
 #writeContent {
-  width: 700px;
+  width: 45%;
   margin: 0 auto;
   padding: 20px 30px;
   border-radius: 10px;
@@ -133,7 +133,6 @@ section {
   border-radius: 20px;
   background: #eeeeee;
   transition: 0.3s ease-in-out;
-  box-shadow: 1px 2px 2px 2px #cfcfcf;
 }
 
 .inputContent:hover {
@@ -156,11 +155,11 @@ section {
 
 #main {
   box-sizing: border-box;
-  width: 700px;
-  margin-top: 20px;
+  width: 45%;
+  margin: 20px auto;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.01);
-  background-image: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);
+  background: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);
   box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
   -moz-box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
   -webkit-box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
@@ -261,8 +260,8 @@ section {
 }
 
 .midBox .blockThree img {
+  width: 100%;
   max-height: 500px;
-  max-width: 700px;
 }
 
 .bottomBox {

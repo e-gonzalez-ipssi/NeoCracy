@@ -55,14 +55,15 @@ section {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  width: 50%;
 }
 
 #main {
   box-sizing: border-box;
-  width: 900px;
+  width: 100%;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.01);
-  background-image: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);
+  background: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);
   box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
   -moz-box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
   -webkit-box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);

@@ -55,11 +55,12 @@ section {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  width: 50%;
 }
 
 #main {
   box-sizing: border-box;
-  width: 900px;
+  width: 100%;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.01);
   background-image: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);

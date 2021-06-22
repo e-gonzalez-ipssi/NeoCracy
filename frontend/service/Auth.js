@@ -4,22 +4,16 @@ export default (axios) => ({
     console.log('2 password -->', password)
     console.log('2 userToken -->', userToken)
     const res = axios
-      .post(
-        'connect',
-        {
-          withCredentials: true,
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${userToken}`,
-          },
+      .post('/connect', {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${userToken}`,
         },
-        {
-          params: {
-            mail,
-            password,
-          },
-        }
-      )
+        params: {
+          mail,
+          password,
+        },
+      })
       .then((response) => response.status)
       .catch((err) => alert(err.message))
     return res
