@@ -69,10 +69,10 @@
             </li>
           </ul>
 
-          <div class="footer">
+          <!-- <div class="footer">
             <i class="fi-rr-copyright"></i><i class="fi-rr-incognito"></i
             ><i class="fi-rr-bell-ring"></i>
-          </div>
+          </div> -->
         </div>
         <div class="navTop">
           <div class="navBox1">
@@ -193,7 +193,6 @@ header {
   border: none;
   background: #eeeeee;
   transition: 0.3s ease-in-out;
-  box-shadow: 1px 2px 2px 2px #cfcfcf;
 }
 
 .navBox1 input::placeholder {
@@ -226,7 +225,9 @@ header {
   width: 70px;
   border-radius: 9999px;
   border: 2px solid #00d699;
-  box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+  box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
+  -moz-box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
+  -webkit-box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
 }
 
 .navBox2 h3 {
@@ -238,6 +239,7 @@ header {
 
 .navLeft {
   position: fixed;
+  flex-direction: column;
   z-index: 2;
   width: 300px;
   height: 100%;
@@ -354,10 +356,11 @@ header {
   right: 0;
   width: 120px;
   height: 100%;
-  display: inline;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 130px;
+  padding: 100px 20px 100px 20px;
   background-color: white;
   box-sizing: border-box;
   border-left: rgba(0, 0, 0, 0.1) 1px solid;
@@ -383,7 +386,6 @@ header {
   width: 65px;
   height: 65px;
   margin: auto;
-  margin-top: 40px;
   border-radius: 9999px;
 }
 
