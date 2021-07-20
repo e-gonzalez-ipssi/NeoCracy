@@ -66,21 +66,15 @@ export default {
     async onLogin() {
       console.log('1 emailLogin -->', this.emailLogin)
       console.log('1 passwordLogin -->', this.passwordLogin)
-      this.$cookies.set('userToken', '123', {
-        path: '/',
-        maxAge: 60 * 60 * 24 * 7,
-      })
-      const userToken = this.$cookies.get('userToken')
-      console.log('1 userToken -->', userToken)
       const response = await this.$api.auth.login(
         this.emailLogin,
         this.passwordLogin,
-        userToken
       )
-      console.log(response)
+      document.cookie = 'userToken='+response;
     },
     async onLogout() {
-      const response = await this.$api.auth.logout()
+      console.log(document.cookie)
+      const response = await this.$api.auth.logout(document.cookie)
       console.log(response)
     },
   },

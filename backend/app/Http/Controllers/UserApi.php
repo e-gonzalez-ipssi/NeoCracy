@@ -25,13 +25,19 @@ class UserApi extends Api
         int $right = self::NO_RIGHT,
         bool $isConnected = true
     ): array {
+        $paramsClean = $this->getParams($params);
+
         if ($isConnected) {
-            $this->me = $this->connexionService->getCurrentUser();
+            if(isset($paramsClean["userToken"])){
+                $userToken = explode("=", $paramsClean["userToken"])[1];
+                $this->me = $this->connexionService->getCurrentUserWithToken($userToken);
+            } 
+            else {
+                $this->me = $this->connexionService->getCurrentUser();
+            } 
         }
 
         $this->checkAccess($right, $this->me);
-
-        $paramsClean = $this->getParams($params);
 
         return $paramsClean;
     }
@@ -67,8 +73,10 @@ class UserApi extends Api
      * 
      * @return mixed les informations de l'utilisateur au format JSON
      */
-    public function getMe() {
-        $this->initialize([], self::NO_RIGHT, true);
+    public function getMe(Request $request) {
+        $this->initialize([
+            ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
+        ], self::NO_RIGHT, true);
 
         return $this->returnOutput($this->me->arrayify());
     }
@@ -89,8 +97,8 @@ class UserApi extends Api
             false,
         );
 
-        $this->connexionService->connexion($params['mail'], $params['password']);
-        return $this->returnOutput($this->ack());
+        $cookie = $this->connexionService->connexion($params['mail'], $params['password']);
+        return $this->returnOutput($cookie);
     }
 
     /**
@@ -101,12 +109,14 @@ class UserApi extends Api
      */
     public function disconnect(Request $request) {
         $params = $this->initialize(
-            [],
+            [
+                ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
+            ],
             self::NO_RIGHT,
             true,
         );
         
-        $this->connexionService->deconnexion();
+        $this->connexionService->deconnexion($params["userToken"]);
         return $this->returnOutput($this->ack());
     }
 

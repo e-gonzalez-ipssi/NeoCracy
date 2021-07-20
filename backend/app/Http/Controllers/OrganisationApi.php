@@ -34,7 +34,13 @@ class OrganisationApi extends Api
         int $orgId = null
     ): array {
         if ($isConnected) {
-            $this->me = $this->connexionService->getCurrentUser();
+            if(isset($paramsClean["userToken"])){
+                $userToken = explode("=", $paramsClean["userToken"])[1];
+                $this->me = $this->connexionService->getCurrentUserWithToken($userToken);
+            } 
+            else {
+                $this->me = $this->connexionService->getCurrentUser();
+            } 
         }
 
         if(!is_null($orgId)){
@@ -95,8 +101,10 @@ class OrganisationApi extends Api
      * 
      * @return  mixed les informations de l'organisation au format JSON
      */
-    public function getOrgMembers(int $orgId) {
-        $this->initialize([], self::IS_ORG_MEMBER, true, $orgId);
+    public function getOrgMembers(Request $request, int $orgId) {
+        $this->initialize([
+            ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
+        ], self::IS_ORG_MEMBER, true, $orgId);
 
         $users = $this->orgService->getUsersFromOrganisation($this->org);
         return $this->returnOutput($users);
@@ -109,8 +117,10 @@ class OrganisationApi extends Api
      * 
      * @return  mixed les informations de l'organisation au format JSON
      */
-    public function getOrgAdmins(int $orgId) {
-        $this->initialize([], self::IS_ORG_MEMBER, true, $orgId);
+    public function getOrgAdmins(Request $request, int $orgId) {
+        $this->initialize([
+            ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
+        ], self::IS_ORG_MEMBER, true, $orgId);
 
         $users = $this->orgService->getAdminsFromOrganisation($this->org);
         return $this->returnOutput($users);
@@ -128,6 +138,7 @@ class OrganisationApi extends Api
         $params = $this->initialize(
             [                
                 ["mail", REQUIRED, TYPE_MAIL, $request->input('mail')],
+                ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
             ], 
             self::IS_ORG_ADMIN, 
             true, 
@@ -146,8 +157,10 @@ class OrganisationApi extends Api
      * 
      * @return  mixed les informations de l'organisation au format JSON
      */
-    public function addOrgMembers(int $orgId) {
-        $this->initialize([], self::IS_NOT_ORG_MEMBER, true, $orgId);
+    public function addOrgMembers(Request $request, int $orgId) {
+        $this->initialize([
+            ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
+        ], self::IS_NOT_ORG_MEMBER, true, $orgId);
 
         $this->orgService->addUserFromOrganisation($this->org, $this->me);
         return $this->returnOutput($this->ack());
@@ -166,6 +179,7 @@ class OrganisationApi extends Api
                 ["nom", REQUIRED, TYPE_STRING, $request->input('nom')],
                 ["description", NOT_REQUIRED, TYPE_STRING, $request->input('description'), 'La super description de mon organisation'],
                 ["lienSite", NOT_REQUIRED, TYPE_STRING, $request->input('lienSite'), 'www.neocracy.fr'],
+                ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
             ],
             self::NO_RIGHT, 
             true

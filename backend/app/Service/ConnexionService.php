@@ -71,8 +71,8 @@ class  ConnexionService {
      * 
      * Note : ces 2 paramêtre peuvent être nul si l'utililsateur utilise sont token pour se connecté
      */
-    public function connexion(?string $mail = null, ?string $password = null): void {
-        if($this->isConnected()){
+    public function connexion(?string $mail = null, ?string $password = null): string {
+        if($this->me){
             throw new Exception("user-already-connected");
         }
 
@@ -92,7 +92,11 @@ class  ConnexionService {
             throw new Exception("bad-password");
         }
 
-        $this->setToken($user, $this->generateUserToken(), time() + (86400 * 30));
+        $cookie = $this->generateUserToken();
+
+        $this->setToken($user, $cookie, time() + (86400 * 30));
+
+        return $cookie;
     }
 
     /**
@@ -100,17 +104,39 @@ class  ConnexionService {
      * 
      * throw Exception renvoie une exeption si il n'y a pas d'utilisateur connecté, ou si la déconnection échou
      */
-    public function deconnexion() {
-        if(!$this->isConnected()) {
-            throw new Exception("user-already-disconnected");
+    public function deconnexion(?string $userToken = null) {
+        if(isset($userToken)){
+            if(!$this->me) {
+                throw new Exception("user-already-disconnected-2");
+            }
+            
+            $this->setToken($this->me, "", time() - 3600);
+            try {
+                $user = $this->getCurrentUserWithToken($userToken);
+            }
+            catch (Exception $e){
+                if (!$e->getMessage() == "error-not-connected-2") {
+                    throw new Exception("disconnection-failed");
+                }
+            }
         }
-        
-        $user = $this->getCurrentUser();
-        $this->setToken($user, $this->generateUserToken(), time() - 3600);
+        else {
+            if(!$this->me) {
+                throw new Exception("user-already-disconnected");
+            }
+            
+            $user = $this->getCurrentUser();
+            $this->setToken($user, $this->generateUserToken(), time() - 3600);
+            try {
+                $user = $this->getCurrentUser();
+            }
+            catch (Exception $e){
+                if (!$e->getMessage() == "error-not-connected") {
+                    throw new Exception("disconnection-failed");
+                }
+            }
+        }
 
-        if ($this->isConnected()) {
-            throw new Exception("disconnection-failed");
-        }
     }
 
     /**
@@ -132,24 +158,6 @@ class  ConnexionService {
     }
     
 
-    /** 
-     * Permet de vérifier si il y a un utilisateur actuellement connecté
-     * 
-     * @return bool True = connecté, False = non connecté
-     */
-    public function isConnected(): bool {
-        try {
-            $this->setCurrentUser();
-            if(! is_null($this->getCurrentUser())) {
-                return true;
-            }
-            return false;
-        } catch (Exception $e) {
-            return false;
-        }
-    }
-
-
     /**
      * Permet de set un utilisateur courant pour la fonction getCurrentUser()
      * Utilise le cookie Utilisateur, si il n'y a pas d'utilisateur courant, le set a NULL
@@ -158,6 +166,22 @@ class  ConnexionService {
         if(isset($_COOKIE[COOKIE_USER_TOKEN])){
             try {
                 $this->me = $this->userManager->getUserByToken($_COOKIE[COOKIE_USER_TOKEN]);
+            } catch (Exception $e) {
+                if ($e->getMessage() == "error-user-not-found") {
+                    $this->me = null;
+                }
+            }
+        }
+    }
+
+    /**
+     * Permet de set un utilisateur courant pour la fonction getCurrentUser()
+     * Utilise le cookie Utilisateur, si il n'y a pas d'utilisateur courant, le set a NULL
+     */
+    private function setCurrentUserWithToken(string $userToken) {
+        if(isset($userToken)){
+            try {
+                $this->me = $this->userManager->getUserByToken($userToken);
             } catch (Exception $e) {
                 if ($e->getMessage() == "error-user-not-found") {
                     $this->me = null;
@@ -187,6 +211,20 @@ class  ConnexionService {
     public function getCurrentUser(): User {
         if (is_null($this->me)) {
             throw new Exception("error-not-connected");
+        }
+
+        return $this->me;
+    }
+
+    /**
+     * Permet de récupéré l'utilisateur courant
+     * 
+     * @return User L'utilisateur courant au format User
+     */
+    public function getCurrentUserWithToken(string $userToken): User {
+        $this->setCurrentUserWithToken($userToken);
+        if (is_null($this->me)) {
+            throw new Exception("error-not-connected-2");
         }
 
         return $this->me;

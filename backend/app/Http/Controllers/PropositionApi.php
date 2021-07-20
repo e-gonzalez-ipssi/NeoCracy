@@ -30,7 +30,13 @@ class PropositionApi extends Api
         bool $isConnected = true
     ): array {
         if ($isConnected) {
-            $this->me = $this->connexionService->getCurrentUser();
+            if(isset($paramsClean["userToken"])){
+                $userToken = explode("=", $paramsClean["userToken"])[1];
+                $this->me = $this->connexionService->getCurrentUserWithToken($userToken);
+            } 
+            else {
+                $this->me = $this->connexionService->getCurrentUser();
+            } 
         }
 
         $paramsClean = $this->getParams($params);
@@ -88,7 +94,8 @@ class PropositionApi extends Api
                 ["organisation", REQUIRED, TYPE_INT, $request->input('organisation')],
                 ["title", REQUIRED, TYPE_STRING, $request->input('title')],
                 ["description", NOT_REQUIRED, TYPE_STRING, $request->input('description'), ""],
-                ["tags", NOT_REQUIRED, TYPE_STRING, $request->input('tags'), ""]
+                ["tags", NOT_REQUIRED, TYPE_STRING, $request->input('tags'), ""],
+                ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
             ],
             self::IS_ORG_MEMBER
         );
@@ -142,6 +149,7 @@ class PropositionApi extends Api
         $this->initialize(
             [
                 ["organisation", REQUIRED, TYPE_INT, $request->input('organisation')],
+                ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
             ], self::IS_ORG_MEMBER, true);
 
 
@@ -160,6 +168,7 @@ class PropositionApi extends Api
         $this->initialize(
             [
                 ["organisation", REQUIRED, TYPE_INT, $request->input('organisation')],
+                ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
             ], self::IS_ORG_MEMBER, true);
 
         $proposition = $this->propositionService->getPropositionById($id);
@@ -176,6 +185,7 @@ class PropositionApi extends Api
     public function getVote(Request $request, int $id) {
         $this->initialize(
             [
+                ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
             ],  self::NO_RIGHT, true);
 
         $proposition = $this->propositionService->getPropositionById($id);
@@ -221,6 +231,7 @@ class PropositionApi extends Api
         $params = $this->initialize(
             [
                 ["message", REQUIRED, TYPE_STRING, $request->input('message')],
+                ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
             ],
             self::NO_RIGHT,
             true
@@ -240,7 +251,9 @@ class PropositionApi extends Api
      */
     public function getReports(Request $request) {
         $this->initialize(
-            [],
+            [
+                ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
+            ],
             self::IS_ADMIN,
             true
         );

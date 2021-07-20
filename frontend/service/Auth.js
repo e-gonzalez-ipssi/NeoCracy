@@ -1,27 +1,22 @@
 export default (axios) => ({
-  login(mail, password, userToken) {
+  login(mail, password) {
     console.log('2 email -->', mail)
     console.log('2 password -->', password)
-    console.log('2 userToken -->', userToken)
     const res = axios
-      .post('/connect', {
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${userToken}`,
-        },
+      .post('/connect', null, {
         params: {
           mail,
           password,
         },
       })
-      .then((response) => response.status)
+      .then((response) => response.data.value)
       .catch((err) => alert(err.message))
     return res
   },
 
-  logout() {
+  logout(userToken) {
     const res = axios
-      .post('disconnect')
+      .post('disconnect', null, {params: {userToken:userToken}})
       .then((response) => response.status)
       .catch((err) => alert(err.message))
     return res
