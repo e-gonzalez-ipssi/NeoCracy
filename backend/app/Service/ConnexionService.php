@@ -92,7 +92,7 @@ class  ConnexionService {
             throw new Exception("bad-password");
         }
 
-        $this->setToken($user, $_COOKIE[COOKIE_USER_TOKEN], time() + (86400 * 30));
+        $this->setToken($user, $this->generateUserToken(), time() + (86400 * 30));
     }
 
     /**
@@ -120,7 +120,6 @@ class  ConnexionService {
         $str = "";
         $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz@#$&*";  
         $size = strlen( $chars );  
-        echo "Random string =";  
         for( $i = 0; $i < $length; $i++ ) {  
             $str.= $chars[ rand( 0, $size - 1 ) ];  
         }  
@@ -177,7 +176,7 @@ class  ConnexionService {
      */
     private function setToken(User $user, string $value, ?int $time = null){
         $this->userManager->setUserToken($value, $user->getId());
-        //setcookie(COOKIE_USER_TOKEN, $value, $time);
+        setcookie(COOKIE_USER_TOKEN, $value, $time);
     }
 
     /**
