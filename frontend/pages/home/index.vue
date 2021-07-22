@@ -1,6 +1,8 @@
 <template>
   <div>
     <Nav />
+    <NavTablet />
+    <NavPhone />
     <div class="container">
       <div id="writeContent">
         <ModalFormPost
@@ -86,7 +88,6 @@ export default {
       this.reveleFormPost = !this.reveleFormPost
     },
   },
-  scrollToTop: true,
 }
 </script>
 

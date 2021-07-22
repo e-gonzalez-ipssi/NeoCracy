@@ -1,6 +1,8 @@
 <template>
   <div>
     <Nav />
+    <NavTablet />
+    <NavPhone />
     <div class="container">
       <section>
         <main id="main" v-for="post in posts" :key="post">
