@@ -1,19 +1,19 @@
 <template>
   <div>
     <header class="navTablet">
-      <nav class="topNav">
+      <nav class="topNavTablet">
         <ul>
-          <div class="leftNav">
+          <div class="leftNavTablet">
             <NuxtLink to="/home">
               <img src="@/assets/logo.svg" alt="logo" />
             </NuxtLink>
             <h1>Neocracy<span>.</span></h1>
           </div>
-          <div class="midNav">
+          <div class="midNavTablet">
             <i class="loupe fi-rr-search"></i>
             <input type="text" placeholder="Rechercher" />
           </div>
-          <div class="rightNav">
+          <div class="rightNavTablet">
             <h3>Louis</h3>
             <button onclick="myFunction()" class="dropbtn">
               <i class="fi-rr-caret-down"></i>
@@ -107,7 +107,7 @@ export default {}
     font-family: 'Open Sans', sans-serif;
   }
 
-  .topNav {
+  .topNavTablet {
     position: fixed;
     top: 0;
     z-index: 1;
@@ -116,27 +116,28 @@ export default {}
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 20px;
     box-sizing: border-box;
     background-color: #fff;
     border-bottom: rgba(0, 0, 0, 0.1) 1px solid;
   }
 
-  .topNav ul {
+  .topNavTablet ul {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  .topNav ul .leftNav {
+  .topNavTablet ul .leftNav {
     width: 30%;
   }
 
-  .topNav ul .midNav {
+  .topNavTablet ul .midNav {
     width: 40%;
   }
 
-  .topNav ul .rightNav {
+  .topNavTablet ul .rightNav {
     width: 30%;
   }
 
@@ -144,18 +145,18 @@ export default {}
 
   /* TOP LEFT NAV */
 
-  .leftNav {
+  .leftNavTablet {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .leftNav img {
+  .leftNavTablet img {
     height: 50px;
     width: 50px;
   }
 
-  .leftNav h1 {
+  .leftNavTablet h1 {
     display: flex;
     justify-content: center;
     margin-left: 10px;
@@ -163,7 +164,7 @@ export default {}
     color: #424347;
   }
 
-  .leftNav h1 span {
+  .leftNavTablet h1 span {
     color: #ec7533;
   }
 
@@ -171,13 +172,15 @@ export default {}
 
   /* TOP MID NAV  */
 
-  .midNav {
+  .midNavTablet {
+    width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: auto;
   }
 
-  .midNav i {
+  .midNavTablet i {
     position: relative;
     z-index: 2;
     left: 30px;
@@ -186,9 +189,9 @@ export default {}
     color: #424347;
   }
 
-  .midNav input {
+  .midNavTablet input {
     position: relative;
-    width: 100%;
+    width: 80%;
     height: auto;
     padding: 5px 20px 5px 40px;
     border-radius: 20px;
@@ -197,13 +200,13 @@ export default {}
     transition: 0.2s ease-in-out;
   }
 
-  .midNav input::placeholder {
+  .midNavTablet input::placeholder {
     font-family: 'Open Sans', sans-serif;
     font-size: 12px;
     color: #424347;
   }
 
-  .midNav input:focus {
+  .midNavTablet input:focus {
     border: 1px solid #424347;
     padding: 5px 20px 5px 45px;
     transition: 0.2s ease-in-out;
@@ -214,13 +217,13 @@ export default {}
 
   /* TOP RIGHT NAV */
 
-  .rightNav {
+  .rightNavTablet {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .rightNav h3 {
+  .rightNavTablet h3 {
     font-size: 15px;
     color: #424347;
     margin-right: 15px;
@@ -283,7 +286,7 @@ export default {}
     display: block;
   }
 
-  .rightNav img {
+  .rightNavTablet img {
     border-radius: 9999px;
     width: 40px;
     border: 2px solid #ec7533;
@@ -328,7 +331,8 @@ export default {}
     bottom: 15px;
     height: 2px;
     width: 100%;
-    background: #ec7533;
+    background-color: #ec7533;
+    background: linear-gradient(317deg, #ec7533 30%, #ca622a 100%);
   }
 
   .bottomNav li:hover i,
@@ -351,7 +355,7 @@ export default {}
   }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1050px) {
   .navTablet {
     display: none;
   }

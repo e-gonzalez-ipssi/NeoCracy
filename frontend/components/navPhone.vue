@@ -8,11 +8,11 @@
             <input type="text" placeholder="Rechercher" />
           </div>
           <div class="rightNav">
-            <button onclick="myFunction()" class="dropbtn">
+            <button onclick="myFunctionTwo()" class="dropbtn">
               <i class="fi-rr-caret-down"></i>
             </button>
             <div class="dropdown">
-              <div id="myDropdown" class="select">
+              <div id="myDropdownTwo" class="select">
                 <a href="#">
                   <i class="fi-rr-settings"></i><span>Paramètres</span>
                 </a>
@@ -53,9 +53,14 @@
         </li>
       </nav>
     </header>
+    <script>
+      function myFunctionTwo() {
+        var toggle = document.getElementById('myDropdownTwo')
+        toggle.classList.toggle('show')
+      }
+    </script>
   </div>
 </template>
-
 <script>
 export default {}
 </script>
@@ -92,6 +97,7 @@ export default {}
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 10px;
     box-sizing: border-box;
     background-color: #fff;
     border-bottom: rgba(0, 0, 0, 0.1) 1px solid;

@@ -46,7 +46,8 @@
                 <i class="fi-rr-following"></i><span>Mes abonnements</span>
               </NuxtLink>
             </li>
-
+          </ul>
+          <ul>
             <h2>Général</h2>
 
             <li>
@@ -85,13 +86,11 @@
             </div>
           </div>
           <div class="navBox2">
-            <div class="rond">
-              <img src="https://via.placeholder.com/150" />
-            </div>
             <h3>
               Prénom NOM<br />
               <small>Neocracy</small>
             </h3>
+            <img src="https://via.placeholder.com/150" />
           </div>
         </div>
         <div class="navRight">
@@ -114,7 +113,20 @@ export default {}
 </script>
 
 <style>
-@media (min-width: 1025px) {
+@media (max-width: 1340px) {
+  .navTop .navBox2 h3,
+  .navTop .navBox2 small {
+    display: none;
+  }
+}
+
+@media (max-width: 1190px) {
+  .navTop .navBox2 img {
+    display: none;
+  }
+}
+
+@media (min-width: 1050px) {
   .navLaptop {
     display: block;
   }
@@ -140,7 +152,7 @@ export default {}
     display: flex;
     align-items: center;
     padding-left: 300px;
-    padding-right: 100px;
+    padding-right: 120px;
     box-sizing: border-box;
     background-color: #fff;
     border-bottom: rgba(0, 0, 0, 0.1) 1px solid;
@@ -151,24 +163,20 @@ export default {}
   }
 
   .navBox1 {
-    font-size: 30px;
-  }
-
-  .navBox1,
-  .navBox2 {
     position: relative;
     width: 100%;
     height: 100px;
     display: flex;
     box-sizing: border-box;
     align-items: center;
+    font-size: 30px;
   }
 
   .navBox1 img {
     width: 60px;
     margin-top: 10px;
     margin-left: 30px;
-    color: #00d699;
+    color: #ec7533;
   }
 
   .navBox1 img:hover {
@@ -191,12 +199,13 @@ export default {}
 
   .navBox1 input {
     position: relative;
-    width: 500px;
+    width: 100%;
+    min-width: 500px;
     height: 50px;
     padding: 5px 20px 5px 50px;
     border-radius: 20px;
     border: none;
-    background: #eeeeee;
+    background: #ddd;
     transition: 0.3s ease-in-out;
   }
 
@@ -213,37 +222,35 @@ export default {}
     outline: none;
   }
 
-  .navBox2 img {
+  .navBox2 {
     position: relative;
+    width: 50%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  .navBox2 img {
+    margin-right: 30px;
     border-radius: 9999px;
     width: 60px;
     background: transparent;
-  }
-
-  .navBox2 .rond {
-    position: absolute;
-    right: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 70px;
-    width: 70px;
-    border-radius: 9999px;
-    border: 2px solid #00d699;
-    box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
-    -moz-box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
-    -webkit-box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
+    border: 2px solid #ec7533;
   }
 
   .navBox2 h3 {
-    position: absolute;
-    right: 170px;
+    margin-right: 15px;
     color: #424347;
     font-weight: bold;
   }
 
   .navLeft {
     position: fixed;
+    display: flex;
+    align-items: center;
     flex-direction: column;
     z-index: 2;
     width: 300px;
@@ -264,7 +271,7 @@ export default {}
 
   .navLeft h1 span {
     font-size: 40px;
-    color: #00d699;
+    color: #ec7533;
   }
 
   .navLeft h2 {
@@ -297,12 +304,12 @@ export default {}
   }
 
   .navLeft li:hover i {
-    color: #00d699;
+    color: #ec7533;
     font-weight: 900;
   }
 
   .navLeft a.nuxt-link-active i {
-    color: #00d699;
+    color: #ec7533;
     font-weight: 900;
   }
 
@@ -311,8 +318,8 @@ export default {}
     left: 0;
     height: 25px;
     width: 6px;
-    background-color: #00d699;
-    background: linear-gradient(317deg, #00d699 30%, #00eeaa 100%);
+    background-color: #ec7533;
+    background: linear-gradient(317deg, #ec7533 30%, #ca622a 100%);
     border-radius: 999px;
   }
 
@@ -321,8 +328,8 @@ export default {}
     left: 0;
     height: 25px;
     width: 6px;
-    background-color: #00d699;
-    background: linear-gradient(317deg, #00d699 30%, #00eeaa 100%);
+    background-color: #ec7533;
+    background: linear-gradient(317deg, #ec7533 30%, #ca622a 100%);
     border-radius: 999px;
   }
 
@@ -334,12 +341,12 @@ export default {}
   }
 
   .navLeft li:hover span {
-    color: #00d699;
+    color: #ec7533;
     font-weight: bold;
   }
 
   .navLeft a.nuxt-link-active span {
-    color: #00d699;
+    color: #ec7533;
     font-weight: bold;
   }
 
@@ -350,8 +357,8 @@ export default {}
     width: 80%;
     height: 100px;
     border-radius: 30px;
-    background-color: #00d699;
-    background: linear-gradient(317deg, #00d699 30%, #00eeaa 100%);
+    background-color: #ec7533;
+    background: linear-gradient(317deg, #ec7533 30%, #ca622a 100%);
     box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
   }
 
@@ -382,8 +389,8 @@ export default {}
     font-size: 25px;
     color: #fff;
     padding-top: 5px;
-    background-color: #00d699;
-    background: linear-gradient(317deg, #00d699 30%, #00eeaa 100%);
+    background-color: #ec7533;
+    background: linear-gradient(317deg, #ec7533 30%, #ca622a 100%);
     border: transparent;
   }
 
@@ -402,7 +409,7 @@ export default {}
   }
 }
 
-@media (max-width: 1025px) {
+@media (max-width: 1050px) {
   .navLaptop {
     display: none;
   }
