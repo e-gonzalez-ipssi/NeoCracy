@@ -81,7 +81,7 @@ services:
     links:
       - neocracy-backend
     volumes:
-      - C:/Users/frisc/OneDrive/Documents/Neocracy/NeoCracy/frontend:/usr/src/app
+      - ../frontend:/usr/src/app
     networks:
       - neocracy
 

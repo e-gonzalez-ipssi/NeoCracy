@@ -4,16 +4,18 @@
     <NavTablet />
     <NavPhone />
     <div class="container">
-      <div id="writeContent">
-        <ModalFormPost
-          :revele="reveleFormPost"
-          :toggle-modale-form-post="toggleModaleFormPost"
-        ></ModalFormPost>
-        <div class="inputContent" @click="toggleModaleFormPost">
-          <i class="fi-rr-pencil"></i>
-          <h3>Rédiger un article ...</h3>
+      <section>
+        <div id="writeContent">
+          <ModalFormPost
+            :revele="reveleFormPost"
+            :toggle-modale-form-post="toggleModaleFormPost"
+          ></ModalFormPost>
+          <div class="inputContent" @click="toggleModaleFormPost">
+            <i class="fi-rr-pencil"></i>
+            <h3>Rédiger un article ...</h3>
+          </div>
         </div>
-      </div>
+      </section>
       <section>
         <main id="main" v-for="post in posts" :key="post">
           <div class="topBox">
@@ -45,7 +47,7 @@
             </div>
             <div class="blockThree">
               <img
-                src="https://assets.website-files.com/5aac3a69b2d9acb3144c8171/5ed4ff9b6b5b2be3deac22ff_final.001.png"
+                src="https://www.justifit.fr/wp-content/uploads/2020/06/Droit-a-limage.jpg"
               />
             </div>
           </div>
@@ -99,6 +101,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   padding-top: 120px;
+  background: #f1f1f1;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -108,14 +111,17 @@ a {
 
 section {
   height: auto;
+  width: 100%;
+  padding-left: 150px;
+  padding-right: 150px;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: auto;
 }
 
 #writeContent {
-  width: 45%;
-  margin: 0 auto;
+  width: 50%;
+  margin: auto;
   padding: 20px 30px;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.01);
@@ -132,7 +138,7 @@ section {
   padding: 15px;
   box-sizing: border-box;
   border-radius: 20px;
-  background: #eeeeee;
+  background: #ddd;
   transition: 0.3s ease-in-out;
 }
 
@@ -156,7 +162,7 @@ section {
 
 #main {
   box-sizing: border-box;
-  width: 45%;
+  width: 50%;
   margin: 20px auto;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.01);
@@ -177,7 +183,7 @@ section {
 
 .topBox img {
   width: 60px;
-  border: 2px solid #00d699;
+  border: 2px solid #ec7533;
   border-radius: 9999px;
 }
 
@@ -255,13 +261,11 @@ section {
 }
 
 .midBox .blockThree {
-  background: #eeeeee;
-  max-height: 500px;
-  max-width: 700px;
+  margin: auto;
 }
 
 .midBox .blockThree img {
-  width: 100%;
+  width: 100% !important;
   max-height: 500px;
 }
 
@@ -284,7 +288,7 @@ section {
 .bottomBox .hr {
   height: 30px;
   width: 1px;
-  background: #757588;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .bottomBox i {
@@ -293,5 +297,180 @@ section {
 
 .bottomBox p {
   margin-left: 10px;
+}
+
+/* ON LITTLE SCREEN FOR LAPTOP */
+
+@media (max-width: 1300px) {
+  section {
+    padding-left: 200px;
+    padding-right: 100px;
+  }
+
+  #writeContent {
+    width: 60%;
+  }
+
+  #main {
+    width: 60%;
+  }
+}
+
+/* ******************** */
+
+/* ON TABLETTE */
+
+@media (max-width: 1050px) {
+  .container {
+    padding-top: 65px;
+  }
+
+  section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #writeContent {
+    width: 70%;
+  }
+
+  .inputContent {
+    height: 30px;
+    padding: 10px;
+    width: 90%;
+    margin: auto;
+  }
+
+  .inputContent h3,
+  .inputContent i {
+    font-size: 12px;
+  }
+
+  #main {
+    width: 70%;
+    margin: 10px auto;
+  }
+
+  .topBox {
+    padding: 10px 20px;
+  }
+
+  .topBox .author {
+    margin-left: 10px;
+  }
+
+  .topBox img {
+    width: 40px;
+  }
+
+  .topBox .author h5 {
+    font-size: 15px;
+  }
+
+  .topBox .author h6 {
+    margin-top: 2px;
+    font-size: 13px;
+  }
+
+  .topBox .author small {
+    font-size: 9px;
+  }
+
+  .topBox .blockTwo i {
+    font-size: 15px;
+  }
+
+  .midBox .blockOne h3 {
+    font-size: 15px;
+  }
+
+  .midBox .blockTwo p {
+    font-size: 12px;
+  }
+
+  .bottomBox {
+    font-size: 12px;
+    padding: 10px 20px;
+  }
+}
+
+/* ******************** */
+
+/* ON PHONE */
+
+@media (max-width: 650px) {
+  .container {
+    padding-top: 65px;
+  }
+
+  section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #writeContent {
+    width: 98%;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+  .inputContent {
+    height: 30px;
+    padding: 10px;
+    width: 90%;
+    margin: auto;
+  }
+
+  .inputContent h3,
+  .inputContent i {
+    font-size: 12px;
+  }
+
+  #main {
+    width: 98%;
+    margin: 5px auto;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+  .topBox img {
+    width: 40px;
+  }
+
+  .topBox .author h5 {
+    font-size: 13px;
+  }
+
+  .topBox .author h6 {
+    margin-top: 2px;
+    font-size: 11px;
+  }
+
+  .topBox .author small {
+    font-size: 9px;
+  }
+
+  .topBox .blockTwo i {
+    font-size: 13px;
+  }
+
+  .midBox .blockOne h3 {
+    font-size: 13px;
+  }
+
+  .midBox .blockTwo p {
+    font-size: 10px;
+  }
+
+  .bottomBox {
+    font-size: 10px;
+    padding: 10px 20px;
+  }
 }
 </style>
