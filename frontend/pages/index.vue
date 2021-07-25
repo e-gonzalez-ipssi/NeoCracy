@@ -67,11 +67,13 @@ export default {
         this.emailLogin,
         this.passwordLogin
       )
-      document.cookie = 'userToken=' + response
+      this.$cookiz.set('userToken', response)
       this.$router.push('home')
     },
     async onLogout() {
-      await this.$api.auth.logout(document.cookie)
+      const userToken = 'userToken=' + this.$cookiz.get('userToken')
+      console.log('userToken:', userToken)
+      await this.$api.auth.logout(userToken)
     },
   },
 }

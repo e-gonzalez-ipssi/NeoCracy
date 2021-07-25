@@ -23,11 +23,11 @@ export default (axios) => ({
   },
 
   register(nom, prenom, mail, password, confirmPassword) {
-    console.log('2 nom -->', nom)
-    console.log('2 prenom -->', prenom)
-    console.log('2 mail -->', mail)
-    console.log('2 password -->', password)
-    console.log('2 confirmPassword -->', confirmPassword)
+    console.log('Auth nom -->', nom)
+    console.log('Auth prenom -->', prenom)
+    console.log('Auth mail -->', mail)
+    console.log('Auth password -->', password)
+    console.log('Auth confirmPassword -->', confirmPassword)
     const res = axios
       .post('register', null, {
         params: {
