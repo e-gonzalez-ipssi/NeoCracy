@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav :userdata="userInfo" />
+    <Nav />
     <NavTablet />
     <NavPhone />
     <div class="container">
@@ -76,22 +76,23 @@
 <script>
 import ModalFormPost from '@/components/Modals/Forms/ModalFormPost'
 export default {
+  userInfo: {},
   components: {
     ModalFormPost,
   },
   async asyncData({ params, $api }) {
-    console.log('1 asyncData ok')
     const userData = await $api.data.getData()
-    console.log('userData:', userData)
     localStorage.setItem('userInfo', JSON.stringify(userData))
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-    return { userInfo }
+    JSON.parse(localStorage.getItem('userInfo'))
   },
   data() {
     return {
       reveleFormPost: false,
       posts: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     }
+  },
+  fetch() {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
   },
   methods: {
     toggleModaleFormPost() {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav :userdata="userInfo" />
+    <Nav />
     <NavTablet />
     <NavPhone />
     <div class="container">
@@ -35,9 +35,9 @@
 
 <script>
 export default {
-  asyncData({ params, $api }) {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-    return { userInfo }
+  userInfo: {},
+  fetch() {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
   },
 }
 </script>

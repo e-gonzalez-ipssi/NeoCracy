@@ -87,7 +87,7 @@
           </div>
           <div class="navBox2">
             <h3>
-              {{ userdata.prenom }} {{ userdata.nom }}<br />
+              {{ userInfo.prenom }} {{ userInfo.nom }}<br />
               <small>Neocracy</small>
             </h3>
             <img src="https://via.placeholder.com/150" />
@@ -110,17 +110,13 @@
 
 <script>
 export default {
-  props: {
-    userdata: {
-      type: Object,
-      required: true,
-    },
+  userInfo: {},
+  fetch() {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
   },
   methods: {
     async onLogout() {
-      console.log(document.cookie)
-      const response = await this.$api.auth.logout(document.cookie)
-      console.log(response)
+      await this.$api.auth.logout(document.cookie)
       this.$router.push('/')
     },
   },
