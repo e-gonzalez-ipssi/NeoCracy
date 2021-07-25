@@ -53,16 +53,25 @@
         </li>
       </nav>
     </header>
-    <script>
-      function myFunctionTwo() {
-        var toggle = document.getElementById('myDropdownTwo')
-        toggle.classList.toggle('show')
-      }
-    </script>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  userInfo: {},
+  fetch() {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  },
+  methods: {
+    myFunctionTwo() {
+      const toggle = document.getElementById('myDropdownTwo')
+      toggle.classList.toggle('show')
+    },
+    async onLogout() {
+      await this.$api.auth.logout(document.cookie)
+      this.$router.push('/')
+    },
+  },
+}
 </script>
 
 <style>
