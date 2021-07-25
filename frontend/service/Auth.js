@@ -16,7 +16,7 @@ export default (axios) => ({
 
   logout(userToken) {
     const res = axios
-      .post('disconnect', null, {params: {userToken:userToken}})
+      .post('disconnect', null, { params: { userToken } })
       .then((response) => response.status)
       .catch((err) => alert(err.message))
     return res

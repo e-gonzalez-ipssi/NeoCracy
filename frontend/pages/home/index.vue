@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav />
+    <Nav :userdata="userInfo" />
     <NavTablet />
     <NavPhone />
     <div class="container">
@@ -22,7 +22,7 @@
             <div class="blockOne">
               <img src="https://via.placeholder.com/150" />
               <div class="author">
-                <h5>Louis Poulin</h5>
+                <h5>{{ userInfo.prenom }} {{ userInfo.nom }}</h5>
                 <div>
                   <small>de</small>
                   <h6>Neocracy</h6>
@@ -78,6 +78,14 @@ import ModalFormPost from '@/components/Modals/Forms/ModalFormPost'
 export default {
   components: {
     ModalFormPost,
+  },
+  async asyncData({ params, $api }) {
+    console.log('1 asyncData ok')
+    const userData = await $api.data.getData()
+    console.log('userData:', userData)
+    localStorage.setItem('userInfo', JSON.stringify(userData))
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    return { userInfo }
   },
   data() {
     return {

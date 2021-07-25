@@ -68,9 +68,10 @@ export default {
       console.log('1 passwordLogin -->', this.passwordLogin)
       const response = await this.$api.auth.login(
         this.emailLogin,
-        this.passwordLogin,
+        this.passwordLogin
       )
-      document.cookie = 'userToken='+response;
+      document.cookie = 'userToken=' + response
+      this.$router.push('home')
     },
     async onLogout() {
       console.log(document.cookie)

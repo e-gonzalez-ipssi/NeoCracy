@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav />
+    <Nav :userdata="userInfo" />
     <NavTablet />
     <NavPhone />
     <div class="container">
@@ -14,7 +14,7 @@
           <div class="midBox">
             <div class="blockOne">
               <div class="author">
-                <h5>Louis Poulin</h5>
+                <h5>{{ userInfo.prenom }} {{ userInfo.nom }}</h5>
                 <p>CEO chez Neocracy</p>
               </div>
             </div>
@@ -34,7 +34,12 @@
 </template>
 
 <script>
-export default {}
+export default {
+  asyncData({ params, $api }) {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    return { userInfo }
+  },
+}
 </script>
 
 <style scoped>

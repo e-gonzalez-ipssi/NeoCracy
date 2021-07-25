@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav />
+    <Nav :userdata="userInfo" />
     <NavTablet />
     <NavPhone />
     <div class="container">
@@ -34,7 +34,12 @@
 </template>
 
 <script>
-export default {}
+export default {
+  asyncData({ params, $api }) {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    return { userInfo }
+  },
+}
 </script>
 
 <style scoped>

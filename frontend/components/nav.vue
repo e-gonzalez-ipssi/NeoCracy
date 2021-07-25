@@ -63,7 +63,7 @@
               </a>
             </li>
             <li>
-              <a href="#">
+              <a @click="onLogout">
                 <div></div>
                 <i class="fi-rr-power"></i><span>Déconnexion</span>
               </a>
@@ -87,7 +87,7 @@
           </div>
           <div class="navBox2">
             <h3>
-              Prénom NOM<br />
+              {{ userdata.prenom }} {{ userdata.nom }}<br />
               <small>Neocracy</small>
             </h3>
             <img src="https://via.placeholder.com/150" />
@@ -109,7 +109,22 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    userdata: {
+      type: Object,
+      required: true,
+    },
+  },
+  methods: {
+    async onLogout() {
+      console.log(document.cookie)
+      const response = await this.$api.auth.logout(document.cookie)
+      console.log(response)
+      this.$router.push('/')
+    },
+  },
+}
 </script>
 
 <style>
@@ -291,6 +306,7 @@ export default {}
     height: 50px;
     width: 250px;
     list-style: none;
+    cursor: pointer;
   }
 
   .navLeft a {

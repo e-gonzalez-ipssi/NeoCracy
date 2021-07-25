@@ -2,7 +2,9 @@ version: "3.6"
 services:
   neocracy-db:
     container_name: neocracy-db
-    image: mariadb:latest
+    build:
+      context: ../divers/install/database
+      dockerfile: Dockerfile
     restart: unless-stopped
     ports:
       - 3307:3306
