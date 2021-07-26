@@ -1,9 +1,7 @@
 <template>
   <div v-if="revele" class="bloc-modale">
     <div class="modale">
-      <button class="btn-modale" @click="toggleModaleFormOrganisation">
-        X
-      </button>
+      <button class="btn-modale" @click="toggle">X</button>
 
       <form @submit.prevent="handleSubmitOrganisation">
         <h3>Créer une Organisation</h3>
@@ -34,7 +32,7 @@ export default {
   name: 'ModaleFormOrganisation',
   props: {
     revele: Boolean,
-    toggleModaleFormOrganisation: { type: Function, required: true },
+    toggle: { type: Function, required: true },
   },
   data() {
     return {

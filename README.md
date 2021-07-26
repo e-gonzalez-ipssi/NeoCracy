@@ -1,6 +1,6 @@
 # Neocracy
 
-## Bienvenu sur la documentation de Neocracy 
+## Bienvenue sur la documentation de Neocracy 
 
 ### Pour récupérer le projet utiliser la commande :
 

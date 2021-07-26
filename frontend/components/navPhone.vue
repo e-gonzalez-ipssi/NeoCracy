@@ -67,7 +67,9 @@ export default {
       toggle.classList.toggle('show')
     },
     async onLogout() {
-      await this.$api.auth.logout(document.cookie)
+      const userToken = 'userToken=' + this.$cookiz.get('userToken')
+      console.log('userToken:', userToken)
+      await this.$api.auth.logout(userToken)
       this.$router.push('/')
     },
   },

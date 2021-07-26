@@ -5,9 +5,13 @@ export default (axios) => ({
     console.log('Organisation', form.lienSite)
     // http://localhost:8000/api/organisation?description=test2&lienSite=test2&nom=test2
     const res = axios
-      .post(
-        'http://localhost:8000/api/organisation?description=test2&lienSite=test2&nom=test2'
-      )
+      .post('/organisation', null, {
+        params: {
+          nom: form.nom,
+          description: form.description,
+          lienSite: form.lienSite,
+        },
+      })
       .then((response) => response.status)
       .catch((err) => console.warn(err))
     return res

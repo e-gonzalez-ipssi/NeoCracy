@@ -8,7 +8,7 @@
         <div id="writeContent">
           <ModalFormOrganisation
             :revele="reveleFormOrganisation"
-            :toggle-modale-form-post="toggleModaleFormOrganisation"
+            :toggle="toggleModaleFormOrganisation"
           />
           <div class="inputContent" @click="toggleModaleFormOrganisation">
             <i class="fi-rr-pencil"></i>
@@ -18,7 +18,7 @@
         <div id="writeContent">
           <ModalFormProposition
             :revele="reveleFormProposition"
-            :toggle-modale-form-proposition="toggleModaleFormProposition"
+            :toggle="toggleModaleFormProposition"
           />
           <div class="inputContent" @click="toggleModaleFormProposition">
             <i class="fi-rr-pencil"></i>

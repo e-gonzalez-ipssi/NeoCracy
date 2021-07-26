@@ -83,7 +83,7 @@ services:
     links:
       - neocracy-backend
     volumes:
-      - ../frontend:/usr/src/app
+      - "D:\\IPPSI\\projet\\NeoCracy\\frontend:/usr/src/app"
     networks:
       - neocracy
 

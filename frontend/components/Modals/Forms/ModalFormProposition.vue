@@ -1,7 +1,7 @@
 <template>
   <div v-if="revele" class="bloc-modale">
     <div class="modale">
-      <button class="btn-modale" @click="toggleModaleFormProposition">X</button>
+      <button class="btn-modale" @click="toggle">X</button>
 
       <form @submit.prevent="handleSubmitProposition">
         <h3>Créer un Post</h3>
@@ -38,7 +38,7 @@ export default {
   name: 'ModaleFormProposition',
   props: {
     revele: Boolean,
-    toggleModaleFormProposition: { type: Function, required: true },
+    toggle: { type: Function, required: true },
   },
   data() {
     return {
