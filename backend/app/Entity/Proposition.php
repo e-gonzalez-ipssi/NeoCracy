@@ -15,9 +15,11 @@ class Proposition
     protected int $date;
     protected int $like;
     protected int $dislike;
+    protected string $image;
+    protected string $url;
 
 
-    public function __construct(int $id, User $author, string $nom, string $description, array $tag, int $date, int $like, int $dislike)
+    public function __construct(int $id, User $author, string $nom, string $description, array $tag, int $date, int $like, int $dislike, string $image, string $url)
     {
         $this->id = $id;
         $this->author = $author;
@@ -27,6 +29,8 @@ class Proposition
         $this->date = $date;
         $this->like = $like;
         $this->dislike = $dislike;
+        $this->image = $image;
+        $this->url = $url;
     }
 
     public function getId():int{
@@ -87,6 +91,14 @@ class Proposition
         return $this->dislike;
     }
 
+    public function getImage(): string{
+        return $this->image;
+    }
+
+    public function getUrl(): string{
+        return $this->url;
+    }
+
     public function arrayify(): array {
         $date = new DateTime();
         $date->format('U = Y-m-d H:i:s');
@@ -109,6 +121,8 @@ class Proposition
             "date" => $date,
             "like" => $this->like,
             "dislike" => $this->dislike,
+            "image" => $this->image,
+            "url" => $this->url,
         ];
     }
 }
