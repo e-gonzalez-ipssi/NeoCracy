@@ -33,7 +33,7 @@ export default {
     '@nuxtjs/pwa',
     // https://auth.nuxtjs.org/
     // '@nuxtjs/auth',
-    ['cookie-universal-nuxt', { parseJSON: false }],
+    ['cookie-universal-nuxt', { alias: 'cookiz', parseJSON: false }],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -59,4 +59,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  // Port server front
+  server: {
+    port: 3333,
+  },
 }

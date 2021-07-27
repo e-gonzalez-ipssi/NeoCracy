@@ -1,28 +1,30 @@
 <template>
   <div v-if="revele" class="bloc-modale">
     <div class="modale">
-      <button class="btn-modale" @click="toggleModaleFormPost">X</button>
+      <button class="btn-modale" @click="toggle">X</button>
 
-      <form @submit.prevent="handleSubmit">
+      <form @submit.prevent="handleSubmitProposition">
         <h3>Créer un Post</h3>
+        <p>Pour quelle organisation</p>
+        <input
+          v-model="form.organisation"
+          type="text"
+          placeholder="organisation"
+        />
         <p>Ajouter un titre</p>
         <input
-          v-model="form.titre"
+          v-model="form.title"
           type="text"
           placeholder="Titre du post"
           required
         />
         <p>Contenu du post</p>
         <textarea
-          v-model="form.contenu"
+          v-model="form.description"
           placeholder="Que voulez vous dire ?"
           name="message"
           required
         ></textarea>
-        <p>Publier une image</p>
-        <input ref="image" type="file" @change="onFileChange" />
-        <p>Utiliser un url</p>
-        <input v-model="url" type="text" placeholder="url" />
         <p>Ajouter des tags</p>
         <input v-model="tags" type="text" placeholder="#Neocracy" />
         <button type="submit">Send</button>
@@ -33,39 +35,29 @@
 
 <script>
 export default {
-  name: 'ModaleFormPost',
+  name: 'ModaleFormProposition',
   props: {
     revele: Boolean,
-    toggleModaleFormPost: { type: Function, required: true },
+    toggle: { type: Function, required: true },
   },
   data() {
     return {
       form: {
-        titre: 'titre',
-        contenu: 'contenu',
-        url: 'url',
-        tags: 'tags',
-        image: [],
+        title: 'Un titre',
+        description: 'le contenu',
+        organisation: 'Neocracy',
+        tags: '#Neocracy',
       },
     }
   },
   methods: {
-    onFileChange() {
-      const files = this.$refs.image.files
-      const data = new FormData()
-      data.append('image', files[0])
-    },
-    handleSubmit() {
-      console.log(this.form)
-
-      // await this.$api.auth
-      //   .register(formData)
-      //   .then(({ data }) => {
-      //     console.log(data)
-      //   })
-      //   .catch((e) => {
-      //     console.log(e)
-      //   })
+    async handleSubmitProposition() {
+      const userToken = document.cookie
+      console.log(this.form.title)
+      console.log(this.form.description)
+      console.log(this.form.organisation)
+      console.log(this.form.tags)
+      await this.$api.proposition.postProposition(this.form, userToken)
     },
   },
 }

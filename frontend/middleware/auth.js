@@ -1,14 +1,3 @@
-// export default function ({ isServer, res, query }) {
-//   const token = query.token
-//   if (token) {
-//     if (isServer) {
-//       res.setHeader('Set-Cookie', [`userToken=${token}`]) // Server-side
-//     } else {
-//       document.cookie = `userToken=${token}` // Client-side
-//     }
-//   }
-// }
-
 // universal cookie
 const cookieValObject = { param1: 'value1', param2: 'value2' }
 

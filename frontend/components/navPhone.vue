@@ -53,16 +53,27 @@
         </li>
       </nav>
     </header>
-    <script>
-      function myFunctionTwo() {
-        var toggle = document.getElementById('myDropdownTwo')
-        toggle.classList.toggle('show')
-      }
-    </script>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  userInfo: {},
+  fetch() {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  },
+  methods: {
+    myFunctionTwo() {
+      const toggle = document.getElementById('myDropdownTwo')
+      toggle.classList.toggle('show')
+    },
+    async onLogout() {
+      const userToken = 'userToken=' + this.$cookiz.get('userToken')
+      console.log('userToken:', userToken)
+      await this.$api.auth.logout(userToken)
+      this.$router.push('/')
+    },
+  },
+}
 </script>
 
 <style>

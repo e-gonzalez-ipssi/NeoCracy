@@ -65,17 +65,28 @@
         </li>
       </nav>
     </header>
-    <script>
-      function myFunction() {
-        var toggle = document.getElementById('myDropdown')
-        toggle.classList.toggle('show')
-      }
-    </script>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  userInfo: {},
+  fetch() {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  },
+  methods: {
+    myFunction() {
+      const toggle = document.getElementById('myDropdown')
+      toggle.classList.toggle('show')
+    },
+    async onLogout() {
+      const userToken = 'userToken=' + this.$cookiz.get('userToken')
+      console.log('userToken:', userToken)
+      await this.$api.auth.logout(userToken)
+      this.$router.push('/')
+    },
+  },
+}
 </script>
 
 <style>

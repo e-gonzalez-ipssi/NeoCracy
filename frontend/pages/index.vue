@@ -54,28 +54,26 @@ export default {
 
   methods: {
     async onRegister() {
-      const response = await this.$api.auth.register(
+      await this.$api.auth.register(
         this.nom,
         this.prenom,
         this.mailRegister,
         this.passwordRegister,
         this.confirmPassword
       )
-      console.log(response)
     },
     async onLogin() {
-      console.log('1 emailLogin -->', this.emailLogin)
-      console.log('1 passwordLogin -->', this.passwordLogin)
       const response = await this.$api.auth.login(
         this.emailLogin,
-        this.passwordLogin,
+        this.passwordLogin
       )
-      document.cookie = 'userToken='+response;
+      this.$cookiz.set('userToken', response)
+      this.$router.push('home')
     },
     async onLogout() {
-      console.log(document.cookie)
-      const response = await this.$api.auth.logout(document.cookie)
-      console.log(response)
+      const userToken = 'userToken=' + this.$cookiz.get('userToken')
+      console.log('userToken:', userToken)
+      await this.$api.auth.logout(userToken)
     },
   },
 }

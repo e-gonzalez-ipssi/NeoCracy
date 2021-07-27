@@ -14,7 +14,7 @@
           <div class="midBox">
             <div class="blockOne">
               <div class="author">
-                <h5>Louis Poulin</h5>
+                <h5>{{ userInfo.prenom }} {{ userInfo.nom }}</h5>
                 <p>CEO chez Neocracy</p>
               </div>
             </div>
@@ -34,7 +34,12 @@
 </template>
 
 <script>
-export default {}
+export default {
+  userInfo: {},
+  fetch() {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  },
+}
 </script>
 
 <style scoped>

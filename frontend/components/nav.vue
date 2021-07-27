@@ -63,7 +63,7 @@
               </a>
             </li>
             <li>
-              <a href="#">
+              <a @click="onLogout">
                 <div></div>
                 <i class="fi-rr-power"></i><span>Déconnexion</span>
               </a>
@@ -87,7 +87,7 @@
           </div>
           <div class="navBox2">
             <h3>
-              Prénom NOM<br />
+              {{ userInfo.prenom }} {{ userInfo.nom }}<br />
               <small>Neocracy</small>
             </h3>
             <img src="https://via.placeholder.com/150" />
@@ -109,7 +109,20 @@
 </template>
 
 <script>
-export default {}
+export default {
+  userInfo: {},
+  fetch() {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  },
+  methods: {
+    async onLogout() {
+      const userToken = 'userToken=' + this.$cookiz.get('userToken')
+      console.log('userToken:', userToken)
+      await this.$api.auth.logout(userToken)
+      this.$router.push('/')
+    },
+  },
+}
 </script>
 
 <style>
@@ -291,6 +304,7 @@ export default {}
     height: 50px;
     width: 250px;
     list-style: none;
+    cursor: pointer;
   }
 
   .navLeft a {

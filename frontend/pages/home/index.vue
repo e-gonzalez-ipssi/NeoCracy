@@ -6,13 +6,23 @@
     <div class="container">
       <section>
         <div id="writeContent">
-          <ModalFormPost
-            :revele="reveleFormPost"
-            :toggle-modale-form-post="toggleModaleFormPost"
-          ></ModalFormPost>
-          <div class="inputContent" @click="toggleModaleFormPost">
+          <ModalFormOrganisation
+            :revele="reveleFormOrganisation"
+            :toggle="toggleModaleFormOrganisation"
+          />
+          <div class="inputContent" @click="toggleModaleFormOrganisation">
             <i class="fi-rr-pencil"></i>
-            <h3>Rédiger un article ...</h3>
+            <h3>Créer une Organisation ...</h3>
+          </div>
+        </div>
+        <div id="writeContent">
+          <ModalFormProposition
+            :revele="reveleFormProposition"
+            :toggle="toggleModaleFormProposition"
+          />
+          <div class="inputContent" @click="toggleModaleFormProposition">
+            <i class="fi-rr-pencil"></i>
+            <h3>Rédiger une proposition ...</h3>
           </div>
         </div>
       </section>
@@ -22,7 +32,7 @@
             <div class="blockOne">
               <img src="https://via.placeholder.com/150" />
               <div class="author">
-                <h5>Louis Poulin</h5>
+                <h5>{{ userInfo.prenom }} {{ userInfo.nom }}</h5>
                 <div>
                   <small>de</small>
                   <h6>Neocracy</h6>
@@ -74,20 +84,35 @@
 </template>
 
 <script>
-import ModalFormPost from '@/components/Modals/Forms/ModalFormPost'
+import ModalFormProposition from '@/components/Modals/Forms/ModalFormProposition'
+import ModalFormOrganisation from '@/components/Modals/Forms/ModalFormOrganisation'
 export default {
+  userInfo: {},
   components: {
-    ModalFormPost,
+    ModalFormProposition,
+    ModalFormOrganisation,
+  },
+  async asyncData({ params, $api }) {
+    const userData = await $api.userdata.getData()
+    localStorage.setItem('userInfo', JSON.stringify(userData))
+    JSON.parse(localStorage.getItem('userInfo'))
   },
   data() {
     return {
-      reveleFormPost: false,
+      reveleFormProposition: false,
+      reveleFormOrganisation: false,
       posts: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     }
   },
+  fetch() {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  },
   methods: {
-    toggleModaleFormPost() {
-      this.reveleFormPost = !this.reveleFormPost
+    toggleModaleFormProposition() {
+      this.reveleFormProposition = !this.reveleFormProposition
+    },
+    toggleModaleFormOrganisation() {
+      this.reveleFormOrganisation = !this.reveleFormOrganisation
     },
   },
 }
@@ -120,6 +145,7 @@ section {
 }
 
 #writeContent {
+  cursor: pointer;
   width: 50%;
   margin: auto;
   padding: 20px 30px;
