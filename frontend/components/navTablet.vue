@@ -45,11 +45,13 @@
             <i class="fi-rr-bank"></i><span>Organisation</span>
           </NuxtLink>
         </li>
-        <li>
-          <NuxtLink to="#">
-            <div></div>
-            <i class="fi-rr-pencil"></i><span>Publier</span>
-          </NuxtLink>
+        <ModalFormPost
+          :revele="reveleFormPost"
+          :toggle-modale-form-post="toggleModaleFormPost"
+        ></ModalFormPost>
+        <li @click="toggleModaleFormPost">
+          <div></div>
+          <i class="fi-rr-pencil"></i><span>Publier</span>
         </li>
         <li>
           <NuxtLink to="/subscribe">
@@ -75,7 +77,22 @@
 </template>
 
 <script>
-export default {}
+import ModalFormPost from '@/components/Modals/Forms/ModalFormPost'
+export default {
+  components: {
+    ModalFormPost,
+  },
+  data() {
+    return {
+      reveleFormPost: false,
+    }
+  },
+  methods: {
+    toggleModaleFormPost() {
+      this.reveleFormPost = !this.reveleFormPost
+    },
+  },
+}
 </script>
 
 <style>
@@ -99,11 +116,10 @@ export default {}
   }
 
   .navTablet {
+    z-index: 5;
     position: fixed;
     background: transparent;
-    z-index: 5;
     width: 100%;
-    height: 100vh;
     font-family: 'Open Sans', sans-serif;
   }
 

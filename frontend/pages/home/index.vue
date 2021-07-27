@@ -12,7 +12,7 @@
           ></ModalFormPost>
           <div class="inputContent" @click="toggleModaleFormPost">
             <i class="fi-rr-pencil"></i>
-            <h3>Rédiger un article ...</h3>
+            <h3>Rédiger un post ...</h3>
           </div>
         </div>
       </section>
@@ -123,6 +123,7 @@ section {
   width: 50%;
   margin: auto;
   padding: 20px 30px;
+  cursor: pointer;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.01);
   background-image: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);
@@ -410,7 +411,7 @@ section {
 
   #writeContent {
     width: 98%;
-    padding: 5px;
+    padding: 10px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: none;
     -moz-box-shadow: none;
@@ -418,8 +419,8 @@ section {
   }
 
   .inputContent {
-    height: 30px;
-    padding: 10px;
+    height: 20px;
+    padding: 15px;
     width: 90%;
     margin: auto;
   }

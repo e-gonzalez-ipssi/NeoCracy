@@ -4,6 +4,9 @@
       <nav class="topNav">
         <ul>
           <div class="leftNav">
+            <NuxtLink to="/home">
+              <img src="@/assets/logo.svg" alt="logo" />
+            </NuxtLink>
             <i class="loupe fi-rr-search"></i>
             <input type="text" placeholder="Rechercher" />
           </div>
@@ -36,10 +39,12 @@
             <div><i class="fi-rr-bank"></i><span>Organisation</span></div>
           </NuxtLink>
         </li>
-        <li>
-          <NuxtLink to="#">
-            <div><i class="fi-rr-pencil"></i><span>Publier</span></div>
-          </NuxtLink>
+        <ModalFormPost
+          :revele="reveleFormPost"
+          :toggle-modale-form-post="toggleModaleFormPost"
+        ></ModalFormPost>
+        <li @click="toggleModaleFormPost">
+          <div><i class="fi-rr-pencil"></i><span>Publier</span></div>
         </li>
         <li>
           <NuxtLink to="/subscribe">
@@ -62,11 +67,26 @@
   </div>
 </template>
 <script>
-export default {}
+import ModalFormPost from '@/components/Modals/Forms/ModalFormPost'
+export default {
+  components: {
+    ModalFormPost,
+  },
+  data() {
+    return {
+      reveleFormPost: false,
+    }
+  },
+  methods: {
+    toggleModaleFormPost() {
+      this.reveleFormPost = !this.reveleFormPost
+    },
+  },
+}
 </script>
 
 <style>
-@media (min-width: 200px) {
+@media (min-width: 20px) {
   .navPhone {
     display: block;
   }
@@ -80,18 +100,16 @@ export default {}
   }
 
   .navPhone {
+    z-index: 5;
     position: fixed;
     background: transparent;
-    z-index: 5;
     width: 100%;
-    height: 100vh;
     font-family: 'Open Sans', sans-serif;
   }
 
   .topNav {
     position: fixed;
     top: 0;
-    z-index: 1;
     height: 50px;
     width: 100%;
     display: flex;
@@ -126,6 +144,11 @@ export default {}
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .leftNav img {
+    height: 50px;
+    width: 50px;
   }
 
   .leftNav i {
