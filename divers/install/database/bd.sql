@@ -27,7 +27,8 @@ CREATE TABLE Organisation(
         id          Int  Auto_increment PRIMARY KEY NOT NULL ,
         name         Varchar (50) NOT NULL ,
         description Varchar (50) NOT NULL ,
-        lienSite    Varchar (50) NOT NULL
+        lienSite    Varchar (50) NOT NULL ,
+        image varchar(255) ,
 );
 
 
