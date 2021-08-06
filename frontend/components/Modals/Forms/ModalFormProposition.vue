@@ -26,7 +26,7 @@
           required
         ></textarea>
         <p>Ajouter des tags</p>
-        <input v-model="tags" type="text" placeholder="#Neocracy" />
+        <input type="text" placeholder="#Neocracy" />
         <button type="submit">Send</button>
       </form>
     </div>
@@ -53,10 +53,14 @@ export default {
   methods: {
     async handleSubmitProposition() {
       const userToken = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('userToken='))
+        .split('=')[1]
       console.log(this.form.title)
       console.log(this.form.description)
       console.log(this.form.organisation)
       console.log(this.form.tags)
+      console.log(userToken)
       await this.$api.proposition.postProposition(this.form, userToken)
     },
   },

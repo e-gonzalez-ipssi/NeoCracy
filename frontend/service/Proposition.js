@@ -5,19 +5,15 @@ export default (axios) => ({
     console.log('Proposition', form.organisation)
     console.log('Proposition', form.tags)
     const res = axios
-      .post(
-        'proposition',
-        { withCredentials: true },
-        {
-          params: {
-            title: form.title,
-            description: form.description,
-            organisation: form.organisation,
-            tags: form.tags,
-            userToken,
-          },
-        }
-      )
+      .post('proposition', null, {
+        params: {
+          title: form.title,
+          description: form.description,
+          organisation: form.organisation,
+          tags: form.tags,
+          userToken,
+        },
+      })
       .then((response) => response.status)
       .catch((err) => console.warn(err))
     return res
