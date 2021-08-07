@@ -149,4 +149,19 @@ class UserApi extends Api
         return $this->returnOutput($this->ack());
     }
 
+   /**
+     * @route get(api/user/{id}/organisations)
+     * 
+     * @param int $id l'id de l'organisation que l'on recherche
+     * 
+     * @return  mixed les informations de l'organisation au format JSON
+     */
+    public function getOrgsByUserID(int $userId) {
+        $this->initialize([], self::NO_RIGHT, true, $userId);
+
+        $organisations = $this->orgService->getUsersFromOrganisation($userId);
+
+        return $this->returnOutput($organisations);
+    }
+
 }

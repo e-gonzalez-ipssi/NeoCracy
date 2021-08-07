@@ -2,6 +2,7 @@
 
 namespace App\Manager;
 Use App\Entity\User;
+Use App\Entity\Organisation;
 use Exception;
 
 class UserManager extends Manager {
@@ -182,5 +183,34 @@ class UserManager extends Manager {
         $this->setQuery($newQuery);
         $this->querySet();
         return $this->ack("L'utilisateur a bien été supprimé a la base de donnée");
+    }
+
+
+    /**
+     * Cette fonction permet de récupéré toutes les organisation d'un user
+     * 
+     * @param int $id L'id de l'utilisateur que l'on recherche
+     * 
+     * @return Organisation Cette fonction retourne l'utilisateur rechercher
+     * 
+     * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
+     */
+    public function getOrganisationsById(int $id): Organisation {
+        if (!empty($this->inventory[$id])) {
+            return $this->inventory[$id];
+        }
+
+        $newQuery = "SELECT DISTINCT Organisation.name FROM `Organisation` NATURAL JOIN OrgMember WHERE OrgMember.id_Utilisateur = $id";
+        $this->setQuery($newQuery);
+
+        $result = $this->querySelect();
+
+        if(count($result) < 1) {
+            throw new Exception("error-user-not-have-organisations");
+        }
+
+        $user = $this->fromQueryToOrganisations($result);
+
+        return $user;
     }
 }

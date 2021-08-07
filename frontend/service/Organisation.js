@@ -17,4 +17,10 @@ export default (axios) => ({
       .catch((err) => console.warn(err))
     return res
   },
+  getUserOrganisation() {
+    const userData = JSON.parse(localStorage.getItem('userInfo'))
+    let userID = userData.id
+
+
+  },
 })

@@ -87,7 +87,7 @@ class OrganisationApi extends Api
      * 
      * @return  mixed les informations de l'organisation au format JSON
      */
-    public function getOrg(int $orgId) {
+    public function getOrgsByUserID(int $orgId) {
         $this->initialize([], self::NO_RIGHT, false, $orgId);
 
         return $this->returnOutput($this->org->arrayify());

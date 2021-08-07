@@ -101,7 +101,7 @@ export default {
     return {
       reveleFormProposition: false,
       reveleFormOrganisation: false,
-      posts: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      posts: [1, 2, 3, 4],
     }
   },
   fetch() {
