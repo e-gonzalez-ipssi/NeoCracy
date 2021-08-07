@@ -16,14 +16,14 @@ class OrganisationManager extends Manager {
      * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
-    public function createOrganisation(string $nom, string $description, string $lienSite , int $userId): array {
+    public function createOrganisation(string $nom, string $description, string $lienSite , string $image, int $userId): array {
         /** @var string $newQuery */
-        $newQuery = "INSERT INTO `Organisation` (`nom`, `description`, `lienSite`) VALUES ('$nom', '$description', '$lienSite')";
+        $newQuery = "INSERT INTO `Organisation` (`name`, `description`, `lienSite`, `image`) VALUES ('$nom', '$description', '$lienSite', '$image')";
         $this->setQuery($newQuery);
         $this->querySet();
 
         /** @var string $request */
-        $request = "SELECT id FROM `Organisation`  WHERE nom = '$nom'";
+        $request = "SELECT id FROM `Organisation`  WHERE name = '$nom'";
         $this->setQuery($request);
         $orgId = $this->querySelect()[0]["id"];
 
@@ -89,7 +89,7 @@ class OrganisationManager extends Manager {
             return $this->inventory[$id];
         }
 
-        $newQuery = "SELECT `id`, `nom`, `description`, `lienSite` FROM `Organisation` WHERE id = $id";
+        $newQuery = "SELECT `id`, `name`, `description`, `lienSite`, `image` FROM `Organisation` WHERE id = $id";
         $this->setQuery($newQuery);
 
         $result = $this->querySelect();
@@ -113,7 +113,7 @@ class OrganisationManager extends Manager {
      * @throw Exception Relève une expetion si l'Organisation n'a pas été trouvé
      */
     public function getOrganisationByName(string $nom): Organisation {
-        $newQuery = "SELECT `id`, `nom`, `description`, `lienSite` FROM `Organisation` WHERE nom = '$nom'";
+        $newQuery = "SELECT `id`, `name`, `description`, `lienSite`, `image` FROM `Organisation` WHERE name = '$nom'";
         $this->setQuery($newQuery);
 
         $result = $this->querySelect();
@@ -134,7 +134,7 @@ class OrganisationManager extends Manager {
     public function deleteOrganisation(Organisation $org, string $userName): array {
         $nom = $org->getNom();
         /** @var string $newQuery */
-        $newQuery = "DELETE FROM `OrgAdmin`  WHERE id_Organisation = (SELECT id FROM Organisation WHERE nom = $nom) AND 
+        $newQuery = "DELETE FROM `OrgAdmin`  WHERE id_Organisation = (SELECT id FROM Organisation WHERE name = $nom) AND 
         id_Utilisateur = (SELECT Id FROM Utilisateur WHERE nom = $userName)";
         $this->setQuery($newQuery);
         $this->querySet();

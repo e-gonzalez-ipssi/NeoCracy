@@ -21,9 +21,9 @@ class  PropositionService {
         $this->userService = $userService;
     }
 
-    public function createProposition(Organisation $org, User $author, string $title, string $description, string $tags) {
+    public function createProposition(Organisation $org, User $author, string $title, string $description, string $tags, string $image, string $url) {
         // on créer une proposition
-        $propositionId = $this->propositionManager->createProposition($org->getId(), $author->getId(), $title, $description);
+        $propositionId = $this->propositionManager->createProposition($org->getId(), $author->getId(), $title, $description, $image, $url);
 
         // créer une array avec la liste des tags : séparateur utiliser : virgule
         $tagsList = explode(",", $tags);
