@@ -195,7 +195,7 @@ class UserManager extends Manager {
      * 
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
-    public function getOrganisationsById(int $id): Organisation {
+    public function getOrganisationsByUserId(int $id): array {
         if (!empty($this->inventory[$id])) {
             return $this->inventory[$id];
         }
@@ -209,8 +209,8 @@ class UserManager extends Manager {
             throw new Exception("error-user-not-have-organisations");
         }
 
-        $user = $this->fromQueryToOrganisations($result);
+        $organisations = $this->fromQueryToOrganisations($result);
 
-        return $user;
+        return $organisations;
     }
 }

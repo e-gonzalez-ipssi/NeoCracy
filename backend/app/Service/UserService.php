@@ -91,11 +91,11 @@ class  UserService {
     /**
      * Cette fonction permet de récupéré la liste d'organisation d'un Utilisateur a partir de son id
      * 
-     * @param int $id L'id de l'utilisateur que l'on cherche
+     * @param User $user L'utilisateur que d'on on cherche les organisations
      * 
      * @return array La liste des organisation d'un utilisateur correspondant a l'id
      */
-    public function getOrganisationById (int $id): array {
-        return $this->userManager->getOrganisationsById($id);
+    public function getOrganisationById (User $user): array {
+        return $this->userManager->getOrganisationsByUserId($user->getId());
     }
 }
