@@ -20,7 +20,11 @@
           required
         ></textarea>
         <p>Ajouter un lien</p>
-        <input type="text" placeholder="https://google.fr" />
+        <input
+          v-model="form.lienSite"
+          type="text"
+          placeholder="https://google.fr"
+        />
         <button type="submit">Send</button>
       </form>
     </div>
