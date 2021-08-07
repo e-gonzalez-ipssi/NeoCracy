@@ -31,7 +31,7 @@ class  OrganisationService {
         string $nom, 
         ?string $description, 
         ?string $lienSite,
-        ?string $image,
+        ?string $image
     ) {
         // si une organisation avec le même nom éxiste déjà, on renvoie une erreur
         try {

@@ -190,7 +190,7 @@ class OrganisationApi extends Api
             $params["nom"],
             $params["description"],
             $params["lienSite"],
-            $params["url"],
+            $params["image"],
         );
         return $this->returnOutput($this->ack());
     }
