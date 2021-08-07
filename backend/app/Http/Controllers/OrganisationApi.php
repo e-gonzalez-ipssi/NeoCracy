@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Entity\Organisation;
-use App\Entity\User;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -33,6 +32,8 @@ class OrganisationApi extends Api
         bool $isConnected = true,
         int $orgId = null
     ): array {
+        $paramsClean = $this->getParams($params);
+
         if ($isConnected) {
             if(isset($paramsClean["userToken"])){
                 $userToken = explode("=", $paramsClean["userToken"])[1];
@@ -48,8 +49,6 @@ class OrganisationApi extends Api
         }
 
         $this->checkAccess($right, $orgId);
-
-        $paramsClean = $this->getParams($params);
 
         return $paramsClean;
     }
@@ -178,7 +177,8 @@ class OrganisationApi extends Api
             [
                 ["nom", REQUIRED, TYPE_STRING, $request->input('nom')],
                 ["description", NOT_REQUIRED, TYPE_STRING, $request->input('description'), 'La super description de mon organisation'],
-                ["lienSite", NOT_REQUIRED, TYPE_STRING, $request->input('lienSite'), 'www.neocracy.fr'],
+                ["lienSite", NOT_REQUIRED, TYPE_URL, $request->input('lienSite'), 'www.neocracy.fr'],
+                ["image", NOT_REQUIRED, TYPE_URL, $request->input('image'), ''],
                 ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
             ],
             self::NO_RIGHT, 
@@ -190,6 +190,7 @@ class OrganisationApi extends Api
             $params["nom"],
             $params["description"],
             $params["lienSite"],
+            $params["url"],
         );
         return $this->returnOutput($this->ack());
     }

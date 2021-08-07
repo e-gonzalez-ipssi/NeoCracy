@@ -71,9 +71,9 @@ class PropositionManager extends Manager {
     /**
      * Permet de créer une nouvelle proposition
      */
-    public function createProposition(int $orgId, int $authorId, string $title, string $description): int{
+    public function createProposition(int $orgId, int $authorId, string $title, string $description, $image, $url): int{
         $timestamp = time();
-        $requete = "INSERT INTO `Proposition` (`nom`, `description`, `date`) VALUES ('$title', '$description', '$timestamp')";
+        $requete = "INSERT INTO `Proposition` (`title`, `description`, `date`, `image`, `url`) VALUES ('$title', '$description', '$timestamp', '$image', '$url')";
         $this->setQuery($requete);
         $this->querySet();
 

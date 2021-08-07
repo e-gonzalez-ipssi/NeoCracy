@@ -30,7 +30,8 @@ class  OrganisationService {
         User $user,
         string $nom, 
         ?string $description, 
-        ?string $lienSite
+        ?string $lienSite,
+        ?string $image,
     ) {
         // si une organisation avec le même nom éxiste déjà, on renvoie une erreur
         try {
@@ -39,7 +40,7 @@ class  OrganisationService {
         }
         catch (Exception $e) {
             if ($e->getMessage() === "error-organisation-not-found") {
-                $this->organisationManager->createOrganisation($nom, $description, $lienSite, $user->getId());
+                $this->organisationManager->createOrganisation($nom, $description, $lienSite, $image, $user->getId());
             }
             else {
                 throw new Exception("error-org-already-exist");

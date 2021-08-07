@@ -36,3 +36,4 @@ define("TYPE_INT_NOT_NEGATIF_OR_NULL", 3);
 define("TYPE_BOOLEAN", 4);
 define("TYPE_MAIL", 5);
 define("TYPE_PASSWORD", 6);
+define("TYPE_URL", 7);
