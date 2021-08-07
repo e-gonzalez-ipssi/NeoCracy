@@ -31,12 +31,12 @@ class OrganisationApi extends Api
         int $right = self::NO_RIGHT,
         bool $isConnected = true,
         int $orgId = null
-    ): array {
+    ){
         $paramsClean = $this->getParams($params);
 
         if ($isConnected) {
             if(isset($paramsClean["userToken"])){
-                $userToken = explode("=", $paramsClean["userToken"])[1];
+                $userToken = $paramsClean["userToken"];
                 $this->me = $this->connexionService->getCurrentUserWithToken($userToken);
             } 
             else {
