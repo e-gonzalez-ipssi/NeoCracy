@@ -144,7 +144,7 @@ class  ConnexionService {
      */
     private function rand_string($length):string{ 
         $str = "";
-        $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz@#$&*";  
+        $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";  
         $size = strlen( $chars );  
         for( $i = 0; $i < $length; $i++ ) {  
             $str.= $chars[ rand( 0, $size - 1 ) ];  
