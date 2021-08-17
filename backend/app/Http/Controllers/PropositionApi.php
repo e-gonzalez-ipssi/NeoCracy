@@ -33,7 +33,7 @@ class PropositionApi extends Api
 
         if ($isConnected) {
             if(isset($paramsClean["userToken"])){
-                $userToken = explode("=", $paramsClean["userToken"])[1];
+                $userToken = $paramsClean["userToken"];
                 $this->me = $this->connexionService->getCurrentUserWithToken($userToken);
             } 
             else {

@@ -156,10 +156,10 @@ class UserApi extends Api
      * 
      * @return mixed les informations des organisations au format JSON
      */
-    public function getOrgsByUserID(Request $request, int $userId) {
+    public function getOrgsByUserID(Request $request, int $id) {
         $this->initialize([], self::NO_RIGHT, false);
 
-        $organisations = $this->userService->getOrganisationById($this->userService->getUserById($userId));
+        $organisations = $this->userService->getOrganisationById($this->userService->getUserById($id));
 
         $return = [];
         foreach($organisations as $organisation) {
