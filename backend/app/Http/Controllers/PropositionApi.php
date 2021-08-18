@@ -41,8 +41,8 @@ class PropositionApi extends Api
             }
         }
 
-        if(array_key_exists('organisation', $paramsClean)) {
-            $this->checkAccess($right, $paramsClean['organisation']);
+        if(array_key_exists('orgId', $paramsClean)) {
+            $this->checkAccess($right, $paramsClean['orgId']);
         }
         else {
             $this->checkAccess($right);

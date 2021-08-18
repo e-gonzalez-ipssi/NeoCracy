@@ -19,6 +19,7 @@
           <ModalFormProposition
             :revele="reveleFormProposition"
             :toggle="toggleModaleFormProposition"
+            :organisation="organisation"
           />
           <div class="inputContent" @click="toggleModaleFormProposition">
             <i class="fi-rr-pencil"></i>
@@ -102,10 +103,15 @@ export default {
       reveleFormProposition: false,
       reveleFormOrganisation: false,
       posts: [1, 2, 3, 4],
+      organisation: [],
     }
   },
-  fetch() {
+  async fetch() {
     this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    console.log('1 ok')
+    this.organisation = await this.$api.userdata.getOrganisationsFromUserId()
+    console.log('5 ok')
+    console.log('6 organisation:', this.organisation)
   },
   methods: {
     toggleModaleFormProposition() {

@@ -5,12 +5,13 @@
 
       <form @submit.prevent="handleSubmitProposition">
         <h3>Créer un Post</h3>
-        <p>Pour quelle organisation</p>
-        <input
-          v-model="form.organisation"
-          type="text"
-          placeholder="organisation"
-        />
+        <p>Pour quelle organisation ?</p>
+        <select v-model="form.organisation">
+          <option disabled value>Please select one</option>
+          <option v-for="el in organisation" :key="el.id" :value="el.id">
+            {{ el.name }}
+          </option>
+        </select>
         <p>Ajouter un titre</p>
         <input
           v-model="form.title"
@@ -39,28 +40,26 @@ export default {
   props: {
     revele: Boolean,
     toggle: { type: Function, required: true },
+    organisation: { type: Array, required: true },
   },
   data() {
     return {
       form: {
         title: 'Un titre',
         description: 'le contenu',
-        organisation: 'Neocracy',
+        organisation: [],
         tags: '#Neocracy',
       },
     }
   },
   methods: {
     async handleSubmitProposition() {
-      const userToken = document.cookie
-        .split('; ')
-        .find((row) => row.startsWith('userToken='))
-        .split('=')[1]
       console.log(this.form.title)
       console.log(this.form.description)
       console.log(this.form.organisation)
       console.log(this.form.tags)
-      console.log(userToken)
+      const userToken = this.$cookiz.get('userToken')
+      console.log('userToken:', userToken)
       await this.$api.proposition.postProposition(this.form, userToken)
     },
   },

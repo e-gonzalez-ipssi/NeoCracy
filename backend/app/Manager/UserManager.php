@@ -196,8 +196,8 @@ class UserManager extends Manager {
      * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
      */
     public function getOrganisationsByUserId(int $id): array {
-        
-        $newQuery = "SELECT DISTINCT Organisation.name FROM `Organisation` NATURAL JOIN OrgMember WHERE OrgMember.id_Utilisateur = $id";
+
+        $newQuery = "SELECT DISTINCT Organisation.id, Organisation.name, Organisation.description, Organisation.lienSite, Organisation.image FROM `Organisation` NATURAL JOIN OrgMember WHERE OrgMember.id_Utilisateur = $id";
         $this->setQuery($newQuery);
 
         $result = $this->querySelect();

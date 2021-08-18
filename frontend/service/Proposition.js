@@ -4,12 +4,13 @@ export default (axios) => ({
     console.log('Proposition', form.description)
     console.log('Proposition', form.organisation)
     console.log('Proposition', form.tags)
+    // image,url
     const res = axios
       .post('proposition', null, {
         params: {
           title: form.title,
           description: form.description,
-          organisation: form.organisation,
+          orgId: form.organisation,
           tags: form.tags,
           userToken,
         },
