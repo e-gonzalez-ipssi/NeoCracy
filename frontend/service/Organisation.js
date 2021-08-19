@@ -1,11 +1,7 @@
 export default (axios) => ({
   postOrganisation(form, userToken) {
-    console.log('Organisation', form.nom)
-    console.log('Organisation', form.description)
-    console.log('Organisation', form.lienSite)
-    // http://localhost:8000/api/organisation?description=test2&lienSite=test2&nom=test2
     const res = axios
-      .post('/organisation', null, {
+      .post('organisation', null, {
         params: {
           nom: form.nom,
           description: form.description,
@@ -13,14 +9,9 @@ export default (axios) => ({
           userToken,
         },
       })
-      .then((response) => console.log(response.status))
+      .then((response) => response.status)
       .catch((err) => console.warn(err))
     return res
   },
-  getUserOrganisation() {
-    const userData = JSON.parse(localStorage.getItem('userInfo'))
-    let userID = userData.id
-
-
-  },
+  getUserOrganisation() {},
 })

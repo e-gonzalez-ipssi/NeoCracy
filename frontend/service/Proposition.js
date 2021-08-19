@@ -1,9 +1,5 @@
 export default (axios) => ({
   postProposition(form, userToken) {
-    console.log('Proposition', form.title)
-    console.log('Proposition', form.description)
-    console.log('Proposition', form.organisation)
-    console.log('Proposition', form.tags)
     // image,url
     const res = axios
       .post('proposition', null, {
@@ -17,6 +13,18 @@ export default (axios) => ({
       })
       .then((response) => response.status)
       .catch((err) => console.warn(err))
+    return res
+  },
+  getPropositionsByOrganisationId() {
+    const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    console.log('userInfo:', userInfo)
+    const res = axios
+      .get(`proposition/organisation/${userInfo.organisations[0].id}`, {
+        withCredentials: true,
+      })
+      .then((response) => response.data.value)
+      .catch((err) => console.log(err))
+
     return res
   },
 })

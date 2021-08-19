@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav />
+    <Nav :info="userInfo" />
     <NavTablet />
     <NavPhone />
     <div class="container">
@@ -34,10 +34,28 @@
 </template>
 
 <script>
+import Nav from '@/components/Nav/Nav'
+import NavPhone from '@/components/Nav/NavPhone'
+import NavTablet from '@/components/Nav/NavTablet'
 export default {
-  userInfo: {},
+  components: {
+    Nav,
+    NavPhone,
+    NavTablet,
+  },
+  data() {
+    return {
+      userInfo: {},
+    }
+  },
   fetch() {
-    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+  },
+  beforeMount() {
+    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+  },
+  mounted() {
+    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
   },
 }
 </script>

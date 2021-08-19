@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav />
+    <Nav :info="userInfo" />
     <NavTablet />
     <NavPhone />
     <div class="container">
@@ -27,12 +27,27 @@
 </template>
 
 <script>
+import Nav from '@/components/Nav/Nav'
+import NavPhone from '@/components/Nav/NavPhone'
+import NavTablet from '@/components/Nav/NavTablet'
 export default {
+  components: {
+    Nav,
+    NavPhone,
+    NavTablet,
+  },
   data() {
     return {
       reveleFormPost: false,
       posts: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      userInfo: {},
     }
+  },
+  fetch() {
+    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+  },
+  mounted() {
+    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
   },
 }
 </script>

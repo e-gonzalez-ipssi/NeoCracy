@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav />
+    <Nav :info="userInfo" />
     <NavTablet />
     <NavPhone />
     <div class="container">
@@ -34,7 +34,25 @@
 </template>
 
 <script>
-export default {}
+import Nav from '@/components/Nav/Nav'
+import NavPhone from '@/components/Nav/NavPhone'
+import NavTablet from '@/components/Nav/NavTablet'
+
+export default {
+  components: {
+    Nav,
+    NavPhone,
+    NavTablet,
+  },
+  data() {
+    return {
+      userInfo: {},
+    }
+  },
+  mounted() {
+    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+  },
+}
 </script>
 
 <style scoped>

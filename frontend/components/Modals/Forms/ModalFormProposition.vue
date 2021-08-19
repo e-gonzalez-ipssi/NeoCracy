@@ -4,19 +4,25 @@
       <button class="btn-modale" @click="toggle">X</button>
 
       <form @submit.prevent="handleSubmitProposition">
-        <h3>Créer un Post</h3>
-        <p>Pour quelle organisation ?</p>
-        <select v-model="form.organisation">
+        <h3>Rédiger un post</h3>
+        <!-- <p>Pour quelle organisation ?</p> -->
+        <!-- <select v-model="form.organisation">
           <option disabled value>Please select one</option>
-          <option v-for="el in organisation" :key="el.id" :value="el.id">
-            {{ el.name }}
+          <option v-for="(id, name) in organisation" :key="id" :value="name">
+            {{ name }}
           </option>
-        </select>
-        <p>Ajouter un titre</p>
+        </select> -->
+        <!-- <input
+          v-model="form.organisation"
+          type="number"
+          placeholder="n° de l'organisation"
+          required
+        /> -->
+        <p>Titre du post</p>
         <input
           v-model="form.title"
           type="text"
-          placeholder="Titre du post"
+          placeholder="En-tête de votre post"
           required
         />
         <p>Contenu du post</p>
@@ -26,8 +32,22 @@
           name="message"
           required
         ></textarea>
+        <p>Publier une image</p>
+        <input
+          ref="image"
+          type="file"
+          placeholder="#Ajouter un fichier"
+          @change="onFileChange"
+        />
+
+        <p>Utiliser une url</p>
+        <input
+          v-model="form.url"
+          type="text"
+          placeholder="https://neocracy.com"
+        />
         <p>Ajouter des tags</p>
-        <input type="text" placeholder="#Neocracy" />
+        <input v-model="form.tags" type="text" placeholder="#Neocracy" />
         <button type="submit">Send</button>
       </form>
     </div>
@@ -40,27 +60,27 @@ export default {
   props: {
     revele: Boolean,
     toggle: { type: Function, required: true },
-    organisation: { type: Array, required: true },
   },
   data() {
     return {
       form: {
         title: 'Un titre',
         description: 'le contenu',
-        organisation: [],
-        tags: '#Neocracy',
+        image: {},
+        url: 'https://neocracy.com',
+        tags: 'Neocracy',
       },
     }
   },
   methods: {
+    onFileChange() {
+      this.image = this.$refs.image.files[0]
+    },
     async handleSubmitProposition() {
-      console.log(this.form.title)
-      console.log(this.form.description)
-      console.log(this.form.organisation)
-      console.log(this.form.tags)
+      console.log('this.form:', this.form)
       const userToken = this.$cookiz.get('userToken')
-      console.log('userToken:', userToken)
       await this.$api.proposition.postProposition(this.form, userToken)
+      this.toggle()
     },
   },
 }
