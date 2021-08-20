@@ -3,7 +3,7 @@ DIR="${PWD}"
 if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
 
     echo "vous uttilisez windows"
-    echo 'version: "3.6"
+    echo "version: \"3.6\"
 services:
   neocracy-db:
     container_name: neocracy-db
@@ -71,34 +71,11 @@ services:
     links:
       - neocracy-db
 
-  neocracy-front:
-    container_name: neocracy-front
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
-    image: neocracy-front
-    restart: unless-stopped
-    ports:
-      - 3333:3333
-    environment:
-      HOST: 0.0.0.0
-    depends_on:
-      - neocracy-db
-      - neocracy-backend
-    links:
-      - neocracy-backend
-    volumes:
-      - "D:\\IPPSI\\projet\\NeoCracy\\frontend:/usr/src/app\
-      # - ../frontend:/usr/src/app/
-    networks:
-      - neocracy
-
 networks:
   neocracy:
-    name: neocracy'  > $DIR/docker/docker-compose.yml
+    name: neocracy"  > $DIR/docker/docker-compose.yml
     cd docker
     docker-compose up -d
-    docker stop neocracy-front
     cd ..
     cd frontend
     [ -d "node_modules" ] && npm install nuxt
