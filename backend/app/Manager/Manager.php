@@ -88,9 +88,10 @@ abstract class  Manager
     protected function fromQueryToOrganisation($result): Organisation {
         return new Organisation(
             $result[0]["id"],
-            $result[0]["nom"],
+            $result[0]["name"],
             $result[0]["description"],
             $result[0]["lienSite"],
+            $result[0]["image"],
         );
     }
 
@@ -99,9 +100,10 @@ abstract class  Manager
         foreach($result as $organisation) {
             $newOrganisation = new Organisation(
                 $organisation["id"],
-                $organisation["nom"],
+                $organisation["name"],
                 $organisation["description"],
                 $organisation["lienSite"],
+                $organisation["image"],
             );
             array_push($organisations, $newOrganisation);
         }
@@ -143,12 +145,14 @@ abstract class  Manager
             $newProposition = new Proposition(
                 $proposition["id"],
                 $author,
-                $proposition["nom"],
+                $proposition["title"],
                 $proposition["description"],
                 $tags,
                 $proposition["date"],
                 $like,
                 $dislike,
+                $proposition["image"],
+                $proposition["url"],
             );
             array_push($return, $newProposition);
         }

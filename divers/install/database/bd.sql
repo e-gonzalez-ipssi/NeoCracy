@@ -25,9 +25,10 @@ CREATE TABLE Utilisateur(
 
 CREATE TABLE Organisation(
         id          Int  Auto_increment PRIMARY KEY NOT NULL ,
-        nom         Varchar (50) NOT NULL ,
+        name         Varchar (50) NOT NULL ,
         description Varchar (50) NOT NULL ,
-        lienSite    Varchar (50) NOT NULL
+        lienSite    Varchar (50) NOT NULL ,
+        image varchar(255) ,
 );
 
 
@@ -37,10 +38,12 @@ CREATE TABLE Organisation(
 
 CREATE TABLE Proposition(
         id          Int  Auto_increment PRIMARY KEY NOT NULL ,
-        nom         Varchar (50) NOT NULL ,
+        title         Varchar (50) NOT NULL ,
         description Varchar (50) NOT NULL ,
-        date        int NOT NULL
-);
+        date        int NOT NULL,
+        image       VarChar (255),
+        url         VarChar (255)
+); 
 
 #------------------------------------------------------------
 # Table: Tags

@@ -118,6 +118,10 @@ class Api extends BaseController
         }
 
         if ($typeRequired === TYPE_PASSWORD) {
+            if(!is_string($value) && !is_null($value)) {
+                throw new Exception("type-is-invalid");
+            }
+
             // Vérifier si le mot de passe a bien une sécurité minimum (exemple : 8 characteres (8-20) , 1 chiffres, 1 majuscules)
             $regex = "((?=.*\\d)(?=.*[A-Z]).{8,20})";
             $verif_pass = strlen($value) >= 8;
@@ -126,9 +130,18 @@ class Api extends BaseController
             if(!$verif_pass || !$regex_pass ){
                 throw new Exception("check-password-security");
             }
+        }
 
+        if ($typeRequired === TYPE_URL) {
             if(!is_string($value) && !is_null($value)) {
                 throw new Exception("type-is-invalid");
+            }
+
+            // Vérifier si la string est bien une url
+            $regex_pass = preg_match('#(https?|ftp|ssh|mailto):\/\/[a-z0-9\/:%_+.,\#?!@&=-]+#i', $value);
+
+            if(!$regex_pass ){
+                throw new Exception("is-not-url");
             }
         }
 
