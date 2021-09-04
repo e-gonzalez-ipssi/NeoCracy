@@ -77,10 +77,11 @@ export default {
       this.image = this.$refs.image.files[0]
     },
     async handleSubmitProposition() {
-      console.log('this.form:', this.form)
       const userToken = this.$cookiz.get('userToken')
-      await this.$api.proposition.postProposition(this.form, userToken)
+      const userOrg = JSON.parse(sessionStorage.getItem('userInfo'))
+      await this.$api.proposition.postProposition(this.form, userToken, userOrg)
       this.toggle()
+      location.reload()
     },
   },
 }

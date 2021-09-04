@@ -1,12 +1,12 @@
 export default (axios) => ({
-  postProposition(form, userToken) {
+  postProposition(form, userToken, userOrg) {
     // image,url
     const res = axios
       .post('proposition', null, {
         params: {
           title: form.title,
           description: form.description,
-          orgId: form.organisation,
+          orgId: userOrg.organisations[0].id,
           tags: form.tags,
           userToken,
         },
@@ -17,13 +17,17 @@ export default (axios) => ({
   },
   getPropositionsByOrganisationId() {
     const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    let res
     console.log('userInfo:', userInfo)
-    const res = axios
-      .get(`proposition/organisation/${userInfo.organisations[0].id}`, {
-        withCredentials: true,
-      })
-      .then((response) => response.data.value)
-      .catch((err) => console.log(err))
+    try {
+      res = axios
+        .get(`proposition/organisation/${userInfo.organisations[0].id}`, {
+          withCredentials: true,
+        })
+        .then((response) => response.data.value)
+    } catch (error) {
+      console.log(error)
+    }
 
     return res
   },

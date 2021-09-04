@@ -51,16 +51,16 @@
             <h2>Général</h2>
 
             <li>
-              <a href="#">
+              <NuxtLink to="/contact">
                 <div></div>
-                <i class="fi-rr-info"></i><span>Nous contacter</span>
-              </a>
+                <i class="fi-rr-following"></i><span>Nous contacter</span>
+              </NuxtLink>
             </li>
             <li>
-              <a href="#">
+              <NuxtLink to="/parametre">
                 <div></div>
-                <i class="fi-rr-settings"></i><span>Paramètres</span>
-              </a>
+                <i class="fi-rr-following"></i><span>Mes paramètres</span>
+              </NuxtLink>
             </li>
             <li>
               <a @click="onLogout">

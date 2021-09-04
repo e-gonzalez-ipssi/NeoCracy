@@ -5,27 +5,24 @@
     <NavPhone />
     <div class="container">
       <section>
+        <h1>Parametre</h1>
         <main id="main">
           <div class="topBox">
             <div class="blockOne">
-              <img
-                :src="
-                  userInfo.organisations[0].image ||
-                  'https://via.placeholder.com/150'
-                "
-                alt=" no image found"
-              />
+              <img src="https://via.placeholder.com/150" />
             </div>
           </div>
           <div class="midBox">
             <div class="blockOne">
               <div class="author">
-                <h5>{{ userInfo.organisations[0].nom }}</h5>
-                <p>{{ userInfo.organisations[0].description }}</p>
+                <h5>{{ userInfo.prenom }} {{ userInfo.nom }}</h5>
+                <p>{{ userInfo.mail }}</p>
               </div>
             </div>
             <div class="blockTwo">
-              <button type="button">S'abonner</button>
+              <button type="button" @click="toggleModaleFormUser">
+                Modification
+              </button>
             </div>
           </div>
           <div class="bottomBox">
@@ -34,6 +31,11 @@
             <div class="blockThree"></div>
           </div>
         </main>
+
+        <ModalFormUser
+          :revele="reveleFormUser"
+          :toggle="toggleModaleFormUser"
+        />
       </section>
     </div>
   </div>
@@ -43,20 +45,35 @@
 import Nav from '@/components/Nav/Nav'
 import NavPhone from '@/components/Nav/NavPhone'
 import NavTablet from '@/components/Nav/NavTablet'
+import ModalFormUser from '@/components/Modals/Forms/ModalFormUser'
 
 export default {
   components: {
     Nav,
     NavPhone,
     NavTablet,
+    ModalFormUser,
   },
   data() {
     return {
+      reveleFormUser: false,
       userInfo: {},
     }
   },
   fetch() {
     this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+  },
+  beforeMount() {
+    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+  },
+  mounted() {
+    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+  },
+
+  methods: {
+    toggleModaleFormUser() {
+      this.reveleFormUser = !this.reveleFormUser
+    },
   },
 }
 </script>
@@ -89,7 +106,7 @@ section {
   width: 100%;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.01);
-  background-image: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);
+  background: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);
   box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
   -moz-box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
   -webkit-box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);

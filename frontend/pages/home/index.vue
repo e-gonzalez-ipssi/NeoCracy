@@ -9,7 +9,6 @@
           <ModalFormProposition
             :revele="reveleFormProposition"
             :toggle="toggleModaleFormProposition"
-            :organisation="organisation"
           />
           <div class="inputContent" @click="toggleModaleFormProposition">
             <i class="fi-rr-pencil"></i>
@@ -93,19 +92,18 @@ export default {
     NavTablet,
     ModalFormProposition,
   },
-  async asyncData({ $api }) {
-    const posts = await $api.proposition.getPropositionsByOrganisationId()
-    console.log('posts:', posts)
-    return { posts }
-  },
   data() {
     return {
       reveleFormProposition: false,
       userInfo: {},
+      posts: [],
     }
   },
   fetch() {
     this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+  },
+  async beforeCreate() {
+    this.posts = await this.$api.proposition.getPropositionsByOrganisationId()
   },
   methods: {
     toggleModaleFormProposition() {

@@ -8,20 +8,15 @@
         <main id="main">
           <div class="topBox">
             <div class="blockOne">
-              <img
-                :src="
-                  userInfo.organisations[0].image ||
-                  'https://via.placeholder.com/150'
-                "
-                alt=" no image found"
-              />
+              <img src="https://via.placeholder.com/150" />
             </div>
           </div>
+          <h1>Contact</h1>
           <div class="midBox">
             <div class="blockOne">
               <div class="author">
-                <h5>{{ userInfo.organisations[0].nom }}</h5>
-                <p>{{ userInfo.organisations[0].description }}</p>
+                <h5>{{ userInfo.prenom }} {{ userInfo.nom }}</h5>
+                <p>CEO chez Neocracy</p>
               </div>
             </div>
             <div class="blockTwo">
@@ -43,7 +38,6 @@
 import Nav from '@/components/Nav/Nav'
 import NavPhone from '@/components/Nav/NavPhone'
 import NavTablet from '@/components/Nav/NavTablet'
-
 export default {
   components: {
     Nav,
@@ -56,6 +50,12 @@ export default {
     }
   },
   fetch() {
+    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+  },
+  beforeMount() {
+    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+  },
+  mounted() {
     this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
   },
 }
@@ -89,7 +89,7 @@ section {
   width: 100%;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.01);
-  background-image: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);
+  background: linear-gradient(315deg, rgba(0, 0, 0, 0.01) 30%, #fff 100%);
   box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
   -moz-box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
   -webkit-box-shadow: 0px 1px 10px 0px rgba(144, 144, 144, 0.5);
