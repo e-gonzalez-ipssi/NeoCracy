@@ -24,6 +24,22 @@ class UserManager extends Manager {
     }
 
     /**
+     * Cette fonction permet de modifier les informations d'un utilisateur
+     * 
+     * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
+     * 
+     */
+    public function updateUser(int $id, string $nom, string $prenom, string $mail): array {
+        /** @var string $newQuery */
+        $newQuery = "UPDATE `Utilisateur` SET `nom` = $nom, `prenom` = $prenom, `mail`= $mail WHERE id = $id";
+        $this->setQuery($newQuery);
+
+        $this->querySet();
+
+        return $this->ack("L'utilisateur a bien été modifié");
+    }
+
+    /**
      * Cette fonction permet de récupéré un utilisateur
      * 
      * @param int $id L'id de l'utilisateur que l'on recherche

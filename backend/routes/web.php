@@ -14,6 +14,7 @@
 */
 $router->get('api/user/{id}','UserApi@getUser');
 $router->get('api/me/','UserApi@getMe');
+$router->get('api/user/{id}/update','UserApi@updateMe');
 
 $router->post('api/connect/', 'UserApi@connect');
 $router->post('api/register/', 'UserApi@register');
