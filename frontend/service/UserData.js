@@ -17,4 +17,20 @@ export default (axios) => ({
 
     return res
   },
+  updateUserDetail(form, userToken) {
+    const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+
+    const res = axios
+      .post(`user/${userInfo.id}/update`, null, {
+        params: {
+          nom: form.nom,
+          prenom: form.prenom,
+          mail: form.email,
+          userToken,
+        },
+      })
+      .then((response) => response.status)
+      .catch((err) => console.warn(err))
+    return res
+  },
 })

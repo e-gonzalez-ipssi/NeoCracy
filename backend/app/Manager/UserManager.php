@@ -31,7 +31,8 @@ class UserManager extends Manager {
      */
     public function updateUser(int $id, string $nom, string $prenom, string $mail): array {
         /** @var string $newQuery */
-        $newQuery = "UPDATE `Utilisateur` SET `nom` = $nom, `prenom` = $prenom, `mail`= $mail WHERE id = $id";
+        // UPDATE `Utilisateur` SET `nom` = "gonz", `prenom` = "esteban", `mail`= "test@test.com" WHERE `id` = 1
+        $newQuery = "UPDATE `Utilisateur` SET `nom` = '$nom' , `prenom` = '$prenom', `mail`= '$mail' WHERE `id` = '$id'";
         $this->setQuery($newQuery);
 
         $this->querySet();

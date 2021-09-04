@@ -29,8 +29,8 @@ class UserApi extends Api
 
         if ($isConnected) {
             if(isset($paramsClean["userToken"])){
-                $userToken = explode("=", $paramsClean["userToken"])[1];
-                $this->me = $this->connexionService->getCurrentUserWithToken($userToken);
+                //$userToken = explode("=", $paramsClean["userToken"])[1];
+                $this->me = $this->connexionService->getCurrentUserWithToken($paramsClean["userToken"]);
             } 
             else {
                 $this->me = $this->connexionService->getCurrentUser();
@@ -98,7 +98,7 @@ class UserApi extends Api
             true,
         );
         
-        $this->connexionService->updateMe(
+        $this->userService->updateMe(
             $this->userService->getUserById($id),
             $params['nom'],
             $params['prenom'],

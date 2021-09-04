@@ -3,7 +3,7 @@
     <div class="modale">
       <button class="btn-modale" @click="toggle">X</button>
 
-      <form @submit.prevent="handleSubmitProposition">
+      <form @submit.prevent="handleSubmitUser">
         <h3>Modifier vos informations</h3>
 
         <p>Nom</p>
@@ -39,12 +39,10 @@ export default {
     onFileChange() {
       this.image = this.$refs.image.files[0]
     },
-    async handleSubmitProposition() {
+    async handleSubmitUser() {
       const userToken = this.$cookiz.get('userToken')
-      const userOrg = JSON.parse(sessionStorage.getItem('userInfo'))
-      await this.$api.proposition.postProposition(this.form, userToken, userOrg)
+      await this.$api.userdata.updateUserDetail(this.form, userToken)
       this.toggle()
-      location.reload()
     },
   },
 }
