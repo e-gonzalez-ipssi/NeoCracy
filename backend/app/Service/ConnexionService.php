@@ -64,6 +64,26 @@ class  ConnexionService {
     }
 
     /**
+     * Permet de modifier ses informations personnel
+     */
+    public function updateMe(
+        User $user,
+        string $nom,
+        string $prenom,
+        string $mail
+    ) {
+        $nom = $this->valid_donnees($nom);
+        $prenom = $this->valid_donnees($prenom);
+
+        // on verifie si l'email utiliser n'éxiste pas déjà
+        if (in_array($mail, $this->userManager->getAllUserMail())){
+            throw new Exception("mail-already-used");
+        }
+
+        $this->userManager->updateUser($user->getId(), $nom, $prenom, $mail);
+    }
+
+    /**
      * Permet de connecté un utilisateur
      * 
      * @param null|string $mail Le mail de l'utilisateur qui se connecte

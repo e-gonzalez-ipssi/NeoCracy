@@ -82,6 +82,32 @@ class UserApi extends Api
     }
 
     /**
+     * @route post(api/user/{id}/update)
+     * 
+     * @return  mixed Un message d'approbation
+     */
+    public function updateMe(Request $request, int $id) {
+        $params = $this->initialize(
+            [
+                ["nom", REQUIRED, TYPE_STRING, $request->input('nom')],
+                ["prenom", REQUIRED, TYPE_STRING, $request->input('prenom')],
+                ["mail", REQUIRED, TYPE_MAIL, $request->input('mail')],
+                ["userToken", REQUIRED, TYPE_STRING, $request->input('userToken')],
+            ],
+            self::NO_RIGHT, 
+            true,
+        );
+        
+        $this->connexionService->updateMe(
+            $this->userService->getUserById($id),
+            $params['nom'],
+            $params['prenom'],
+            $params['mail']
+        );
+        return $this->returnOutput($this->ack());
+    }
+
+    /**
      * @route post(api/connect/)
      * 
      * 
