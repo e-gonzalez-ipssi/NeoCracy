@@ -12,7 +12,7 @@
         <input id="prenom" v-model="form.prenom" type="text" required />
 
         <p>Email</p>
-        <input id="mail" v-model="form.email" type="text" required />
+        <input id="mail" v-model="form.email" type="text" />
         <button type="submit">Send</button>
       </form>
     </div>
@@ -27,12 +27,6 @@ export default {
     toggle: { type: Function, required: true },
   },
   data() {
-    const nom = (document.getElementById('nom')[0].placeholder =
-      'new text for email')
-    const prenom = (document.getElementById('prenom')[0].placeholder =
-      'new text for email')
-    const mail = (document.getElementById('mail')[0].placeholder =
-      'new text for email')
     return {
       form: {
         nom: undefined,
@@ -48,6 +42,10 @@ export default {
     async handleSubmitUser() {
       const userToken = this.$cookiz.get('userToken')
       await this.$api.userdata.updateUserDetail(this.form, userToken)
+
+      const userData = await this.$api.userdata.getData()
+      sessionStorage.setItem('userInfo', JSON.stringify(userData))
+
       this.toggle()
       location.reload()
     },

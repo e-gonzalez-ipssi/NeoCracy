@@ -99,11 +99,11 @@ export default {
       posts: [],
     }
   },
-  fetch() {
-    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
-  },
   async beforeCreate() {
     this.posts = await this.$api.proposition.getPropositionsByOrganisationId()
+    if (sessionStorage) {
+      this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    }
   },
   methods: {
     toggleModaleFormProposition() {

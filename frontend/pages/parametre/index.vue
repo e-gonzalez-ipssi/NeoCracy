@@ -60,13 +60,7 @@ export default {
       userInfo: {},
     }
   },
-  fetch() {
-    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
-  },
   beforeMount() {
-    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
-  },
-  mounted() {
     this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
   },
 

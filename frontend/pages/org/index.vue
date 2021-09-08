@@ -21,7 +21,15 @@
             <div class="blockOne">
               <div class="author">
                 <h5>{{ userInfo.organisations[0].nom }}</h5>
-                <p>{{ userInfo.organisations[0].description }}</p>
+
+                <p>
+                  Lien du site :
+                  <a target="_blank" :href="userInfo.organisations[0].lienSite">
+                    {{ userInfo.organisations[0].lienSite }}</a
+                  >
+                </p>
+
+                <p>Description : {{ userInfo.organisations[0].description }}</p>
               </div>
             </div>
             <div class="blockTwo">
@@ -55,8 +63,12 @@ export default {
       userInfo: {},
     }
   },
-  fetch() {
-    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+  created() {
+    console.log('beforeCreate')
+    try {
+      this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+      console.log(this.userInfo)
+    } catch (error) {}
   },
 }
 </script>
