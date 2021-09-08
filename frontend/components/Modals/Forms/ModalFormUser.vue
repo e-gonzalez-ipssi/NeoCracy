@@ -7,12 +7,12 @@
         <h3>Modifier vos informations</h3>
 
         <p>Nom</p>
-        <input v-model="form.nom" type="text" required />
+        <input id="nom" v-model="form.nom" type="text" required />
         <p>Prenom</p>
-        <input v-model="form.prenom" type="text" required />
+        <input id="prenom" v-model="form.prenom" type="text" required />
 
         <p>Email</p>
-        <input v-model="form.email" type="text" required />
+        <input id="mail" v-model="form.email" type="text" required />
         <button type="submit">Send</button>
       </form>
     </div>
@@ -27,11 +27,17 @@ export default {
     toggle: { type: Function, required: true },
   },
   data() {
+    const nom = (document.getElementById('nom')[0].placeholder =
+      'new text for email')
+    const prenom = (document.getElementById('prenom')[0].placeholder =
+      'new text for email')
+    const mail = (document.getElementById('mail')[0].placeholder =
+      'new text for email')
     return {
       form: {
-        nom: JSON.parse(sessionStorage.getItem('userInfo')).nom,
-        prenom: JSON.parse(sessionStorage.getItem('userInfo')).prenom,
-        email: JSON.parse(sessionStorage.getItem('userInfo')).mail,
+        nom: undefined,
+        prenom: undefined,
+        email: undefined,
       },
     }
   },
@@ -43,6 +49,7 @@ export default {
       const userToken = this.$cookiz.get('userToken')
       await this.$api.userdata.updateUserDetail(this.form, userToken)
       this.toggle()
+      location.reload()
     },
   },
 }

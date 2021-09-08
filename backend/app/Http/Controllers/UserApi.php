@@ -23,14 +23,20 @@ class UserApi extends Api
     private function initialize(
         array $params = [],
         int $right = self::NO_RIGHT,
-        bool $isConnected = true
+        bool $isConnected = true,
+        bool $isModification = false
     ): array {
         $paramsClean = $this->getParams($params);
 
         if ($isConnected) {
             if(isset($paramsClean["userToken"])){
-                //$userToken = explode("=", $paramsClean["userToken"])[1];
-                $this->me = $this->connexionService->getCurrentUserWithToken($paramsClean["userToken"]);
+                $userToken = $paramsClean["userToken"];
+            
+                if(!$isModification){
+                    $userToken = explode("=", $paramsClean["userToken"])[1];
+                }
+                $this->me = $this->connexionService->getCurrentUserWithToken($userToken);
+
             } 
             else {
                 $this->me = $this->connexionService->getCurrentUser();
@@ -95,6 +101,7 @@ class UserApi extends Api
                 ["userToken", REQUIRED, TYPE_STRING, $request->input('userToken')],
             ],
             self::NO_RIGHT, 
+            true,
             true,
         );
         

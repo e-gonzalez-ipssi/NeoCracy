@@ -17,6 +17,8 @@ export default (axios) => ({
       .post('disconnect', null, { params: { userToken } })
       .then((response) => response.status)
       .catch((err) => alert(err.message))
+
+    sessionStorage.clear()
     return res
   },
 
