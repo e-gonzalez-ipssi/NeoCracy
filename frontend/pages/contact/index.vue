@@ -11,6 +11,7 @@
               <img src="https://via.placeholder.com/150" />
             </div>
           </div>
+          <h1>Contact</h1>
           <div class="midBox">
             <div class="blockOne">
               <div class="author">

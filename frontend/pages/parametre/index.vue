@@ -5,6 +5,7 @@
     <NavPhone />
     <div class="container">
       <section>
+        <h1>Parametre</h1>
         <main id="main">
           <div class="topBox">
             <div class="blockOne">
@@ -15,11 +16,13 @@
             <div class="blockOne">
               <div class="author">
                 <h5>{{ userInfo.prenom }} {{ userInfo.nom }}</h5>
-                <p>CEO chez Neocracy</p>
+                <p>{{ userInfo.mail }}</p>
               </div>
             </div>
             <div class="blockTwo">
-              <button type="button">S'abonner</button>
+              <button type="button" @click="toggleModaleFormUser">
+                Modification
+              </button>
             </div>
           </div>
           <div class="bottomBox">
@@ -28,6 +31,11 @@
             <div class="blockThree"></div>
           </div>
         </main>
+
+        <ModalFormUser
+          :revele="reveleFormUser"
+          :toggle="toggleModaleFormUser"
+        />
       </section>
     </div>
   </div>
@@ -37,25 +45,29 @@
 import Nav from '@/components/Nav/Nav'
 import NavPhone from '@/components/Nav/NavPhone'
 import NavTablet from '@/components/Nav/NavTablet'
+import ModalFormUser from '@/components/Modals/Forms/ModalFormUser'
+
 export default {
   components: {
     Nav,
     NavPhone,
     NavTablet,
+    ModalFormUser,
   },
   data() {
     return {
+      reveleFormUser: false,
       userInfo: {},
     }
-  },
-  fetch() {
-    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
   },
   beforeMount() {
     this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
   },
-  mounted() {
-    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+
+  methods: {
+    toggleModaleFormUser() {
+      this.reveleFormUser = !this.reveleFormUser
+    },
   },
 }
 </script>

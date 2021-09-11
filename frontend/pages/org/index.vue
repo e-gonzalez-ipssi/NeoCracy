@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav />
+    <Nav :info="userInfo" />
     <NavTablet />
     <NavPhone />
     <div class="container">
@@ -8,14 +8,28 @@
         <main id="main">
           <div class="topBox">
             <div class="blockOne">
-              <img src="https://via.placeholder.com/150" />
+              <img
+                :src="
+                  userInfo.organisations[0].image ||
+                  'https://via.placeholder.com/150'
+                "
+                alt=" no image found"
+              />
             </div>
           </div>
           <div class="midBox">
             <div class="blockOne">
               <div class="author">
-                <h5>Neocracy</h5>
-                <p>Social network of professional</p>
+                <h5>{{ userInfo.organisations[0].nom }}</h5>
+
+                <p>
+                  Lien du site :
+                  <a target="_blank" :href="userInfo.organisations[0].lienSite">
+                    {{ userInfo.organisations[0].lienSite }}</a
+                  >
+                </p>
+
+                <p>Description : {{ userInfo.organisations[0].description }}</p>
               </div>
             </div>
             <div class="blockTwo">
@@ -34,7 +48,29 @@
 </template>
 
 <script>
-export default {}
+import Nav from '@/components/Nav/Nav'
+import NavPhone from '@/components/Nav/NavPhone'
+import NavTablet from '@/components/Nav/NavTablet'
+
+export default {
+  components: {
+    Nav,
+    NavPhone,
+    NavTablet,
+  },
+  data() {
+    return {
+      userInfo: {},
+    }
+  },
+  created() {
+    console.log('beforeCreate')
+    try {
+      this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+      console.log(this.userInfo)
+    } catch (error) {}
+  },
+}
 </script>
 
 <style scoped>

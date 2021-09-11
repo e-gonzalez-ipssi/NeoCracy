@@ -33,7 +33,7 @@ class PropositionApi extends Api
 
         if ($isConnected) {
             if(isset($paramsClean["userToken"])){
-                $userToken = explode("=", $paramsClean["userToken"])[1];
+                $userToken = $paramsClean["userToken"];
                 $this->me = $this->connexionService->getCurrentUserWithToken($userToken);
             } 
             else {
@@ -41,8 +41,8 @@ class PropositionApi extends Api
             }
         }
 
-        if(array_key_exists('organisation', $paramsClean)) {
-            $this->checkAccess($right, $paramsClean['organisation']);
+        if(array_key_exists('orgId', $paramsClean)) {
+            $this->checkAccess($right, $paramsClean['orgId']);
         }
         else {
             $this->checkAccess($right);
@@ -91,7 +91,7 @@ class PropositionApi extends Api
     public function createProposition(Request $request) {
         $params = $this->initialize(
             [
-                ["organisation", REQUIRED, TYPE_INT, $request->input('organisation')],
+                ["orgId", REQUIRED, TYPE_INT, $request->input('orgId')],
                 ["title", REQUIRED, TYPE_STRING, $request->input('title')],
                 ["description", NOT_REQUIRED, TYPE_STRING, $request->input('description'), ""],
                 ["tags", NOT_REQUIRED, TYPE_STRING, $request->input('tags'), ""],
@@ -102,7 +102,7 @@ class PropositionApi extends Api
             self::IS_ORG_MEMBER
         );
 
-        $org = $this->orgService->getOrganisationById($params['organisation']);
+        $org = $this->orgService->getOrganisationById($params['orgId']);
         $this->propositionService->createProposition($org, $this->me, $params['title'], $params['description'], $params['tags'], $params["image"], $params["url"]);
         return $this->returnOutput($this->ack());
     }

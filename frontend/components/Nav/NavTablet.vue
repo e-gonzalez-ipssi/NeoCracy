@@ -1,18 +1,25 @@
 <template>
   <div>
-    <header class="navPhone">
-      <nav class="topNav">
+    <header class="navTablet">
+      <nav class="topNavTablet">
         <ul>
-          <div class="leftNav">
+          <div class="leftNavTablet">
+            <NuxtLink to="/home">
+              <img src="@/assets/logo.svg" alt="logo" />
+            </NuxtLink>
+            <h1>Neocracy<span>.</span></h1>
+          </div>
+          <div class="midNavTablet">
             <i class="loupe fi-rr-search"></i>
             <input type="text" placeholder="Rechercher" />
           </div>
-          <div class="rightNav">
-            <button onclick="myFunctionTwo()" class="dropbtn">
+          <div class="rightNavTablet">
+            <h3>Louis</h3>
+            <button onclick="myFunction()" class="dropbtn">
               <i class="fi-rr-caret-down"></i>
             </button>
             <div class="dropdown">
-              <div id="myDropdownTwo" class="select">
+              <div id="myDropdown" class="select">
                 <a href="#">
                   <i class="fi-rr-settings"></i><span>Paramètres</span>
                 </a>
@@ -28,47 +35,49 @@
       <nav class="bottomNav">
         <li>
           <NuxtLink to="/home">
-            <div><i class="fi-rr-home"></i><span>Acceuil</span></div>
+            <div></div>
+            <i class="fi-rr-home"></i><span>Acceuil</span>
           </NuxtLink>
         </li>
         <li>
           <NuxtLink to="/org">
-            <div><i class="fi-rr-bank"></i><span>Organisation</span></div>
+            <div></div>
+            <i class="fi-rr-bank"></i><span>Organisation</span>
           </NuxtLink>
         </li>
         <li>
           <NuxtLink to="#">
-            <div><i class="fi-rr-pencil"></i><span>Publier</span></div>
+            <div></div>
+            <i class="fi-rr-pencil"></i><span>Publier</span>
           </NuxtLink>
         </li>
         <li>
           <NuxtLink to="/subscribe">
-            <div><i class="fi-rr-following"></i><span>Réseaux</span></div>
+            <div></div>
+            <i class="fi-rr-following"></i><span>Réseaux</span>
           </NuxtLink>
         </li>
         <li>
           <NuxtLink to="/profil">
-            <div><i class="fi-rr-user"></i><span>Profil</span></div>
+            <div></div>
+            <i class="fi-rr-user"></i><span>Profil</span>
           </NuxtLink>
         </li>
       </nav>
     </header>
   </div>
 </template>
+
 <script>
 export default {
-  userInfo: {},
-  fetch() {
-    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
-  },
+  name: 'NavTablet',
   methods: {
-    myFunctionTwo() {
-      const toggle = document.getElementById('myDropdownTwo')
+    myFunction() {
+      const toggle = document.getElementById('myDropdown')
       toggle.classList.toggle('show')
     },
     async onLogout() {
       const userToken = 'userToken=' + this.$cookiz.get('userToken')
-      console.log('userToken:', userToken)
       await this.$api.auth.logout(userToken)
       this.$router.push('/')
     },
@@ -77,8 +86,14 @@ export default {
 </script>
 
 <style>
-@media (min-width: 200px) {
-  .navPhone {
+@media (min-width: 300px) {
+  .navTablet {
+    display: none;
+  }
+}
+
+@media (min-width: 650px) {
+  .navTablet {
     display: block;
   }
 
@@ -90,7 +105,7 @@ export default {
     text-decoration: none;
   }
 
-  .navPhone {
+  .navTablet {
     position: fixed;
     background: transparent;
     z-index: 5;
@@ -99,7 +114,7 @@ export default {
     font-family: 'Open Sans', sans-serif;
   }
 
-  .topNav {
+  .topNavTablet {
     position: fixed;
     top: 0;
     z-index: 1;
@@ -108,24 +123,28 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 20px;
     box-sizing: border-box;
     background-color: #fff;
     border-bottom: rgba(0, 0, 0, 0.1) 1px solid;
   }
 
-  .topNav ul {
+  .topNavTablet ul {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  .topNav ul .leftNav {
-    width: 70%;
+  .topNavTablet ul .leftNav {
+    width: 30%;
   }
 
-  .topNav ul .rightNav {
+  .topNavTablet ul .midNav {
+    width: 40%;
+  }
+
+  .topNavTablet ul .rightNav {
     width: 30%;
   }
 
@@ -133,13 +152,42 @@ export default {
 
   /* TOP LEFT NAV */
 
-  .leftNav {
+  .leftNavTablet {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .leftNav i {
+  .leftNavTablet img {
+    height: 50px;
+    width: 50px;
+  }
+
+  .leftNavTablet h1 {
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    font-size: 20px;
+    color: #424347;
+  }
+
+  .leftNavTablet h1 span {
+    color: #ec7533;
+  }
+
+  /******************/
+
+  /* TOP MID NAV  */
+
+  .midNavTablet {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+
+  .midNavTablet i {
     position: relative;
     z-index: 2;
     left: 30px;
@@ -148,9 +196,9 @@ export default {
     color: #424347;
   }
 
-  .leftNav input {
+  .midNavTablet input {
     position: relative;
-    width: 100%;
+    width: 80%;
     height: auto;
     padding: 5px 20px 5px 40px;
     border-radius: 20px;
@@ -159,15 +207,15 @@ export default {
     transition: 0.2s ease-in-out;
   }
 
-  .leftNav input::placeholder {
+  .midNavTablet input::placeholder {
     font-family: 'Open Sans', sans-serif;
     font-size: 12px;
     color: #424347;
   }
 
-  .leftNav input:focus {
+  .midNavTablet input:focus {
     border: 1px solid #424347;
-    padding: 5px 20px 5px 43px;
+    padding: 5px 20px 5px 45px;
     transition: 0.2s ease-in-out;
     outline: none;
   }
@@ -176,10 +224,16 @@ export default {
 
   /* TOP RIGHT NAV */
 
-  .rightNav {
+  .rightNavTablet {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .rightNavTablet h3 {
+    font-size: 15px;
+    color: #424347;
+    margin-right: 15px;
   }
 
   .dropdown {
@@ -199,7 +253,7 @@ export default {
     display: none;
     position: absolute;
     top: 50px;
-    right: 20px;
+    right: 40px;
     background: #fff;
     border-radius: 5px;
     z-index: 1;
@@ -239,7 +293,7 @@ export default {
     display: block;
   }
 
-  .rightNav img {
+  .rightNavTablet img {
     border-radius: 9999px;
     width: 40px;
     border: 2px solid #ec7533;
@@ -258,7 +312,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5px;
+    padding: 0 30px;
     box-sizing: border-box;
     background-color: #fff;
     border-top: rgba(0, 0, 0, 0.1) 1px solid;
@@ -270,19 +324,22 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-  }
-
-  .bottomNav li div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
 
   .bottomNav i {
-    font-size: 11px;
+    margin-right: 10px;
+    font-size: 15px;
     color: #424347;
+  }
+
+  .bottomNav a.nuxt-link-active li:hover div,
+  .bottomNav a.nuxt-link-active div {
+    position: relative;
+    bottom: 15px;
+    height: 2px;
+    width: 100%;
+    background-color: #ec7533;
+    background: linear-gradient(317deg, #ec7533 30%, #ca622a 100%);
   }
 
   .bottomNav li:hover i,
@@ -293,7 +350,7 @@ export default {
 
   .bottomNav span {
     font-weight: bold;
-    font-size: 11px;
+    font-size: 15px;
     color: #424347;
     padding-bottom: 5px;
   }
@@ -305,8 +362,8 @@ export default {
   }
 }
 
-@media (min-width: 650px) {
-  .navPhone {
+@media (min-width: 1050px) {
+  .navTablet {
     display: none;
   }
 }

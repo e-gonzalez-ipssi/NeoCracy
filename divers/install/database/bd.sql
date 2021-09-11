@@ -16,7 +16,7 @@ CREATE TABLE Utilisateur(
         mdp    Varchar (255) NOT NULL ,
         photo  Varchar (50),
         isAdmin Boolean NOT NUll ,
-        token Varchar (255) 
+        token Varchar (255)
 );
 
 #------------------------------------------------------------
@@ -28,7 +28,7 @@ CREATE TABLE Organisation(
         name         Varchar (50) NOT NULL ,
         description Varchar (50) NOT NULL ,
         lienSite    Varchar (50) NOT NULL ,
-        image varchar(255) ,
+        image varchar(255)
 );
 
 
@@ -43,7 +43,7 @@ CREATE TABLE Proposition(
         date        int NOT NULL,
         image       VarChar (255),
         url         VarChar (255)
-); 
+);
 
 #------------------------------------------------------------
 # Table: Tags
@@ -78,7 +78,7 @@ CREATE TABLE OrgMember (
         id_Utilisateur Int NOT NULL,
     FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
     FOREIGN KEY (id_Organisation) REFERENCES Organisation(id)
-); 
+);
 
 #------------------------------------------------------------
 # Table: OrgAdmin
@@ -89,7 +89,7 @@ CREATE TABLE OrgAdmin (
         id_Utilisateur Int NOT NULL,
     FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
     FOREIGN KEY (id_Organisation) REFERENCES Organisation(id)
-); 
+);
 
 #------------------------------------------------------------
 # Table: UtilisateurProposition
@@ -100,7 +100,7 @@ CREATE TABLE UtilisateurProposition (
         id_Utilisateur Int NOT NULL,
     FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
-); 
+);
 
 #------------------------------------------------------------
 # Table: OrgProposition
@@ -111,7 +111,7 @@ CREATE TABLE OrgProposition (
         id_Organisation Int NOT NULL,
     FOREIGN KEY (id_Organisation) REFERENCES Organisation(id),
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
-); 
+);
 
 
 #------------------------------------------------------------
@@ -124,7 +124,7 @@ CREATE TABLE PropositionLike (
         vote           BOOLEAN NOT NULL,
     FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
-); 
+);
 
 
 #------------------------------------------------------------
@@ -138,7 +138,7 @@ CREATE TABLE PropositionComment (
         date           Int NOT NULL,
     FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id),
     FOREIGN KEY (id_Proposition) REFERENCES Proposition(id)
-); 
+);
 
 #------------------------------------------------------------
 # Table: PropositionSignalée

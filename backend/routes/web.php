@@ -14,11 +14,13 @@
 */
 $router->get('api/user/{id}','UserApi@getUser');
 $router->get('api/me/','UserApi@getMe');
-$router->get('api/user/{id}/update','UserApi@updateMe');
+$router->post('api/user/{id}/update','UserApi@updateMe');
 
 $router->post('api/connect/', 'UserApi@connect');
 $router->post('api/register/', 'UserApi@register');
 $router->post('api/disconnect/', 'UserApi@disconnect');
+
+$router->get('api/user/{id}/organisations','UserApi@getOrgsByUserID');
 
 $router->get('api/organisation/{orgId}','OrganisationApi@getOrg');
 $router->get('api/organisation/{orgId}/members','OrganisationApi@getOrgMembers');

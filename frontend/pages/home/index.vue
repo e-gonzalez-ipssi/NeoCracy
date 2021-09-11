@@ -1,20 +1,10 @@
 <template>
   <div>
-    <Nav />
+    <Nav :info="userInfo" />
     <NavTablet />
     <NavPhone />
     <div class="container">
       <section>
-        <div id="writeContent">
-          <ModalFormOrganisation
-            :revele="reveleFormOrganisation"
-            :toggle="toggleModaleFormOrganisation"
-          />
-          <div class="inputContent" @click="toggleModaleFormOrganisation">
-            <i class="fi-rr-pencil"></i>
-            <h3>Créer une Organisation ...</h3>
-          </div>
-        </div>
         <div id="writeContent">
           <ModalFormProposition
             :revele="reveleFormProposition"
@@ -26,13 +16,14 @@
           </div>
         </div>
       </section>
+
       <section>
-        <main id="main" v-for="post in posts" :key="post">
+        <main v-for="post in posts" id="main" :key="post.id">
           <div class="topBox">
             <div class="blockOne">
               <img src="https://via.placeholder.com/150" />
               <div class="author">
-                <h5>{{ userInfo.prenom }} {{ userInfo.nom }}</h5>
+                <h5>{{ post.author.prenom }} {{ post.author.nom }}</h5>
                 <div>
                   <small>de</small>
                   <h6>Neocracy</h6>
@@ -45,17 +36,22 @@
           </div>
           <div class="midBox">
             <div class="blockOne">
-              <h3>Titre du poste</h3>
+              <h3>{{ post.nom }}</h3>
             </div>
             <div class="blockTwo">
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim
-                iure voluptate distinctio optio sed sint vitae ab nulla eius
-                libero. Assumenda obcaecati, dolores minus voluptatibus ipsa
-                omnis sit quibusdam odit!
+                {{ post.description }}
               </p>
             </div>
-            <div class="blockThree">
+            <div
+              v-for="tag in post.tags"
+              id="main"
+              :key="tag.id"
+              class="blockThree"
+            >
+              <p>#{{ tag.name }}</p>
+            </div>
+            <div class="blockFour">
               <img
                 src="https://www.justifit.fr/wp-content/uploads/2020/06/Droit-a-limage.jpg"
               />
@@ -84,35 +80,34 @@
 </template>
 
 <script>
+import Nav from '@/components/Nav/Nav'
+import NavPhone from '@/components/Nav/NavPhone'
+import NavTablet from '@/components/Nav/NavTablet'
 import ModalFormProposition from '@/components/Modals/Forms/ModalFormProposition'
-import ModalFormOrganisation from '@/components/Modals/Forms/ModalFormOrganisation'
+
 export default {
-  userInfo: {},
   components: {
+    Nav,
+    NavPhone,
+    NavTablet,
     ModalFormProposition,
-    ModalFormOrganisation,
-  },
-  async asyncData({ params, $api }) {
-    const userData = await $api.userdata.getData()
-    localStorage.setItem('userInfo', JSON.stringify(userData))
-    JSON.parse(localStorage.getItem('userInfo'))
   },
   data() {
     return {
       reveleFormProposition: false,
-      reveleFormOrganisation: false,
-      posts: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      userInfo: {},
+      posts: [],
     }
   },
-  fetch() {
-    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  async beforeCreate() {
+    this.posts = await this.$api.proposition.getPropositionsByOrganisationId()
+    if (sessionStorage) {
+      this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    }
   },
   methods: {
     toggleModaleFormProposition() {
       this.reveleFormProposition = !this.reveleFormProposition
-    },
-    toggleModaleFormOrganisation() {
-      this.reveleFormOrganisation = !this.reveleFormOrganisation
     },
   },
 }
@@ -286,11 +281,11 @@ section {
   margin-bottom: 15px;
 }
 
-.midBox .blockThree {
+.midBox .blockFour {
   margin: auto;
 }
 
-.midBox .blockThree img {
+.midBox .blockFour img {
   width: 100% !important;
   max-height: 500px;
 }

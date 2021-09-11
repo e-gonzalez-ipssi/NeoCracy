@@ -20,7 +20,11 @@
           required
         ></textarea>
         <p>Ajouter un lien</p>
-        <input v-model="lien" type="text" placeholder="https://google.fr" />
+        <input
+          v-model="form.lienSite"
+          type="text"
+          placeholder="https://google.fr"
+        />
         <button type="submit">Send</button>
       </form>
     </div>
@@ -50,6 +54,7 @@ export default {
       console.log(this.form.nom)
       console.log(this.form.description)
       console.log(this.form.lienSite)
+      console.log(userToken)
       await this.$api.organisation.postOrganisation(this.form, userToken)
     },
   },

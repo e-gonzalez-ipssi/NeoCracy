@@ -2,6 +2,7 @@
 
 namespace App\Manager;
 Use App\Entity\User;
+Use App\Entity\Organisation;
 use Exception;
 
 class UserManager extends Manager {
@@ -30,7 +31,8 @@ class UserManager extends Manager {
      */
     public function updateUser(int $id, string $nom, string $prenom, string $mail): array {
         /** @var string $newQuery */
-        $newQuery = "UPDATE `Utilisateur` SET `nom` = $nom, `prenom` = $prenom, `mail`= $mail WHERE id = $id";
+        // UPDATE `Utilisateur` SET `nom` = "gonz", `prenom` = "esteban", `mail`= "test@test.com" WHERE `id` = 1
+        $newQuery = "UPDATE `Utilisateur` SET `nom` = '$nom' , `prenom` = '$prenom', `mail`= '$mail' WHERE `id` = '$id'";
         $this->setQuery($newQuery);
 
         $this->querySet();
@@ -198,5 +200,31 @@ class UserManager extends Manager {
         $this->setQuery($newQuery);
         $this->querySet();
         return $this->ack("L'utilisateur a bien été supprimé a la base de donnée");
+    }
+
+
+    /**
+     * Cette fonction permet de récupéré toutes les organisation d'un user
+     * 
+     * @param int $id L'id de l'utilisateur que l'on recherche
+     * 
+     * @return Organisation Cette fonction retourne l'utilisateur rechercher
+     * 
+     * @throw Exception Relève une expetion si l'utilisateur n'a pas été trouvé
+     */
+    public function getOrganisationsByUserId(int $id): array {
+
+        $newQuery = "SELECT DISTINCT Organisation.id, Organisation.name, Organisation.description, Organisation.lienSite, Organisation.image FROM `Organisation` NATURAL JOIN OrgMember WHERE OrgMember.id_Utilisateur = $id";
+        $this->setQuery($newQuery);
+
+        $result = $this->querySelect();
+
+        if(count($result) < 1) {
+            throw new Exception("error-user-not-have-organisations");
+        }
+
+        $organisations = $this->fromQueryToOrganisations($result);
+
+        return $organisations;
     }
 }

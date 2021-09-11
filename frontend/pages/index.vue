@@ -68,11 +68,24 @@ export default {
         this.passwordLogin
       )
       this.$cookiz.set('userToken', response)
+      const userData = await this.$api.userdata.getData()
+
+      sessionStorage.setItem('userInfo', JSON.stringify(userData))
+
+      userData.inOrg = false
+      try {
+        userData.organisations =
+          await this.$api.userdata.getOrganisationsFromUserId()
+        console.log('1 userData.organisations:', userData.organisations)
+        if (userData.organisations.length >= 1) userData.inOrg = true
+        sessionStorage.setItem('userInfo', JSON.stringify(userData))
+        console.log('2 userData.organisations:', userData.organisations)
+      } catch (error) {}
+
       this.$router.push('home')
     },
     async onLogout() {
       const userToken = 'userToken=' + this.$cookiz.get('userToken')
-      console.log('userToken:', userToken)
       await this.$api.auth.logout(userToken)
     },
   },

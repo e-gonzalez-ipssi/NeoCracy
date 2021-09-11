@@ -23,14 +23,20 @@ class UserApi extends Api
     private function initialize(
         array $params = [],
         int $right = self::NO_RIGHT,
-        bool $isConnected = true
+        bool $isConnected = true,
+        bool $isModification = false
     ): array {
         $paramsClean = $this->getParams($params);
 
         if ($isConnected) {
             if(isset($paramsClean["userToken"])){
-                $userToken = explode("=", $paramsClean["userToken"])[1];
+                $userToken = $paramsClean["userToken"];
+            
+                if(!$isModification){
+                    $userToken = explode("=", $paramsClean["userToken"])[1];
+                }
                 $this->me = $this->connexionService->getCurrentUserWithToken($userToken);
+
             } 
             else {
                 $this->me = $this->connexionService->getCurrentUser();
@@ -96,9 +102,10 @@ class UserApi extends Api
             ],
             self::NO_RIGHT, 
             true,
+            true,
         );
         
-        $this->connexionService->updateMe(
+        $this->userService->updateMe(
             $this->userService->getUserById($id),
             $params['nom'],
             $params['prenom'],
@@ -173,6 +180,26 @@ class UserApi extends Api
             $params['mail']
         );
         return $this->returnOutput($this->ack());
+    }
+
+   /**
+     * @route get(api/user/{id}/organisations)
+     * 
+     * @param int $id l'id de l'utilisateur dont on recherche les orgnisations
+     * 
+     * @return mixed les informations des organisations au format JSON
+     */
+    public function getOrgsByUserID(Request $request, int $id) {
+        $this->initialize([], self::NO_RIGHT, false);
+
+        $organisations = $this->userService->getOrganisationById($this->userService->getUserById($id));
+
+        $return = [];
+        foreach($organisations as $organisation) {
+            array_push($return, $organisation->arrayify());
+        }
+
+        return $this->returnOutput($return);
     }
 
 }

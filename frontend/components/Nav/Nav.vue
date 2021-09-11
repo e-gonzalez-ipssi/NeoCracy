@@ -51,16 +51,16 @@
             <h2>Général</h2>
 
             <li>
-              <a href="#">
+              <NuxtLink to="/contact">
                 <div></div>
-                <i class="fi-rr-info"></i><span>Nous contacter</span>
-              </a>
+                <i class="fi-rr-following"></i><span>Nous contacter</span>
+              </NuxtLink>
             </li>
             <li>
-              <a href="#">
+              <NuxtLink to="/parametre">
                 <div></div>
-                <i class="fi-rr-settings"></i><span>Paramètres</span>
-              </a>
+                <i class="fi-rr-following"></i><span>Mes paramètres</span>
+              </NuxtLink>
             </li>
             <li>
               <a @click="onLogout">
@@ -87,7 +87,7 @@
           </div>
           <div class="navBox2">
             <h3>
-              {{ userInfo.prenom }} {{ userInfo.nom }}<br />
+              {{ info.prenom }} {{ info.nom }}<br />
               <small>Neocracy</small>
             </h3>
             <img src="https://via.placeholder.com/150" />
@@ -110,14 +110,13 @@
 
 <script>
 export default {
-  userInfo: {},
-  fetch() {
-    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  name: 'Nav',
+  props: {
+    info: { type: Object, required: true },
   },
   methods: {
     async onLogout() {
       const userToken = 'userToken=' + this.$cookiz.get('userToken')
-      console.log('userToken:', userToken)
       await this.$api.auth.logout(userToken)
       this.$router.push('/')
     },

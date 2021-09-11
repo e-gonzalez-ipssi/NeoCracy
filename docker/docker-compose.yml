@@ -74,7 +74,7 @@ services:
     image: neocracy-front
     restart: unless-stopped
     ports:
-      - 3333:3000
+      - 3333:3333
     environment:
       HOST: 0.0.0.0
     depends_on:
@@ -83,7 +83,7 @@ services:
     links:
       - neocracy-backend
     volumes:
-      - "D:\\IPPSI\\projet\\NeoCracy\\frontend:/usr/src/app"
+      - ../frontend:/usr/src/app/
     networks:
       - neocracy
 
