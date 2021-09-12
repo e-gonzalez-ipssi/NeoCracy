@@ -5,10 +5,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-          rel="stylesheet"
-          href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
-        />
+        <link rel="stylesheet" href="@/assets/uicons/css/uicons.css" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
@@ -125,6 +122,8 @@ export default {
 </script>
 
 <style>
+@import url('https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
 @media (max-width: 1340px) {
   .navTop .navBox2 h3,
   .navTop .navBox2 small {
