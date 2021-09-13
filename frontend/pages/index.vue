@@ -304,6 +304,7 @@ main section:nth-child(1) p {
 }
 
 main section:nth-child(1) a.register {
+  margin-top: 30px;
   width: 300px;
 }
 
