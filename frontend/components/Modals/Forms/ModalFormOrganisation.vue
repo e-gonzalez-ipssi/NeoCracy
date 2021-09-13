@@ -69,7 +69,14 @@ export default {
         console.error('error:', error)
       }
 
-      if (response === 200) this.$router.push('org')
+      if (response === 200) {
+        this.$router.app.refresh()
+        this.$nuxt.refresh()
+        this.$mount()
+        this.toggle()
+        this.$forceUpdate()
+        window.location.reload(true)
+      }
     },
   },
 }

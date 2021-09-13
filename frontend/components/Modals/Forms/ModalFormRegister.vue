@@ -2,7 +2,7 @@
   <div v-if="revele" class="bloc-modale">
     <div class="modale">
       <button class="btn-modale" @click="toggle">X</button>
-      <div class="registered" v-if="registered">
+      <div v-if="registered" class="registered">
         <h5>Félicitations</h5>
         <p>Vous êtes désormais inscris sur Neocracy !</p>
         <button class="btn" @click="toggle">Continuer</button>
@@ -76,9 +76,7 @@ export default {
   },
   methods: {
     async handleSubmitRegister() {
-      console.log('form', this.form)
       const res = await this.$api.auth.register(this.form)
-      console.log('res:', res)
       if (res === 200) {
         this.registered = true
       }
