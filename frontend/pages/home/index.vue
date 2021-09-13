@@ -109,6 +109,7 @@ export default {
       this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
     }
   },
+
   methods: {
     toggleModaleFormProposition() {
       this.reveleFormProposition = !this.reveleFormProposition

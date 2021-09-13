@@ -113,9 +113,6 @@ export default {
   props: {
     info: { type: Object, required: true },
   },
-  mounted() {
-    console.log(this.info)
-  },
   methods: {
     async onLogout() {
       const userToken = 'userToken=' + this.$cookiz.get('userToken')

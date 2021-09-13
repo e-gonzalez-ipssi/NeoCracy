@@ -68,18 +68,14 @@ export default {
           this.form,
           userToken
         )
-      } catch (error) {
-        console.error('error:', error)
-      }
+      } catch (error) {}
       try {
         const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
         userInfo.organisations =
           await this.$api.userdata.getOrganisationsFromUserId()
         userInfo.inOrg = true
         sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
-      } catch (error) {
-        console.error('error:', error)
-      }
+      } catch (error) {}
 
       if (response === 200) {
         this.$router.push('org')

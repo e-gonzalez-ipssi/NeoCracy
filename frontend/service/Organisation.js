@@ -16,17 +16,33 @@ export default (axios) => ({
   getMembersOrganisation() {
     const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
     let res
-    console.log('userInfo:', userInfo)
+
     try {
       res = axios
         .get(`organisation/${userInfo.organisations[0].id}/members`, {
           withCredentials: true,
         })
         .then((response) => response.data.value)
-    } catch (error) {
-      console.log(error)
-    }
+    } catch (error) {}
 
+    return res
+  },
+
+  AddMemberOrganisation(form, userToken) {
+    const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    const res = axios
+      .post(
+        `organisation/${userInfo.organisations[0].id}/members`,
+        { withCredentials: true },
+        {
+          params: {
+            email: form.email,
+            userToken,
+          },
+        }
+      )
+      .then((response) => response.status)
+      .catch((err) => console.warn(err))
     return res
   },
 })

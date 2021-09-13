@@ -57,7 +57,7 @@
               <main>
                 <div class="blockOne">
                   <div class="author">
-                    <h3>Vos membres :</h3>
+                    <h3>Les membres :</h3>
                     <table>
                       <tr>
                         <th>Nom</th>
@@ -72,8 +72,18 @@
                   </div>
                 </div>
               </main>
-
-              <button type="button">Ajouter</button>
+              <div id="writeContent">
+                <ModalFormAddUserOrganisation
+                  :revele="reveleFormAddUserOrganisation"
+                  :toggle="toggleModaleFormAddUserOrganisation"
+                />
+                <div
+                  v-if="ifInArray"
+                  @click="toggleModaleFormAddUserOrganisation"
+                >
+                  <button type="button">Ajouter</button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="bottomBox">
@@ -91,15 +101,23 @@
 import Nav from '@/components/Nav/Nav'
 import NavPhone from '@/components/Nav/NavPhone'
 import NavTablet from '@/components/Nav/NavTablet'
+import ModalFormAddUserOrganisation from '@/components/Modals/Forms/ModalFormAddUserOrganisation'
 
 export default {
   components: {
     Nav,
     NavPhone,
     NavTablet,
+    ModalFormAddUserOrganisation,
+  },
+  filters: {
+    ifInArray(value) {
+      return this.members.incluedes(value) > -1 ? 'Yes' : 'No'
+    },
   },
   data() {
     return {
+      reveleFormAddUserOrganisation: false,
       userInfo: {},
       members: [],
     }
@@ -107,9 +125,13 @@ export default {
   async mounted() {
     try {
       this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
-      console.log(this.userInfo)
     } catch (error) {}
     this.members = await this.$api.organisation.getMembersOrganisation()
+  },
+  methods: {
+    toggleModaleFormAddUserOrganisation() {
+      this.reveleFormAddUserOrganisation = !this.reveleFormAddUserOrganisation
+    },
   },
 }
 </script>
