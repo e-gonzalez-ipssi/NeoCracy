@@ -26,7 +26,7 @@
                 <h5>{{ post.author.prenom }} {{ post.author.nom }}</h5>
                 <div>
                   <small>de</small>
-                  <h6>Neocracy</h6>
+                  <h6>{{ userInfo.organisations[0].nom }}</h6>
                 </div>
               </div>
             </div>

@@ -85,7 +85,9 @@
           <div class="navBox2">
             <h3>
               {{ info.prenom }} {{ info.nom }}<br />
-              <small>Neocracy</small>
+              <small v-if="info.organisations">{{
+                info.organisations[0].nom
+              }}</small>
             </h3>
             <img src="https://via.placeholder.com/150" />
           </div>
@@ -110,6 +112,9 @@ export default {
   name: 'Nav',
   props: {
     info: { type: Object, required: true },
+  },
+  mounted() {
+    console.log(this.info)
   },
   methods: {
     async onLogout() {

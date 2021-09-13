@@ -9,10 +9,16 @@
           <div class="topBox">
             <div class="blockOne">
               <img
+                v-if="userInfo.organisations"
                 :src="
                   userInfo.organisations[0].image ||
                   'https://via.placeholder.com/150'
                 "
+                alt=" no image found"
+              />
+              <img
+                v-else
+                :src="'https://via.placeholder.com/150'"
                 alt=" no image found"
               />
             </div>
@@ -20,21 +26,34 @@
           <div class="midBox">
             <div class="blockOne">
               <div class="author">
-                <h5>{{ userInfo.organisations[0].nom }}</h5>
+                <h5 v-if="userInfo.organisations">
+                  {{ userInfo.organisations[0].nom }}
+                </h5>
 
-                <p>
+                <h5 v-else>Pas d'organisation</h5>
+
+                <p v-if="userInfo.organisations">
                   Lien du site :
                   <a target="_blank" :href="userInfo.organisations[0].lienSite">
                     {{ userInfo.organisations[0].lienSite }}</a
                   >
                 </p>
+                <p v-else>No lien site</p>
 
-                <p>Description : {{ userInfo.organisations[0].description }}</p>
+                <p v-if="userInfo.organisations">
+                  Description : {{ userInfo.organisations[0].description }}
+                </p>
+                <p v-else>No description org</p>
               </div>
             </div>
-            <div class="blockTwo">
-              <button type="button">S'abonner</button>
-            </div>
+            <NuxtLink
+              v-if="!userInfo.organisations"
+              to="/create_org"
+              class="blockTwo"
+            >
+              <button type="button">Créer organisation</button>
+            </NuxtLink>
+            <div v-else class="blockTwo"></div>
           </div>
           <div class="bottomBox">
             <div class="blockOne"></div>
@@ -63,7 +82,7 @@ export default {
       userInfo: {},
     }
   },
-  created() {
+  mounted() {
     console.log('beforeCreate')
     try {
       this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
