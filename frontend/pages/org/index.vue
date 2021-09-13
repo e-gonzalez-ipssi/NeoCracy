@@ -46,6 +46,7 @@
                 <p v-else>No description org</p>
               </div>
             </div>
+
             <NuxtLink
               v-if="!userInfo.organisations"
               to="/create_org"
@@ -53,7 +54,46 @@
             >
               <button type="button">Créer organisation</button>
             </NuxtLink>
+            <div v-else class="blockTwo">
+              <main>
+                <div class="blockOne">
+                  <div class="author">
+                    <h3>Les membres :</h3>
+                    <table>
+                      <tr>
+                        <th>Nom</th>
+                        <th>Rôle</th>
+                      </tr>
+                      <tr v-for="member in members" :key="member.id">
+                        <td>{{ member.mail }}</td>
+                        <td v-if="member[0].isAdmin">Administrateur</td>
+                        <td v-else>Membre</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </main>
+              <div id="writeContent">
+                <ModalFormAddUserOrganisation
+                  :revele="reveleFormAddUserOrganisation"
+                  :toggle="toggleModaleFormAddUserOrganisation"
+                />
+                <div
+                  v-if="ifInArray"
+                  @click="toggleModaleFormAddUserOrganisation"
+                >
+                  <button type="button">Ajouter</button>
+                </div>
+              </div>
+            </div>
+            =======
+            <div v-if="!userInfo.organisations" class="blockTwo">
+              <button type="button" @click="toggleModalFormOrganisation">
+                Créer organisation
+              </button>
+            </div>
             <div v-else class="blockTwo"></div>
+            >>>>>>> c24ab2e789888615fe9c020b52b9bd533a8f0bd7
           </div>
           <div class="bottomBox">
             <div class="blockOne"></div>
@@ -61,6 +101,10 @@
             <div class="blockThree"></div>
           </div>
         </main>
+        <ModalFormOrganisation
+          :revele="reveleFormOrganisation"
+          :toggle="toggleModalFormOrganisation"
+        />
       </section>
     </div>
   </div>
@@ -70,24 +114,37 @@
 import Nav from '@/components/Nav/Nav'
 import NavPhone from '@/components/Nav/NavPhone'
 import NavTablet from '@/components/Nav/NavTablet'
+import ModalFormAddUserOrganisation from '@/components/Modals/Forms/ModalFormAddUserOrganisation'
 
 export default {
   components: {
     Nav,
     NavPhone,
     NavTablet,
+    ModalFormAddUserOrganisation,
+  },
+  filters: {
+    ifInArray(value) {
+      return this.members.incluedes(value) > -1 ? 'Yes' : 'No'
+    },
   },
   data() {
     return {
+      reveleFormAddUserOrganisation: false,
       userInfo: {},
+      members: [],
     }
   },
-  mounted() {
-    console.log('beforeCreate')
+  async mounted() {
     try {
       this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
-      console.log(this.userInfo)
     } catch (error) {}
+    this.members = await this.$api.organisation.getMembersOrganisation()
+  },
+  methods: {
+    toggleModaleFormAddUserOrganisation() {
+      this.reveleFormAddUserOrganisation = !this.reveleFormAddUserOrganisation
+    },
   },
 }
 </script>

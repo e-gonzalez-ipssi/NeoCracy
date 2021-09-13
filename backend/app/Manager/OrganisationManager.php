@@ -51,7 +51,12 @@ class OrganisationManager extends Manager {
      * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
-    public function addUserToOrganisation(string $organisationId , string $userId): array {
+    public function addUserToOrganisation(string $organisationId , string $userMail): array {
+        /** @var string $request */
+        $request = "SELECT id FROM `Utilisateur`  WHERE mail = '$userMail'";
+        $this->setQuery($request);
+        $userId = $this->querySelect()[0]["id"];
+        
         /** @var string $request2 */    
         $request2 = "INSERT INTO `OrgMember` (`id_Organisation`, `id_Utilisateur`) VALUES ($organisationId, $userId)";
         $this->setQuery($request2);

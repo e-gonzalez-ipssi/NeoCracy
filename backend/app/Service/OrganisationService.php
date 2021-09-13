@@ -113,8 +113,8 @@ class  OrganisationService {
     /**
      * Permet d'ajouter un utilisateur à une organisation
      */
-    public function addUserFromOrganisation(Organisation $org, User $user): void{
-        $this->organisationManager->addUserToOrganisation($org->getId(), $user->getId());
+    public function addUserFromOrganisation(Organisation $org, $userMail): void{
+        $this->organisationManager->addUserToOrganisation($org->getId(), $userMail);
     }
 
     /**
