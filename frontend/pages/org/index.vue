@@ -46,13 +46,11 @@
                 <p v-else>No description org</p>
               </div>
             </div>
-            <NuxtLink
-              v-if="!userInfo.organisations"
-              to="/create_org"
-              class="blockTwo"
-            >
-              <button type="button">Créer organisation</button>
-            </NuxtLink>
+            <div v-if="!userInfo.organisations" class="blockTwo">
+              <button type="button" @click="toggleModalFormOrganisation">
+                Créer organisation
+              </button>
+            </div>
             <div v-else class="blockTwo"></div>
           </div>
           <div class="bottomBox">
@@ -61,6 +59,10 @@
             <div class="blockThree"></div>
           </div>
         </main>
+        <ModalFormOrganisation
+          :revele="reveleFormOrganisation"
+          :toggle="toggleModalFormOrganisation"
+        />
       </section>
     </div>
   </div>
@@ -70,15 +72,18 @@
 import Nav from '@/components/Nav/Nav'
 import NavPhone from '@/components/Nav/NavPhone'
 import NavTablet from '@/components/Nav/NavTablet'
+import ModalFormOrganisation from '@/components/Modals/Forms/ModalFormOrganisation'
 
 export default {
   components: {
     Nav,
     NavPhone,
     NavTablet,
+    ModalFormOrganisation,
   },
   data() {
     return {
+      reveleFormOrganisation: false,
       userInfo: {},
     }
   },
@@ -88,6 +93,11 @@ export default {
       this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
       console.log(this.userInfo)
     } catch (error) {}
+  },
+  methods: {
+    toggleModalFormOrganisation() {
+      this.reveleFormOrganisation = !this.reveleFormOrganisation
+    },
   },
 }
 </script>

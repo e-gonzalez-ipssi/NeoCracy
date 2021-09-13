@@ -49,13 +49,27 @@ export default {
   },
   methods: {
     async handleSubmitOrganisation() {
-      const userToken = this.$cookiz.get('userToken')
-      console.log('userToken:', userToken)
-      console.log(this.form.nom)
-      console.log(this.form.description)
-      console.log(this.form.lienSite)
-      console.log(userToken)
-      await this.$api.organisation.postOrganisation(this.form, userToken)
+      let response
+      try {
+        const userToken = this.$cookiz.get('userToken')
+        response = await this.$api.organisation.postOrganisation(
+          this.form,
+          userToken
+        )
+      } catch (error) {
+        console.error('error:', error)
+      }
+      try {
+        const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+        userInfo.organisations =
+          await this.$api.userdata.getOrganisationsFromUserId()
+        userInfo.inOrg = true
+        sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+      } catch (error) {
+        console.error('error:', error)
+      }
+
+      if (response === 200) this.$router.push('org')
     },
   },
 }
