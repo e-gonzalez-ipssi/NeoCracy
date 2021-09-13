@@ -4,28 +4,28 @@
       <button class="btn-modale" @click="toggle">X</button>
 
       <form @submit.prevent="handleSubmitOrganisation">
-        <h3>Créer une Organisation</h3>
-        <p>Ajouter un titre</p>
+        <h3>Créer votre Organisation</h3>
+        <label>Nom de votre organisation</label>
         <input
           v-model="form.nom"
           type="text"
-          placeholder="Nom de l'organisation"
+          placeholder="Nom de votre organisation"
           required
         />
-        <p>Contenu de la description</p>
+        <label>Décrivez votre activitée</label>
         <textarea
           v-model="form.description"
           placeholder="Une description ?"
           name="message"
           required
         ></textarea>
-        <p>Ajouter un lien</p>
+        <label>Lien vers votre site</label>
         <input
           v-model="form.lienSite"
           type="text"
-          placeholder="https://google.fr"
+          placeholder="https://Neocracy.fr"
         />
-        <button type="submit">Send</button>
+        <button type="submit">Créer mon organisation</button>
       </form>
     </div>
   </div>
@@ -49,13 +49,27 @@ export default {
   },
   methods: {
     async handleSubmitOrganisation() {
-      const userToken = this.$cookiz.get('userToken')
-      console.log('userToken:', userToken)
-      console.log(this.form.nom)
-      console.log(this.form.description)
-      console.log(this.form.lienSite)
-      console.log(userToken)
-      await this.$api.organisation.postOrganisation(this.form, userToken)
+      let response
+      try {
+        const userToken = this.$cookiz.get('userToken')
+        response = await this.$api.organisation.postOrganisation(
+          this.form,
+          userToken
+        )
+      } catch (error) {
+        console.error('error:', error)
+      }
+      try {
+        const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+        userInfo.organisations =
+          await this.$api.userdata.getOrganisationsFromUserId()
+        userInfo.inOrg = true
+        sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+      } catch (error) {
+        console.error('error:', error)
+      }
+
+      if (response === 200) this.$router.push('org')
     },
   },
 }
@@ -63,7 +77,7 @@ export default {
 
 <style scoped>
 .bloc-modale {
-  z-index: 4;
+  z-index: 6;
   position: fixed;
   top: 0;
   bottom: 0;

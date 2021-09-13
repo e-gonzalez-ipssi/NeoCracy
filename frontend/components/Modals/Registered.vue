@@ -2,71 +2,16 @@
   <div v-if="revele" class="bloc-modale">
     <div class="modale">
       <button class="btn-modale" @click="toggle">X</button>
-
-      <form @submit.prevent="handleSubmitProposition">
-        <h3>Rédiger un post</h3>
-        <label
-          >Titre du post
-          <p>* Champs obligatoires</p></label
-        >
-        <input
-          v-model="form.title"
-          type="text"
-          placeholder="En-tête de votre post"
-          required
-        />
-        <label
-          >Contenu du post
-          <p>* Champs obligatoires</p></label
-        >
-        <textarea
-          v-model="form.description"
-          placeholder="Que voulez vous dire ?"
-          name="message"
-          required
-        ></textarea>
-        <label>Publier une image</label>
-        <label for="file" class="custom"
-          ><i class="fi-rr-file-add"></i> Ajouter un fichier</label
-        >
-        <input
-          id="file"
-          ref="image"
-          type="file"
-          placeholder="#Ajouter un fichier"
-          @change="onFileChange"
-        />
-        <label>Utiliser un url</label>
-        <input
-          v-model="form.url"
-          type="text"
-          placeholder="https://neocracy.com"
-        />
-        <label>Ajouter des tags</label>
-        <input v-model="form.tags" type="text" placeholder="#Neocracy" />
-        <button type="submit">Publier le post</button>
-      </form>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ModaleFormProposition',
+  name: 'ModaleRegistered',
   props: {
     revele: Boolean,
     toggle: { type: Function, required: true },
-  },
-  data() {
-    return {
-      form: {
-        title: '',
-        description: '',
-        image: {},
-        url: '',
-        tags: '',
-      },
-    }
   },
   methods: {
     onFileChange() {
@@ -85,7 +30,7 @@ export default {
 
 <style scoped>
 .bloc-modale {
-  z-index: 6;
+  z-index: 4;
   position: fixed;
   top: 0;
   bottom: 0;

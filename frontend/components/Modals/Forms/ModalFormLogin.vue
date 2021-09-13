@@ -3,48 +3,25 @@
     <div class="modale">
       <button class="btn-modale" @click="toggle">X</button>
 
-      <form @submit.prevent="handleSubmitProposition">
-        <h3>Rédiger un post</h3>
+      <form @submit.prevent="handleSubmitLogin">
+        <h3>Se connecter</h3>
         <label
-          >Titre du post
+          >Email
+          <p>* Champs obligatoires</p></label
+        >
+        <input id="mail" v-model="form.email" type="text" />
+        <label
+          >Mot de passe
           <p>* Champs obligatoires</p></label
         >
         <input
-          v-model="form.title"
-          type="text"
-          placeholder="En-tête de votre post"
+          id="password"
+          v-model="form.password"
+          type="password"
+          placeholder="passwordLogin"
           required
         />
-        <label
-          >Contenu du post
-          <p>* Champs obligatoires</p></label
-        >
-        <textarea
-          v-model="form.description"
-          placeholder="Que voulez vous dire ?"
-          name="message"
-          required
-        ></textarea>
-        <label>Publier une image</label>
-        <label for="file" class="custom"
-          ><i class="fi-rr-file-add"></i> Ajouter un fichier</label
-        >
-        <input
-          id="file"
-          ref="image"
-          type="file"
-          placeholder="#Ajouter un fichier"
-          @change="onFileChange"
-        />
-        <label>Utiliser un url</label>
-        <input
-          v-model="form.url"
-          type="text"
-          placeholder="https://neocracy.com"
-        />
-        <label>Ajouter des tags</label>
-        <input v-model="form.tags" type="text" placeholder="#Neocracy" />
-        <button type="submit">Publier le post</button>
+        <button type="submit">Se connecter</button>
       </form>
     </div>
   </div>
@@ -60,24 +37,31 @@ export default {
   data() {
     return {
       form: {
-        title: '',
-        description: '',
-        image: {},
-        url: '',
-        tags: '',
+        email: 'test@test.com',
+        password: '0123456Az',
       },
     }
   },
   methods: {
-    onFileChange() {
-      this.image = this.$refs.image.files[0]
-    },
-    async handleSubmitProposition() {
-      const userToken = this.$cookiz.get('userToken')
-      const userOrg = JSON.parse(sessionStorage.getItem('userInfo'))
-      await this.$api.proposition.postProposition(this.form, userToken, userOrg)
+    async handleSubmitLogin() {
+      const response = await this.$api.auth.login(this.form)
+      this.$cookiz.set('userToken', response)
+      const userData = await this.$api.userdata.getData()
+
+      sessionStorage.setItem('userInfo', JSON.stringify(userData))
+
+      userData.inOrg = false
+      try {
+        userData.organisations =
+          await this.$api.userdata.getOrganisationsFromUserId()
+        console.log('1 userData.organisations:', userData.organisations)
+        if (userData.organisations.length >= 1) userData.inOrg = true
+        sessionStorage.setItem('userInfo', JSON.stringify(userData))
+        console.log('2 userData.organisations:', userData.organisations)
+      } catch (error) {}
+
+      this.$router.push('home')
       this.toggle()
-      location.reload()
     },
   },
 }

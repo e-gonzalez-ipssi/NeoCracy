@@ -46,6 +46,7 @@
                 <p v-else>No description org</p>
               </div>
             </div>
+<<<<<<< HEAD
             <NuxtLink
               v-if="!userInfo.organisations"
               to="/create_org"
@@ -85,6 +86,14 @@
                 </div>
               </div>
             </div>
+=======
+            <div v-if="!userInfo.organisations" class="blockTwo">
+              <button type="button" @click="toggleModalFormOrganisation">
+                Créer organisation
+              </button>
+            </div>
+            <div v-else class="blockTwo"></div>
+>>>>>>> c24ab2e789888615fe9c020b52b9bd533a8f0bd7
           </div>
           <div class="bottomBox">
             <div class="blockOne"></div>
@@ -92,6 +101,10 @@
             <div class="blockThree"></div>
           </div>
         </main>
+        <ModalFormOrganisation
+          :revele="reveleFormOrganisation"
+          :toggle="toggleModalFormOrganisation"
+        />
       </section>
     </div>
   </div>
@@ -101,13 +114,18 @@
 import Nav from '@/components/Nav/Nav'
 import NavPhone from '@/components/Nav/NavPhone'
 import NavTablet from '@/components/Nav/NavTablet'
+<<<<<<< HEAD
 import ModalFormAddUserOrganisation from '@/components/Modals/Forms/ModalFormAddUserOrganisation'
+=======
+import ModalFormOrganisation from '@/components/Modals/Forms/ModalFormOrganisation'
+>>>>>>> c24ab2e789888615fe9c020b52b9bd533a8f0bd7
 
 export default {
   components: {
     Nav,
     NavPhone,
     NavTablet,
+<<<<<<< HEAD
     ModalFormAddUserOrganisation,
   },
   filters: {
@@ -118,6 +136,13 @@ export default {
   data() {
     return {
       reveleFormAddUserOrganisation: false,
+=======
+    ModalFormOrganisation,
+  },
+  data() {
+    return {
+      reveleFormOrganisation: false,
+>>>>>>> c24ab2e789888615fe9c020b52b9bd533a8f0bd7
       userInfo: {},
       members: [],
     }
@@ -131,6 +156,11 @@ export default {
   methods: {
     toggleModaleFormAddUserOrganisation() {
       this.reveleFormAddUserOrganisation = !this.reveleFormAddUserOrganisation
+    },
+  },
+  methods: {
+    toggleModalFormOrganisation() {
+      this.reveleFormOrganisation = !this.reveleFormOrganisation
     },
   },
 }

@@ -2,51 +2,56 @@
   <div v-if="revele" class="bloc-modale">
     <div class="modale">
       <button class="btn-modale" @click="toggle">X</button>
+      <div class="registered" v-if="registered">
+        <h5>Félicitations</h5>
+        <p>Vous êtes désormais inscris sur Neocracy !</p>
+        <button class="btn" @click="toggle">Continuer</button>
+      </div>
+      <form v-else @submit.prevent="handleSubmitRegister">
+        <h3>S'inscrire</h3>
 
-      <form @submit.prevent="handleSubmitProposition">
-        <h3>Rédiger un post</h3>
         <label
-          >Titre du post
+          >Nom
+          <p>* Champs obligatoires</p></label
+        >
+        <input id="nom" v-model="form.nom" type="text" required />
+        <label
+          >Prénom
+          <p>* Champs obligatoires</p></label
+        >
+        <input id="prenom" v-model="form.prenom" type="text" required />
+
+        <label
+          >Email
+          <p>* Champs obligatoires</p></label
+        >
+        <input id="mail" v-model="form.email" type="text" />
+        <label
+          >Mot de passe
           <p>* Champs obligatoires</p></label
         >
         <input
-          v-model="form.title"
-          type="text"
-          placeholder="En-tête de votre post"
+          id="password"
+          v-model="form.password"
+          type="password"
+          placeholder="password"
           required
         />
         <label
-          >Contenu du post
+          >Confirmer mot de passe
           <p>* Champs obligatoires</p></label
         >
-        <textarea
-          v-model="form.description"
-          placeholder="Que voulez vous dire ?"
-          name="message"
+        <input
+          id="password"
+          v-model="form.confirmPassword"
+          type="password"
+          placeholder="confirmPassword"
           required
-        ></textarea>
-        <label>Publier une image</label>
-        <label for="file" class="custom"
-          ><i class="fi-rr-file-add"></i> Ajouter un fichier</label
-        >
-        <input
-          id="file"
-          ref="image"
-          type="file"
-          placeholder="#Ajouter un fichier"
-          @change="onFileChange"
         />
-        <label>Utiliser un url</label>
-        <input
-          v-model="form.url"
-          type="text"
-          placeholder="https://neocracy.com"
-        />
-        <label>Ajouter des tags</label>
-        <input v-model="form.tags" type="text" placeholder="#Neocracy" />
-        <button type="submit">Publier le post</button>
+        <button type="submit">S'inscrire</button>
       </form>
     </div>
+    <ModaleRegistered v-if="registered" />
   </div>
 </template>
 
@@ -59,25 +64,24 @@ export default {
   },
   data() {
     return {
+      registered: false,
       form: {
-        title: '',
-        description: '',
-        image: {},
-        url: '',
-        tags: '',
+        nom: 'Gonzalez',
+        prenom: 'Esteban',
+        email: 'test@test.com',
+        password: '0123456Az',
+        confirmPassword: '0123456Az',
       },
     }
   },
   methods: {
-    onFileChange() {
-      this.image = this.$refs.image.files[0]
-    },
-    async handleSubmitProposition() {
-      const userToken = this.$cookiz.get('userToken')
-      const userOrg = JSON.parse(sessionStorage.getItem('userInfo'))
-      await this.$api.proposition.postProposition(this.form, userToken, userOrg)
-      this.toggle()
-      location.reload()
+    async handleSubmitRegister() {
+      console.log('form', this.form)
+      const res = await this.$api.auth.register(this.form)
+      console.log('res:', res)
+      if (res === 200) {
+        this.registered = true
+      }
     },
   },
 }
@@ -304,4 +308,47 @@ export default {
 }
 
 /* ******************** */
+
+.registered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.registered h5 {
+  font-size: 30px;
+}
+
+.registered p {
+  font-size: 20px;
+  margin-top: 10px;
+  color: #333;
+}
+
+.registered button {
+  width: 100%;
+  margin-top: 20px;
+  cursor: pointer;
+  padding: 15px 25px;
+  border: 2px solid transparent;
+  border-radius: 22px;
+  color: #fff;
+  background-color: #ec7533;
+  background: linear-gradient(317deg, #ca622a 10%, #ec7533 100%);
+  box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
+  transition: 0.3s ease-in-out;
+}
+
+.registered button:hover {
+  border: 2px solid #ec7533;
+  font-weight: bold;
+  color: #ec7533;
+  background: none;
+  transition: 0.3s ease-in-out;
+}
 </style>

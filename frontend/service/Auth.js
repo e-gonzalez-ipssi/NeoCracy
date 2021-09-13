@@ -1,10 +1,10 @@
 export default (axios) => ({
-  login(mail, password) {
+  login(form) {
     const res = axios
       .post('connect', null, {
         params: {
-          mail,
-          password,
+          mail: form.email,
+          password: form.password,
         },
       })
       .then((response) => response.data.value)
@@ -33,15 +33,16 @@ export default (axios) => ({
     return res
   },
 
-  register(nom, prenom, mail, password, confirmPassword) {
+  register(form) {
+    console.log('2 form:', form)
     const res = axios
       .post('register', null, {
         params: {
-          nom,
-          prenom,
-          mail,
-          password,
-          confirmPassword,
+          nom: form.nom,
+          prenom: form.prenom,
+          mail: form.email,
+          password: form.password,
+          confirmPassword: form.confirmPassword,
         },
       })
       .then((response) => response.status)
