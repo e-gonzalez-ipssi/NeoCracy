@@ -157,11 +157,12 @@ class OrganisationApi extends Api
      * @return  mixed les informations de l'organisation au format JSON
      */
     public function addOrgMembers(Request $request, int $orgId) {
-        $this->initialize([
+        $params = $this->initialize([
+            ["mail", REQUIRED, TYPE_MAIL, $request->input('mail')],
             ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
-        ], self::IS_NOT_ORG_MEMBER, true, $orgId);
+        ], self::IS_ORG_ADMIN, true, $orgId);
 
-        $this->orgService->addUserFromOrganisation($this->org, $this->me);
+        $this->orgService->addUserFromOrganisation($this->org, $params["mail"]);
         return $this->returnOutput($this->ack());
     }
 
