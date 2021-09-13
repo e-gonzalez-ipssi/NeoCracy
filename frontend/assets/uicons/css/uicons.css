@@ -14,6 +14,9 @@ text-transform: none;
 line-height: 1;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
+color: #333 !important;
+background: #333 !important;
+fill: #333 !important;
 }
 
         .fi-rr-add:before {

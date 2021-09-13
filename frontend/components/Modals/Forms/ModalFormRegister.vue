@@ -1,7 +1,9 @@
 <template>
   <div v-if="revele" class="bloc-modale">
     <div class="modale">
-      <button class="btn-modale" @click="toggle">X</button>
+      <button class="btn-modale" @click="toggle">
+        <img class="icons" src="~/assets/uicons/svg/fi-rr-cross.svg" />
+      </button>
       <div class="registered" v-if="registered">
         <h5>Félicitations</h5>
         <p>Vous êtes désormais inscris sur Neocracy !</p>
@@ -88,6 +90,10 @@ export default {
 </script>
 
 <style scoped>
+.icons {
+  height: 18px;
+}
+
 .bloc-modale {
   z-index: 6;
   position: fixed;

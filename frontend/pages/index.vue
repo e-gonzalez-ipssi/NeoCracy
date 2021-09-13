@@ -34,6 +34,12 @@
         :toggle="toggleModaleFormLogin"
       />
 
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+
       <main>
         <section>
           <h1>Une sphère dédiée aux entreprises</h1>
@@ -227,6 +233,45 @@ ul li a {
   border-bottom: 2px solid #ec7533;
 }
 
+.circle {
+  z-index: 5;
+  position: absolute;
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  background: #ff6584;
+}
+
+.circle:nth-child(1) {
+  left: 10%;
+  top: 61%;
+}
+
+.circle:nth-child(2) {
+  left: 25%;
+  top: 20%;
+}
+
+.circle:nth-child(3) {
+  left: 40%;
+  top: 70%;
+}
+
+.circle:nth-child(4) {
+  left: 5%;
+  top: 40%;
+}
+
+.circle:nth-child(5) {
+  left: 23%;
+  top: 55%;
+}
+
+.circle:nth-child(6) {
+  left: 46%;
+  top: 14%;
+}
+
 main {
   width: 80%;
   height: auto;
@@ -282,7 +327,7 @@ main section:nth-child(2) img {
 
 footer {
   position: fixed;
-  bottom: 10px;
+  bottom: 0px;
   display: flex;
   justify-content: center;
   width: 100%;
