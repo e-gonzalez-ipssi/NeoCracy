@@ -53,24 +53,28 @@
             </div>
             <div class="blockFour">
               <img
-                src="https://www.justifit.fr/wp-content/uploads/2020/06/Droit-a-limage.jpg"
+                :src="
+                  post.image ||
+                  'https://www.justifit.fr/wp-content/uploads/2020/06/Droit-a-limage.jpg'
+                "
+                alt=" no image found"
               />
             </div>
           </div>
           <div class="bottomBox">
             <div class="blockOne">
               <i class="fi-rr-thumbs-up"></i>
-              <p>J'aime</p>
+              <a>J'aime</a>
             </div>
             <div class="hr"></div>
             <div class="blockTwo">
               <i class="fi-rr-thumbs-down"></i>
-              <p>Je n'aime pas</p>
+              <a>Je n'aime pas</a>
             </div>
             <div class="hr"></div>
             <div class="blockThree">
               <i class="fi-rr-comment"></i>
-              <p>Commenter</p>
+              <a>Commenter</a>
             </div>
           </div>
         </main>
