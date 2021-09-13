@@ -1,32 +1,18 @@
 <template>
   <div>
-    <div>
-      <h3>Register</h3>
-      <input v-model="nom" type="text" placeholder="nom" />
-      <input v-model="prenom" type="text" placeholder="prenom" />
-      <input v-model="mailRegister" type="text" placeholder="mailRegister" />
-      <input
-        v-model="passwordRegister"
-        type="password"
-        placeholder="passwordRegister"
-      />
-      <input
-        v-model="confirmPassword"
-        type="password"
-        placeholder="confirmPassword"
-      />
-      <button @click="onRegister">Register</button>
+    <div class="inputContent" @click="toggleModaleFormRegister">
+      <i class="fi-rr-pencil"></i>
+      <h3>Register.</h3>
     </div>
-    <div>
+    <ModalFormRegister
+      :revele="reveleFormRegister"
+      :toggle="toggleModaleFormRegister"
+    />
+    <div class="inputContent" @click="toggleModaleFormLogin">
+      <i class="fi-rr-pencil"></i>
       <h3>Login</h3>
-      <input v-model="emailLogin" type="text" placeholder="emailLogin" />
-      <input
-        v-model="passwordLogin"
-        type="password"
-        placeholder="passwordLogin"
-      />
-      <button @click="onLogin">Login</button>
     </div>
+    <ModalFormLogin :revele="reveleFormLogin" :toggle="toggleModaleFormLogin" />
     <div>
       <h3>Logout</h3>
       <button @click="onLogout">Logout</button>
@@ -39,7 +25,14 @@
 </template>
 
 <script>
+import ModalFormLogin from '@/components/Modals/Forms/ModalFormLogin'
+import ModalFormRegister from '@/components/Modals/Forms/ModalFormRegister'
+
 export default {
+  components: {
+    ModalFormLogin,
+    ModalFormRegister,
+  },
   data() {
     return {
       nom: 'Gonzalez',
@@ -49,40 +42,17 @@ export default {
       confirmPassword: '0123456Az',
       emailLogin: 'test@test.com',
       passwordLogin: '0123456Az',
+      reveleFormLogin: false,
+      reveleFormRegister: false,
     }
   },
 
   methods: {
-    async onRegister() {
-      await this.$api.auth.register(
-        this.nom,
-        this.prenom,
-        this.mailRegister,
-        this.passwordRegister,
-        this.confirmPassword
-      )
+    toggleModaleFormLogin() {
+      this.reveleFormLogin = !this.reveleFormLogin
     },
-    async onLogin() {
-      const response = await this.$api.auth.login(
-        this.emailLogin,
-        this.passwordLogin
-      )
-      this.$cookiz.set('userToken', response)
-      const userData = await this.$api.userdata.getData()
-
-      sessionStorage.setItem('userInfo', JSON.stringify(userData))
-
-      userData.inOrg = false
-      try {
-        userData.organisations =
-          await this.$api.userdata.getOrganisationsFromUserId()
-        console.log('1 userData.organisations:', userData.organisations)
-        if (userData.organisations.length >= 1) userData.inOrg = true
-        sessionStorage.setItem('userInfo', JSON.stringify(userData))
-        console.log('2 userData.organisations:', userData.organisations)
-      } catch (error) {}
-
-      this.$router.push('home')
+    toggleModaleFormRegister() {
+      this.reveleFormRegister = !this.reveleFormRegister
     },
     async onLogout() {
       const userToken = 'userToken=' + this.$cookiz.get('userToken')
@@ -121,5 +91,33 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+.inputContent {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background: #ddd;
+  transition: 0.3s ease-in-out;
+}
+.inputContent:hover {
+  border: 1px solid #aaaaaa;
+  outline: none;
+  transition: 0.3s ease-in-out;
+}
+
+.inputContent i {
+  font-size: 15px;
+  color: #757588;
+  margin-top: 2px;
+}
+
+.inputContent h3 {
+  font-size: 15px;
+  color: #757588;
+  margin-left: 10px;
 }
 </style>
