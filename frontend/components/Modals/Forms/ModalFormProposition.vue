@@ -85,7 +85,7 @@ export default {
 
 <style scoped>
 .bloc-modale {
-  z-index: 4;
+  z-index: 6;
   position: fixed;
   top: 0;
   bottom: 0;

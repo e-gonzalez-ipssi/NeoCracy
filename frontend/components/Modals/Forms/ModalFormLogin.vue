@@ -4,13 +4,16 @@
       <button class="btn-modale" @click="toggle">X</button>
 
       <form @submit.prevent="handleSubmitLogin">
-        <h3>Login</h3>
+        <h3>Se connecter</h3>
         <label
           >Email
           <p>* Champs obligatoires</p></label
         >
         <input id="mail" v-model="form.email" type="text" />
-        <label>Password</label>
+        <label
+          >Mot de passe
+          <p>* Champs obligatoires</p></label
+        >
         <input
           id="password"
           v-model="form.password"
@@ -18,7 +21,7 @@
           placeholder="passwordLogin"
           required
         />
-        <button type="submit">Modifier</button>
+        <button type="submit">Se connecter</button>
       </form>
     </div>
   </div>
@@ -66,7 +69,7 @@ export default {
 
 <style scoped>
 .bloc-modale {
-  z-index: 4;
+  z-index: 6;
   position: fixed;
   top: 0;
   bottom: 0;

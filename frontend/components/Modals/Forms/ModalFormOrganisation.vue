@@ -4,28 +4,28 @@
       <button class="btn-modale" @click="toggle">X</button>
 
       <form @submit.prevent="handleSubmitOrganisation">
-        <h3>Créer une Organisation</h3>
-        <p>Ajouter un titre</p>
+        <h3>Créer votre Organisation</h3>
+        <label>Nom de votre organisation</label>
         <input
           v-model="form.nom"
           type="text"
-          placeholder="Nom de l'organisation"
+          placeholder="Nom de votre organisation"
           required
         />
-        <p>Contenu de la description</p>
+        <label>Décrivez votre activitée</label>
         <textarea
           v-model="form.description"
           placeholder="Une description ?"
           name="message"
           required
         ></textarea>
-        <p>Ajouter un lien</p>
+        <label>Lien vers votre site</label>
         <input
           v-model="form.lienSite"
           type="text"
-          placeholder="https://google.fr"
+          placeholder="https://Neocracy.fr"
         />
-        <button type="submit">Send</button>
+        <button type="submit">Créer mon organisation</button>
       </form>
     </div>
   </div>
@@ -77,7 +77,7 @@ export default {
 
 <style scoped>
 .bloc-modale {
-  z-index: 4;
+  z-index: 6;
   position: fixed;
   top: 0;
   bottom: 0;

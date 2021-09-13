@@ -2,16 +2,23 @@
   <div v-if="revele" class="bloc-modale">
     <div class="modale">
       <button class="btn-modale" @click="toggle">X</button>
-      <div v-if="registered">
-        <h1>You get Registered !!!</h1>
-        <button class="btn" @click="toggle">OK</button>
+      <div class="registered" v-if="registered">
+        <h5>Félicitations</h5>
+        <p>Vous êtes désormais inscris sur Neocracy !</p>
+        <button class="btn" @click="toggle">Continuer</button>
       </div>
       <form v-else @submit.prevent="handleSubmitRegister">
-        <h3>Register</h3>
+        <h3>S'inscrire</h3>
 
-        <label>Nom</label>
+        <label
+          >Nom
+          <p>* Champs obligatoires</p></label
+        >
         <input id="nom" v-model="form.nom" type="text" required />
-        <label>Prenom</label>
+        <label
+          >Prénom
+          <p>* Champs obligatoires</p></label
+        >
         <input id="prenom" v-model="form.prenom" type="text" required />
 
         <label
@@ -19,7 +26,10 @@
           <p>* Champs obligatoires</p></label
         >
         <input id="mail" v-model="form.email" type="text" />
-        <label>Password</label>
+        <label
+          >Mot de passe
+          <p>* Champs obligatoires</p></label
+        >
         <input
           id="password"
           v-model="form.password"
@@ -27,7 +37,10 @@
           placeholder="password"
           required
         />
-        <label>Confirm Password</label>
+        <label
+          >Confirmer mot de passe
+          <p>* Champs obligatoires</p></label
+        >
         <input
           id="password"
           v-model="form.confirmPassword"
@@ -35,7 +48,7 @@
           placeholder="confirmPassword"
           required
         />
-        <button type="submit">Modifier</button>
+        <button type="submit">S'inscrire</button>
       </form>
     </div>
     <ModaleRegistered v-if="registered" />
@@ -76,7 +89,7 @@ export default {
 
 <style scoped>
 .bloc-modale {
-  z-index: 4;
+  z-index: 6;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -295,4 +308,47 @@ export default {
 }
 
 /* ******************** */
+
+.registered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.registered h5 {
+  font-size: 30px;
+}
+
+.registered p {
+  font-size: 20px;
+  margin-top: 10px;
+  color: #333;
+}
+
+.registered button {
+  width: 100%;
+  margin-top: 20px;
+  cursor: pointer;
+  padding: 15px 25px;
+  border: 2px solid transparent;
+  border-radius: 22px;
+  color: #fff;
+  background-color: #ec7533;
+  background: linear-gradient(317deg, #ca622a 10%, #ec7533 100%);
+  box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
+  transition: 0.3s ease-in-out;
+}
+
+.registered button:hover {
+  border: 2px solid #ec7533;
+  font-weight: bold;
+  color: #ec7533;
+  background: none;
+  transition: 0.3s ease-in-out;
+}
 </style>
