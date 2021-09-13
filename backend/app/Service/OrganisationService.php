@@ -133,12 +133,15 @@ class  OrganisationService {
      */
     public function getUsersFromOrganisation(Organisation $org){
         $membersId = $this->organisationManager->getUsersFromOrganisation($org->getId());
-    
+        
         $membersList = [];
     
         foreach($membersId as $userId) {
             $user = $this->userService->getUserById($userId["id_Utilisateur"]);
-            array_push($membersList, $user->arrayify());
+            $userRow = $user->arrayify();
+            array_push($userRow , (object)['isAdmin' => $this->userIsOrgAdmin($user , $org->getId())]);
+            array_push($membersList,  $userRow);
+    
         }
 
         return $membersList;

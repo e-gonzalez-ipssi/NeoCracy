@@ -53,7 +53,28 @@
             >
               <button type="button">Créer organisation</button>
             </NuxtLink>
-            <div v-else class="blockTwo"></div>
+            <div v-else class="blockTwo">
+              <main>
+                <div class="blockOne">
+                  <div class="author">
+                    <h3>Vos membres :</h3>
+                    <table>
+                      <tr>
+                        <th>Nom</th>
+                        <th>Rôle</th>
+                      </tr>
+                      <tr v-for="member in members" :key="member.id">
+                        <td>{{ member.mail }}</td>
+                        <td v-if="member[0].isAdmin">Administrateur</td>
+                        <td v-else>Membre</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </main>
+
+              <button type="button">Ajouter</button>
+            </div>
           </div>
           <div class="bottomBox">
             <div class="blockOne"></div>
@@ -80,14 +101,15 @@ export default {
   data() {
     return {
       userInfo: {},
+      members: [],
     }
   },
-  mounted() {
-    console.log('beforeCreate')
+  async mounted() {
     try {
       this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
       console.log(this.userInfo)
     } catch (error) {}
+    this.members = await this.$api.organisation.getMembersOrganisation()
   },
 }
 </script>

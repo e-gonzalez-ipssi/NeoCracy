@@ -81,7 +81,9 @@ export default {
         console.error('error:', error)
       }
 
-      if (response === 200) this.$router.push('org')
+      if (response === 200) {
+        this.$router.push('org')
+      }
     },
   },
 }
