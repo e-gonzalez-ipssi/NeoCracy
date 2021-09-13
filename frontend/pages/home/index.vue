@@ -11,7 +11,17 @@
             :toggle="toggleModaleFormProposition"
           />
           <div class="inputContent" @click="toggleModaleFormProposition">
-            <i class="fi-rr-pencil"></i>
+            <svg
+              class="icons"
+              xmlns="http://www.w3.org/2000/svg"
+              id="Outline"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M22.853,1.148a3.626,3.626,0,0,0-5.124,0L1.465,17.412A4.968,4.968,0,0,0,0,20.947V23a1,1,0,0,0,1,1H3.053a4.966,4.966,0,0,0,3.535-1.464L22.853,6.271A3.626,3.626,0,0,0,22.853,1.148ZM5.174,21.122A3.022,3.022,0,0,1,3.053,22H2V20.947a2.98,2.98,0,0,1,.879-2.121L15.222,6.483l2.3,2.3ZM21.438,4.857,18.932,7.364l-2.3-2.295,2.507-2.507a1.623,1.623,0,1,1,2.295,2.3Z"
+              />
+            </svg>
+
             <h3>Rédiger une proposition ...</h3>
           </div>
         </div>
@@ -31,7 +41,16 @@
               </div>
             </div>
             <div class="blockTwo">
-              <i class="fi-rr-menu-dots-vertical"></i>
+              <svg
+                class="icons"
+                xmlns="http://www.w3.org/2000/svg"
+                id="Outline"
+                viewBox="0 0 24 24"
+              >
+                <circle cx="12" cy="2" r="2" />
+                <circle cx="12" cy="12" r="2" />
+                <circle cx="12" cy="22" r="2" />
+              </svg>
             </div>
           </div>
           <div class="midBox">
@@ -63,17 +82,50 @@
           </div>
           <div class="bottomBox">
             <div class="blockOne">
-              <i class="fi-rr-thumbs-up"></i>
+              <svg
+                class="icons"
+                xmlns="http://www.w3.org/2000/svg"
+                id="Outline"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M22.773,7.721A4.994,4.994,0,0,0,19,6H15.011l.336-2.041A3.037,3.037,0,0,0,9.626,2.122L7.712,6H5a5.006,5.006,0,0,0-5,5v5a5.006,5.006,0,0,0,5,5H18.3a5.024,5.024,0,0,0,4.951-4.3l.705-5A5,5,0,0,0,22.773,7.721ZM2,16V11A3,3,0,0,1,5,8H7V19H5A3,3,0,0,1,2,16Zm19.971-4.581-.706,5A3.012,3.012,0,0,1,18.3,19H9V7.734a1,1,0,0,0,.23-.292l2.189-4.435A1.07,1.07,0,0,1,13.141,2.8a1.024,1.024,0,0,1,.233.84l-.528,3.2A1,1,0,0,0,13.833,8H19a3,3,0,0,1,2.971,3.419Z"
+                />
+              </svg>
+
               <a>J'aime</a>
             </div>
             <div class="hr"></div>
             <div class="blockTwo">
-              <i class="fi-rr-thumbs-down"></i>
+              <svg
+                class="icons"
+                xmlns="http://www.w3.org/2000/svg"
+                id="Outline"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M23.951,12.3l-.705-5A5.024,5.024,0,0,0,18.3,3H5A5.006,5.006,0,0,0,0,8v5a5.006,5.006,0,0,0,5,5H7.712l1.914,3.878a3.037,3.037,0,0,0,5.721-1.837L15.011,18H19a5,5,0,0,0,4.951-5.7ZM5,5H7V16H5a3,3,0,0,1-3-3V8A3,3,0,0,1,5,5Zm16.264,9.968A3,3,0,0,1,19,16H13.833a1,1,0,0,0-.987,1.162l.528,3.2a1.024,1.024,0,0,1-.233.84,1.07,1.07,0,0,1-1.722-.212L9.23,16.558A1,1,0,0,0,9,16.266V5h9.3a3.012,3.012,0,0,1,2.97,2.581l.706,5A3,3,0,0,1,21.264,14.968Z"
+                />
+              </svg>
+
               <a>Je n'aime pas</a>
             </div>
             <div class="hr"></div>
             <div class="blockThree">
-              <i class="fi-rr-comment"></i>
+              <svg
+                class="icons"
+                xmlns="http://www.w3.org/2000/svg"
+                id="Outline"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M24,11.247A12.012,12.012,0,1,0,12.017,24H19a5.005,5.005,0,0,0,5-5V11.247ZM22,19a3,3,0,0,1-3,3H12.017a10.041,10.041,0,0,1-7.476-3.343,9.917,9.917,0,0,1-2.476-7.814,10.043,10.043,0,0,1,8.656-8.761A10.564,10.564,0,0,1,12.021,2,9.921,9.921,0,0,1,18.4,4.3,10.041,10.041,0,0,1,22,11.342Z"
+                />
+                <path d="M8,9h4a1,1,0,0,0,0-2H8A1,1,0,0,0,8,9Z" />
+                <path d="M16,11H8a1,1,0,0,0,0,2h8a1,1,0,0,0,0-2Z" />
+                <path d="M16,15H8a1,1,0,0,0,0,2h8a1,1,0,0,0,0-2Z" />
+              </svg>
+
               <a>Commenter</a>
             </div>
           </div>
@@ -127,6 +179,11 @@ export default {
   padding-top: 120px;
   background: #f1f1f1;
   font-family: 'Open Sans', sans-serif;
+}
+
+.icons {
+  height: 15px;
+  fill: #333;
 }
 
 a {
@@ -256,8 +313,8 @@ section {
   align-items: center;
 }
 
-.topBox .blockTwo i {
-  font-size: 20px;
+.topBox .blockTwo .icons {
+  height: 20px;
 }
 
 .midBox {

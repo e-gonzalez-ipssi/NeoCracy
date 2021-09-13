@@ -1,21 +1,35 @@
 <template>
   <div v-if="revele" class="bloc-modale">
     <div class="modale">
-      <button class="btn-modale" @click="toggle">X</button>
+      <button class="btn-modale" @click="toggle">
+        <img class="icons" src="~/assets/uicons/svg/fi-rr-cross.svg" />
+      </button>
 
       <form @submit.prevent="handleSubmitUser">
         <h3>Modifier vos informations</h3>
 
         <label>Nom</label>
-        <input id="nom" v-model="form.nom" type="text" required />
-        <label>Prenom</label>
-        <input id="prenom" v-model="form.prenom" type="text" required />
+        <input
+          id="nom"
+          v-model="form.nom"
+          type="text"
+          required
+          placeholder="Nom"
+        />
+        <label>Prénom</label>
+        <input
+          id="prenom"
+          v-model="form.prenom"
+          type="text"
+          required
+          placeholder="Prénom"
+        />
 
         <label
           >Email
           <p>* Champs obligatoires</p></label
         >
-        <input id="mail" v-model="form.email" type="text" />
+        <input id="mail" v-model="form.email" type="text" placeholder="Email" />
         <button type="submit">Modifier</button>
       </form>
     </div>
@@ -57,6 +71,10 @@ export default {
 </script>
 
 <style scoped>
+.icons {
+  height: 18px;
+}
+
 .bloc-modale {
   z-index: 4;
   position: fixed;

@@ -1,7 +1,9 @@
 <template>
   <div v-if="revele" class="bloc-modale">
     <div class="modale">
-      <button class="btn-modale" @click="toggle">X</button>
+      <button class="btn-modale" @click="toggle">
+        <img class="icons" src="~/assets/uicons/svg/fi-rr-cross.svg" />
+      </button>
 
       <form @submit.prevent="handleSubmitOrganisation">
         <h3>Créer votre Organisation</h3>
@@ -76,6 +78,10 @@ export default {
 </script>
 
 <style scoped>
+.icons {
+  height: 18px;
+}
+
 .bloc-modale {
   z-index: 6;
   position: fixed;
