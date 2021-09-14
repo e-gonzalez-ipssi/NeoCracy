@@ -45,4 +45,11 @@ export default (axios) => ({
       .catch((err) => console.warn(err))
     return res
   },
+  getAllOrganisation() {
+    const res = axios
+      .get('organisation', { withCredentials: true })
+      .then((response) => response.status)
+      .catch((err) => console.warn(err))
+    return res
+  },
 })

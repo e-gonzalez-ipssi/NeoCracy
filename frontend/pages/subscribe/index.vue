@@ -5,7 +5,7 @@
     <NavPhone />
     <div class="container">
       <section>
-        <main id="main" v-for="post in posts" :key="post">
+        <main v-for="org in orgs" id="main" :key="org">
           <div class="topBox">
             <div class="blockOne">
               <img src="https://via.placeholder.com/150" />
@@ -39,15 +39,20 @@ export default {
   data() {
     return {
       reveleFormPost: false,
-      posts: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      orgs: [1],
       userInfo: {},
     }
   },
   fetch() {
     this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
   },
-  mounted() {
+  async mounted() {
     this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    this.members = await this.$api.organisation.getMembersOrganisation()
+    try {
+      this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+      console.log(this.userInfo)
+    } catch (error) {}
   },
 }
 </script>
