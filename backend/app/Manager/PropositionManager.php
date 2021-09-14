@@ -116,7 +116,7 @@ class PropositionManager extends Manager {
     /**
      * Cette fonction permet de récupéré la derniere proposition d'une organisation
      */
-    public function getLastProposition(int $orgId): array {
+    public function getLastProposition(int $orgId): Proposition {
         $requete = "SELECT id_Proposition FROM `OrgProposition` WHERE id_Organisation = $orgId";
         $this->setQuery($requete);
         $result = $this->querySelect();
