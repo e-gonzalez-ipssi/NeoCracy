@@ -487,13 +487,13 @@ section {
 
 .cardTwo .blockTwo {
   width: 100%;
-  margin-top: 10px;
 }
 
 .cardTwo .blockTwo .flex {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
 }
 
 .cardTwo .blockTwo .flex div {
