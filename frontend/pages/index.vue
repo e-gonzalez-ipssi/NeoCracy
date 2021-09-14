@@ -186,6 +186,12 @@ ul li a {
   cursor: pointer;
 }
 
+#underline {
+  background: #fff;
+  height: 2px;
+  width: 105px;
+}
+
 .link:hover #underline {
   background: #ec7533;
   height: 2px;
