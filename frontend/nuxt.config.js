@@ -37,7 +37,7 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: { baseURL: 'http://localhost:8000/api/' },
+  axios: { baseURL: 'https://server.neocracy.fr/api/' },
 
   // auth: {
   //   localStorage: false,
