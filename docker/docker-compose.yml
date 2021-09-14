@@ -16,7 +16,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: neocracy
     networks:
-      - site
+      - neocracy
 
   neocracy-myadmin:
     container_name: neocracy-myadmin
@@ -41,7 +41,7 @@ services:
       - traefik.http.services.myadmin.loadbalancer.server.port=80
     networks:
       - web
-      - site
+      - neocracy
 
   neocracy-backend:
     container_name: neocracy-backend
@@ -68,7 +68,8 @@ services:
     links:
       - neocracy-db
     networks:
-      - site
+      - web
+      - neocracy
 
   neocracy-front:
     container_name: neocracy-front
@@ -84,6 +85,8 @@ services:
     depends_on:
       - neocracy-db
       - neocracy-backend
+    links:
+      - neocracy-backend
     volumes:
       - ../frontend:/usr/src/app/
     labels:
@@ -95,11 +98,12 @@ services:
       - traefik.http.routers.site-secure.service=site
       - traefik.http.services.site.loadbalancer.server.port=3333
     networks:
+      - neocracy
       - web
 
 networks:
   web:
     external:
       name: web
-  site:
-    name: site
+  neocracy:
+    name: neocracy

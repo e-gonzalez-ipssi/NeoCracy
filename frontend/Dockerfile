@@ -12,5 +12,5 @@ RUN npm install
 EXPOSE 3333
 ADD . ${APP_ROOT}
 VOLUME ${APP_ROOT}
-RUN npm run build
-CMD [ "npm", "start" ]
+# RUN npm run build
+CMD [ "npm","run", "dev" ]
