@@ -81,6 +81,26 @@ class OrganisationApi extends Api
     }
 
     /**
+     * @route get(api/organisation/)
+     * 
+     * @return  mixed les informations des organisations au format JSON
+     */
+    public function getOrgs() {
+        $this->initialize([], self::NO_RIGHT, false);
+
+        $orgs = $this->orgService->getOrganisations();
+
+        $return = [];
+
+        foreach($orgs as $org){
+            $newOrg = $org->arrayify();
+            array_push($return, $newOrg);
+        }
+
+        return $return;
+    }
+
+    /**
      * @route get(api/organisation/{id})
      * 
      * @param int $id l'id de l'organisation que l'on recherche

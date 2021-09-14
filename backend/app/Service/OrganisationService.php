@@ -50,6 +50,15 @@ class  OrganisationService {
     }
 
     /**
+     * Permet de récupéré une liste d'organisation
+     * 
+     * @return array Retourne la liste de toute les organisations
+     */
+    public function getOrganisations(): array {
+        return $this->organisationManager->getOrganisations();
+    }
+
+    /**
      * Permet de récupéré un object Organisation via son id
      * 
      * @param int $id L'id de l'organisation a rechercher
