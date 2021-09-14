@@ -1,7 +1,9 @@
 <template>
   <div v-if="revele" class="bloc-modale">
     <div class="modale">
-      <button class="btn-modale" @click="toggle">X</button>
+      <button class="btn-modale" @click="toggle">
+        <img class="icons" src="~/assets/uicons/svg/fi-rr-cross.svg" />
+      </button>
 
       <form @submit.prevent="handleSubmitUser">
         <h3>Ajouter votre Camarade !</h3>
@@ -56,6 +58,9 @@ export default {
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.75);
+}
+.icons {
+  height: 15px;
 }
 .overlay {
   z-index: 4;
