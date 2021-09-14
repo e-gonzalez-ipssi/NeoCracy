@@ -17,7 +17,7 @@
                 <small>{{ org.lienSite }}</small>
               </div>
               <div class="right">
-                <button type="submit"></button>
+                <button type="submit">S'abonner</button>
               </div>
             </div>
           </div>
