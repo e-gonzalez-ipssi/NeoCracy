@@ -70,9 +70,13 @@
                   </div>
                 </div>
               </main>
-              <div @click="toggleModaleFormAddUserOrganisation">
+              <div
+                v-if="userInfo.mail === admin[0].mail"
+                @click="toggleModaleFormAddUserOrganisation"
+              >
                 <button type="button">Ajouter</button>
               </div>
+              <div v-else></div>
             </div>
           </div>
           <div class="bottomBox">
@@ -109,16 +113,23 @@ export default {
     ModalFormOrganisation,
     ModalFormAddUserOrganisation,
   },
+  filters: {
+    ifInArray(value) {
+      return this.members[0].includes(value) > -1 ? 'Yes' : 'No'
+    },
+  },
   data() {
     return {
       reveleFormOrganisation: false,
       reveleFormAddUserOrganisation: false,
       userInfo: {},
       members: [],
+      admin: [],
     }
   },
   async mounted() {
     this.members = await this.$api.organisation.getMembersOrganisation()
+    this.admin = await this.$api.organisation.getAdminOrganisation()
     try {
       this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
       console.log(this.userInfo)
