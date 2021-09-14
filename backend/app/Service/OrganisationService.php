@@ -40,7 +40,7 @@ class  OrganisationService {
         }
         catch (Exception $e) {
             if ($e->getMessage() === "error-organisation-not-found") {
-                $this->organisationManager->createOrganisation($nom, $description, $lienSite, $image, $user->getId());
+                $this->organisationManager->createOrganisation($nom, $description, $lienSite, $image, $user->getId() , $user->getMail());
             }
             else {
                 throw new Exception("error-org-already-exist");
@@ -122,8 +122,8 @@ class  OrganisationService {
     /**
      * Permet d'ajouter un utilisateur à une organisation
      */
-    public function addUserFromOrganisation(Organisation $org, User $user): void{
-        $this->organisationManager->addUserToOrganisation($org->getId(), $user->getId());
+    public function addUserFromOrganisation(Organisation $org,  $userMail): void{
+        $this->organisationManager->addUserToOrganisation($org->getId(), $userMail);
     }
 
     /**
@@ -147,7 +147,9 @@ class  OrganisationService {
     
         foreach($membersId as $userId) {
             $user = $this->userService->getUserById($userId["id_Utilisateur"]);
-            array_push($membersList, $user->arrayify());
+            $userRow = $user->arrayify();
+            array_push($userRow , (object)['isAdmin' => $this->userIsOrgAdmin($user , $org->getId())]);
+            array_push($membersList,  $userRow);
         }
 
         return $membersList;

@@ -51,7 +51,33 @@
                 Créer organisation
               </button>
             </div>
-            <div v-else class="blockTwo"></div>
+            <div v-else class="blockTwo">
+              <main>
+                <div class="blockOne">
+                  <div class="author">
+                    <h3>Les membres :</h3>
+                    <table>
+                      <tr>
+                        <th>Nom</th>
+                        <th>Rôle</th>
+                      </tr>
+                      <tr v-for="member in members" :key="member.id">
+                        <td>{{ member.mail }}</td>
+                        <td v-if="member[0].isAdmin">Administrateur</td>
+                        <td v-else>Membre</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </main>
+              <div
+                v-if="userInfo.mail === admin[0].mail"
+                @click="toggleModaleFormAddUserOrganisation"
+              >
+                <button type="button">Ajouter</button>
+              </div>
+              <div v-else></div>
+            </div>
           </div>
           <div class="bottomBox">
             <div class="blockOne"></div>
@@ -63,6 +89,10 @@
           :revele="reveleFormOrganisation"
           :toggle="toggleModalFormOrganisation"
         />
+        <ModalFormAddUserOrganisation
+          :revele="reveleFormAddUserOrganisation"
+          :toggle="toggleModaleFormAddUserOrganisation"
+        />
       </section>
     </div>
   </div>
@@ -73,6 +103,7 @@ import Nav from '@/components/Nav/Nav'
 import NavPhone from '@/components/Nav/NavPhone'
 import NavTablet from '@/components/Nav/NavTablet'
 import ModalFormOrganisation from '@/components/Modals/Forms/ModalFormOrganisation'
+import ModalFormAddUserOrganisation from '@/components/Modals/Forms/ModalFormAddUserOrganisation'
 
 export default {
   components: {
@@ -80,15 +111,25 @@ export default {
     NavPhone,
     NavTablet,
     ModalFormOrganisation,
+    ModalFormAddUserOrganisation,
+  },
+  filters: {
+    ifInArray(value) {
+      return this.members[0].includes(value) > -1 ? 'Yes' : 'No'
+    },
   },
   data() {
     return {
       reveleFormOrganisation: false,
+      reveleFormAddUserOrganisation: false,
       userInfo: {},
+      members: [],
+      admin: [],
     }
   },
-  mounted() {
-    console.log('beforeCreate')
+  async mounted() {
+    this.members = await this.$api.organisation.getMembersOrganisation()
+    this.admin = await this.$api.organisation.getAdminOrganisation()
     try {
       this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
       console.log(this.userInfo)
@@ -97,6 +138,9 @@ export default {
   methods: {
     toggleModalFormOrganisation() {
       this.reveleFormOrganisation = !this.reveleFormOrganisation
+    },
+    toggleModaleFormAddUserOrganisation() {
+      this.reveleFormAddUserOrganisation = !this.reveleFormAddUserOrganisation
     },
   },
 }

@@ -16,7 +16,7 @@ class OrganisationManager extends Manager {
      * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
-    public function createOrganisation(string $nom, string $description, string $lienSite , string $image, int $userId): array {
+    public function createOrganisation(string $nom, string $description, string $lienSite , string $image, int $userId , string $userMail): array {
         /** @var string $newQuery */
         $newQuery = "INSERT INTO `Organisation` (`name`, `description`, `lienSite`, `image`) VALUES ('$nom', '$description', '$lienSite', '$image')";
         $this->setQuery($newQuery);
@@ -40,7 +40,7 @@ class OrganisationManager extends Manager {
         $this->setQuery($request2);
         $this->querySet();
 
-        $this->addUserToOrganisation($orgId, $userId);
+        $this->addUserToOrganisation($orgId, $userMail);
 
         return $this->ack("L'Organisation a bien été ajouté a la base de donnée");
     }
@@ -51,7 +51,13 @@ class OrganisationManager extends Manager {
      * @return array Cette fonction retourne ou un message d'erreur ou un message disant que tout c'est bien passer
      * 
      */
-    public function addUserToOrganisation(string $organisationId , string $userId): array {
+    public function addUserToOrganisation(string $organisationId , string $userMail): array {
+
+        /** @var string $request */
+        $request = "SELECT id FROM `Utilisateur`  WHERE mail = '$userMail'";
+        $this->setQuery($request);
+        $userId = $this->querySelect()[0]["id"];
+
         /** @var string $request2 */    
         $request2 = "INSERT INTO `OrgMember` (`id_Organisation`, `id_Utilisateur`) VALUES ($organisationId, $userId)";
         $this->setQuery($request2);
