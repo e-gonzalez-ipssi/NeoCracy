@@ -36,6 +36,7 @@ export default {
       const userToken = this.$cookiz.get('userToken')
       await this.$api.organisation.AddMemberOrganisation(this.form, userToken)
       this.toggle()
+      window.location.reload(true)
     },
   },
 }

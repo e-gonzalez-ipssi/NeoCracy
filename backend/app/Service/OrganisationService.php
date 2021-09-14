@@ -40,7 +40,7 @@ class  OrganisationService {
         }
         catch (Exception $e) {
             if ($e->getMessage() === "error-organisation-not-found") {
-                $this->organisationManager->createOrganisation($nom, $description, $lienSite, $image, $user->getId());
+                $this->organisationManager->createOrganisation($nom, $description, $lienSite, $image, $user->getId() , $user->getMail());
             }
             else {
                 throw new Exception("error-org-already-exist");
