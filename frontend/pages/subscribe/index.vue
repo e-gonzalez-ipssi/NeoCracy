@@ -5,15 +5,16 @@
     <NavPhone />
     <div class="container">
       <section>
-        <main id="main" v-for="post in posts" :key="post">
+        <main v-for="org in organisations" id="main" :key="org.id">
           <div class="topBox">
             <div class="blockOne">
-              <img src="https://via.placeholder.com/150" />
+              <img :src="org.image" />
             </div>
             <div class="blockTwo">
               <div class="left">
-                <h3>Neocracy</h3>
-                <small>Social Media</small>
+                <h3>{{ org.nom }}</h3>
+                <small>{{ org.description }}</small>
+                <small>{{ org.lienSite }}</small>
               </div>
               <div class="right">
                 <button type="submit"></button>
@@ -39,15 +40,21 @@ export default {
   data() {
     return {
       reveleFormPost: false,
-      posts: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      organisations: [1],
       userInfo: {},
     }
   },
   fetch() {
     this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
   },
-  mounted() {
+  async mounted() {
     this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    this.organisations = await this.$api.organisation.getAllOrganisation()
+    console.log('organisations:', this.organisations)
+    try {
+      this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+      console.log(this.userInfo)
+    } catch (error) {}
   },
 }
 </script>
