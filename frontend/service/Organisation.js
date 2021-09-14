@@ -63,7 +63,7 @@ export default (axios) => ({
   getAllOrganisation() {
     const res = axios
       .get('organisation', { withCredentials: true })
-      .then((response) => response.status)
+      .then((response) => response.data)
       .catch((err) => console.warn(err))
     return res
   },
