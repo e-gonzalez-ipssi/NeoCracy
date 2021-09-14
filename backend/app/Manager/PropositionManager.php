@@ -114,7 +114,7 @@ class PropositionManager extends Manager {
     }
 
     /**
-     * Cette fonction permet de récupéré une proposition exploitable en donnant son id
+     * Cette fonction permet de récupéré la derniere proposition d'une organisation
      */
     public function getLastProposition(int $orgId): array {
         $requete = "SELECT id_Proposition FROM `OrgProposition` WHERE id_Organisation = $orgId";
