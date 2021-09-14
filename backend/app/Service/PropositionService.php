@@ -174,6 +174,6 @@ class  PropositionService {
     }
 
     public function getLastProposition(Organisation $org): Proposition {
-        return $this->organisationManager->getLastProposition($org->getId());
+        return $this->propositionManager->getLastProposition($org->getId());
     }
 }

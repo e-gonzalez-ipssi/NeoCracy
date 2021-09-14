@@ -123,10 +123,10 @@ class OrganisationApi extends Api
     public function getLastPost(Request $request, int $orgId) {
         $this->initialize([
             ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
-        ], self::NO_RIGHT, false, $orgId);
+        ], self::NO_RIGHT, true, $orgId);
 
         $proposition = $this->propositionService->getLastProposition($this->orgService->getOrganisationById($orgId));
-
+     
         $propositionFinal = [];
 
         array_push($propositionFinal, $proposition->arrayify());
@@ -134,9 +134,9 @@ class OrganisationApi extends Api
             array_push($propositionFinal, (object)['liked' => $this->propositionService->isAlreadyLiked($proposition,$this->me)]);
             array_push($propositionFinal, (object)['disliked' => $this->propositionService->isAlreadyDisliked($proposition,$this->me)]);
         }
-        array_push($result,$propositionFinal);
+ 
 
-        return $this->returnOutput($this->org->arrayify());
+        return $this->returnOutput($propositionFinal);
     }
 
     /**

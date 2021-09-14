@@ -67,4 +67,19 @@ export default (axios) => ({
       .catch((err) => console.warn(err))
     return res
   },
+
+  getLastPostOrganisation() {
+    const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    let res
+
+    try {
+      res = axios
+        .get(`organisation/${userInfo.organisations[0].id}/lastpost`, {
+          withCredentials: true,
+        })
+        .then((response) => response.data.value)
+    } catch (error) {}
+
+    return res
+  },
 })
