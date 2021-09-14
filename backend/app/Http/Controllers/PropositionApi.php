@@ -129,15 +129,24 @@ class PropositionApi extends Api
      * 
      * @param int $id l'id de l'utilisateur que l'on recherche
      */
-    public function getPropositionByOrgId(int $orgId) {
-        $this->initialize([], self::NO_RIGHT, false);
+    public function getPropositionByOrgId(Request $request,int $orgId) {
+        $this->initialize([
+            ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
+        ], self::NO_RIGHT, true);
 
         $propositions = $this->propositionService->getPropositionByOrgId($orgId);
 
         $result = [];
+        
         foreach($propositions as $proposition) {
-            array_push($result, $proposition->arrayify());
+            $propositionFinal = [];
+
+            array_push($propositionFinal, $proposition->arrayify());
+            array_push($propositionFinal, (object)['liked' => $this->propositionService->isAlreadyLiked($proposition,$this->me)]);
+            array_push($propositionFinal, (object)['disliked' => $this->propositionService->isAlreadyDisliked($proposition,$this->me)]);
+            array_push($result,$propositionFinal);
         }
+
 
         return $this->returnOutput($result);
     }
@@ -150,9 +159,8 @@ class PropositionApi extends Api
     public function likeProposition(Request $request, int $id) {
         $this->initialize(
             [
-                ["organisation", REQUIRED, TYPE_INT, $request->input('organisation')],
                 ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
-            ], self::IS_ORG_MEMBER, true);
+            ], self::NO_RIGHT, true);
 
 
         $proposition = $this->propositionService->getPropositionById($id);
@@ -169,7 +177,6 @@ class PropositionApi extends Api
     public function dislikeProposition(Request $request, int $id) {
         $this->initialize(
             [
-                ["organisation", REQUIRED, TYPE_INT, $request->input('organisation')],
                 ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
             ], self::IS_ORG_MEMBER, true);
 

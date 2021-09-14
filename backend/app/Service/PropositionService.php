@@ -90,7 +90,7 @@ class  PropositionService {
         }
     }
 
-    private function isAlreadyLiked(Proposition $proposition, User $author): bool {
+    public function isAlreadyLiked(Proposition $proposition, User $author): bool {
         $likeList = $this->propositionManager->getLike($proposition->getId());
 
         foreach($likeList as $like) {
@@ -102,7 +102,7 @@ class  PropositionService {
         return false;
     }
 
-    private function isAlreadyDisliked(Proposition $proposition, User $author): bool {
+    public function isAlreadyDisliked(Proposition $proposition, User $author): bool {
         $dislikeList = $this->propositionManager->getDislike($proposition->getId());
 
         foreach($dislikeList as $dislike) {
