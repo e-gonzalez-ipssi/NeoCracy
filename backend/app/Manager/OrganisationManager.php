@@ -82,7 +82,28 @@ class OrganisationManager extends Manager {
     }
 
     /**
-     * Cette fonction permet de récupéré un Organisation
+     * Cette fonction permet de récupéré toute les organisations
+
+     * 
+     * @return array Retourne la liste de toute les organisations
+     * 
+     */
+    public function getOrganisations(): array {
+        $newQuery = "SELECT `id`, `name`, `description`, `lienSite`, `image` FROM `Organisation`";
+        $this->setQuery($newQuery);
+
+        $result = $this->querySelect();
+
+        $orgs = $this->fromQueryToOrganisations($result);
+        foreach($orgs as $org){
+            $this->inventory[$org->getId()] = $org;
+        }
+
+        return $orgs;
+    }
+
+    /**
+     * Cette fonction permet de récupéré une Organisation
      * 
      * @param int $id L'id de l'Organisation que l'on recherche
      * 

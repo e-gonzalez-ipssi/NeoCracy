@@ -63,7 +63,7 @@ class  PropositionService {
      */
     public function likeProposition(Proposition $proposition, User $author) {
         if ($this->isAlreadyDisliked($proposition, $author)) {
-            throw new Exception('proposition-already-disliked');
+            $this->propositionManager->removeLikeProposition($proposition->getId(), $author->getId());
         }
 
         if ($this->isAlreadyLiked($proposition, $author)) {
@@ -79,7 +79,7 @@ class  PropositionService {
      */
     public function dislikeProposition(Proposition $proposition, User $author) {
         if ($this->isAlreadyLiked($proposition, $author)) {
-            throw new Exception('proposition-already-liked');
+            $this->propositionManager->removeLikeProposition($proposition->getId(), $author->getId());
         }
 
         if ($this->isAlreadyDisliked($proposition, $author)) {

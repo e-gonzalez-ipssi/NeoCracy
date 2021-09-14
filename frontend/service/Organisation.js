@@ -28,6 +28,21 @@ export default (axios) => ({
     return res
   },
 
+  getAdminOrganisation() {
+    const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    let res
+
+    try {
+      res = axios
+        .get(`organisation/${userInfo.organisations[0].id}/admins`, {
+          withCredentials: true,
+        })
+        .then((response) => response.data.value)
+    } catch (error) {}
+
+    return res
+  },
+
   AddMemberOrganisation(form, userToken) {
     const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
     const res = axios
@@ -42,6 +57,13 @@ export default (axios) => ({
         }
       )
       .then((response) => response.status)
+      .catch((err) => console.warn(err))
+    return res
+  },
+  getAllOrganisation() {
+    const res = axios
+      .get('organisation', { withCredentials: true })
+      .then((response) => response.data)
       .catch((err) => console.warn(err))
     return res
   },
