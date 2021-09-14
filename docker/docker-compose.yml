@@ -60,11 +60,11 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=web
-      - traefik.http.routers.back-secure.entrypoints=https
-      - traefik.http.routers.back-secure.rule=Host(`server.neocracy.fr`)
-      - traefik.http.routers.back-secure.tls.certresolver=cert
-      - traefik.http.routers.back-secure.service=back
-      - traefik.http.services.back.loadbalancer.server.port=8000
+      - traefik.http.routers.backend-secure.entrypoints=https
+      - traefik.http.routers.backend-secure.rule=Host(`backend.neocracy.fr`)
+      - traefik.http.routers.backend-secure.tls.certresolver=cert
+      - traefik.http.routers.backend-secure.service=backend
+      - traefik.http.services.backend.loadbalancer.server.port=8000
     links:
       - neocracy-db
     networks:

@@ -9,10 +9,8 @@ WORKDIR ${APP_ROOT}
 COPY package.json ${APP_ROOT}
 
 RUN npm install
-
-# ADD . ${APP_ROOT}
-VOLUME ${APP_ROOT}
-# RUN npm run build
 EXPOSE 3333
-# ENTRYPOINT [ "npm", "run", "start" ]
-ENTRYPOINT [ "npm", "run", "dev" ]
+ADD . ${APP_ROOT}
+VOLUME ${APP_ROOT}
+RUN npm run build
+CMD [ "npm", "start" ]
