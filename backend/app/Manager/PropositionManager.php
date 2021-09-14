@@ -112,4 +112,21 @@ class PropositionManager extends Manager {
 
         return $this->userService->getUserById($result[0]["id_Utilisateur"]);
     }
+
+    /**
+     * Cette fonction permet de récupéré la derniere proposition d'une organisation
+     */
+    public function getLastProposition(int $orgId): array {
+        $requete = "SELECT id_Proposition FROM `OrgProposition` WHERE id_Organisation = $orgId";
+        $this->setQuery($requete);
+        $result = $this->querySelect();
+
+        $propositions = [];
+
+        foreach ($result as $propositionId) {
+            array_push($propositions, $this->getPropositionById($propositionId["id_Proposition"]));
+        }
+
+        return $propositions[count($propositions)-1];
+    }
 }

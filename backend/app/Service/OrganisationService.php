@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Organisation;
 use App\Entity\User;
+use App\Entity\Proposition;
 use App\Manager\OrganisationManager;
 use App\Service\UserService;
 use Exception;
