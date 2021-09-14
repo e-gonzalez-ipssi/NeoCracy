@@ -1,0 +1,105 @@
+version: "3.6"
+services:
+  neocracy-db:
+    container_name: neocracy-db
+    build:
+      context: ../divers/install/database
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    volumes:
+      - ./database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: neocracydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: neocracy
+    networks:
+      - site
+
+  neocracy-myadmin:
+    container_name: neocracy-myadmin
+    image: phpmyadmin
+    restart: always
+    depends_on:
+      - neocracy-db
+    links:
+      - neocracy-db
+    environment:
+      PMA_HOST: neocracy-db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 8080:80
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=web
+      - traefik.http.routers.myadmin-secure.entrypoints=https
+      - traefik.http.routers.myadmin-secure.rule=Host(`myadmin.neocracy.fr`)
+      - traefik.http.routers.myadmin-secure.tls.certresolver=cert
+      - traefik.http.routers.myadmin-secure.service=myadmin
+      - traefik.http.services.myadmin.loadbalancer.server.port=80
+    networks:
+      - web
+      - site
+
+  neocracy-backend:
+    container_name: neocracy-backend
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    image: neocracy-backend
+    restart: unless-stopped
+    command: php -S 0.0.0.0:8000 -t ./public
+    volumes:
+      - ../backend:/app
+    depends_on:
+      - neocracy-db
+    ports:
+      - 8000:8000
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=web
+      - traefik.http.routers.back-secure.entrypoints=https
+      - traefik.http.routers.back-secure.rule=Host(`server.neocracy.fr`)
+      - traefik.http.routers.back-secure.tls.certresolver=cert
+      - traefik.http.routers.back-secure.service=back
+      - traefik.http.services.back.loadbalancer.server.port=8000
+    links:
+      - neocracy-db
+    networks:
+      - site
+
+  neocracy-front:
+    container_name: neocracy-front
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    image: neocracy-front
+    restart: unless-stopped
+    ports:
+      - 3333:3333
+    environment:
+      HOST: 0.0.0.0
+    depends_on:
+      - neocracy-db
+      - neocracy-backend
+    volumes:
+      - ../frontend:/usr/src/app/
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=web
+      - traefik.http.routers.site-secure.entrypoints=https
+      - traefik.http.routers.site-secure.rule=Host(`www.neocracy.fr`)
+      - traefik.http.routers.site-secure.tls.certresolver=cert
+      - traefik.http.routers.site-secure.service=site
+      - traefik.http.services.site.loadbalancer.server.port=3333
+    networks:
+      - web
+
+networks:
+  web:
+    external:
+      name: web
+  site:
+    name: site
