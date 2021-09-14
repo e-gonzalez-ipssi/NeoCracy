@@ -31,7 +31,7 @@
         <main v-for="post in posts" id="main" :key="post.id">
           <div class="topBox">
             <div class="blockOne">
-              <img src="https://via.placeholder.com/150" />
+              <img src="https://source.unsplash.com/100x100/?people" />
               <div class="author">
                 <h5>{{ post[0].author.prenom }} {{ post[0].author.nom }}</h5>
                 <div>
@@ -73,8 +73,7 @@
             <div class="blockFour">
               <img
                 :src="
-                  post[0].image ||
-                  'https://www.justifit.fr/wp-content/uploads/2020/06/Droit-a-limage.jpg'
+                  post[0].image || 'https://source.unsplash.com/800x600/?work'
                 "
                 alt=" no image found"
               />
@@ -82,18 +81,18 @@
           </div>
           <div class="bottomBox">
             <div class="blockOne">
-              <svg
-                id="svgLike"
-                class="icons"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M22.773,7.721A4.994,4.994,0,0,0,19,6H15.011l.336-2.041A3.037,3.037,0,0,0,9.626,2.122L7.712,6H5a5.006,5.006,0,0,0-5,5v5a5.006,5.006,0,0,0,5,5H18.3a5.024,5.024,0,0,0,4.951-4.3l.705-5A5,5,0,0,0,22.773,7.721ZM2,16V11A3,3,0,0,1,5,8H7V19H5A3,3,0,0,1,2,16Zm19.971-4.581-.706,5A3.012,3.012,0,0,1,18.3,19H9V7.734a1,1,0,0,0,.23-.292l2.189-4.435A1.07,1.07,0,0,1,13.141,2.8a1.024,1.024,0,0,1,.233.84l-.528,3.2A1,1,0,0,0,13.833,8H19a3,3,0,0,1,2.971,3.419Z"
-                />
-              </svg>
               <form @submit.prevent="handleSubmitLike">
-                <button type="submit">J'aime</button>
+                <svg
+                  id="svgLike"
+                  class="icons"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M22.773,7.721A4.994,4.994,0,0,0,19,6H15.011l.336-2.041A3.037,3.037,0,0,0,9.626,2.122L7.712,6H5a5.006,5.006,0,0,0-5,5v5a5.006,5.006,0,0,0,5,5H18.3a5.024,5.024,0,0,0,4.951-4.3l.705-5A5,5,0,0,0,22.773,7.721ZM2,16V11A3,3,0,0,1,5,8H7V19H5A3,3,0,0,1,2,16Zm19.971-4.581-.706,5A3.012,3.012,0,0,1,18.3,19H9V7.734a1,1,0,0,0,.23-.292l2.189-4.435A1.07,1.07,0,0,1,13.141,2.8a1.024,1.024,0,0,1,.233.84l-.528,3.2A1,1,0,0,0,13.833,8H19a3,3,0,0,1,2.971,3.419Z"
+                  />
+                </svg>
+                <button class="like" type="submit">J'aime</button>
                 <input
                   id="input-like"
                   ref="input"
@@ -104,18 +103,18 @@
             </div>
             <div class="hr"></div>
             <div class="blockTwo">
-              <svg
-                class="icons"
-                xmlns="http://www.w3.org/2000/svg"
-                id="svgDislike"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M23.951,12.3l-.705-5A5.024,5.024,0,0,0,18.3,3H5A5.006,5.006,0,0,0,0,8v5a5.006,5.006,0,0,0,5,5H7.712l1.914,3.878a3.037,3.037,0,0,0,5.721-1.837L15.011,18H19a5,5,0,0,0,4.951-5.7ZM5,5H7V16H5a3,3,0,0,1-3-3V8A3,3,0,0,1,5,5Zm16.264,9.968A3,3,0,0,1,19,16H13.833a1,1,0,0,0-.987,1.162l.528,3.2a1.024,1.024,0,0,1-.233.84,1.07,1.07,0,0,1-1.722-.212L9.23,16.558A1,1,0,0,0,9,16.266V5h9.3a3.012,3.012,0,0,1,2.97,2.581l.706,5A3,3,0,0,1,21.264,14.968Z"
-                />
-              </svg>
               <form @submit.prevent="handleSubmitDislike">
-                <button type="submit">Je n'aime pas</button>
+                <svg
+                  class="icons"
+                  xmlns="http://www.w3.org/2000/svg"
+                  id="svgDislike"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M23.951,12.3l-.705-5A5.024,5.024,0,0,0,18.3,3H5A5.006,5.006,0,0,0,0,8v5a5.006,5.006,0,0,0,5,5H7.712l1.914,3.878a3.037,3.037,0,0,0,5.721-1.837L15.011,18H19a5,5,0,0,0,4.951-5.7ZM5,5H7V16H5a3,3,0,0,1-3-3V8A3,3,0,0,1,5,5Zm16.264,9.968A3,3,0,0,1,19,16H13.833a1,1,0,0,0-.987,1.162l.528,3.2a1.024,1.024,0,0,1-.233.84,1.07,1.07,0,0,1-1.722-.212L9.23,16.558A1,1,0,0,0,9,16.266V5h9.3a3.012,3.012,0,0,1,2.97,2.581l.706,5A3,3,0,0,1,21.264,14.968Z"
+                  />
+                </svg>
+                <button class="dislike" type="submit">Je n'aime pas</button>
                 <input
                   id="input-dislike"
                   ref="input"
@@ -126,22 +125,21 @@
             </div>
             <div class="hr"></div>
             <div class="blockThree">
-              <svg
-                class="icons"
-                xmlns="http://www.w3.org/2000/svg"
-                id="Outline"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M24,11.247A12.012,12.012,0,1,0,12.017,24H19a5.005,5.005,0,0,0,5-5V11.247ZM22,19a3,3,0,0,1-3,3H12.017a10.041,10.041,0,0,1-7.476-3.343,9.917,9.917,0,0,1-2.476-7.814,10.043,10.043,0,0,1,8.656-8.761A10.564,10.564,0,0,1,12.021,2,9.921,9.921,0,0,1,18.4,4.3,10.041,10.041,0,0,1,22,11.342Z"
-                />
-                <path d="M8,9h4a1,1,0,0,0,0-2H8A1,1,0,0,0,8,9Z" />
-                <path d="M16,11H8a1,1,0,0,0,0,2h8a1,1,0,0,0,0-2Z" />
-                <path d="M16,15H8a1,1,0,0,0,0,2h8a1,1,0,0,0,0-2Z" />
-              </svg>
-
               <form @submit.prevent="handleSubmitComment">
-                <button type="submit">Commenter</button>
+                <svg
+                  class="icons"
+                  xmlns="http://www.w3.org/2000/svg"
+                  id="Outline"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M24,11.247A12.012,12.012,0,1,0,12.017,24H19a5.005,5.005,0,0,0,5-5V11.247ZM22,19a3,3,0,0,1-3,3H12.017a10.041,10.041,0,0,1-7.476-3.343,9.917,9.917,0,0,1-2.476-7.814,10.043,10.043,0,0,1,8.656-8.761A10.564,10.564,0,0,1,12.021,2,9.921,9.921,0,0,1,18.4,4.3,10.041,10.041,0,0,1,22,11.342Z"
+                  />
+                  <path d="M8,9h4a1,1,0,0,0,0-2H8A1,1,0,0,0,8,9Z" />
+                  <path d="M16,11H8a1,1,0,0,0,0,2h8a1,1,0,0,0,0-2Z" />
+                  <path d="M16,15H8a1,1,0,0,0,0,2h8a1,1,0,0,0,0-2Z" />
+                </svg>
+                <button class="comment" type="submit">Commenter</button>
                 <input id="comment" type="hidden" />
               </form>
             </div>
@@ -200,8 +198,8 @@ export default {
         svgLike.remove('iconsVal')
         svgLike.add('icons')
       }
-      if (svgDislike.contains('iconsVal')) {
-        svgDislike.remove('iconsVal')
+      if (svgDislike.contains('iconsVal2')) {
+        svgDislike.remove('iconsVal2')
         svgDislike.add('icons')
         svgLike.remove('icons')
         svgLike.add('iconsVal')
@@ -217,9 +215,9 @@ export default {
 
       if (svgDislike.contains('icons')) {
         svgDislike.remove('icons')
-        svgDislike.add('iconsVal')
+        svgDislike.add('iconsVal2')
       } else {
-        svgDislike.remove('iconsVal')
+        svgDislike.remove('iconsVal2')
         svgDislike.add('icons')
       }
 
@@ -227,7 +225,7 @@ export default {
         svgLike.remove('iconsVal')
         svgLike.add('icons')
         svgDislike.remove('icons')
-        svgDislike.add('iconsVal')
+        svgDislike.add('iconsVal2')
       }
     },
     handleSubmitComment() {
@@ -255,7 +253,12 @@ export default {
 
 .iconsVal {
   height: 15px;
-  fill: rgb(68, 93, 230);
+  fill: #0077ff;
+}
+
+.iconsVal2 {
+  height: 15px;
+  fill: #ff0000;
 }
 
 a {
@@ -445,12 +448,27 @@ section {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.bottomBox i {
-  margin-top: 2px;
+.bottomBox button {
+  padding: 5px;
+  border: none;
+  text-decoration: none;
+  font-size: 15px;
 }
 
-.bottomBox p {
-  margin-left: 10px;
+.bottomBox .like:hover {
+  color: #0077ff;
+}
+
+.bottomBox .dislike:hover {
+  color: #ff0000;
+}
+
+.bottomBox .comment:hover {
+  color: #ec7533;
+}
+
+.bottomBox svg {
+  margin-top: 3px;
 }
 
 /* ON LITTLE SCREEN FOR LAPTOP */
