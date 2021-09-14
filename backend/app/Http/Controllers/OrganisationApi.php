@@ -120,16 +120,20 @@ class OrganisationApi extends Api
      * 
      * @return mixed La derniere proposition de l'entreprise
      */
-    public function getLastPost(int $orgId) {
-        $this->initialize([], self::NO_RIGHT, false, $orgId);
+    public function getLastPost(Request $request, int $orgId) {
+        $this->initialize([
+            ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
+        ], self::NO_RIGHT, false, $orgId);
 
         $proposition = $this->propositionService->getLastProposition($this->orgService->getOrganisationById($orgId));
 
         $propositionFinal = [];
 
         array_push($propositionFinal, $proposition->arrayify());
-        array_push($propositionFinal, (object)['liked' => $this->propositionService->isAlreadyLiked($proposition,$this->me)]);
-        array_push($propositionFinal, (object)['disliked' => $this->propositionService->isAlreadyDisliked($proposition,$this->me)]);
+        if ($this->me) {
+            array_push($propositionFinal, (object)['liked' => $this->propositionService->isAlreadyLiked($proposition,$this->me)]);
+            array_push($propositionFinal, (object)['disliked' => $this->propositionService->isAlreadyDisliked($proposition,$this->me)]);
+        }
         array_push($result,$propositionFinal);
 
         return $this->returnOutput($this->org->arrayify());
