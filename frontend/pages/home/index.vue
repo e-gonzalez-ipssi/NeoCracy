@@ -83,10 +83,9 @@
           <div class="bottomBox">
             <div class="blockOne">
               <svg
-                v-if="!post[1].liked"
+                id="svgLike"
                 class="icons"
                 xmlns="http://www.w3.org/2000/svg"
-                id="Outlinetest"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -108,7 +107,7 @@
               <svg
                 class="icons"
                 xmlns="http://www.w3.org/2000/svg"
-                id="Outline"
+                id="svgDislike"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -188,14 +187,48 @@ export default {
     async handleSubmitLike() {
       const userToken = this.$cookiz.get('userToken')
       const idPost = document.getElementById('input-like').value
+
       await this.$api.proposition.likeProposition(idPost, userToken)
-      document.querySelector('#Outlinetest').classList.remove('icons')
-      document.querySelector('#Outlinetest').classList.remove('iconsVal')
+
+      const svgLike = document.getElementById('svgLike').classList
+      const svgDislike = document.getElementById('svgDislike').classList
+
+      if (svgLike.contains('icons')) {
+        svgLike.remove('icons')
+        svgLike.add('iconsVal')
+      } else {
+        svgLike.remove('iconsVal')
+        svgLike.add('icons')
+      }
+      if (svgDislike.contains('iconsVal')) {
+        svgDislike.remove('iconsVal')
+        svgDislike.add('icons')
+        svgLike.remove('icons')
+        svgLike.add('iconsVal')
+      }
     },
     async handleSubmitDislike() {
       const userToken = this.$cookiz.get('userToken')
       const idPost = document.getElementById('input-like').value
       await this.$api.proposition.dislikeProposition(idPost, userToken)
+
+      const svgDislike = document.getElementById('svgDislike').classList
+      const svgLike = document.getElementById('svgLike').classList
+
+      if (svgDislike.contains('icons')) {
+        svgDislike.remove('icons')
+        svgDislike.add('iconsVal')
+      } else {
+        svgDislike.remove('iconsVal')
+        svgDislike.add('icons')
+      }
+
+      if (svgLike.contains('iconsVal')) {
+        svgLike.remove('iconsVal')
+        svgLike.add('icons')
+        svgDislike.remove('icons')
+        svgDislike.add('iconsVal')
+      }
     },
     handleSubmitComment() {
       window.alert('comment')

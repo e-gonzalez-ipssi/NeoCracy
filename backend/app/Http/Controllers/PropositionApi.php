@@ -178,7 +178,7 @@ class PropositionApi extends Api
         $this->initialize(
             [
                 ["userToken", NOT_REQUIRED, TYPE_STRING, $request->input('userToken')],
-            ], self::IS_ORG_MEMBER, true);
+            ], self::NO_RIGHT, true);
 
         $proposition = $this->propositionService->getPropositionById($id);
         $this->propositionService->dislikeProposition($proposition, $this->me);
