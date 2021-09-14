@@ -31,4 +31,29 @@ export default (axios) => ({
 
     return res
   },
+  likeProposition(idPost, userToken) {
+    // image,url
+    const res = axios
+      .post(`proposition/${idPost}/like`, null, {
+        params: {
+          userToken,
+        },
+      })
+      .then((response) => response.status)
+      .catch((err) => console.warn(err))
+    return res
+  },
+
+  dislikeProposition(idPost, userToken) {
+    // image,url
+    const res = axios
+      .post(`proposition/${idPost}/dislike`, null, {
+        params: {
+          userToken,
+        },
+      })
+      .then((response) => response.status)
+      .catch((err) => console.warn(err))
+    return res
+  },
 })

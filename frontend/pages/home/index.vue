@@ -33,7 +33,7 @@
             <div class="blockOne">
               <img src="https://via.placeholder.com/150" />
               <div class="author">
-                <h5>{{ post.author.prenom }} {{ post.author.nom }}</h5>
+                <h5>{{ post[0].author.prenom }} {{ post[0].author.nom }}</h5>
                 <div>
                   <small>de</small>
                   <h6>{{ userInfo.organisations[0].nom }}</h6>
@@ -55,11 +55,11 @@
           </div>
           <div class="midBox">
             <div class="blockOne">
-              <h3>{{ post.nom }}</h3>
+              <h3>{{ post[0].nom }}</h3>
             </div>
             <div class="blockTwo">
               <p>
-                {{ post.description }}
+                {{ post[0].description }}
               </p>
             </div>
             <div
@@ -73,7 +73,7 @@
             <div class="blockFour">
               <img
                 :src="
-                  post.image ||
+                  post[0].image ||
                   'https://www.justifit.fr/wp-content/uploads/2020/06/Droit-a-limage.jpg'
                 "
                 alt=" no image found"
@@ -83,32 +83,46 @@
           <div class="bottomBox">
             <div class="blockOne">
               <svg
+                id="svgLike"
                 class="icons"
                 xmlns="http://www.w3.org/2000/svg"
-                id="Outline"
                 viewBox="0 0 24 24"
               >
                 <path
                   d="M22.773,7.721A4.994,4.994,0,0,0,19,6H15.011l.336-2.041A3.037,3.037,0,0,0,9.626,2.122L7.712,6H5a5.006,5.006,0,0,0-5,5v5a5.006,5.006,0,0,0,5,5H18.3a5.024,5.024,0,0,0,4.951-4.3l.705-5A5,5,0,0,0,22.773,7.721ZM2,16V11A3,3,0,0,1,5,8H7V19H5A3,3,0,0,1,2,16Zm19.971-4.581-.706,5A3.012,3.012,0,0,1,18.3,19H9V7.734a1,1,0,0,0,.23-.292l2.189-4.435A1.07,1.07,0,0,1,13.141,2.8a1.024,1.024,0,0,1,.233.84l-.528,3.2A1,1,0,0,0,13.833,8H19a3,3,0,0,1,2.971,3.419Z"
                 />
               </svg>
-
-              <a>J'aime</a>
+              <form @submit.prevent="handleSubmitLike">
+                <button type="submit">J'aime</button>
+                <input
+                  id="input-like"
+                  ref="input"
+                  :value="post[0].id"
+                  type="hidden"
+                />
+              </form>
             </div>
             <div class="hr"></div>
             <div class="blockTwo">
               <svg
                 class="icons"
                 xmlns="http://www.w3.org/2000/svg"
-                id="Outline"
+                id="svgDislike"
                 viewBox="0 0 24 24"
               >
                 <path
                   d="M23.951,12.3l-.705-5A5.024,5.024,0,0,0,18.3,3H5A5.006,5.006,0,0,0,0,8v5a5.006,5.006,0,0,0,5,5H7.712l1.914,3.878a3.037,3.037,0,0,0,5.721-1.837L15.011,18H19a5,5,0,0,0,4.951-5.7ZM5,5H7V16H5a3,3,0,0,1-3-3V8A3,3,0,0,1,5,5Zm16.264,9.968A3,3,0,0,1,19,16H13.833a1,1,0,0,0-.987,1.162l.528,3.2a1.024,1.024,0,0,1-.233.84,1.07,1.07,0,0,1-1.722-.212L9.23,16.558A1,1,0,0,0,9,16.266V5h9.3a3.012,3.012,0,0,1,2.97,2.581l.706,5A3,3,0,0,1,21.264,14.968Z"
                 />
               </svg>
-
-              <a>Je n'aime pas</a>
+              <form @submit.prevent="handleSubmitDislike">
+                <button type="submit">Je n'aime pas</button>
+                <input
+                  id="input-dislike"
+                  ref="input"
+                  :value="post[0].id"
+                  type="hidden"
+                />
+              </form>
             </div>
             <div class="hr"></div>
             <div class="blockThree">
@@ -126,7 +140,10 @@
                 <path d="M16,15H8a1,1,0,0,0,0,2h8a1,1,0,0,0,0-2Z" />
               </svg>
 
-              <a>Commenter</a>
+              <form @submit.prevent="handleSubmitComment">
+                <button type="submit">Commenter</button>
+                <input id="comment" type="hidden" />
+              </form>
             </div>
           </div>
         </main>
@@ -157,13 +174,64 @@ export default {
   },
   async beforeCreate() {
     this.posts = await this.$api.proposition.getPropositionsByOrganisationId()
+    console.log(this.posts)
     if (sessionStorage) {
       this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
     }
   },
+
   methods: {
     toggleModaleFormProposition() {
       this.reveleFormProposition = !this.reveleFormProposition
+    },
+    async handleSubmitLike() {
+      const userToken = this.$cookiz.get('userToken')
+      const idPost = document.getElementById('input-like').value
+
+      await this.$api.proposition.likeProposition(idPost, userToken)
+
+      const svgLike = document.getElementById('svgLike').classList
+      const svgDislike = document.getElementById('svgDislike').classList
+
+      if (svgLike.contains('icons')) {
+        svgLike.remove('icons')
+        svgLike.add('iconsVal')
+      } else {
+        svgLike.remove('iconsVal')
+        svgLike.add('icons')
+      }
+      if (svgDislike.contains('iconsVal')) {
+        svgDislike.remove('iconsVal')
+        svgDislike.add('icons')
+        svgLike.remove('icons')
+        svgLike.add('iconsVal')
+      }
+    },
+    async handleSubmitDislike() {
+      const userToken = this.$cookiz.get('userToken')
+      const idPost = document.getElementById('input-like').value
+      await this.$api.proposition.dislikeProposition(idPost, userToken)
+
+      const svgDislike = document.getElementById('svgDislike').classList
+      const svgLike = document.getElementById('svgLike').classList
+
+      if (svgDislike.contains('icons')) {
+        svgDislike.remove('icons')
+        svgDislike.add('iconsVal')
+      } else {
+        svgDislike.remove('iconsVal')
+        svgDislike.add('icons')
+      }
+
+      if (svgLike.contains('iconsVal')) {
+        svgLike.remove('iconsVal')
+        svgLike.add('icons')
+        svgDislike.remove('icons')
+        svgDislike.add('iconsVal')
+      }
+    },
+    handleSubmitComment() {
+      window.alert('comment')
     },
   },
 }
@@ -183,6 +251,11 @@ export default {
 .icons {
   height: 15px;
   fill: #333;
+}
+
+.iconsVal {
+  height: 15px;
+  fill: rgb(68, 93, 230);
 }
 
 a {
