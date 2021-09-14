@@ -6,7 +6,7 @@
       </button>
       <div class="registered" v-if="registered">
         <h5>Félicitations</h5>
-        <p>Vous êtes désormais inscris sur Neocracy !</p>
+        <p>Vous êtes désormais inscrit sur Neocracy !</p>
         <button class="btn" @click="toggle">Continuer</button>
       </div>
       <form v-else @submit.prevent="handleSubmitRegister">

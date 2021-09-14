@@ -177,7 +177,6 @@ export default {
   justify-content: center;
   flex-direction: column;
   padding-top: 120px;
-  background: #f1f1f1;
   font-family: 'Open Sans', sans-serif;
 }
 
