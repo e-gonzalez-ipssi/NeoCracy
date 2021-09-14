@@ -55,7 +55,7 @@ class PropositionManager extends Manager {
      * Cette fonction permet de récupéré une proposition exploitable en donnant son id
      */
     public function getPropositionByOrgId(int $orgId): array {
-        $requete = "SELECT id_Proposition FROM `OrgProposition` WHERE id_Organisation = $orgId";
+        $requete = "SELECT id_Proposition FROM `OrgProposition` WHERE id_Organisation = $orgId ORDER BY id_Proposition DESC";
         $this->setQuery($requete);
         $result = $this->querySelect();
 
