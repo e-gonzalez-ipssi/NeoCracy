@@ -114,6 +114,28 @@ class OrganisationApi extends Api
     }
 
     /**
+     * @route get(api/organisation/{id}/lastpost)
+     * 
+     * @param int $id l'id de l'organisation que l'on recherche
+     * 
+     * @return mixed La derniere proposition de l'entreprise
+     */
+    public function getLastPost(int $orgId) {
+        $this->initialize([], self::NO_RIGHT, false, $orgId);
+
+        $proposition = $this->propositionService->getLastProposition($this->orgService->getOrganisationById($orgId));
+
+        $propositionFinal = [];
+
+        array_push($propositionFinal, $proposition->arrayify());
+        array_push($propositionFinal, (object)['liked' => $this->propositionService->isAlreadyLiked($proposition,$this->me)]);
+        array_push($propositionFinal, (object)['disliked' => $this->propositionService->isAlreadyDisliked($proposition,$this->me)]);
+        array_push($result,$propositionFinal);
+
+        return $this->returnOutput($this->org->arrayify());
+    }
+
+    /**
      * @route get(api/organisation/{id}/members)
      * 
      * @param int $orgId l'id de l'organisation que l'on recherche
