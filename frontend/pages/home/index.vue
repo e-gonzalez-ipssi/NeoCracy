@@ -254,11 +254,13 @@ export default {
 .iconsVal {
   height: 15px;
   fill: #0077ff;
+  color: #0077ff;
 }
 
 .iconsVal2 {
   height: 15px;
   fill: #ff0000;
+  color: #ff0000;
 }
 
 a {
@@ -440,6 +442,15 @@ section {
 .bottomBox .blockTwo,
 .bottomBox .blockThree {
   display: flex;
+  justify-content: center;
+  width: 20%;
+}
+
+.bottomBox .blockOne:hover,
+.bottomBox .blockTwo:hover,
+.bottomBox .blockThree:hover {
+  background: #dddddd;
+  border-radius: 5px;
 }
 
 .bottomBox .hr {
@@ -451,20 +462,9 @@ section {
 .bottomBox button {
   padding: 5px;
   border: none;
+  background: transparent;
   text-decoration: none;
   font-size: 15px;
-}
-
-.bottomBox .like:hover {
-  color: #0077ff;
-}
-
-.bottomBox .dislike:hover {
-  color: #ff0000;
-}
-
-.bottomBox .comment:hover {
-  color: #ec7533;
 }
 
 .bottomBox svg {

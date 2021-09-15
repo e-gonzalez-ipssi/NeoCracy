@@ -45,7 +45,7 @@
           <h1>Une sphère dédiée aux entreprises</h1>
           <p>
             <strong>Neocracy</strong> est un réseau social qui permet
-            <strong>d'échanger entre professionels</strong> afin d'élargir leur
+            <strong>d'échanger entre professionnels</strong> afin d'élargir leur
             visibilité sur le web.
           </p>
           <a href="#" class="btn register" @click="toggleModaleFormRegister"
